@@ -1,3 +1,4 @@
+# Coming soon!
 ###Hello Bitcoin Checker users!  
 As you know, number of virtual currencies increasing very fast. Currencie pairs set on existing exchanges changes almost everyday and also there is need to add new and new exchanges over time.
 _We proudly announce_ that `DataModule` (containing exchanges and currency pairs) for Bitcoin Checker app is now _OPEN_ for our users to make this application _even better_! This means that _anyone_ can now:
