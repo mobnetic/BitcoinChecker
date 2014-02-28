@@ -101,6 +101,26 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 }
 ```
 
+###2a. Providing other parameters in URL
+Sometimes there is a need to include some kind of pair ID instead of just currencies names. Please see `Cryptsy` as en example. There is separate `CURRENCY_PAIRS_IDS` map that holds pairs ids:
+```java
+CURRENCY_PAIRS_IDS.put("42_BTC", 141);
+CURRENCY_PAIRS_IDS.put("ALF_BTC", 57);
+CURRENCY_PAIRS_IDS.put("AMC_BTC", 43);
+[...]
+```
+
+While providing URL we need to obtain proper ID that is associated with this pair:
+```java
+@Override
+public String getUrl(int requestId, CheckerInfo checkerInfo) {
+	final String pairString = String.format("%1$s_%2$s", checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+	if(CURRENCY_PAIRS_IDS.containsKey(pairString))
+		return String.format(URL, String.valueOf(CURRENCY_PAIRS_IDS.get(pairString)));	
+	return URL;
+}
+```
+
 ##3. Parsing API response:
 While parsing response from exchange you have to fill fieds of `Ticker` object.  
 If API response is just in plain JSON object you can parse it in parseTickerInnerFromJsonObject method:
@@ -118,7 +138,7 @@ protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObje
 ```
 
 __IMPORTANT:__ that the ticker.last field is obligated, all the rest of fields are optional.
-__NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format.  
+__NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` fields for that.
 
 ###3a. Parsing non JSONObject responses:
 Sometimes responses are more complicated than plain JSON, then you should use `parseTickerInner` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats but overriding this method:
