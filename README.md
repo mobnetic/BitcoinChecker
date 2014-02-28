@@ -8,10 +8,10 @@ _We proudly announce_ that `DataModule` (containing exchanges and currency pairs
 #####Bitcoin Checker on Google Play Store:
 https://play.google.com/store/apps/details?id=com.mobnetic.coinguardian
 
-###Donate to Bitcoin Checker project:
-♥ __BTC__: 1KyLY5sT1Ffa6ctFPFpdL2bxhSAxNqfvMA  
-♥ __DOGE__: D81kyZ49E132enb7ct7RcPGpjgsrN7bsd7  
-♥ __LTC__: LZ3EiK42o5nbDW3cwiaKUptFQ9eBA3x1vw  
+###♥ Donate to Bitcoin Checker project ♥
+* __BTC__: 1KyLY5sT1Ffa6ctFPFpdL2bxhSAxNqfvMA  
+* __DOGE__: D81kyZ49E132enb7ct7RcPGpjgsrN7bsd7  
+* __LTC__: LZ3EiK42o5nbDW3cwiaKUptFQ9eBA3x1vw  
 
 ###Issues
 Please put all requests for new exchanges/currency pairs or bugs in Bitcoin Checker apps in the Issues section.
@@ -50,10 +50,10 @@ Just just add them to Currency or VirtualCurrency class. Please place all fiat/n
 #Adding new exchange:
 ##1. New exchange configuration
 To add support for new exchange you have to provide some constants describing that particular exchange:
-* `NAME` - Name of exchange that will be displayed in app.  
-* `TTS_NAME` - Name of exchange that will be used in spoken announements. Sometimes it's just fine to put `NAME` here (see Kraken), but sometines it's better to provide more spoken friendly version (like on McxNOW - "MCX now").  
+* `NAME` - name of exchange that will be displayed in app.  
+* `TTS_NAME` - name of exchange that will be used in spoken announements. Sometimes it's just fine to put `NAME` here (see Kraken), but sometines it's better to provide more spoken friendly version (like on McxNOW - "MCX now").  
 * `URL` - this field stores Url for Ticker API. Most often it contains some two (or one) parameters (%1$s and %2$s). These parameters will be replaces with currency names or selected currency pair. Providing URL is described in the next section. 
-* `CURRENCY_PAIRS` - Map of all currencies supported by this exchange (described in other section).  
+* `CURRENCY_PAIRS` - map of all currencies supported by this exchange - described later. 
 
 These constants (without `URL`) should be provided in default constructor:
 ```java
@@ -61,8 +61,11 @@ public MarketExample() {
 	super(NAME, TTS_NAME, CURRENCY_PAIRS);
 }
 ```
+##2. Providing currency pairs:
+You have to specify which currency pairs are supported by your new exchange. Description for this is done above, in 
+[Updating currency pairs on existing exchange](https://github.com/mobnetic/BitcoinCheckerDataModule#updating-currency-pairs-on-existing-exchange) section.
 
-##2. Providing API Url:
+##3. Providing API Url:
 API Url is provided by getUrl method. The simplest implementation is to just return URL field. Sometimes Url requires some additionsl parameters (line currency names) - then you have to provide them using ```String.format()``` method.  
 See examples below:
 
@@ -101,17 +104,23 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 }
 ```
 
-###2a. Providing other parameters in URL
+###3a. Providing other parameters in URL (advanced):
 Sometimes there is a need to include some kind of pair ID instead of just currencies names. Please see `Cryptsy` as en example. There is separate `CURRENCY_PAIRS_IDS` map that holds pairs ids:
 ```java
-CURRENCY_PAIRS_IDS.put("42_BTC", 141);
-CURRENCY_PAIRS_IDS.put("ALF_BTC", 57);
-CURRENCY_PAIRS_IDS.put("AMC_BTC", 43);
+[...]
+CURRENCY_PAIRS_IDS.put("DMD_BTC", 72);
+CURRENCY_PAIRS_IDS.put("DOGE_BTC", 132);
+CURRENCY_PAIRS_IDS.put("DOGE_LTC", 135);
+CURRENCY_PAIRS_IDS.put("DVC_BTC", 40);
 [...]
 ```
 
 While providing URL we need to obtain proper ID that is associated with this pair:
 ```java
+Example for DOGE/BTC (id=132) on Cryptsy:
+API example: http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132
+URL field: http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=%1$s
+
 @Override
 public String getUrl(int requestId, CheckerInfo checkerInfo) {
 	final String pairString = String.format("%1$s_%2$s", checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
@@ -121,7 +130,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 }
 ```
 
-##3. Parsing API response:
+##4. Parsing API response:
 While parsing response from exchange you have to fill fieds of `Ticker` object.  
 If API response is just in plain JSON object you can parse it in parseTickerInnerFromJsonObject method:
 ```java
@@ -137,10 +146,10 @@ protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObje
 }
 ```
 
-__IMPORTANT:__ that the ticker.last field is obligated, all the rest of fields are optional.
+__IMPORTANT:__ that the ticker.last field is obligated, all the rest of fields are optional.  
 __NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` fields for that.
 
-###3a. Parsing non JSONObject responses:
+###4a. Parsing non JSONObject responses (advanced):
 Sometimes responses are more complicated than plain JSON, then you should use `parseTickerInner` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats but overriding this method:
 ```java
 protected void parseTickerInner(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
@@ -153,7 +162,7 @@ You can find examples of usage:
 * MintPal: JSON array response (instead of JSON object)
 * McxNOW: XML based response
 
-##4. Parsing error (not required):
+##5. Parsing error (not required):
 Sometimes an exchange is down but with some error message in their API (See `Crypto-Trade` as an example). You can also handle this situation and display error message directly from exchange to the user. There are two methods related with it and they are designed in similar way to parsing normal response:
 
 ```java
@@ -164,7 +173,7 @@ or if JSONObject is not suitable you can override following method:
 public String parseError(int requestId, String responseString, CheckerInfo checkerInfo);
 ```
 
-##5. Enablind exchange:
+##6. Enablind exchange:
 To enable newly created exchange you should add corresponding line at the bottom of `MarketsConfig` file:
 ```java
 static {
