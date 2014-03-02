@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="market_caution_unknown">Selected market was probably removed and does not exist. Please choose another one.</string>
+    <string name="market_caution_coinse">CAUTION! Due to this exchange\'s specification checking price on it may consume a lot of mobile data (while on mobile network). Consider this before using selected exchange. You can also try to choose larger update interval for this Checker.</string>
+    
+</resources>
