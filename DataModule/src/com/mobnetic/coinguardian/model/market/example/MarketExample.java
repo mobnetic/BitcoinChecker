@@ -17,12 +17,10 @@ public class MarketExample extends Market {
 	public final static String URL = "https://www.marketexample.com/api/%1$s_%2$s/ticker/";
 	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
-		// BTC/CNY and BTC/USD pairs
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.CNY,
 				Currency.USD
 			});
-		// DOGE/BTC and DOGE/USD pairs
 		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
@@ -35,8 +33,6 @@ public class MarketExample extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-//		return URL;
-//		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
 		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
 	}
 	
