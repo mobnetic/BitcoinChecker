@@ -5,53 +5,58 @@ _We proudly announce_ that `DataModule` (containing exchanges and currency pairs
 * Add support for new exchange
 * Update currency pairs on their favourite exchange
 
+###Issues
+Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin Checker apps in the [Issues](https://github.com/mobnetic/BitcoinChecker/issues) section.
+
 #####Bitcoin Checker on Google Play Store:
 https://play.google.com/store/apps/details?id=com.mobnetic.coinguardian
 
-###♥ Donate to Bitcoin Checker project ♥
-* __BTC__: 1KyLY5sT1Ffa6ctFPFpdL2bxhSAxNqfvMA  
-* __DOGE__: D81kyZ49E132enb7ct7RcPGpjgsrN7bsd7  
-* __LTC__: LZ3EiK42o5nbDW3cwiaKUptFQ9eBA3x1vw  
-
-###Issues
-Please put all requests for new exchanges/currency pairs or bugs in Bitcoin Checker apps in the Issues section.
+###Donate to Bitcoin Checker project:
+♥ __BTC__: 1KyLY5sT1Ffa6ctFPFpdL2bxhSAxNqfvMA  
+♥ __DOGE__: D81kyZ49E132enb7ct7RcPGpjgsrN7bsd7  
+♥ __LTC__: LZ3EiK42o5nbDW3cwiaKUptFQ9eBA3x1vw  
 
 #Introduction
-To start working you should clone this repo. It basically contains two projects:
-* `BitcoinCheckerDataModule`: library project that stores information about exchanges and currencies used in Bitcoin Checker. This is the project that you will work with.
-* `BitcoinCheckerDataModuleTester`: simple project that you will launch in order to test your changes - whether they work:)
+To start working you should fork this repo. It basically contains two projects:
+* [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule): library project that stores information about exchanges and currencies used in Bitcoin Checker. This is the project that you will work with.
+* [DataModuleTester](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModuleTester): simple project that you will launch in order to test your changes - whether they work:)
 
-The whole tutorial described below reffers to the `BitcoinCheckerDataModule` project because only thit project is meant to be edited by users.
+The whole tutorial described below reffers to the [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule) project because only thit project is meant to be edited by users. After doing your changes please create pull request to the original repo.
+
 #####Let the crypto fun begin!
 
 #Updating currency pairs on existing exchange:
-To update currency pairs on youir favourite exchange you have to find corresponding exchange class file in `com.mobnetic.coinguardian.model.market` package.  
+To update currency pairs on your favourite exchange you have to find corresponding exchange class file in [com.mobnetic.coinguardian.model.market](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule/src/com/mobnetic/coinguardian/model/market) package.  
 In every exchange file there is `CURRENCY_PAIRS` HashMap that contains a base currency (as a key) and a list of counter currencies. Every combination of base and counter currency represents one currency pair.
 ```java
 CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{		// Base currency
 		VirtualCurrency.BTC,						        // Counter currency
 		Currency.USD,										// Counter currency
-		Currency.CNY										// Counter currency
+		Currency.RUR,										// Counter currency
+		Currency.EUR										// Counter currency
 	});
 ```
-This example represents 3 pairs: `LTC/BTC` and `LTC/USD` and `LTC/CNY`.
+This example from [BTC-e](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Btce.java) represents 4 pairs: `LTC/BTC`, `LTC/USD`, `LTC/RUR` and `LTC/EUR`.
 
 __HINT:__ Good practise is to keep alphabetical order of base currencies (or even with counter currencies) but sometimes it's also good to mirror order from exchange site.
 
 While adding new pairs you should use currency names from these two classes:
-- Currency - where you can find fiat currencies
-- VirtualCurrency - where all crypto/virtual currencies are stored
+- [Currency](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/currency/Currency.java) - where you can find fiat currencies
+- [VirtualCurrency](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/currency/VirtualCurrency.java) - where all crypto/virtual currencies are stored
 
 ###Some currencies are missing?
 You want to add some currency pairs but one currency (or both) is missing in Currency or VirtualCurrency class?  
-Just just add them to Currency or VirtualCurrency class. Please place all fiat/normal currencies in Currency file and all crypto/virtual currencies in VirtualCurrency.
+Just just add them to Currency or VirtualCurrency class. Please put all fiat/normal currencies in Currency file and all crypto/virtual currencies in VirtualCurrency.
 
 
 #Adding new exchange:
-##1. New exchange configuration
+###Example:
+Please see example of a class that represents single exchange here - [MarketExample](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/example/MarketExample.java)
+
+##1. New exchange configuration:
 To add support for new exchange you have to provide some constants describing that particular exchange:
 * `NAME` - name of exchange that will be displayed in app.  
-* `TTS_NAME` - name of exchange that will be used in spoken announements. Sometimes it's just fine to put `NAME` here (see Kraken), but sometines it's better to provide more spoken friendly version (like on McxNOW - "MCX now").  
+* `TTS_NAME` - name of exchange that will be used in spoken announements. Sometimes it's just fine to put `NAME` here (see [Kraken](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Kraken.java)), but sometines it's better to provide more spoken friendly version (like on [McxNOW](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/McxNOW.java) - "MCX now").  
 * `URL` - this field stores Url for Ticker API. Most often it contains some two (or one) parameters (%1$s and %2$s). These parameters will be replaces with currency names or selected currency pair. Providing URL is described in the next section. 
 * `CURRENCY_PAIRS` - map of all currencies supported by this exchange - described later. 
 
@@ -105,7 +110,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 ```
 
 ###3a. Providing other parameters in URL (advanced):
-Sometimes there is a need to include some kind of pair ID instead of just currencies names. Please see `Cryptsy` as en example. There is separate `CURRENCY_PAIRS_IDS` map that holds pairs ids:
+Sometimes there is a need to include some kind of pair ID instead of just currencies names. Please see [Cryptsy](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Cryptsy.java) as en example. There is separate `CURRENCY_PAIRS_IDS` map that holds pairs ids:
 ```java
 [...]
 CURRENCY_PAIRS_IDS.put("DMD_BTC", 72);
@@ -131,7 +136,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 ```
 
 ##4. Parsing API response:
-While parsing response from exchange you have to fill fieds of `Ticker` object.  
+While parsing response from exchange you have to fill fieds of [Ticker](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/Ticker.java) object.  
 If API response is just in plain JSON object you can parse it in parseTickerInnerFromJsonObject method:
 ```java
 @Override
@@ -147,7 +152,7 @@ protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObje
 ```
 
 __IMPORTANT:__ that the ticker.last field is obligated, all the rest of fields are optional.  
-__NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` fields for that.
+__NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` constants from [TimeUtils](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/util/TimeUtils.java) for that.
 
 ###4a. Parsing non JSONObject responses (advanced):
 Sometimes responses are more complicated than plain JSON, then you should use `parseTickerInner` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats but overriding this method:
@@ -158,12 +163,12 @@ protected void parseTickerInner(int requestId, String responseString, Ticker tic
 ```
 
 You can find examples of usage:
-* Huobi: "almost" JSON object response, there is a need to trim some characters at the begining and at the end of the response
-* MintPal: JSON array response (instead of JSON object)
-* McxNOW: XML based response
+* [Huobi](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Huobi.java): "almost" JSON object response, there is a need to trim some characters at the begining and at the end of the response
+* [MintPal](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/MintPal.java): JSON array response (instead of JSON object)
+* [McxNOW](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/McxNOW.java): XML based response
 
 ##5. Parsing error (not required):
-Sometimes an exchange is down but with some error message in their API (See `Crypto-Trade` as an example). You can also handle this situation and display error message directly from exchange to the user. There are two methods related with it and they are designed in similar way to parsing normal response:
+Sometimes an exchange is down but with some error message in their API (See [Crypto-Trade](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/CryptoTrade.java) as an example). You can also handle this situation and display error message directly from exchange to the user. There are two methods related with it and they are designed in similar way to parsing normal response:
 
 ```java
 protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo);
@@ -186,7 +191,7 @@ static {
 ##Multiple requests per exchange:
 Some exchanges does not provide nice ticker api with all important information (bid, ask, vol, high, low, last), so there is a need to perform few requests (for example 2) to acquire as many information as possible.  
 These requests will be performed in a sequense and new price notification would appear when all of these requests are finished.  
-See `Poloniex` exchange as a good example. In order to perform 2 requests you have to override `getNumOfRequests` method:
+See [Poloniex](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Poloniex.java) exchange as a good example. In order to perform 2 requests you have to override `getNumOfRequests` method:
 ```java
 @Override
 public int getNumOfRequests(CheckerInfo checkerRecord) {
