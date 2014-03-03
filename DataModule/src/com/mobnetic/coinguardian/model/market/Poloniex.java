@@ -22,6 +22,9 @@ public class Poloniex extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BC, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.CACH, new String[]{
 				VirtualCurrency.BTC
 			});
@@ -39,6 +42,9 @@ public class Poloniex extends Market {
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.CORG, new String[]{
 				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.DIME, new String[]{
+				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
 				VirtualCurrency.BTC
@@ -67,14 +73,23 @@ public class Poloniex extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.GLB, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.GRC, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.HUC, new String[]{
 				VirtualCurrency.BTC
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.KDC, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.ICN, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.IXC, new String[]{
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.IFC, new String[]{
 				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.KDC, new String[]{
+				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LEAF, new String[]{
 				VirtualCurrency.LTC
@@ -104,6 +119,9 @@ public class Poloniex extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.MTS, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.MYR, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
 				VirtualCurrency.BTC
 			});
@@ -120,6 +138,9 @@ public class Poloniex extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.PMC, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.PAND, new String[]{
+				VirtualCurrency.LTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.PRC, new String[]{
 				VirtualCurrency.BTC
 			});
@@ -129,6 +150,9 @@ public class Poloniex extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.Q2C, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.REDD, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.RIC, new String[]{
 				VirtualCurrency.BTC
 			});
@@ -136,6 +160,12 @@ public class Poloniex extends Market {
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.SOC, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.SUN, new String[]{
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.SXC, new String[]{
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.USDE, new String[]{

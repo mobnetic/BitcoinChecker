@@ -59,6 +59,7 @@ public class VirtualCurrency {
 	public static final String DEM = "DEM";
 	public static final String DGB = "DGB";
 	public static final String DGC = "DGC";
+	public static final String DIME = "DIME";
 	public static final String DMD = "DMD";
 	public static final String DOGE = "DOGE";
 	public static final String DOPE = "DOPE";
@@ -134,6 +135,7 @@ public class VirtualCurrency {
 	public static final String MTS = "MTS";
 	public static final String MXB = "MXB";
 	public static final String MYMINER = "MYMINER";
+	public static final String MYR = "MYR";
 	public static final String NAN = "NAN";
 	public static final String NBL = "NBL";
 	public static final String NEC = "NEC";
@@ -148,6 +150,7 @@ public class VirtualCurrency {
 	public static final String OLY = "OLY";
 	public static final String ORB = "ORB";
 	public static final String OSC = "OSC";
+	public static final String PAND = "PAND";
 	public static final String PANDA = "PANDA";
 	public static final String PCC = "PCC";
 	public static final String PENG = "PENG";
@@ -170,6 +173,7 @@ public class VirtualCurrency {
 	public static final String RDD = "RDD";
 	public static final String REC = "REC";
 	public static final String RED = "RED";
+	public static final String REDD = "REDD";
 	public static final String RIC = "RIC";
 	public static final String RPC = "RPC";
 	public static final String RPD = "RPD";

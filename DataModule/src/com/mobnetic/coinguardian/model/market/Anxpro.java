@@ -21,6 +21,10 @@ public class Anxpro extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
@@ -33,10 +37,6 @@ public class Anxpro extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
 				VirtualCurrency.BTC,
 				VirtualCurrency.LTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
-				VirtualCurrency.BTC,
 				Currency.USD
 			});
 	}
