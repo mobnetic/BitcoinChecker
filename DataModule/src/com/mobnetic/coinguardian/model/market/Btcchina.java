@@ -37,7 +37,7 @@ public class Btcchina extends Market {
 		
 		ticker.bid = tickerJsonObject.getDouble("buy");
 		ticker.ask = tickerJsonObject.getDouble("sell");
-		ticker.vol = tickerJsonObject.getDouble("volume");
+		ticker.vol = tickerJsonObject.getDouble("vol");
 		ticker.high = tickerJsonObject.getDouble("high");
 		ticker.low = tickerJsonObject.getDouble("low");
 		ticker.last = tickerJsonObject.getDouble("last");
