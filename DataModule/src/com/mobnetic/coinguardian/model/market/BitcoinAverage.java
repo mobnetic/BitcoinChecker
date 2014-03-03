@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitcoinAverage extends Market {
 
-	public final static String NAME = "BitcoinAverage";
-	public final static String TTS_NAME = "Bitcoin Average";
-	public final static String URL = "https://api.bitcoinaverage.com/ticker/%1$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "BitcoinAverage";
+	private final static String TTS_NAME = "Bitcoin Average";
+	private final static String URL = "https://api.bitcoinaverage.com/ticker/%1$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.AUD,

@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CexIO extends Market {
 
-	public final static String NAME = "CEX.IO";
-	public final static String TTS_NAME = "CEX IO";
-	public final static String URL = "https://cex.io/api/ticker/%1$s/%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "CEX.IO";
+	private final static String TTS_NAME = "CEX IO";
+	private final static String URL = "https://cex.io/api/ticker/%1$s/%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.GHS, new String[]{
 				VirtualCurrency.BTC,

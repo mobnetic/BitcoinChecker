@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Campbx extends Market {
 
-	public final static String NAME = "CampBX";
-	public final static String TTS_NAME = "Camp BX";
-	public final static String URL = "http://campbx.com/api/xticker.php";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "CampBX";
+	private final static String TTS_NAME = "Camp BX";
+	private final static String URL = "http://campbx.com/api/xticker.php";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD

@@ -13,11 +13,11 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Coinbase extends Market {
 
-	public final static String NAME = "Coinbase";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://coinbase.com/api/v1/prices/buy?currency=%1$s";
-	public final static String URL_SECOND = "https://coinbase.com/api/v1/prices/sell?currency=%1$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Coinbase";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://coinbase.com/api/v1/prices/buy?currency=%1$s";
+	private final static String URL_SECOND = "https://coinbase.com/api/v1/prices/sell?currency=%1$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{

@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Winkdex extends Market {
 
-	public final static String NAME = "Winkdex";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "http://winkdex.com/static/js/stats.js";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Winkdex";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "http://winkdex.com/static/js/stats.js";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD

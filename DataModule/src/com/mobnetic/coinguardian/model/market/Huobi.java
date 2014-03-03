@@ -14,10 +14,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Huobi extends Market {
 
-	public final static String NAME = "Huobi";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://detail.huobi.com/staticmarket/detail.html?jsoncallback=";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Huobi";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://detail.huobi.com/staticmarket/detail.html?jsoncallback=";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.CNY

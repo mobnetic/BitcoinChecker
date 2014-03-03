@@ -13,11 +13,11 @@ import com.mobnetic.coinguardian.util.TimeUtils;
 
 public class Bitfinex extends Market {
 
-	public final static String NAME = "Bitfinex";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://api.bitfinex.com/v1/ticker/%1$s%2$s";
-	public final static String URL_SECOND = "https://api.bitfinex.com/v1/today/%1$s%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Bitfinex";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://api.bitfinex.com/v1/ticker/%1$s%2$s";
+	private final static String URL_SECOND = "https://api.bitfinex.com/v1/today/%1$s%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD

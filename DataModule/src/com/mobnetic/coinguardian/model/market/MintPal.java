@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class MintPal extends Market {
 
-	public final static String NAME = "MintPal";
-	public final static String TTS_NAME = "Mint Pal";
-	public final static String URL = "https://api.mintpal.com/market/stats/%1$s/%2$s/";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "MintPal";
+	private final static String TTS_NAME = "Mint Pal";
+	private final static String URL = "https://api.mintpal.com/market/stats/%1$s/%2$s/";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
 				VirtualCurrency.BTC

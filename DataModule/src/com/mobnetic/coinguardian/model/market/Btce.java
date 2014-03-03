@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Btce extends Market {
 
-	public final static String NAME = "Btc-e";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://btc-e.com/api/2/%1$s_%2$s/ticker";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Btc-e";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://btc-e.com/api/2/%1$s_%2$s/ticker";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD,

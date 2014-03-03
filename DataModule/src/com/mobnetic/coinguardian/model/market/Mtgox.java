@@ -14,10 +14,10 @@ import com.mobnetic.coinguardian.util.TimeUtils;
 
 public class Mtgox extends Market {
 
-	public final static String NAME = "Mtgox";
-	public final static String TTS_NAME = "MT gox";
-	public final static String URL = "https://data.mtgox.com/api/2/%1$s%2$s/money/ticker";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Mtgox";
+	private final static String TTS_NAME = "MT gox";
+	private final static String URL = "https://data.mtgox.com/api/2/%1$s%2$s/money/ticker";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD,

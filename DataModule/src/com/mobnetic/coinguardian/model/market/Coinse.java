@@ -13,10 +13,10 @@ import com.mobnetic.coinguardiandatamodule.R;
 
 public class Coinse extends Market {
 
-	public final static String NAME = "Coins-E";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://www.coins-e.com/api/v2/markets/data/";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Coins-E";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://www.coins-e.com/api/v2/markets/data/";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.ALP, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.AMC, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });

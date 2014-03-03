@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.Currency;
 
 public class Btcchina extends Market {
 	
-	public final static String NAME = "BtcChina";
-	public final static String TTS_NAME = "BTC China";
-	public final static String URL = "https://data.btcchina.com/data/ticker";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "BtcChina";
+	private final static String TTS_NAME = "BTC China";
+	private final static String URL = "https://data.btcchina.com/data/ticker";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put("BTC", new String[]{
 				Currency.CNY

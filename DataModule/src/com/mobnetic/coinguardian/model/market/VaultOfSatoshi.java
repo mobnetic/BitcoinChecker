@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class VaultOfSatoshi extends Market {
 
-	public final static String NAME = "VaultOfSatoshi";
-	public final static String TTS_NAME = "Vault Of Satoshi";
-	public final static String URL = "https://api.vaultofsatoshi.com/public/ticker?order_currency=%1$s&payment_currency=%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "VaultOfSatoshi";
+	private final static String TTS_NAME = "Vault Of Satoshi";
+	private final static String URL = "https://api.vaultofsatoshi.com/public/ticker?order_currency=%1$s&payment_currency=%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.CAD,

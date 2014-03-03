@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Okcoin extends Market {
 
-	public final static String NAME = "OKCoin";
-	public final static String TTS_NAME = "OK Coin";
-	public final static String URL = "https://www.okcoin.com/api/ticker.do?symbol=%1$s_%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "OKCoin";
+	private final static String TTS_NAME = "OK Coin";
+	private final static String URL = "https://www.okcoin.com/api/ticker.do?symbol=%1$s_%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.CNY

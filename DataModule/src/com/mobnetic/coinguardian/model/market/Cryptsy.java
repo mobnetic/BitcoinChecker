@@ -13,11 +13,11 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Cryptsy extends Market {
 
-	public final static String NAME = "Cryptsy";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=%1$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	public final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>();
+	private final static String NAME = "Cryptsy";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=%1$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency._42, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ALF, new String[]{ VirtualCurrency.BTC });

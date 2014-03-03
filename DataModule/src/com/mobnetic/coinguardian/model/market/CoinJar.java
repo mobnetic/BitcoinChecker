@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CoinJar extends Market {
 
-	public final static String NAME = "CoinJar";
-	public final static String TTS_NAME = "Coin Jar";
-	public final static String URL = "https://coinjar-data.herokuapp.com/fair_rate.json";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "CoinJar";
+	private final static String TTS_NAME = "Coin Jar";
+	private final static String URL = "https://coinjar-data.herokuapp.com/fair_rate.json";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD,

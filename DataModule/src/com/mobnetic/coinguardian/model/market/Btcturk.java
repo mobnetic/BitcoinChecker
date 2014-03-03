@@ -14,10 +14,10 @@ import com.mobnetic.coinguardian.util.TimeUtils;
 
 public class Btcturk extends Market {
 
-	public final static String NAME = "BtcTurk";
-	public final static String TTS_NAME = "Btc Turk";
-	public final static String URL = "https://www.btcturk.com/api/ticker";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "BtcTurk";
+	private final static String TTS_NAME = "Btc Turk";
+	private final static String URL = "https://www.btcturk.com/api/ticker";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.TRY

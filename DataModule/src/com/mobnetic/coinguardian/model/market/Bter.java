@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Bter extends Market {
 
-	public final static String NAME = "Bter";
-	public final static String TTS_NAME = "B ter";
-	public final static String URL = "https://bter.com/api/1/ticker/%1$s_%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Bter";
+	private final static String TTS_NAME = "B ter";
+	private final static String URL = "https://bter.com/api/1/ticker/%1$s_%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BQC, new String[]{ Currency.CNY, VirtualCurrency.BTC, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.BTB, new String[]{ Currency.CNY, VirtualCurrency.BTC });

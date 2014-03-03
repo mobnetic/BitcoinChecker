@@ -12,10 +12,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CoinMarketIO extends Market {
 
-	public final static String NAME = "CoinMarket.io";
-	public final static String TTS_NAME = "Coin Market IO";
-	public final static String URL = "https://coinmarket.io/ticker/%1$s%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "CoinMarket.io";
+	private final static String TTS_NAME = "Coin Market IO";
+	private final static String URL = "https://coinmarket.io/ticker/%1$s%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.LEAF, new String[]{
 				VirtualCurrency.BTC

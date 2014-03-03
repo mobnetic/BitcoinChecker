@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitcoinCentralNet extends Market {
 
-	public final static String NAME = "Bitcoin-Central";
-	public final static String TTS_NAME = "Bitcoin Central";
-	public final static String URL = "https://bitcoin-central.net/api/data/eur/ticker";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Bitcoin-Central";
+	private final static String TTS_NAME = "Bitcoin Central";
+	private final static String URL = "https://bitcoin-central.net/api/data/eur/ticker";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.EUR

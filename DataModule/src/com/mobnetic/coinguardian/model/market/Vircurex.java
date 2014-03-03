@@ -13,10 +13,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Vircurex extends Market {
 
-	public final static String NAME = "Vircurex";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://api.vircurex.com/api/get_info_for_1_currency.json?base=%1$s&alt=%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Vircurex";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://api.vircurex.com/api/get_info_for_1_currency.json?base=%1$s&alt=%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD,

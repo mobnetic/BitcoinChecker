@@ -14,11 +14,11 @@ import com.mobnetic.coinguardian.util.TimeUtils;
 
 public class Mercado extends Market {
 
-	public final static String NAME = "Mercado Bitcoin";
-	public final static String TTS_NAME = "Mercado";
-	public final static String URL_BTC = "https://www.mercadobitcoin.com.br/api/ticker/";
-	public final static String URL_LTC = "https://www.mercadobitcoin.com.br/api/ticker_litecoin/";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Mercado Bitcoin";
+	private final static String TTS_NAME = "Mercado";
+	private final static String URL_BTC = "https://www.mercadobitcoin.com.br/api/ticker/";
+	private final static String URL_LTC = "https://www.mercadobitcoin.com.br/api/ticker_litecoin/";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.BRL

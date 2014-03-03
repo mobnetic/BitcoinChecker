@@ -21,10 +21,10 @@ import com.mobnetic.coinguardian.util.XmlParserUtils;
 
 public class McxNOW extends Market {
 
-	public final static String NAME = "McxNOW";
-	public final static String TTS_NAME = "MCX now";
-	public final static String URL = "https://mcxnow.com/orders?cur=%1$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "McxNOW";
+	private final static String TTS_NAME = "MCX now";
+	private final static String URL = "https://mcxnow.com/orders?cur=%1$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				VirtualCurrency.BTC

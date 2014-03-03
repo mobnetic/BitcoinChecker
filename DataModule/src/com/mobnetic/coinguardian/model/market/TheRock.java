@@ -14,10 +14,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class TheRock extends Market {
 
-	public final static String NAME = "TheRock";
-	public final static String TTS_NAME = "The Rock";
-	public final static String URL = "https://www.therocktrading.com/api/ticker/%1$s%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "TheRock";
+	private final static String TTS_NAME = "The Rock";
+	private final static String URL = "https://www.therocktrading.com/api/ticker/%1$s%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.EUR,

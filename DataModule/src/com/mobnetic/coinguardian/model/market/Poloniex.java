@@ -13,11 +13,11 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Poloniex extends Market {
 
-	public final static String NAME = "Poloniex";
-	public final static String TTS_NAME = NAME;
-	public final static String URL = "https://poloniex.com/public?command=returnTicker";
-	public final static String URL_ORDERS = "https://poloniex.com/public?command=returnOrderBook&currencyPair=%1$s_%2$s";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static String NAME = "Poloniex";
+	private final static String TTS_NAME = NAME;
+	private final static String URL = "https://poloniex.com/public?command=returnTicker";
+	private final static String URL_ORDERS = "https://poloniex.com/public?command=returnOrderBook&currencyPair=%1$s_%2$s";
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
 				VirtualCurrency.BTC
