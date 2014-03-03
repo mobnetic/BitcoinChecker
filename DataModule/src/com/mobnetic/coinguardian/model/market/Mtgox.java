@@ -52,16 +52,16 @@ public class Mtgox extends Market {
 	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject dataObject = jsonObject.getJSONObject("data");
 		
-		ticker.bid = getDoubleFromMtgoxFormatObject(dataObject, "buy");
-		ticker.ask = getDoubleFromMtgoxFormatObject(dataObject, "sell");
-		ticker.vol = getDoubleFromMtgoxFormatObject(dataObject, "vol");
-		ticker.high = getDoubleFromMtgoxFormatObject(dataObject, "high");
-		ticker.low = getDoubleFromMtgoxFormatObject(dataObject, "low");
-		ticker.last = getDoubleFromMtgoxFormatObject(dataObject, "last_local");
+		ticker.bid = getPriceValueFromObject(dataObject, "buy");
+		ticker.ask = getPriceValueFromObject(dataObject, "sell");
+		ticker.vol = getPriceValueFromObject(dataObject, "vol");
+		ticker.high = getPriceValueFromObject(dataObject, "high");
+		ticker.low = getPriceValueFromObject(dataObject, "low");
+		ticker.last = getPriceValueFromObject(dataObject, "last_local");
 		ticker.timestamp = dataObject.getLong("now")/TimeUtils.NANOS_IN_MILLIS;
 	}
 	
-	private double getDoubleFromMtgoxFormatObject(JSONObject jsonObject, String key) throws Exception {
+	private double getPriceValueFromObject(JSONObject jsonObject, String key) throws Exception {
 		final JSONObject innerObject = jsonObject.getJSONObject(key);
 		return innerObject.getDouble("value");
 	}
