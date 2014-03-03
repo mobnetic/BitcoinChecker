@@ -173,7 +173,7 @@ public class VirtualCurrency {
 	public static final String RDD = "RDD";
 	public static final String REC = "REC";
 	public static final String RED = "RED";
-	public static final String REDD = "REDD";
+	public static final String REDD = "REDD";	// RDD
 	public static final String RIC = "RIC";
 	public static final String RPC = "RPC";
 	public static final String RPD = "RPD";
