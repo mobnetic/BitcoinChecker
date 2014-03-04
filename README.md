@@ -155,7 +155,7 @@ __IMPORTANT:__ that the ticker.last field is obligated, all the rest of fields a
 __NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` constants from [TimeUtils](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/util/TimeUtils.java) for that.
 
 ###4a. Parsing non JSONObject responses (advanced):
-Sometimes responses are more complicated than plain JSON, then you should use `parseTicker` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats but overriding this method:
+Sometimes responses are more complicated than plain JSON, then you should use `parseTicker` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats by overriding this method:
 ```java
 protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 	parseTickerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
