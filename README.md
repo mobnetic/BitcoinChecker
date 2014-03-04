@@ -1,7 +1,7 @@
 __Bitcoin Checker__ is a FREE app to track the most recent prices of your favourite currency pairs (on over 30 supported exchanges) in many customizable ways (such as rich notifications, TTS voice announcements, Home and Lockscreen widget or multiple alarms).
 
 ###Hello Bitcoin Checker users!  
-As you know, number of virtual currencies increasing very fast. Currencie pairs set on existing exchanges changes almost everyday and also there is need to add new and new exchanges over time.
+As you know, the number of virtual currencies are increasing very fast. Currency pairs set on existing exchanges change almost every day and also there is a need to add new and new exchanges over time.
 _We proudly announce_ that [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule) (containing exchanges and currency pairs) for Bitcoin Checker app is now _OPEN_ for our users to make this application _even better_! This means that _anyone_ can now:
 * Add support for new exchange
 * Update currency pairs on their favourite exchange
@@ -22,7 +22,7 @@ To start working you should fork this repo. It basically contains two projects:
 * [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule): library project that stores information about exchanges and currencies used in Bitcoin Checker. This is the project that you will work with.
 * [DataModuleTester](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModuleTester): simple project that provides minimal interface in order to launch and test your changes - whether they work:)
 
-The whole tutorial described below reffers to the [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule) project because only thit project is meant to be edited by users. After doing your changes please create pull request to the original repo.
+The whole tutorial described below refers to the [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule) project because only this project is meant to be edited by users. After making your changes please create a pull request to the original repo.
 
 
 #Updating currency pairs on existing exchange:
@@ -221,4 +221,3 @@ protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, T
 	}
 }
 ```
-

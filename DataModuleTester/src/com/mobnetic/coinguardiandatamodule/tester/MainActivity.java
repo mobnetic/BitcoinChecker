@@ -32,6 +32,7 @@ import com.mobnetic.coinguardian.config.MarketsConfig;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardian.util.CurrencyUtils;
 import com.mobnetic.coinguardian.util.MarketsConfigUtils;
 import com.mobnetic.coinguardiandatamodule.tester.util.HttpsHelper;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
@@ -203,7 +204,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private String formatPriceWithCurrency(double price, String currency) {
-		return String.valueOf(price)+" "+currency;
+		return String.valueOf(price)+" "+CurrencyUtils.getCurrencySymbol(currency);
 	}
 	
 	private String createNewPriceLineIfNeeded(int textResId, double price, String currency) {
