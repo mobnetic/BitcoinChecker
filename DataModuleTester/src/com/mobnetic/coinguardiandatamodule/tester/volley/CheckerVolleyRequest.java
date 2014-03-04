@@ -32,14 +32,14 @@ public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<Ticker> {
 	protected Ticker parseNetworkResponse(String responseString) throws Exception {
 		Ticker ticker;
 		try {
-			ticker = market.parseTicker(0, responseString, new Ticker(), checkerInfo);
+			ticker = market.parseTickerMain(0, responseString, new Ticker(), checkerInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			ticker = null;
 		}
 		
 		if(ticker==null || ticker.last<=Ticker.NO_DATA) {
-			throw new CheckerErrorParsedError(market.parseError(0, responseString, checkerInfo));
+			throw new CheckerErrorParsedError(market.parseErrorMain(0, responseString, checkerInfo));
 		}
 		
 		final int numOfRequests = market.getNumOfRequests(checkerInfo);
@@ -52,7 +52,7 @@ public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<Ticker> {
 						CheckerVolleyNextRequest request = new CheckerVolleyNextRequest(nextUrl, checkerInfo, future);
 						requestQueue.add(request);
 						String nextResponse = future.get(); // this will block
-						market.parseTicker(requestId, nextResponse, ticker, checkerInfo);
+						market.parseTickerMain(requestId, nextResponse, ticker, checkerInfo);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

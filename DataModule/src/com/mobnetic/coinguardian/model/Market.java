@@ -30,8 +30,8 @@ public abstract class Market {
 	
 	public abstract String getUrl(int requestId, CheckerInfo checkerInfo);
 	
-	public final Ticker parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		parseTickerInner(requestId, responseString, ticker, checkerInfo);
+	public final Ticker parseTickerMain(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+		parseTicker(requestId, responseString, ticker, checkerInfo);
 		if(ticker.timestamp<=0)
 			ticker.timestamp = System.currentTimeMillis();
 		else
@@ -40,20 +40,24 @@ public abstract class Market {
 		return ticker;
 	}
 	
+	public final String parseErrorMain(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
+		return parseError(requestId, responseString, checkerInfo);
+	}
+	
 	// ====================
 	// Parse Ticker Inner
 	// ====================
-	protected void parseTickerInner(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		parseTickerInnerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
+	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+		parseTickerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
 	}
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		// do parsing
 	}
 	
 	// ====================
 	// Parse Error
 	// ====================
-	public String parseError(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
+	protected String parseError(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
 		return parseErrorFromJsonObject(requestId, new JSONObject(responseString), checkerInfo);
 	}
 	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo) throws Exception {

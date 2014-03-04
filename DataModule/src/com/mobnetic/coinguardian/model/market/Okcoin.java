@@ -35,7 +35,7 @@ public class Okcoin extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
 		
 		ticker.bid = tickerJsonObject.getDouble("buy");

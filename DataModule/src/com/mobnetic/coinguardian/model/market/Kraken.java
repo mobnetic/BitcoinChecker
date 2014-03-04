@@ -84,7 +84,7 @@ public class Kraken extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject resultObject = jsonObject.getJSONObject("result");
 		final JSONObject pairObject = resultObject.getJSONObject(resultObject.names().getString(0));
 		

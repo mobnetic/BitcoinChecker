@@ -34,14 +34,14 @@ public class Huobi extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInner(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		if(responseString!=null && responseString.length()>13)
 			responseString = responseString.substring("view_detail(".length(), responseString.length()-")".length());
-		super.parseTickerInner(requestId, responseString, ticker, checkerInfo);
+		super.parseTicker(requestId, responseString, ticker, checkerInfo);
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		JSONArray buys = jsonObject.optJSONArray("buys");
 		if(buys!=null && buys.length()>0)
 			ticker.bid = buys.getJSONObject(0).getDouble("price");

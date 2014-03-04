@@ -209,7 +209,7 @@ public class Poloniex extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		if(requestId==0) {
 			ticker.last = jsonObject.getDouble(checkerInfo.getCurrencyCounter()+"_"+checkerInfo.getCurrencyBase());	// Reversed currencies
 		} else {

@@ -57,7 +57,7 @@ public class VaultOfSatoshi extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject dataObject = jsonObject.getJSONObject("data");
 		
 		ticker.vol = getDoubleFromMtgoxFormatObject(dataObject, "volume_1day");

@@ -33,7 +33,7 @@ public class Winkdex extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		ticker.vol = jsonObject.getDouble("volume_btc_24h");
 		ticker.high = jsonObject.getDouble("winkdex_high_24h");
 		ticker.low = jsonObject.getDouble("winkdex_low_24h");

@@ -42,7 +42,7 @@ public class CexIO extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		
 		if(jsonObject.has("bid"))
 			ticker.bid = jsonObject.getDouble("bid");

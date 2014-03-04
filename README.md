@@ -137,10 +137,10 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 
 ##4. Parsing API response:
 While parsing response from exchange you have to fill fieds of [Ticker](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/Ticker.java) object.  
-If API response is just in plain JSON object you can parse it in parseTickerInnerFromJsonObject method:
+If API response is just in plain JSON object you can parse it in parseTickerFromJsonObject method:
 ```java
 @Override
-protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerRecord) throws Exception {
+protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerRecord) throws Exception {
   ticker.bid = jsonObject.getDouble("bid");
   ticker.ask = jsonObject.getDouble("ask");
   ticker.vol = jsonObject.getDouble("volume");
@@ -155,10 +155,10 @@ __IMPORTANT:__ that the ticker.last field is obligated, all the rest of fields a
 __NOTE:__ parsing `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker would fill it with `now` date. If you want to parse this information please note that some exchanges provides time in different formats (like seconds or nanos) so you have to multiply or divide it to get time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` constants from [TimeUtils](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/util/TimeUtils.java) for that.
 
 ###4a. Parsing non JSONObject responses (advanced):
-Sometimes responses are more complicated than plain JSON, then you should use `parseTickerInner` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats but overriding this method:
+Sometimes responses are more complicated than plain JSON, then you should use `parseTicker` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats but overriding this method:
 ```java
-protected void parseTickerInner(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-	parseTickerInnerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
+protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	parseTickerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
 }
 ```
 
@@ -175,7 +175,7 @@ protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, 
 ```
 or if JSONObject is not suitable you can override following method:
 ```java
-public String parseError(int requestId, String responseString, CheckerInfo checkerInfo);
+protected String parseError(int requestId, String responseString, CheckerInfo checkerInfo);
 ```
 
 ##6. Enablind exchange:
@@ -199,7 +199,7 @@ public int getNumOfRequests(CheckerInfo checkerRecord) {
 }
 ```
 
-Then make use of requestId variable passed to `getUrl` and `parseTickerInnerFromJsonObject` methods.  
+Then make use of requestId variable passed to `getUrl` and `parseTickerFromJsonObject` methods.  
 `requestId` variable is incremented from `0` to `numOfRequests-1` for every new request made.
 From first request we are able to obtain only `last` price. We want to obtain also `bid` and `ask` values so we do another request for orders list:
 ```java
@@ -212,7 +212,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 }
 	
 @Override
-protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 	if(requestId==0) {
 		ticker.last = jsonObject.getDouble(checkerInfo.getCurrencyCounter()+"_"+checkerInfo.getCurrencyBase());  // Reversed currencies
 	} else {

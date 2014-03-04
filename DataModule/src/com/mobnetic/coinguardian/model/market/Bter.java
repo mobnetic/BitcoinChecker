@@ -70,7 +70,7 @@ public class Bter extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		ticker.bid = jsonObject.getDouble("buy");
 		ticker.ask = jsonObject.getDouble("sell");
 		ticker.vol = jsonObject.getDouble("vol_"+checkerInfo.getCurrencyBaseLowerCase());

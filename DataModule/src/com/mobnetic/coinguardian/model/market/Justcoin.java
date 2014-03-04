@@ -38,13 +38,13 @@ public class Justcoin extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInner(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONArray jsonArray = new JSONArray(responseString);
 		final String idString = checkerInfo.getCurrencyBase()+checkerInfo.getCurrencyCounter();
 		for(int i=0; i<jsonArray.length(); ++i) {
 			final JSONObject jsonObject = jsonArray.getJSONObject(i);
 			if(jsonObject!=null && idString.equals(jsonObject.getString("id"))) {
-				parseTickerInnerFromJsonObject(requestId, jsonObject, ticker, checkerInfo);
+				parseTickerFromJsonObject(requestId, jsonObject, ticker, checkerInfo);
 				return;
 			}
 		}
@@ -53,7 +53,7 @@ public class Justcoin extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		ticker.bid = jsonObject.getDouble("bid");
 		ticker.ask = jsonObject.getDouble("ask");
 		ticker.vol = jsonObject.getDouble("volume");

@@ -67,7 +67,7 @@ public class Btce extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
 		
 		ticker.bid = tickerJsonObject.getDouble("sell");	// REVERSED!

@@ -50,7 +50,7 @@ public class TheRock extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONArray resultArray = jsonObject.getJSONArray("result");
 		final JSONObject tickerObject = resultArray.getJSONObject(0);
 		

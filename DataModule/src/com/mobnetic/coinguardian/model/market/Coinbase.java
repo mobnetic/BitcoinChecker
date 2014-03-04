@@ -201,7 +201,7 @@ public class Coinbase extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		JSONObject subtotal = jsonObject.getJSONObject("subtotal");
 		if(requestId==0) {
 			ticker.ask = subtotal.getDouble("amount");

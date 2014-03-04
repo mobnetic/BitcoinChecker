@@ -283,7 +283,7 @@ public class Cryptsy extends Market {
 	}
 	
 	@Override
-	protected void parseTickerInnerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject returnObject = jsonObject.getJSONObject("return");
 		final JSONObject marketsObject = returnObject.getJSONObject("markets");
 		final JSONObject pairObject = marketsObject.getJSONObject(marketsObject.names().getString(0));
