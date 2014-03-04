@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 		final Market market = getSelectedMarket();
 		final String currencyBase = getSelectedCurrencyBase(market);
 		final String currencyCounter = getSelectedCurrencyCounter(market, currencyBase);
-		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter);
+		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, null);
 		Request<?> request = new CheckerVolleyRequest(market, checkerInfo, new Listener<Ticker>() {
 			@Override
 			public void onResponse(Ticker ticker) {
