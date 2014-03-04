@@ -2,6 +2,7 @@ package com.mobnetic.coinguardiandatamodule.tester.volley;
 
 import com.android.volley.toolbox.RequestFuture;
 import com.mobnetic.coinguardian.model.CheckerInfo;
+import com.mobnetic.coinguardiandatamodule.tester.volley.generic.GenericCheckerVolleyRequest;
 
 public class CheckerVolleyNextRequest extends GenericCheckerVolleyRequest<String> {
 	

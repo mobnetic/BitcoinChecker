@@ -2,11 +2,13 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
+import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
@@ -16,6 +18,7 @@ public class Cryptsy extends Market {
 	private final static String NAME = "Cryptsy";
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=%1$s";
+	private final static String URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=marketdatav2";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	private final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>();
 	static {
@@ -279,7 +282,7 @@ public class Cryptsy extends Market {
 		final String pairString = String.format("%1$s_%2$s", checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
 		if(CURRENCY_PAIRS_IDS.containsKey(pairString))
 			return String.format(URL, String.valueOf(CURRENCY_PAIRS_IDS.get(pairString)));	
-		return URL;
+		return String.format(URL, checkerInfo.getCurrencyPairId());
 	}
 	
 	@Override
@@ -308,5 +311,30 @@ public class Cryptsy extends Market {
 			e.printStackTrace();
 		}
 		return Ticker.NO_DATA;
+	}
+	
+	
+	// ====================
+	// Get currency pairs
+	// ====================
+	@Override
+	public String getCurrencyPairsUrl() {
+		return URL_CURRENCY_PAIRS;
+	}
+	
+	@Override
+	protected void parseCurrencyPairsFromJsonObject(JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+		final JSONObject returnObject = jsonObject.getJSONObject("return");
+		final JSONObject marketsObject = returnObject.getJSONObject("markets");
+		final JSONArray marketNames = marketsObject.names();
+		
+		for(int i=0; i<marketNames.length(); ++i) {
+			JSONObject marketObject = marketsObject.getJSONObject(marketNames.getString(i));
+			pairs.add(new CurrencyPairInfo(
+					marketObject.getString("primarycode"),
+					marketObject.getString("secondarycode"),
+					marketObject.getString("marketid")
+				));
+		}
 	}
 }

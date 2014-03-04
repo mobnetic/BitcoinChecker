@@ -5,9 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
+import com.mobnetic.coinguardian.model.CurrencyPairsListWithDate;
 
 public class CurrencyPairsMapHelper {
 
+	private long date;
 	private final HashMap<String, CharSequence[]> currencyPairs;
 	private final HashMap<String, String> currencyPairsIds;
 	
@@ -16,9 +18,11 @@ public class CurrencyPairsMapHelper {
 		currencyPairsIds = new HashMap<String, String>();
 	}
 	
-	public void setPairs(List<CurrencyPairInfo> sortedPairs) {
+	public void setPairs(CurrencyPairsListWithDate currencyPairsListWithDate) {
 		currencyPairs.clear();
 		currencyPairsIds.clear();
+		date = currencyPairsListWithDate.date;
+		List<CurrencyPairInfo> sortedPairs = currencyPairsListWithDate.pairs;
 		
 		// optymalizacja przy pustych ID
 		HashMap<String, Integer> currencyGroupSizes = new HashMap<String, Integer>();
@@ -48,6 +52,10 @@ public class CurrencyPairsMapHelper {
 					createCurrencyPairKey(currencyPairInfo.getCurrencyBase(), currencyPairInfo.getCurrencyCounter()),
 					currencyPairInfo.getCurrencyPairId());
 		}
+	}
+	
+	public long getDate() {
+		return date;
 	}
 	
 	public HashMap<String, CharSequence[]> getCurrencyPairs() {

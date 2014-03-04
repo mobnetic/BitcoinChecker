@@ -35,7 +35,7 @@ import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.util.MarketsConfigUtils;
 import com.mobnetic.coinguardiandatamodule.tester.util.HttpsHelper;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
-import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyRequest;
+import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest;
 
 public class MainActivity extends Activity {
 
@@ -152,7 +152,7 @@ public class MainActivity extends Activity {
 		final String currencyBase = getSelectedCurrencyBase(market);
 		final String currencyCounter = getSelectedCurrencyCounter(market, currencyBase);
 		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, null);
-		Request<?> request = new CheckerVolleyRequest(market, checkerInfo, new Listener<Ticker>() {
+		Request<?> request = new CheckerVolleyMainRequest(market, checkerInfo, new Listener<Ticker>() {
 			@Override
 			public void onResponse(Ticker ticker) {
 				handleNewResult(checkerInfo, ticker, null);
