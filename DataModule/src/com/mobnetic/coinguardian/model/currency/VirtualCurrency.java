@@ -179,6 +179,7 @@ public class VirtualCurrency {
 	public static final String RPD = "RPD";
 	public static final String RUBY = "RUBY";
 	public static final String RYC = "RYC";
+	public static final String SAT = "SAT";
 	public static final String SAV = "SAV";
 	public static final String SBC = "SBC";
 	public static final String SC = "SC";
