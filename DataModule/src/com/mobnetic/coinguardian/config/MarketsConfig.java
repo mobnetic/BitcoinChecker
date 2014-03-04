@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.Anxpro;
+import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
 import com.mobnetic.coinguardian.model.market.BitcoinCentralNet;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
@@ -48,7 +49,7 @@ public class MarketsConfig {
 		addMarket(new Mtgox());
 		addMarket(new Btcchina());
 		addMarket(new Btce());
-		addMarket(new Bitstamp());
+		addMarket(new Bitstamp());		
 		addMarket(new Bitcurex());
 		addMarket(new Mercado());
 		addMarket(new Kraken());
@@ -78,5 +79,6 @@ public class MarketsConfig {
 		addMarket(new Poloniex());
 		addMarket(new Winkdex());
 		addMarket(new Anxpro());
+		addMarket(new BitX());
 	}
 }
