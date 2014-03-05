@@ -38,7 +38,19 @@ CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{		// Base currency
 ```
 This example from [BTC-e](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Btce.java) represents 4 pairs: `LTC/BTC`, `LTC/USD`, `LTC/RUR` and `LTC/EUR`.
 
-__HINT:__ Good practise is to keep alphabetical order of base currencies (or even with counter currencies) but sometimes it's also good to mirror order from exchange site.
+###Adding new pair on Cryptsy?
+Mostly this is enough, but while adding new currency pair on [Cryptsy](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Cryptsy.java) you also need to provide a special pair ID. Please include it in a map called `CURRENCY_PAIRS_IDS`, as shown here:
+```java
+[...]
+CURRENCY_PAIRS_IDS.put("DOGE_BTC", 132);
+CURRENCY_PAIRS_IDS.put("DOGE_LTC", 135);
+[...]
+```
+
+The simplest way to know the pair ID is to click on particular pair (or at least hover) being on Cryptsy website. The number at the end of page address represents an ID of this pair: https://www.cryptsy.com/markets/view/132
+
+###Good practise:
+Try to keep alphabetical order of base currencies (or even with counter currencies) but sometimes it's also good to mirror order from exchange site.
 
 While adding new pairs you should use currency names from these two classes:
 - [Currency](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/currency/Currency.java) - where you can find fiat currencies
