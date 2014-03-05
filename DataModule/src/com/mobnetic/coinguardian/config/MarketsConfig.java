@@ -46,10 +46,10 @@ public class MarketsConfig {
 	}
 	
 	static {
-		addMarket(new Mtgox());
+		addMarket(new Bitstamp());
+//		addMarket(new Mtgox());
 		addMarket(new Btcchina());
 		addMarket(new Btce());
-		addMarket(new Bitstamp());		
 		addMarket(new Bitcurex());
 		addMarket(new Mercado());
 		addMarket(new Kraken());
