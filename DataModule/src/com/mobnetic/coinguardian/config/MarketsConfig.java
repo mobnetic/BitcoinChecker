@@ -80,5 +80,6 @@ public class MarketsConfig {
 		addMarket(new Winkdex());
 		addMarket(new Anxpro());
 		addMarket(new BitX());
+//		addMarket(new CryptoRush());
 	}
 }
