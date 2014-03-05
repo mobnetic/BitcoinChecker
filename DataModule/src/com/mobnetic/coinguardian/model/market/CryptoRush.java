@@ -14,7 +14,7 @@ public class CryptoRush extends Market {
 
 	public final static String NAME = "CryptoRush";
 	public final static String TTS_NAME = "Crypto Rush";
-	public final static String URL = "https://cryptorush.in/api.php?get=market&m=%1$s&b=%2$s&json=true";
+	public final static String URL = "https://cryptorush.in/api.php?get=market&m=%1$s&b=%2$s&json=true&key=APIKEY&id=YOURID";
 	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency._21, new String[]{
