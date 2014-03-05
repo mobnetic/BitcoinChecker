@@ -2,7 +2,9 @@ package com.mobnetic.coinguardian.model.currency;
 
 public class VirtualCurrency {
 
+	public static final String _21 = "21";
 	public static final String _42 = "42";
+	public static final String _66 = "66";
 	public static final String ADT = "ADT";
 	public static final String ALF = "ALF";
 	public static final String ALP = "ALP";
