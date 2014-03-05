@@ -10,13 +10,14 @@ import com.android.volley.toolbox.RequestFuture;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyRequest.TickerWithRawResponse;
 
-public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<Ticker> {
+public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<TickerWithRawResponse> {
 	
 	private final Market market;
 	private RequestQueue requestQueue;
 
-	public CheckerVolleyRequest(Market market, CheckerInfo checkerInfo, Listener<Ticker> listener, ErrorListener errorListener) {
+	public CheckerVolleyRequest(Market market, CheckerInfo checkerInfo, Listener<TickerWithRawResponse> listener, ErrorListener errorListener) {
 		super(market.getUrl(0, checkerInfo), checkerInfo, listener, errorListener);
 		setRetryPolicy(new DefaultRetryPolicy(5000, 3, 1.5f));
 		this.market = market;
@@ -29,10 +30,10 @@ public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<Ticker> {
 	}
 
 	@Override
-	protected Ticker parseNetworkResponse(String responseString) throws Exception {
-		Ticker ticker;
+	protected TickerWithRawResponse parseNetworkResponse(String responseString) throws Exception {
+		TickerWithRawResponse ticker;
 		try {
-			ticker = market.parseTickerMain(0, responseString, new Ticker(), checkerInfo);
+			ticker = (TickerWithRawResponse)market.parseTickerMain(0, responseString, new TickerWithRawResponse(), checkerInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			ticker = null;
@@ -42,6 +43,7 @@ public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<Ticker> {
 			throw new CheckerErrorParsedError(market.parseErrorMain(0, responseString, checkerInfo));
 		}
 		
+		ticker.rawResponse = responseString;
 		final int numOfRequests = market.getNumOfRequests(checkerInfo);
 		if(numOfRequests>1) {
 			for(int requestId=1; requestId<numOfRequests; ++requestId) {
@@ -60,5 +62,11 @@ public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<Ticker> {
 			}
 		}
 		return ticker;
+	}
+	
+	public class TickerWithRawResponse extends Ticker {
+		
+		public String rawResponse;
+		
 	}
 }

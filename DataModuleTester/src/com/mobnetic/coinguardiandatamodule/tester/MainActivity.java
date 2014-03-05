@@ -5,6 +5,8 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
@@ -37,6 +39,7 @@ import com.mobnetic.coinguardian.util.MarketsConfigUtils;
 import com.mobnetic.coinguardiandatamodule.tester.util.HttpsHelper;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyRequest;
+import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyRequest.TickerWithRawResponse;
 
 public class MainActivity extends Activity {
 
@@ -153,9 +156,9 @@ public class MainActivity extends Activity {
 		final String currencyBase = getSelectedCurrencyBase(market);
 		final String currencyCounter = getSelectedCurrencyCounter(market, currencyBase);
 		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter);
-		Request<?> request = new CheckerVolleyRequest(market, checkerInfo, new Listener<Ticker>() {
+		Request<?> request = new CheckerVolleyRequest(market, checkerInfo, new Listener<TickerWithRawResponse>() {
 			@Override
-			public void onResponse(Ticker ticker) {
+			public void onResponse(TickerWithRawResponse ticker) {
 				handleNewResult(checkerInfo, ticker, null);
 			}
 		}, new ErrorListener() {
@@ -184,23 +187,25 @@ public class MainActivity extends Activity {
 		showResultView(false);
 	}
 	
-	private void handleNewResult(CheckerInfo checkerInfo, Ticker ticker, String errorMsg) {
+	private void handleNewResult(CheckerInfo checkerInfo, TickerWithRawResponse ticker, String errorMsg) {
 		showResultView(true);
-		String text = "";
+		SpannableStringBuilder ssb = new SpannableStringBuilder();
 		
 		if (ticker!=null) {
-			text += getString(R.string.ticker_last, formatPriceWithCurrency(ticker.last, checkerInfo.getCurrencyCounter()));
-			text += createNewPriceLineIfNeeded(R.string.ticker_high, ticker.high, checkerInfo.getCurrencyCounter());
-			text += createNewPriceLineIfNeeded(R.string.ticker_low, ticker.low, checkerInfo.getCurrencyCounter());
-			text += createNewPriceLineIfNeeded(R.string.ticker_bid, ticker.bid, checkerInfo.getCurrencyCounter());
-			text += createNewPriceLineIfNeeded(R.string.ticker_ask, ticker.ask, checkerInfo.getCurrencyCounter());
-			text += createNewPriceLineIfNeeded(R.string.ticker_vol, ticker.vol, checkerInfo.getCurrencyBase());
-			text += "\n"+getString(R.string.ticker_timestamp, formatSameDayTimeOrDate(this, ticker.timestamp));
+			ssb.append(getString(R.string.ticker_last, formatPriceWithCurrency(ticker.last, checkerInfo.getCurrencyCounter())));
+			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_high, ticker.high, checkerInfo.getCurrencyCounter()));
+			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_low, ticker.low, checkerInfo.getCurrencyCounter()));
+			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_bid, ticker.bid, checkerInfo.getCurrencyCounter()));
+			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_ask, ticker.ask, checkerInfo.getCurrencyCounter()));
+			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol, ticker.vol, checkerInfo.getCurrencyBase()));
+			ssb.append("\n"+getString(R.string.ticker_timestamp, formatSameDayTimeOrDate(this, ticker.timestamp)));
+			ssb.append("\n\n");
+			ssb.append(Html.fromHtml(getString(R.string.ticker_raw_response)+"\n<small>"+ticker.rawResponse+"</small>"));
 		} else {
-			text = getString(R.string.check_error_generic_prefix, errorMsg!=null ? errorMsg : "UNKNOWN");
+			ssb.append(getString(R.string.check_error_generic_prefix, errorMsg!=null ? errorMsg : "UNKNOWN"));
 		}
 		
-		resultView.setText(text);
+		resultView.setText(ssb);
 	}
 	
 	private String formatPriceWithCurrency(double price, String currency) {
