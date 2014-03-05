@@ -36,6 +36,9 @@ public class MintPal extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.DOPE, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.KARM, new String[]{
 				VirtualCurrency.BTC
 			});
