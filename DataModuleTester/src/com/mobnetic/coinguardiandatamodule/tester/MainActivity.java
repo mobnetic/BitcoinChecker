@@ -1,15 +1,10 @@
 package com.mobnetic.coinguardiandatamodule.tester;
 
-import java.util.Date;
-
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -34,7 +29,7 @@ import com.mobnetic.coinguardian.config.MarketsConfig;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardian.util.CurrencyUtils;
+import com.mobnetic.coinguardian.util.FormatUtilsBase;
 import com.mobnetic.coinguardian.util.MarketsConfigUtils;
 import com.mobnetic.coinguardiandatamodule.tester.util.HttpsHelper;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
@@ -192,13 +187,13 @@ public class MainActivity extends Activity {
 		SpannableStringBuilder ssb = new SpannableStringBuilder();
 		
 		if (ticker!=null) {
-			ssb.append(getString(R.string.ticker_last, formatPriceWithCurrency(ticker.last, checkerInfo.getCurrencyCounter())));
+			ssb.append(getString(R.string.ticker_last, FormatUtilsBase.formatPriceWithCurrency(ticker.last, checkerInfo.getCurrencyCounter())));
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_high, ticker.high, checkerInfo.getCurrencyCounter()));
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_low, ticker.low, checkerInfo.getCurrencyCounter()));
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_bid, ticker.bid, checkerInfo.getCurrencyCounter()));
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_ask, ticker.ask, checkerInfo.getCurrencyCounter()));
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol, ticker.vol, checkerInfo.getCurrencyBase()));
-			ssb.append("\n"+getString(R.string.ticker_timestamp, formatSameDayTimeOrDate(this, ticker.timestamp)));
+			ssb.append("\n"+getString(R.string.ticker_timestamp, FormatUtilsBase.formatSameDayTimeOrDate(this, ticker.timestamp)));
 			ssb.append("\n\n");
 			ssb.append(Html.fromHtml(getString(R.string.ticker_raw_response)+"\n<small>"+ticker.rawResponse+"</small>"));
 		} else {
@@ -208,22 +203,10 @@ public class MainActivity extends Activity {
 		resultView.setText(ssb);
 	}
 	
-	private String formatPriceWithCurrency(double price, String currency) {
-		return String.valueOf(price)+" "+CurrencyUtils.getCurrencySymbol(currency);
-	}
-	
 	private String createNewPriceLineIfNeeded(int textResId, double price, String currency) {
 		if(price<=Ticker.NO_DATA)
 			return "";
 		
-		return "\n"+getString(textResId, formatPriceWithCurrency(price, currency));
-	}
-	
-	public static String formatSameDayTimeOrDate(Context context, long time) {
-		if (DateUtils.isToday(time)) {
-	        return DateFormat.getTimeFormat(context).format(new Date(time));
-	    } else {
-	    	return DateFormat.getDateFormat(context).format(new Date(time));
-	    }
+		return "\n"+getString(textResId, FormatUtilsBase.formatPriceWithCurrency(price, currency));
 	}
 }
