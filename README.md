@@ -1,7 +1,7 @@
 __Bitcoin Checker__ is a FREE app to track the most recent prices of your favourite currency pairs (on over 30 supported exchanges) in many customizable ways (such as rich notifications, TTS voice announcements, Home and Lockscreen widget or multiple alarms).
 
 ###Hello Bitcoin Checker users!  
-As you know, the number of virtual currencies are increasing very fast. Currency pairs set on existing exchanges change almost every day and also there is a need to add newer and newer exchanges over time.
+As you know, the number of virtual currencies is increasing very fast. Currency pairs set on existing exchanges change almost every day and there is also a need to add newer and newer exchanges over time.
 _We proudly announce_ that [DataModule](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule) (containing exchanges and currency pairs) for Bitcoin Checker app is now _OPEN_ for our users to make this application _even better_! This means that _anyone_ can now:
 * Add support for a new exchange
 * Update currency pairs on their favourite exchange
