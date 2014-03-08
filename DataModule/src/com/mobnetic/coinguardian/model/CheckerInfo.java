@@ -2,26 +2,16 @@ package com.mobnetic.coinguardian.model;
 
 import java.util.Locale;
 
-public class CheckerInfo {
+public class CheckerInfo extends CurrencyPairInfo {
 
-	private final String currencyBase;
-	private final String currencyCounter;
-	
-	public CheckerInfo(String currencyBase, String currencyCounter) {
-		this.currencyBase = currencyBase;
-		this.currencyCounter = currencyCounter;
+	public CheckerInfo(String currencyBase, String currencyCounter, String currencyPairId) {
+		super(currencyBase, currencyCounter, currencyPairId);
 	}
 	
-	public String getCurrencyBase() {
-		return currencyBase;
-	}
 	public String getCurrencyBaseLowerCase() {
 		return getCurrencyBase().toLowerCase(Locale.US);
 	}
 	
-	public String getCurrencyCounter() {
-		return currencyCounter;
-	}
 	public String getCurrencyCounterLowerCase() {
 		return getCurrencyCounter().toLowerCase(Locale.US);
 	}

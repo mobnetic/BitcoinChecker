@@ -10,14 +10,15 @@ import com.android.volley.toolbox.RequestFuture;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyRequest.TickerWithRawResponse;
+import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest.TickerWithRawResponse;
+import com.mobnetic.coinguardiandatamodule.tester.volley.generic.GenericCheckerVolleyRequest;
 
-public class CheckerVolleyRequest extends GenericCheckerVolleyRequest<TickerWithRawResponse> {
+public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<TickerWithRawResponse> {
 	
 	private final Market market;
 	private RequestQueue requestQueue;
 
-	public CheckerVolleyRequest(Market market, CheckerInfo checkerInfo, Listener<TickerWithRawResponse> listener, ErrorListener errorListener) {
+	public CheckerVolleyMainRequest(Market market, CheckerInfo checkerInfo, Listener<TickerWithRawResponse> listener, ErrorListener errorListener) {
 		super(market.getUrl(0, checkerInfo), checkerInfo, listener, errorListener);
 		setRetryPolicy(new DefaultRetryPolicy(5000, 3, 1.5f));
 		this.market = market;
