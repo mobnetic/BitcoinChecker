@@ -88,6 +88,7 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.MNC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.MOON, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.MST, new String[]{ VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.MZC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.NAN, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.NBL, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.NEC, new String[]{ VirtualCurrency.BTC });
@@ -217,6 +218,7 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS_IDS.put("MOON_BTC", 146);
 		CURRENCY_PAIRS_IDS.put("MOON_LTC", 145);
 		CURRENCY_PAIRS_IDS.put("MST_LTC", 62);
+		CURRENCY_PAIRS_IDS.put("MZC_BTC", 164);
 		CURRENCY_PAIRS_IDS.put("NAN_BTC", 64);
 		CURRENCY_PAIRS_IDS.put("NBL_BTC", 32);
 		CURRENCY_PAIRS_IDS.put("NEC_BTC", 90);
