@@ -22,10 +22,16 @@ public class MintPal extends Market {
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BC, new String[]{
-				VirtualCurrency.BTC
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.CAGE, new String[]{
-				VirtualCurrency.BTC
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.CTM, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{
 				VirtualCurrency.BTC
@@ -55,6 +61,10 @@ public class MintPal extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.MRS, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.MZC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.OLY, new String[]{
 				VirtualCurrency.BTC
 			});
@@ -68,7 +78,8 @@ public class MintPal extends Market {
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.RBBT, new String[]{
-				VirtualCurrency.BTC
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.RIC, new String[]{
 				VirtualCurrency.BTC
@@ -92,6 +103,9 @@ public class MintPal extends Market {
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.UTC, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ZED, new String[]{
 				VirtualCurrency.BTC
 			});
 	}
