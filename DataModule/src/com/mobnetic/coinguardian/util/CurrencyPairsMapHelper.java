@@ -13,14 +13,13 @@ public class CurrencyPairsMapHelper {
 	private final HashMap<String, CharSequence[]> currencyPairs;
 	private final HashMap<String, String> currencyPairsIds;
 	
-	public CurrencyPairsMapHelper() {
+	public CurrencyPairsMapHelper(CurrencyPairsListWithDate currencyPairsListWithDate) {
 		currencyPairs = new LinkedHashMap<String, CharSequence[]>();
 		currencyPairsIds = new HashMap<String, String>();
-	}
-	
-	public void setPairs(CurrencyPairsListWithDate currencyPairsListWithDate) {
-		currencyPairs.clear();
-		currencyPairsIds.clear();
+		
+		if(currencyPairsListWithDate==null)
+			return;
+		
 		date = currencyPairsListWithDate.date;
 		List<CurrencyPairInfo> sortedPairs = currencyPairsListWithDate.pairs;
 		
