@@ -2,6 +2,13 @@
 
     <string name="app_name">BitcoinCheckerDataModuleTester</string>
 
+    <string name="checker_add_check_currency_empty_warning_title">No currency pairs</string>
+    <string name="checker_add_check_currency_empty_warning_summary">Click here to download latest currency pairs from selected exchange.</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_title">Update currency pairs</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_refresh">Refresh</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_last_sync">Last sync: %1$s</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_last_sync_never">never</string>
+    
     <string name="ticker_last">Price: %1$s</string>
     <string name="ticker_high">High: %1$s</string>
     <string name="ticker_low">Low: %1$s</string>
