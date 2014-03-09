@@ -31,7 +31,10 @@ public abstract class Market {
 	public int getNumOfRequests(CheckerInfo checkerInfo) {
 		return 1;
 	}
-	
+
+	// ====================
+	// Parse Ticker
+	// ====================
 	public abstract String getUrl(int requestId, CheckerInfo checkerInfo);
 	
 	public final Ticker parseTickerMain(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
@@ -44,10 +47,30 @@ public abstract class Market {
 		return ticker;
 	}
 	
+	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+		parseTickerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
+	}
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+		// do parsing
+	}
+	
+	// ====================
+	// Parse Error
+	// ====================
 	public final String parseErrorMain(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
 		return parseError(requestId, responseString, checkerInfo);
 	}
-
+	
+	protected String parseError(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
+		return parseErrorFromJsonObject(requestId, new JSONObject(responseString), checkerInfo);
+	}
+	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo) throws Exception {
+		throw new Exception();
+	}
+	
+	// ====================
+	// Parse currency pairs
+	// ====================
 	public String getCurrencyPairsUrl() {
 		return null;
 	}
@@ -63,33 +86,9 @@ public abstract class Market {
 		Collections.sort(pairs);
 	}
 	
-	// ====================
-	// Parse Ticker Inner
-	// ====================
-	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		parseTickerFromJsonObject(requestId, new JSONObject(responseString), ticker, checkerInfo);
-	}
-	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		// do parsing
-	}
-	
-	// ====================
-	// Parse Error
-	// ====================
-	protected String parseError(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
-		return parseErrorFromJsonObject(requestId, new JSONObject(responseString), checkerInfo);
-	}
-	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo) throws Exception {
-		throw new Exception();
-	}
-	
-	// ====================
-	// Parse currency pairs
-	// ====================
 	protected void parseCurrencyPairs(String responseString, List<CurrencyPairInfo> pairs) throws Exception {
 		parseCurrencyPairsFromJsonObject(new JSONObject(responseString), pairs);
 	}
-	
 	protected void parseCurrencyPairsFromJsonObject(JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		// do parsing
 	}
