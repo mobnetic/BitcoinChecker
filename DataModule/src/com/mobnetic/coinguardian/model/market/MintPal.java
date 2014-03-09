@@ -2,11 +2,13 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
+import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
@@ -16,6 +18,7 @@ public class MintPal extends Market {
 	private final static String NAME = "MintPal";
 	private final static String TTS_NAME = "Mint Pal";
 	private final static String URL = "https://api.mintpal.com/market/stats/%1$s/%2$s/";
+	private final static String URL_CURRENCY_PAIRS = "https://api.mintpal.com/market/summary/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
@@ -131,5 +134,26 @@ public class MintPal extends Market {
 		ticker.high = jsonObject.getDouble("24hhigh");
 		ticker.low = jsonObject.getDouble("24hlow");
 		ticker.last = jsonObject.getDouble("last_price");
+	}
+	
+	// ====================
+	// Get currency pairs
+	// ====================
+	@Override
+	public String getCurrencyPairsUrl() {
+		return URL_CURRENCY_PAIRS;
+	}
+	
+	@Override
+	protected void parseCurrencyPairs(String responseString, List<CurrencyPairInfo> pairs) throws Exception {
+		final JSONArray jsonArray = new JSONArray(responseString);
+		for(int i=0; i<jsonArray.length(); ++i) {
+			JSONObject marketObject = jsonArray.getJSONObject(i);
+			pairs.add(new CurrencyPairInfo(
+					marketObject.getString("code"),
+					marketObject.getString("exchange"),
+					null
+				));
+		}
 	}
 }
