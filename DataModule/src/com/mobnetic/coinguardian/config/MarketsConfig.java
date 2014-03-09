@@ -14,6 +14,7 @@ import com.mobnetic.coinguardian.model.market.Btcchina;
 import com.mobnetic.coinguardian.model.market.Btce;
 import com.mobnetic.coinguardian.model.market.Btcturk;
 import com.mobnetic.coinguardian.model.market.Bter;
+import com.mobnetic.coinguardian.model.market.CCex;
 import com.mobnetic.coinguardian.model.market.Campbx;
 import com.mobnetic.coinguardian.model.market.CexIO;
 import com.mobnetic.coinguardian.model.market.CoinJar;
@@ -80,6 +81,7 @@ public class MarketsConfig {
 		addMarket(new Winkdex());
 		addMarket(new Anxpro());
 		addMarket(new BitX());
+		addMarket(new CCex());
 //		addMarket(new CryptoRush());
 	}
 }

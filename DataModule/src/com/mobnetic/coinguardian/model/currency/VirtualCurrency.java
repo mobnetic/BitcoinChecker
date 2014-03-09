@@ -6,6 +6,7 @@ public class VirtualCurrency {
 	public static final String _42 = "42";
 	public static final String _66 = "66";
 	public static final String ADT = "ADT";
+	public static final String ALB = "ALB";
 	public static final String ALF = "ALF";
 	public static final String ALP = "ALP";
 	public static final String ALT = "ALT";
@@ -55,6 +56,7 @@ public class VirtualCurrency {
 	public static final String CMC = "CMC";
 	public static final String CNC = "CNC";
 	public static final String CNOTE = "CNOTE";
+	public static final String COIN = "COIN";
 	public static final String COINO = "COINO";
 	public static final String COL = "COL";
 	public static final String COLA = "COLA";
@@ -132,7 +134,9 @@ public class VirtualCurrency {
 	public static final String KGC = "KGC";
 	public static final String KKC = "KKC";
 	public static final String KOI = "KOI";
+	public static final String KRN = "KRN";
 	public static final String LBW = "LBW";
+	public static final String LDC = "LDC";
 	public static final String LEAF = "LEAF";
 	public static final String LK7 = "LK7";
 	public static final String LKY = "LKY";
