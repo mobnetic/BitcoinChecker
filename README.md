@@ -79,7 +79,9 @@ public MarketExample() {
 }
 ```
 ##2. Providing currency pairs:
-You have to specify which currency pairs are supported by your new exchange. Description for this is done above, in the [Updating currency pairs on existing exchange](https://github.com/mobnetic/BitcoinCheckerDataModule#updating-currency-pairs-on-existing-exchange) section.
+You have to specify which currency pairs are supported by your new exchange. Description for this is done above, in the [Updating currency pairs on existing exchange](https://github.com/mobnetic/BitcoinCheckerDataModule#updating-currency-pairs-on-existing-exchange) section.  
+  
+Some exchanges provides a mechanism to fetch currency pairs dynamically, there is no need to specify them manually then.   Please see [this section](https://github.com/mobnetic/BitcoinChecker/blob/master/README.md#6-fetching-currency-pairs-directly-from-exchange).
 
 ##3. Providing API Url:
 The API Url is provided by the getUrl method. The simplest implementation is to just return the URL field. Sometimes, the Url requires some additional parameters (like currency names) - then you have to provide them using ```String.format()``` method.  
@@ -189,7 +191,27 @@ or if JSONObject is not suitable, you can override following method:
 protected String parseError(int requestId, String responseString, CheckerInfo checkerInfo);
 ```
 
-##6. Enabling exchange:
+##6. Fetching currency pairs directly from exchange:
+If there is any API (or other way) to obtain currency pairs directly from exchange (without need to update them manually) you can also implement currency pairs fetching functionality.  
+See example on  [Cryptsy](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Cryptsy.java).  
+First thing is to provide provide url:
+```java
+URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=marketdatav2";
+
+@Override
+public String getCurrencyPairsUrl() {
+	return URL_CURRENCY_PAIRS;
+}
+```
+Then you need to do parsing in:
+```java
+protected void parseCurrencyPairsFromJsonObject(JSONObject jsonObject, List<CurrencyPairInfo> pairs)
+or
+protected void parseCurrencyPairs(String responseString, List<CurrencyPairInfo> pairs)
+```
+While parsing currency pairs you need to create [CurrencyPairInfo](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/CurrencyPairInfo.java) and add it to `List<CurrencyPairInfo> pairs`. The last argument `pairId` is currently used only on Cryptsy, so just pass null on the exchanges.
+
+##7. Enabling exchange:
 To enable a newly created exchange, you should add the corresponding line at the bottom of `MarketsConfig` file:
 ```java
 static {
