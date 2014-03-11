@@ -30,7 +30,7 @@ public class CurrencyPairInfo implements Comparable<CurrencyPairInfo>{
 		if(currencyBase==null || another.currencyBase==null || currencyCounter==null || another.currencyCounter==null)
 			throw new NullPointerException();
 		
-		int compBase = currencyBase.compareTo(another.currencyBase);
-		return compBase!=0 ? compBase : currencyCounter.compareTo(another.currencyCounter);
+		int compBase = currencyBase.compareToIgnoreCase(another.currencyBase);
+		return compBase!=0 ? compBase : currencyCounter.compareToIgnoreCase(another.currencyCounter);
 	}
 }

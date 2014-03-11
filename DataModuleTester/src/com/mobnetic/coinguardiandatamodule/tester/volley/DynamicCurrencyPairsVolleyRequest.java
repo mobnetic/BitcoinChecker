@@ -30,7 +30,7 @@ public class DynamicCurrencyPairsVolleyRequest extends GzipVolleyRequest<Currenc
 	protected CurrencyPairsMapHelper parseNetworkResponse(String responseString) throws Exception {
 		List<CurrencyPairInfo> pairs = new ArrayList<CurrencyPairInfo>();
 		market.parseCurrencyPairsMain(responseString, pairs);
-		
+			
 		CurrencyPairsListWithDate currencyPairsListWithDate = new CurrencyPairsListWithDate();
 		currencyPairsListWithDate.date = System.currentTimeMillis();
 		currencyPairsListWithDate.pairs = pairs;

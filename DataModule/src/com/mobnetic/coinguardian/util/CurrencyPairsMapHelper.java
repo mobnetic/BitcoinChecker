@@ -12,6 +12,7 @@ public class CurrencyPairsMapHelper {
 	private long date;
 	private final HashMap<String, CharSequence[]> currencyPairs;
 	private final HashMap<String, String> currencyPairsIds;
+	private int pairsCount = 0;
 	
 	public CurrencyPairsMapHelper(CurrencyPairsListWithDate currencyPairsListWithDate) {
 		currencyPairs = new LinkedHashMap<String, CharSequence[]>();
@@ -22,7 +23,8 @@ public class CurrencyPairsMapHelper {
 		
 		date = currencyPairsListWithDate.date;
 		List<CurrencyPairInfo> sortedPairs = currencyPairsListWithDate.pairs;
-		
+		pairsCount = sortedPairs.size();
+				
 		// optymalizacja przy pustych ID
 		HashMap<String, Integer> currencyGroupSizes = new HashMap<String, Integer>();
 		for(CurrencyPairInfo currencyPairInfo : sortedPairs) {
@@ -47,9 +49,11 @@ public class CurrencyPairsMapHelper {
 			}
 			currencyGroup[currentGroupPositionToInsert] = currencyPairInfo.getCurrencyCounter();
 			
-			currencyPairsIds.put(
-					createCurrencyPairKey(currencyPairInfo.getCurrencyBase(), currencyPairInfo.getCurrencyCounter()),
-					currencyPairInfo.getCurrencyPairId());
+			if(currencyPairInfo.getCurrencyPairId()!=null) {
+				currencyPairsIds.put(
+						createCurrencyPairKey(currencyPairInfo.getCurrencyBase(), currencyPairInfo.getCurrencyCounter()),
+						currencyPairInfo.getCurrencyPairId());
+			}
 		}
 	}
 	
@@ -63,6 +67,10 @@ public class CurrencyPairsMapHelper {
 	
 	public String getCurrencyPairId(String currencyBase, String currencyCounter) {
 		return currencyPairsIds.get(createCurrencyPairKey(currencyBase, currencyCounter));
+	}
+	
+	public int getPairsCount() {
+		return pairsCount;
 	}
 	
 	private String createCurrencyPairKey(String currencyBase, String currencyCounter) {

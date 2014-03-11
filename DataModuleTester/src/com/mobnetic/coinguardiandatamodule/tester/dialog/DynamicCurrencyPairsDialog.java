@@ -90,6 +90,8 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 			dateString = getContext().getString(R.string.checker_add_dynamic_currency_pairs_dialog_last_sync_never);
 		
 		statusView.setText(getContext().getString(R.string.checker_add_dynamic_currency_pairs_dialog_last_sync, dateString));
+		if(currencyPairsMapHelper!=null && currencyPairsMapHelper.getPairsCount()>0)
+			statusView.append("\n"+getContext().getString(R.string.checker_add_dynamic_currency_pairs_dialog_pairs, currencyPairsMapHelper.getPairsCount()));
 		if(errorMsg!=null)
 			statusView.append("\n"+CheckErrorsUtils.formatError(getContext(), errorMsg));
 	}
