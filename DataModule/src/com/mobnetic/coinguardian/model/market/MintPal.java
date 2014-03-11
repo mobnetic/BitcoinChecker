@@ -81,6 +81,9 @@ public class MintPal extends Market {
 				VirtualCurrency.BTC,
 				VirtualCurrency.LTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.POT, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.RBBT, new String[]{
 				VirtualCurrency.BTC,
 				VirtualCurrency.LTC
