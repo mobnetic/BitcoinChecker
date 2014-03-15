@@ -23,12 +23,13 @@ public class Cryptsy extends Market {
 	private final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency._42, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.ADT, new String[]{ VirtualCurrency.XPM, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ALF, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.AMC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ANC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ARG, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ASC, new String[]{ VirtualCurrency.XPM, VirtualCurrency.LTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.BCX, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.BEN, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.BET, new String[]{ VirtualCurrency.BTC });
@@ -51,6 +52,7 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.CSC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.DBL, new String[]{ VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.DEM, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.DGC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.DMD, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
@@ -89,7 +91,7 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.MEOW, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.MINT, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.MNC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.MOON, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.MOON, new String[]{ VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.MST, new String[]{ VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.MZC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.NAN, new String[]{ VirtualCurrency.BTC });
@@ -109,9 +111,11 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.PXC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.PYC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.QRK, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.RDD, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.RED, new String[]{ VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.RPC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.RYC, new String[]{ VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.RYC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.SAT, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.SBC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.SMC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.SPT, new String[]{ VirtualCurrency.BTC });
@@ -135,8 +139,11 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.YAC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.YBC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZCC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.ZED, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
 		CURRENCY_PAIRS_IDS.put("42_BTC", 141);
+		CURRENCY_PAIRS_IDS.put("ADT_LTC", 94);
+		CURRENCY_PAIRS_IDS.put("ADT_XPM", 113);
 		CURRENCY_PAIRS_IDS.put("ALF_BTC", 57);
 		CURRENCY_PAIRS_IDS.put("AMC_BTC", 43);
 		CURRENCY_PAIRS_IDS.put("ANC_BTC", 66);
@@ -145,7 +152,7 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS_IDS.put("ASC_LTC", 111);
 		CURRENCY_PAIRS_IDS.put("ASC_XPM", 112);
 		CURRENCY_PAIRS_IDS.put("AUR_BTC", 160);
-		CURRENCY_PAIRS_IDS.put("AUR_LTC", 161);		
+		CURRENCY_PAIRS_IDS.put("AUR_LTC", 161);
 		CURRENCY_PAIRS_IDS.put("BCX_BTC", 142);
 		CURRENCY_PAIRS_IDS.put("BEN_BTC", 157);
 		CURRENCY_PAIRS_IDS.put("BET_BTC", 129);
@@ -171,6 +178,7 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS_IDS.put("CSC_BTC", 68);
 		CURRENCY_PAIRS_IDS.put("DBL_LTC", 46);
 		CURRENCY_PAIRS_IDS.put("DEM_BTC", 131);
+		CURRENCY_PAIRS_IDS.put("DGB_BTC", 167);
 		CURRENCY_PAIRS_IDS.put("DGC_BTC", 26);
 		CURRENCY_PAIRS_IDS.put("DGC_LTC", 96);
 		CURRENCY_PAIRS_IDS.put("DMD_BTC", 72);
@@ -220,7 +228,6 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS_IDS.put("MEOW_BTC", 149);
 		CURRENCY_PAIRS_IDS.put("MINT_BTC", 156);
 		CURRENCY_PAIRS_IDS.put("MNC_BTC", 7);
-		CURRENCY_PAIRS_IDS.put("MOON_BTC", 146);
 		CURRENCY_PAIRS_IDS.put("MOON_LTC", 145);
 		CURRENCY_PAIRS_IDS.put("MST_LTC", 62);
 		CURRENCY_PAIRS_IDS.put("MZC_BTC", 164);
@@ -247,9 +254,12 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS_IDS.put("PYC_BTC", 92);
 		CURRENCY_PAIRS_IDS.put("QRK_BTC", 71);
 		CURRENCY_PAIRS_IDS.put("QRK_LTC", 126);
+		CURRENCY_PAIRS_IDS.put("RDD_BTC", 169);
 		CURRENCY_PAIRS_IDS.put("RED_LTC", 87);
 		CURRENCY_PAIRS_IDS.put("RPC_BTC", 143);
+		CURRENCY_PAIRS_IDS.put("RYC_BTC", 9);
 		CURRENCY_PAIRS_IDS.put("RYC_LTC", 37);
+		CURRENCY_PAIRS_IDS.put("SAT_BTC", 168);
 		CURRENCY_PAIRS_IDS.put("SBC_BTC", 51);
 		CURRENCY_PAIRS_IDS.put("SBC_LTC", 128);
 		CURRENCY_PAIRS_IDS.put("SMC_BTC", 158);
@@ -279,8 +289,10 @@ public class Cryptsy extends Market {
 		CURRENCY_PAIRS_IDS.put("YAC_LTC", 22);
 		CURRENCY_PAIRS_IDS.put("YBC_BTC", 73);
 		CURRENCY_PAIRS_IDS.put("ZCC_BTC", 140);
+		CURRENCY_PAIRS_IDS.put("ZED_BTC", 170);
 		CURRENCY_PAIRS_IDS.put("ZET_BTC", 85);
 		CURRENCY_PAIRS_IDS.put("ZET_LTC", 127);
+
 
 	}
 	

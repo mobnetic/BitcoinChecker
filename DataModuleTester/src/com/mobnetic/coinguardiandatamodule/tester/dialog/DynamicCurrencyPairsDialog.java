@@ -31,6 +31,8 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 	
 	protected DynamicCurrencyPairsDialog(Context context, Market market, CurrencyPairsMapHelper currencyPairsMapHelper) {
 		super(context);
+		setInverseBackgroundForced(true);
+		
 		this.requestQueue = Volley.newRequestQueue(context);
 		this.market = market;
 		this.currencyPairsMapHelper = currencyPairsMapHelper;

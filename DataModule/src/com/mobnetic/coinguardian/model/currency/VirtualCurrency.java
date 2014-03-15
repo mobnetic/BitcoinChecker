@@ -40,6 +40,7 @@ public class VirtualCurrency {
 	public static final String BTR = "BTR";
 	public static final String BUK = "BUK";
 	public static final String BUR = "BUR";
+	public static final String C2 = "C2";
 	public static final String CACH = "CACH";
 	public static final String CAGE = "CAGE";
 	public static final String CAP = "CAP";
@@ -119,6 +120,7 @@ public class VirtualCurrency {
 	public static final String HBN = "HBN";
 	public static final String HRO = "HRO";
 	public static final String HUC = "HUC";
+	public static final String HVC = "HVC";
 	public static final String HXC = "HXC";
 	public static final String HYC = "HYC";
 	public static final String I0C = "I0C";
@@ -266,6 +268,7 @@ public class VirtualCurrency {
 	public static final String UNI = "UNI";
 	public static final String UNO = "UNO";
 	public static final String USDE = "USDE";
+	public static final String USDe = "USDe";
 	public static final String UTC = "UTC";
 	public static final String VDC = "VDC";
 	public static final String VEN = "VEN";
