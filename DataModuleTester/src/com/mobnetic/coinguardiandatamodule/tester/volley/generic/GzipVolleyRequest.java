@@ -18,6 +18,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
+import com.mobnetic.coinguardiandatamodule.tester.volley.UnknownVolleyError;
 
 public abstract class GzipVolleyRequest<T> extends Request<T> {
 
@@ -61,6 +62,8 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 			return Response.error(checkerErrorParsedError);	
 		} catch (Exception e) {
 			return Response.error(new ParseError(e));
+		} catch (Throwable e) {
+			return Response.error(new UnknownVolleyError(e));
 		}
 	}
 	
