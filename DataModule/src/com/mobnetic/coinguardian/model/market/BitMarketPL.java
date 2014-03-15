@@ -13,7 +13,7 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitMarketPL extends Market {
 
-	private final static String NAME = "BitMarket";
+	private final static String NAME = "BitMarket.pl";
 	private final static String TTS_NAME = "Bit Market";
 	private final static String URL = "https://www.bitmarket.pl/json/%1$s%2$s/ticker.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
