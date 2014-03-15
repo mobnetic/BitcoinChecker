@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.Anxpro;
+import com.mobnetic.coinguardian.model.market.BitMarketPL;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
 import com.mobnetic.coinguardian.model.market.BitcoinCentralNet;
@@ -82,6 +83,7 @@ public class MarketsConfig {
 		addMarket(new Anxpro());
 		addMarket(new BitX());
 		addMarket(new CCex());
+		addMarket(new BitMarketPL());
 //		addMarket(new CryptoRush());
 	}
 }

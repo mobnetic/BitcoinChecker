@@ -3,6 +3,7 @@ package com.mobnetic.coinguardiandatamodule.tester.volley;
 import android.text.TextUtils;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -25,9 +26,9 @@ public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<Ticker
 	}
 	
 	@Override
-	public void setRequestQueue(RequestQueue requestQueue) {
+	public Request<?> setRequestQueue(RequestQueue requestQueue) {
 		this.requestQueue = requestQueue;
-		super.setRequestQueue(requestQueue);
+		return super.setRequestQueue(requestQueue);
 	}
 
 	@Override
