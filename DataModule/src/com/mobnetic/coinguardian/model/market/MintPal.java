@@ -101,9 +101,9 @@ public class MintPal extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.SAT, new String[]{
 				VirtualCurrency.BTC
 			});
-        CURRENCY_PAIRS.put(VirtualCurrency.SPA, new String[]{
-                VirtualCurrency.BTC
-        });
+            CURRENCY_PAIRS.put(VirtualCurrency.SPA, new String[]{
+                    VirtualCurrency.BTC
+            });
 		CURRENCY_PAIRS.put(VirtualCurrency.SUN, new String[]{
 				VirtualCurrency.BTC
 			});
