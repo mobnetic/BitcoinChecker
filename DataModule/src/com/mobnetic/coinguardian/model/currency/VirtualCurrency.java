@@ -239,6 +239,7 @@ public class VirtualCurrency {
 	public static final String SMC = "SMC";
 	public static final String SOC = "SOC";
 	public static final String SOCHI = "SOCHI";
+        public static final String SPA = "SPA";
 	public static final String SPT = "SPT";
 	public static final String SRC = "SRC";
 	public static final String STC = "STC";
