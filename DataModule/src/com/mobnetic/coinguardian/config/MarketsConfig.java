@@ -18,6 +18,7 @@ import com.mobnetic.coinguardian.model.market.Bter;
 import com.mobnetic.coinguardian.model.market.CCex;
 import com.mobnetic.coinguardian.model.market.Campbx;
 import com.mobnetic.coinguardian.model.market.CexIO;
+import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
 import com.mobnetic.coinguardian.model.market.Coinbase;
@@ -32,7 +33,6 @@ import com.mobnetic.coinguardian.model.market.Kraken;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.MintPal;
-import com.mobnetic.coinguardian.model.market.Mtgox;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.TheRock;
@@ -85,6 +85,7 @@ public class MarketsConfig {
 		addMarket(new BitX());
 		addMarket(new CCex());
 		addMarket(new BitMarketPL());
+		addMarket(new CoinDesk());
 		addMarket(new Koinim());
 //		addMarket(new CryptoRush());
 	}
