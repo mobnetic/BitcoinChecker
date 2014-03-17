@@ -27,6 +27,7 @@ import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.Huobi;
 import com.mobnetic.coinguardian.model.market.Justcoin;
+import com.mobnetic.coinguardian.model.market.Koinim;
 import com.mobnetic.coinguardian.model.market.Kraken;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
@@ -84,6 +85,7 @@ public class MarketsConfig {
 		addMarket(new BitX());
 		addMarket(new CCex());
 		addMarket(new BitMarketPL());
+		addMarket(new Koinim());
 //		addMarket(new CryptoRush());
 	}
 }
