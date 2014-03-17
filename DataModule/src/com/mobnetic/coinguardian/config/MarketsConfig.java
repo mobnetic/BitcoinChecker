@@ -86,8 +86,8 @@ public class MarketsConfig {
 		addMarket(new BitX());
 		addMarket(new CCex());
 		addMarket(new BitMarketPL());
+		addMarket(new CryptoRush());
 		addMarket(new CoinDesk());
 		addMarket(new Koinim());
-		addMarket(new CryptoRush());
 	}
 }
