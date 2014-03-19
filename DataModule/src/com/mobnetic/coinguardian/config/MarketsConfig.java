@@ -27,7 +27,7 @@ import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
-import com.mobnetic,coinguardian.model.market.FybSE;
+import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.Huobi;
 import com.mobnetic.coinguardian.model.market.Justcoin;
 import com.mobnetic.coinguardian.model.market.Koinim;
