@@ -1,3 +1,8 @@
+#NOTE: VACATIONS  
+####Until the end of March I'm on my winter vacations (abroad) without any internet connection:( During this time I won't be able to answer any issues, emails or pull requests.
+
+___  
+#Bitcoin Checker  
 __Bitcoin Checker__ is a FREE app to track the most recent prices of your favourite currency pairs (on over 30 supported exchanges) in many customizable ways (such as rich notifications, TTS voice announcements, Home and Lockscreen widget or multiple alarms).
 
 ###Hello Bitcoin Checker users!  
