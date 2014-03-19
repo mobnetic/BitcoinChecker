@@ -28,6 +28,7 @@ import com.mobnetic.coinguardian.model.market.CryptoTrade;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
+import com.mobnetic.coinguardian.model.market.FybSG;
 import com.mobnetic.coinguardian.model.market.Huobi;
 import com.mobnetic.coinguardian.model.market.Justcoin;
 import com.mobnetic.coinguardian.model.market.Koinim;
@@ -91,5 +92,6 @@ public class MarketsConfig {
 		addMarket(new CoinDesk());
 		addMarket(new Koinim());
 		addMarket(new FybSE());
+		addMarket(new FybSG());
 	}
 }
