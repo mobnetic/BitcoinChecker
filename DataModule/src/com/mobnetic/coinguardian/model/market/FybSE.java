@@ -14,7 +14,7 @@ public class FybSE extends Market {
 
 	private final static String NAME = "FYB-SE";
 	private final static String TTS_NAME = NAME; 
-	private final static String URL = "'https://www.fybse.se/api/%1$s/ticker.json"
+	private final static String URL = "'https://www.fybse.se/api/SEK/ticker.json"
 
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
@@ -36,6 +36,6 @@ public class FybSE extends Market {
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		ticker.bid = jsonObject.getDouble("bid");
 		ticker.ask = jsonObject.getDouble("ask");
-		ticker.last = jsonObject.getDouble("last");
+		ticker.last = jsonObject.getDouble("ask");
 	}
 }
