@@ -37,11 +37,11 @@ public class BitMarketPL extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = jsonObject.getDouble("buy");
-		ticker.ask = jsonObject.getDouble("sell");
+		ticker.bid = jsonObject.getDouble("bid");
+		ticker.ask = jsonObject.getDouble("ask");
 		ticker.vol = jsonObject.getDouble("volume");
-		ticker.high = jsonObject.getDouble("max");
-		ticker.low = jsonObject.getDouble("min");
+		ticker.high = jsonObject.getDouble("high");
+		ticker.low = jsonObject.getDouble("low");
 		ticker.last = jsonObject.getDouble("last");
 	}
 }
