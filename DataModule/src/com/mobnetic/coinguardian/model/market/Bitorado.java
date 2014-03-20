@@ -48,12 +48,12 @@ public class Bitorado extends Market
     @Override
     protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
         final JSONObject resultObject = jsonObject.getJSONObject("result");
-        ticker.bid = resultObject.getDouble("buy");
-        ticker.ask = resultObject.getDouble("sell");
-        ticker.vol = resultObject.getDouble("vol");
-        ticker.high = resultObject.getDouble("high");
-        ticker.low = resultObject.getDouble("low");
-        ticker.last = resultObject.getDouble("last");
+        ticker.bid = resultObject.optDouble("buy", Ticker.NO_DATA);
+        ticker.ask = resultObject.optDouble("sell", Ticker.NO_DATA);
+        ticker.vol = resultObject.optDouble("vol", Ticker.NO_DATA);
+        ticker.high = resultObject.optDouble("high", Ticker.NO_DATA);
+        ticker.low = resultObject.optDouble("low", Ticker.NO_DATA);
+        ticker.last = resultObject.optDouble("last", 0.0);
     }
 }
 
