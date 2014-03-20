@@ -85,7 +85,7 @@ public class Coinse extends Market {
 	
 	@Override
 	public int getCautionResId() {
-		return R.string.market_caution_coinse;
+		return R.string.market_caution_much_data;
 	}
 	
 	@Override

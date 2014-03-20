@@ -12,6 +12,7 @@ import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+import com.mobnetic.coinguardiandatamodule.R;
 
 public class CryptoRush extends Market {
 
@@ -177,12 +178,15 @@ public class CryptoRush extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.ZEU, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC, VirtualCurrency.POT });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZMB, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZTC, new String[]{ VirtualCurrency.BTC });
-
-
 	}
 	
 	public CryptoRush() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+	}
+	
+	@Override
+	public int getCautionResId() {
+		return R.string.market_caution_much_data;
 	}
 	
 	@Override
