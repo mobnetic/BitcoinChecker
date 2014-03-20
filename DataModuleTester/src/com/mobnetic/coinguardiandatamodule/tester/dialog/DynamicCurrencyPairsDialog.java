@@ -81,6 +81,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 					stopRefreshingAnim();
 				}
 			});
+		request.setTag(this);
 		requestQueue.add(request);
 	}
 	
