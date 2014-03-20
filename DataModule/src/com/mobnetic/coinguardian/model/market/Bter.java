@@ -40,6 +40,7 @@ public class Bter extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.DTC, new String[]{ Currency.CNY, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.DVC, new String[]{ Currency.CNY, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.EXC, new String[]{ Currency.CNY, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.FLT, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.FRC, new String[]{ Currency.CNY, VirtualCurrency.BTC, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{ Currency.CNY, VirtualCurrency.BTC, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.IFC, new String[]{ Currency.CNY, VirtualCurrency.LTC });
@@ -64,11 +65,12 @@ public class Bter extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.TIX, new String[]{ Currency.CNY, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.VTC, new String[]{ Currency.CNY, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{ Currency.CNY, VirtualCurrency.BTC, VirtualCurrency.LTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.XCP, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.XCP, new String[]{ Currency.CNY, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.XPM, new String[]{ Currency.CNY, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.YAC, new String[]{ Currency.CNY, VirtualCurrency.BTC, VirtualCurrency.LTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZCC, new String[]{ Currency.CNY, VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{ Currency.CNY, VirtualCurrency.BTC });
+
 
 
 	}

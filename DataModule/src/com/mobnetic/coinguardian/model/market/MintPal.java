@@ -21,116 +21,43 @@ public class MintPal extends Market {
 	private final static String URL_CURRENCY_PAIRS = "https://api.mintpal.com/market/summary/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.BC, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.CAGE, new String[]{
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.CTM, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DOPE, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.HVC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.KARM, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.KDC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MINT, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MRC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MRS, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MZC, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.OLY, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PANDA, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PENG, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PND, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.POT, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.RBBT, new String[]{
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.RIC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.SAT, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.SPA, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.SUN, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.TAK, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.TES, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.TOP, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.UNO, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.USDe, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.UTC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.ZED, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.ZEIT, new String[]{
-				VirtualCurrency.BTC
-			});
+		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.BC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.CAGE, new String[]{ VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.CTM, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.DOPE, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.EMO, new String[]{ VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.FLT, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.HVC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.KARM, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.KDC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.MINT, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.MRC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.MRS, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.MZC, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.OLY, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.PANDA, new String[]{ VirtualCurrency.BTC, VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.PENG, new String[]{ VirtualCurrency.LTC, VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.PND, new String[]{ VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.POT, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.RBBT, new String[]{ VirtualCurrency.LTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.RIC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.SAT, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.SPA, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.SUN, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.TAK, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.TES, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.TOP, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.UNO, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.USDE, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.UTC, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.ZED, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.ZEIT, new String[]{ VirtualCurrency.BTC });
+
 	}
 	
 	public MintPal() {

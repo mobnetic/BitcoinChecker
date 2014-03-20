@@ -1,10 +1,12 @@
 package com.mobnetic.coinguardian.model.currency;
 
 public class VirtualCurrency {
-
+	
+	public static final String _10_5 = "10-5";
 	public static final String _21 = "21";
 	public static final String _42 = "42";
 	public static final String _66 = "66";
+	public static final String _888 = "888";
 	public static final String ADT = "ADT";
 	public static final String ALB = "ALB";
 	public static final String ALF = "ALF";
@@ -19,6 +21,7 @@ public class VirtualCurrency {
 	public static final String AUR = "AUR";
 	public static final String BAT = "BAT";
 	public static final String BC = "BC";
+	public static final String BCC = "BCC";
 	public static final String BCX = "BCX";
 	public static final String BEE = "BEE";
 	public static final String BEER = "BEER";
@@ -34,8 +37,10 @@ public class VirtualCurrency {
 	public static final String BTC = "BTC";
 	public static final String mBTC = "mBTC";
 	public static final String Satoshi = "Satoshi";
+	public static final String BTCS = "BTCS";
 	public static final String BTE = "BTE";
 	public static final String BTG = "BTG";
+	public static final String BTP = "BTP";
 	public static final String BTQ = "BTQ";
 	public static final String BTR = "BTR";
 	public static final String BUK = "BUK";
@@ -64,13 +69,17 @@ public class VirtualCurrency {
 	public static final String CON = "CON";
 	public static final String CORG = "CORG";
 	public static final String CPR = "CPR";
+	public static final String CR = "CR";
 	public static final String CRA = "CRA";
 	public static final String CRC = "CRC";
 	public static final String CRD = "CRD";
+	public static final String CREA = "CREA";
 	public static final String CRN = "CRN";
+	public static final String CRS = "CRS";
 	public static final String CSC = "CSC";
 	public static final String CTM = "CTM";
 	public static final String DBL = "DBL";
+	public static final String DELTA = "DELTA";
 	public static final String DEM = "DEM";
 	public static final String DGB = "DGB";
 	public static final String DGC = "DGC";
@@ -83,18 +92,22 @@ public class VirtualCurrency {
 	public static final String DUCK = "DUCK";
 	public static final String DVC = "DVC";
 	public static final String EAC = "EAC";
+	public static final String ECC = "ECC";
 	public static final String ECN = "ECN";
 	public static final String ELC = "ELC";
 	public static final String ELP = "ELP";
 	public static final String EMD = "EMD";
-	public static final String eTOK = "eTOK";
+	public static final String EMO = "EMO";
 	public static final String ETOK = "ETOK";
+	public static final String eTOK = "eTOK";
+	public static final String EUC = "EUC";
 	public static final String EXC = "EXC";
 	public static final String EZC = "EZC";
 	public static final String FCK = "FCK";
 	public static final String FFC = "FFC";
 	public static final String FLAP = "FLAP";
 	public static final String FLO = "FLO";
+	public static final String FLT = "FLT";
 	public static final String FOX = "FOX";
 	public static final String FRC = "FRC";
 	public static final String FRK = "FRK";
@@ -115,9 +128,12 @@ public class VirtualCurrency {
 	public static final String GLX = "GLX";
 	public static final String GME = "GME";
 	public static final String GOAT = "GOAT";
+	public static final String GOX = "GOX";
+	public static final String GPUC = "GPUC";
 	public static final String GRC = "GRC";
 	public static final String GRUMP = "GRUMP";
 	public static final String HBN = "HBN";
+	public static final String HEX = "HEX";
 	public static final String HRO = "HRO";
 	public static final String HUC = "HUC";
 	public static final String HVC = "HVC";
@@ -137,9 +153,11 @@ public class VirtualCurrency {
 	public static final String KKC = "KKC";
 	public static final String KOI = "KOI";
 	public static final String KRN = "KRN";
+	public static final String KUN = "KUN";
 	public static final String LBW = "LBW";
 	public static final String LDC = "LDC";
 	public static final String LEAF = "LEAF";
+	public static final String LGBT = "LGBT";
 	public static final String LK7 = "LK7";
 	public static final String LKY = "LKY";
 	public static final String LMC = "LMC";
@@ -175,6 +193,7 @@ public class VirtualCurrency {
 	public static final String NEC = "NEC";
 	public static final String NET = "NET";
 	public static final String NIB = "NIB";
+	public static final String NKA = "NKA";
 	public static final String NMC = "NMC";
 	public static final String NOBL = "NOBL";
 	public static final String NOTE = "NOTE";
@@ -193,6 +212,7 @@ public class VirtualCurrency {
 	public static final String PAND = "PAND";
 	public static final String PANDA = "PANDA";
 	public static final String PCC = "PCC";
+	public static final String PCN = "PCN";
 	public static final String PENG = "PENG";
 	public static final String PHI = "PHI";
 	public static final String PHS = "PHS";
@@ -218,6 +238,7 @@ public class VirtualCurrency {
 	public static final String QB = "QB";
 	public static final String QRK = "QRK";
 	public static final String RAD = "RAD";
+	public static final String RAIN = "RAIN";
 	public static final String RBBT = "RBBT";
 	public static final String RCH = "RCH";
 	public static final String RDD = "RDD";
@@ -228,6 +249,7 @@ public class VirtualCurrency {
 	public static final String RON = "RON";
 	public static final String RPC = "RPC";
 	public static final String RPD = "RPD";
+	public static final String RSC = "RSC";
 	public static final String RUBY = "RUBY";
 	public static final String RYC = "RYC";
 	public static final String SAT = "SAT";
@@ -275,6 +297,7 @@ public class VirtualCurrency {
 	public static final String VEN = "VEN";
 	public static final String VGC = "VGC";
 	public static final String VLC = "VLC";
+	public static final String VLT = "VLT";
 	public static final String VMP = "VMP";
 	public static final String VOLT = "VOLT";
 	public static final String VTC = "VTC";
@@ -292,7 +315,9 @@ public class VirtualCurrency {
 	public static final String XVN = "XVN"; 	// VEN
 	public static final String XXL = "XXL";
 	public static final String YAC = "YAC";
+	public static final String YANG = "YANG";
 	public static final String YBC = "YBC";
+	public static final String YIN = "YIN";
 	public static final String ZCC = "ZCC";
 	public static final String ZED = "ZED";
 	public static final String ZEIT = "ZEIT";
