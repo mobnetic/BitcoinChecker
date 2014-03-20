@@ -40,8 +40,7 @@ public class Bitorado extends Market
     }
 
     @Override
-    public String getUrl(int requestId, CheckerInfo checkerInfo)
-    {
+    public String getUrl(int requestId, CheckerInfo checkerInfo) {
         return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
     }
 
@@ -53,7 +52,7 @@ public class Bitorado extends Market
         ticker.vol = resultObject.optDouble("vol", Ticker.NO_DATA);
         ticker.high = resultObject.optDouble("high", Ticker.NO_DATA);
         ticker.low = resultObject.optDouble("low", Ticker.NO_DATA);
-        ticker.last = resultObject.optDouble("last", 0.0);
+        ticker.last = resultObject.optDouble("last", 0);
     }
 }
 
