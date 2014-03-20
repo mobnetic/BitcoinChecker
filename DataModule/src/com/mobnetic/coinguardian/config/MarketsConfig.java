@@ -10,6 +10,7 @@ import com.mobnetic.coinguardian.model.market.BitcoinAverage;
 import com.mobnetic.coinguardian.model.market.BitcoinCentralNet;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
+import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
 import com.mobnetic.coinguardian.model.market.Btcchina;
 import com.mobnetic.coinguardian.model.market.Btce;
@@ -88,6 +89,7 @@ public class MarketsConfig {
 		addMarket(new BitX());
 		addMarket(new CCex());
 		addMarket(new BitMarketPL());
+		addMarket(new Bitorado());
 		addMarket(new CryptoRush());
 		addMarket(new CoinDesk());
 		addMarket(new Koinim());
