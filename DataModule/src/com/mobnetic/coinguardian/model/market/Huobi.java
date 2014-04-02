@@ -16,10 +16,14 @@ public class Huobi extends Market {
 
 	private final static String NAME = "Huobi";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://detail.huobi.com/staticmarket/detail.html?jsoncallback=";
+	private final static String URL_BTC = "https://market.huobi.com/staticmarket/detail.html";
+	private final static String URL_LTC = "https://market.huobi.com/staticmarket/detail_ltc.html";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+				Currency.CNY
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				Currency.CNY
 			});
 	}
@@ -30,13 +34,19 @@ public class Huobi extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return URL;
+		if(VirtualCurrency.LTC.equals(checkerInfo.getCurrencyBase()))
+			return URL_LTC;
+		else
+			return URL_BTC;
 	}
 	
 	@Override
 	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		if(responseString!=null && responseString.length()>13)
-			responseString = responseString.substring("view_detail(".length(), responseString.length()-")".length());
+		final String startString = "view_detail(";
+		final String endString = ")";
+		
+		if(responseString!=null && responseString.length()>(startString.length()+endString.length()))
+			responseString = responseString.substring(startString.length(), responseString.length()-endString.length());
 		super.parseTicker(requestId, responseString, ticker, checkerInfo);
 	}
 	
