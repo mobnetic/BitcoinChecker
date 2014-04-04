@@ -140,6 +140,10 @@ public class CCex extends Market {
 				VirtualCurrency.BTC,
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.PLC, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.PMC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD

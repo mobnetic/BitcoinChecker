@@ -217,6 +217,7 @@ public class VirtualCurrency {
 	public static final String PHI = "PHI";
 	public static final String PHS = "PHS";
 	public static final String PIC = "PIC";
+	public static final String PLC = "PLC";
 	public static final String PLT = "PLT";
 	public static final String PMC = "PMC";
 	public static final String PND = "PND";
