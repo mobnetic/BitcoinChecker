@@ -33,6 +33,9 @@ public class Bitorado extends Market
         CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
                 VirtualCurrency.BTC
             });
+        CURRENCY_PAIRS.put(VirtualCurrency.PLC, new String[]{
+                VirtualCurrency.BTC
+            });
     }
 
     public Bitorado() {
