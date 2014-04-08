@@ -1,4 +1,3 @@
-#Bitcoin Checker  
 __Bitcoin Checker__ is a FREE app to track the most recent prices of your favourite currency pairs (on over 30 supported exchanges) in many customizable ways (such as rich notifications, TTS voice announcements, Home and Lockscreen widget or multiple alarms).
 
 ###Hello Bitcoin Checker users!  
