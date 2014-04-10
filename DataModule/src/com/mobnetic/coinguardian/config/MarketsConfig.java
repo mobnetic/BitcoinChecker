@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.Anxpro;
+import com.mobnetic.coinguardian.model.market.AllCrypt;
 import com.mobnetic.coinguardian.model.market.BitMarketPL;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
@@ -95,5 +96,6 @@ public class MarketsConfig {
 		addMarket(new Koinim());
 		addMarket(new FybSE());
 		addMarket(new FybSG());
+		addMarket(new AllCrypt());
 	}
 }
