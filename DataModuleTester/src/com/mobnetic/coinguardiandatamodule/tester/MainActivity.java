@@ -211,28 +211,32 @@ public class MainActivity extends Activity {
 		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, pairId);
 		Request<?> request = new CheckerVolleyMainRequest(market, checkerInfo, new Listener<TickerWithRawResponse>() {
 			@Override
-			public void onResponse(TickerWithRawResponse ticker) {
-				handleNewResult(checkerInfo, ticker, null);
+			public void onResponse(TickerWithRawResponse tickerWithRawResponse) {
+				handleNewResult(checkerInfo, tickerWithRawResponse.ticker, tickerWithRawResponse.rawResponse, null);
 			}
 		}, new ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				error.printStackTrace();
 				
-				String errorMsg;
-				if(error instanceof CheckerErrorParsedError && !TextUtils.isEmpty(((CheckerErrorParsedError)error).getErrorMsg()))
+				String rawResponse = null;
+				String errorMsg = null;
+				if(error instanceof CheckerErrorParsedError) {
+					rawResponse = ((CheckerErrorParsedError)error).getRawResponse();
 					errorMsg = ((CheckerErrorParsedError)error).getErrorMsg();
-				else
+				}
+				
+				if(TextUtils.isEmpty(errorMsg))
 					errorMsg = CheckErrorsUtils.parseVolleyErrorMsg(MainActivity.this, error);
 					
-				handleNewResult(checkerInfo, null, errorMsg);
+				handleNewResult(checkerInfo, null, rawResponse, errorMsg);
 			}
 		});
 		requestQueue.add(request);
 		showResultView(false);
 	}
 	
-	private void handleNewResult(CheckerInfo checkerInfo, TickerWithRawResponse ticker, String errorMsg) {
+	private void handleNewResult(CheckerInfo checkerInfo, Ticker ticker, String rawResponse, String errorMsg) {
 		showResultView(true);
 		SpannableStringBuilder ssb = new SpannableStringBuilder();
 		
@@ -244,10 +248,12 @@ public class MainActivity extends Activity {
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_ask, ticker.ask, checkerInfo.getCurrencyCounter()));
 			ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol, ticker.vol, checkerInfo.getCurrencyBase()));
 			ssb.append("\n"+getString(R.string.ticker_timestamp, FormatUtilsBase.formatSameDayTimeOrDate(this, ticker.timestamp)));
-			ssb.append("\n\n");
-			ssb.append(Html.fromHtml(getString(R.string.ticker_raw_response)+"<br\\><small>"+ticker.rawResponse+"</small>"));
 		} else {
 			ssb.append(getString(R.string.check_error_generic_prefix, errorMsg!=null ? errorMsg : "UNKNOWN"));
+		}
+		if(rawResponse!=null){
+			ssb.append("\n\n");
+			ssb.append(Html.fromHtml(getString(R.string.ticker_raw_response)+"<br\\><small>"+rawResponse+"</small>"));
 		}
 		
 		resultView.setText(ssb);

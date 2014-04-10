@@ -33,19 +33,25 @@ public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<Ticker
 
 	@Override
 	protected TickerWithRawResponse parseNetworkResponse(String responseString) throws Exception {
-		TickerWithRawResponse ticker;
+		TickerWithRawResponse tickerWithRawResponse = new TickerWithRawResponse();
+		tickerWithRawResponse.rawResponse = responseString;
 		try {
-			ticker = (TickerWithRawResponse)market.parseTickerMain(0, responseString, new TickerWithRawResponse(), checkerInfo);
+			tickerWithRawResponse.ticker = market.parseTickerMain(0, responseString, new Ticker(), checkerInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
-			ticker = null;
+			tickerWithRawResponse.ticker = null;
 		}
 		
-		if(ticker==null || ticker.last<=Ticker.NO_DATA) {
-			throw new CheckerErrorParsedError(market.parseErrorMain(0, responseString, checkerInfo));
+		if(tickerWithRawResponse.ticker==null || tickerWithRawResponse.ticker.last<=Ticker.NO_DATA) {
+			String errorMsg;
+			try {
+				errorMsg = market.parseErrorMain(0, responseString, checkerInfo);
+			} catch (Exception e) {
+				errorMsg = null;
+			}
+			throw new CheckerErrorParsedError(responseString, errorMsg);
 		}
 		
-		ticker.rawResponse = responseString;
 		final int numOfRequests = market.getNumOfRequests(checkerInfo);
 		if(numOfRequests>1) {
 			for(int requestId=1; requestId<numOfRequests; ++requestId) {
@@ -56,18 +62,19 @@ public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<Ticker
 						CheckerVolleyNextRequest request = new CheckerVolleyNextRequest(nextUrl, checkerInfo, future);
 						requestQueue.add(request);
 						String nextResponse = future.get(); // this will block
-						market.parseTickerMain(requestId, nextResponse, ticker, checkerInfo);
+						market.parseTickerMain(requestId, nextResponse, tickerWithRawResponse.ticker, checkerInfo);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		return ticker;
+		return tickerWithRawResponse;
 	}
 	
-	public class TickerWithRawResponse extends Ticker {
+	public class TickerWithRawResponse {
 		
+		public Ticker ticker;
 		public String rawResponse;
 		
 	}
