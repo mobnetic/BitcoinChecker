@@ -39,6 +39,7 @@ import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Poloniex;
+import com.mobnetic.coinguardian.model.market.Prelude;
 import com.mobnetic.coinguardian.model.market.TheRock;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vircurex;
@@ -84,6 +85,7 @@ public class MarketsConfig {
 		addMarket(new MintPal());
 		addMarket(new CoinJar());
 		addMarket(new Poloniex());
+        addMarket(new Prelude());
 		addMarket(new Winkdex());
 		addMarket(new Anxpro());
 		addMarket(new BitX());
