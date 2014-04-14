@@ -18,10 +18,9 @@ public class Prelude extends Market {
 
 	private final static String NAME = "Prelude";
 	private final static String TTS_NAME = NAME;
-	private final static String URL_1_BTC = "https://api.prelude.io/statistics/%1$s";
-	private final static String URL_1_USD = "https://api.prelude.io/statistics-usd/%1$s";
-	private final static String URL_2_BTC = "https://api.prelude.io/pairings/%1$s";
-	private final static String URL_2_USD = "https://api.prelude.io/pairings/%1$s";
+	private final static String URL_1 = "https://api.prelude.io/pairings/%1$s";
+	private final static String URL_2_BTC = "https://api.prelude.io/statistics/%1$s";
+	private final static String URL_2_USD = "https://api.prelude.io/statistics-usd/%1$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
@@ -92,20 +91,16 @@ public class Prelude extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
+
 		String currencyCounter = checkerInfo.getCurrencyCounterLowerCase();
+		if (requestId == 0) {
+			return String.format(URL_1, currencyCounter);
+		}
 
 		if (Currency.USD.toLowerCase().equals(currencyCounter)) {
-			if (requestId == 0) {
-				return String.format(URL_2_USD, currencyCounter);
-			} else {
-				return String.format(URL_1_USD, checkerInfo.getCurrencyBase());
-			}
+			return String.format(URL_2_USD, checkerInfo.getCurrencyBase());
 		} else {
-			if (requestId == 0) {
-				return String.format(URL_2_BTC, currencyCounter);
-			} else {
-				return String.format(URL_1_BTC, checkerInfo.getCurrencyBase());
-			}
+			return String.format(URL_2_BTC, checkerInfo.getCurrencyBase());
 		}
 	}
 
