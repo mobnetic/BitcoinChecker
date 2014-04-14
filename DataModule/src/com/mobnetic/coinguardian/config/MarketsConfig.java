@@ -85,7 +85,7 @@ public class MarketsConfig {
 		addMarket(new MintPal());
 		addMarket(new CoinJar());
 		addMarket(new Poloniex());
-        addMarket(new Prelude());
+		addMarket(new Prelude());
 		addMarket(new Winkdex());
 		addMarket(new Anxpro());
 		addMarket(new BitX());
