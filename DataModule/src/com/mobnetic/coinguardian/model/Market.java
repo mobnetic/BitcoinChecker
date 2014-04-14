@@ -28,13 +28,14 @@ public abstract class Market {
 		return 0;
 	}
 	
-	public int getNumOfRequests(CheckerInfo checkerInfo) {
-		return 1;
-	}
 
 	// ====================
 	// Parse Ticker
 	// ====================
+	public int getNumOfRequests(CheckerInfo checkerInfo) {
+		return 1;
+	}
+	
 	public abstract String getUrl(int requestId, CheckerInfo checkerInfo);
 	
 	public final Ticker parseTickerMain(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
@@ -71,12 +72,16 @@ public abstract class Market {
 	// ====================
 	// Parse currency pairs
 	// ====================
-	public String getCurrencyPairsUrl() {
+	public int getCurrencyPairsNumOfRequests() {
+		return 1;
+	}
+	
+	public String getCurrencyPairsUrl(int requestId) {
 		return null;
 	}
 	
-	public final void parseCurrencyPairsMain(String responseString, List<CurrencyPairInfo> pairs) throws Exception {
-		parseCurrencyPairs(responseString, pairs);
+	public final void parseCurrencyPairsMain(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
+		parseCurrencyPairs(requestId, responseString, pairs);
 		
 		for(int i=pairs.size()-1; i>=0; --i) {
 			CurrencyPairInfo currencyPairInfo = pairs.get(i);
@@ -86,10 +91,10 @@ public abstract class Market {
 		Collections.sort(pairs);
 	}
 	
-	protected void parseCurrencyPairs(String responseString, List<CurrencyPairInfo> pairs) throws Exception {
-		parseCurrencyPairsFromJsonObject(new JSONObject(responseString), pairs);
+	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
+		parseCurrencyPairsFromJsonObject(requestId, new JSONObject(responseString), pairs);
 	}
-	protected void parseCurrencyPairsFromJsonObject(JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		// do parsing
 	}
 }

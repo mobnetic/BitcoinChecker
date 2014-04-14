@@ -98,12 +98,12 @@ public class Bter extends Market {
 	// Get currency pairs
 	// ====================
 	@Override
-	public String getCurrencyPairsUrl() {
+	public String getCurrencyPairsUrl(int requestId) {
 		return URL_CURRENCY_PAIRS;
 	}
 	
 	@Override
-	protected void parseCurrencyPairs(String responseString, List<CurrencyPairInfo> pairs) throws Exception {
+	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
 		JSONArray jsonArray = new JSONArray(responseString);
 		for(int i=0; i<jsonArray.length(); ++i) {
 			String pairId = jsonArray.getString(i);

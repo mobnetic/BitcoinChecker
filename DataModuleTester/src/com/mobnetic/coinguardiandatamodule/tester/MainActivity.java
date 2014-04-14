@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void refreshDynamicCurrencyPairsView(Market market) {
-		dynamicCurrencyPairsInfoView.setVisibility(market.getCurrencyPairsUrl()!=null ? View.VISIBLE : View.GONE);
+		dynamicCurrencyPairsInfoView.setVisibility(market.getCurrencyPairsUrl(0)!=null ? View.VISIBLE : View.GONE);
 	}
 	
 	private void refreshCurrencyBaseSpinner(Market market) {

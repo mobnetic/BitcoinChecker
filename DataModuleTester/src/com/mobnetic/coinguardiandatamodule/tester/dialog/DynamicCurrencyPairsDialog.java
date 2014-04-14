@@ -18,7 +18,7 @@ import com.mobnetic.coinguardian.util.CurrencyPairsMapHelper;
 import com.mobnetic.coinguardian.util.FormatUtilsBase;
 import com.mobnetic.coinguardiandatamodule.tester.R;
 import com.mobnetic.coinguardiandatamodule.tester.util.CheckErrorsUtils;
-import com.mobnetic.coinguardiandatamodule.tester.volley.DynamicCurrencyPairsVolleyRequest;
+import com.mobnetic.coinguardiandatamodule.tester.volley.DynamicCurrencyPairsVolleyMainRequest;
 
 public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements OnDismissListener {
 
@@ -63,7 +63,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 	private void startRefreshing() {
 		setCancelable(false);
 		startRefreshingAnim();
-		DynamicCurrencyPairsVolleyRequest request = new DynamicCurrencyPairsVolleyRequest(getContext(), market,
+		DynamicCurrencyPairsVolleyMainRequest request = new DynamicCurrencyPairsVolleyMainRequest(getContext(), market,
 			new Listener<CurrencyPairsMapHelper>() {
 				@Override
 				public void onResponse(CurrencyPairsMapHelper currencyPairsMapHelper) {

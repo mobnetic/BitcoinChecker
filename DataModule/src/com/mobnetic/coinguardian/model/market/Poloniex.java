@@ -237,12 +237,12 @@ public class Poloniex extends Market {
 	// Get currency pairs
 	// ====================
 	@Override
-	public String getCurrencyPairsUrl() {
+	public String getCurrencyPairsUrl(int requestId) {
 		return URL_CURRENCY_PAIRS;
 	}
 	
 	@Override
-	protected void parseCurrencyPairsFromJsonObject(JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONArray pairNames = jsonObject.names();
 		
 		for(int i=0; i<pairNames.length(); ++i) {

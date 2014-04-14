@@ -49,12 +49,12 @@ public class CoinDesk extends Market {
 	// Get currency pairs
 	// ====================
 	@Override
-	public String getCurrencyPairsUrl() {
+	public String getCurrencyPairsUrl(int requestId) {
 		return URL_CURRENCY_PAIRS;
 	}
 	
 	@Override
-	protected void parseCurrencyPairsFromJsonObject(JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONObject bpiJsonObject = jsonObject.getJSONObject("bpi");
 		final JSONArray currencyCounterNames = bpiJsonObject.names();
 		
