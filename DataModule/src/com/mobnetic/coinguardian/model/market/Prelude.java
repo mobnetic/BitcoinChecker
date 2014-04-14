@@ -91,13 +91,11 @@ public class Prelude extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-
-		String currencyCounter = checkerInfo.getCurrencyCounterLowerCase();
 		if (requestId == 0) {
-			return String.format(URL_1, currencyCounter);
+			return String.format(URL_1, checkerInfo.getCurrencyCounterLowerCase());
 		}
 
-		if (Currency.USD.toLowerCase().equals(currencyCounter)) {
+		if (Currency.USD.equals(checkerInfo.getCurrencyCounter())) {
 			return String.format(URL_2_USD, checkerInfo.getCurrencyBase());
 		} else {
 			return String.format(URL_2_BTC, checkerInfo.getCurrencyBase());

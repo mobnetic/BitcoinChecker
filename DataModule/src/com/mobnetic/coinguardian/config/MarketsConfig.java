@@ -85,7 +85,6 @@ public class MarketsConfig {
 		addMarket(new MintPal());
 		addMarket(new CoinJar());
 		addMarket(new Poloniex());
-		addMarket(new Prelude());
 		addMarket(new Winkdex());
 		addMarket(new Anxpro());
 		addMarket(new BitX());
@@ -97,5 +96,6 @@ public class MarketsConfig {
 		addMarket(new Koinim());
 		addMarket(new FybSE());
 		addMarket(new FybSG());
+		addMarket(new Prelude());
 	}
 }
