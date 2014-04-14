@@ -19,6 +19,7 @@ public class Btcchina extends Market {
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+				VirtualCurrency.LTC,
 				Currency.CNY
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
