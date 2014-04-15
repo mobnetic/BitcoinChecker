@@ -156,6 +156,7 @@ public class MainActivity extends Activity {
 		final boolean isCurrencyEmpty = getSelectedCurrencyBase()==null || getSelectedCurrencyCounter()==null;
 		currencySpinnersWrapper.setVisibility(isCurrencyEmpty ? View.GONE : View.VISIBLE);
 		dynamicCurrencyPairsWarningView.setVisibility(isCurrencyEmpty ? View.VISIBLE : View.GONE);
+		getResultButton.setVisibility(isCurrencyEmpty ? View.GONE : View.VISIBLE);
 	}
 	
 	private void refreshDynamicCurrencyPairsView(Market market) {
