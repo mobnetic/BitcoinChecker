@@ -6,6 +6,7 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.Anxpro;
 import com.mobnetic.coinguardian.model.market.BitKonan;
 import com.mobnetic.coinguardian.model.market.BitMarketPL;
+import com.mobnetic.coinguardian.model.market.BitTrex;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
 import com.mobnetic.coinguardian.model.market.BitcoinCentralNet;
@@ -99,5 +100,6 @@ public class MarketsConfig {
 		addMarket(new FybSG());
 		addMarket(new Prelude());
 		addMarket(new BitKonan());
+		addMarket(new BitTrex());
 	}
 }
