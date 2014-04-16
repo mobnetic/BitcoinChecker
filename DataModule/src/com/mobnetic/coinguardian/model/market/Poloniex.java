@@ -18,7 +18,6 @@ public class Poloniex extends Market {
 	private final static String NAME = "Poloniex";
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://poloniex.com/public?command=returnTicker";
-	private final static String URL_ORDERS = "https://poloniex.com/public?command=returnOrderBook&currencyPair=%1$s_%2$s";
 	private final static String URL_CURRENCY_PAIRS = URL;
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
@@ -199,38 +198,18 @@ public class Poloniex extends Market {
 	}
 
 	@Override
-	public int getNumOfRequests(CheckerInfo checkerInfo) {
-		return 2;
-	}
-	
-	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		if(requestId==0)
-			return URL;
-		else
-			return String.format(URL_ORDERS, checkerInfo.getCurrencyCounter(), checkerInfo.getCurrencyBase()); // Reversed currencies
+		return URL;
 	}
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		if(requestId==0) {
-			ticker.last = jsonObject.getDouble(checkerInfo.getCurrencyCounter()+"_"+checkerInfo.getCurrencyBase());	// Reversed currencies
-		} else {
-			ticker.bid = getFirstPriceFromOrder(jsonObject, "bids");
-			ticker.ask = getFirstPriceFromOrder(jsonObject, "asks");
-		}
-	}
-	
-	private double getFirstPriceFromOrder(JSONObject jsonObject, String arrayName) throws Exception {
-		if(jsonObject.has(arrayName)) {
-			JSONArray jsonArray = jsonObject.getJSONArray(arrayName);
-			if(jsonArray.length()>0) {
-				JSONArray orderJsonArray = jsonArray.getJSONArray(0);
-				return orderJsonArray.getDouble(0);
-			}
-		}
-		
-		return Ticker.NO_DATA;
+		final JSONObject pairJsonObject = jsonObject.getJSONObject(checkerInfo.getCurrencyCounter()+"_"+checkerInfo.getCurrencyBase());	// Reversed currencies
+
+		ticker.bid = pairJsonObject.getDouble("highestBid");
+		ticker.ask = pairJsonObject.getDouble("lowestAsk");
+		ticker.vol = pairJsonObject.getDouble("baseVolume");
+		ticker.last = pairJsonObject.getDouble("last");
 	}
 	
 	// ====================
