@@ -15,10 +15,14 @@ public class Virtex extends Market {
 
 	private final static String NAME = "VirtEx";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://www.cavirtex.com/api/CAD/ticker.json";
+	private final static String URL = "https://cavirtex.com/api2/ticker.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+				Currency.CAD,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				Currency.CAD
 			});
 	}
@@ -34,9 +38,14 @@ public class Virtex extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.vol = jsonObject.getDouble("volume");
-		ticker.high = jsonObject.getDouble("high");
-		ticker.low = jsonObject.getDouble("low");
-		ticker.last = jsonObject.getDouble("last");
+		final JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
+		final JSONObject pairJsonObject = tickerJsonObject.getJSONObject(checkerInfo.getCurrencyBase()+checkerInfo.getCurrencyCounter());
+		
+		ticker.bid = pairJsonObject.getDouble("buy");
+		ticker.ask = pairJsonObject.getDouble("sell");
+		ticker.vol = pairJsonObject.getDouble("volume");
+		ticker.high = pairJsonObject.getDouble("high");
+		ticker.low = pairJsonObject.getDouble("low");
+		ticker.last = pairJsonObject.getDouble("last");
 	}
 }
