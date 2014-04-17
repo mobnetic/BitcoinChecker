@@ -19,8 +19,8 @@ public class Bter extends Market {
 
 	private final static String NAME = "Bter";
 	private final static String TTS_NAME = "B ter";
-	private final static String URL = "http://data.bter.com/api/1/ticker/%1$s_%2$s";
-	private final static String URL_CURRENCY_PAIRS = "http://data.bter.com/api/1/pairs";
+	private final static String URL = "https://data.bter.com/api/1/ticker/%1$s_%2$s";
+	private final static String URL_CURRENCY_PAIRS = "https://data.bter.com/api/1/pairs";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{ VirtualCurrency.BTC });
