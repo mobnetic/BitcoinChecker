@@ -7,15 +7,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
 import com.mobnetic.coinguardiandatamodule.tester.volley.UnknownVolleyError;
@@ -24,6 +27,12 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 
 	private final Listener<T> listener;
 	private final Map<String, String> headers;
+	
+	private RequestQueue requestQueue;
+	private String redirectionUrl = null;
+	private int redirectionCount;
+	
+	private final static int MAX_REDIRECTION_COUNT = 3;
 	
 	public GzipVolleyRequest(String url, Listener<T> listener, ErrorListener errorListener) {
 		super(Method.GET, url, errorListener);
@@ -35,10 +44,44 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 		this.headers.put(HTTP.USER_AGENT, "Bitcoin Checker (gzip)");
 	}
 	
+	public RequestQueue getRequestQueue() {
+		return requestQueue;
+	}
+	
+	@Override
+	public String getUrl() {
+		if(redirectionUrl!=null)
+			return redirectionUrl;
+		return super.getUrl();
+	}
+	
 	@Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         return headers!=null ? headers : super.getHeaders();
     }
+	
+	@Override
+	public Request<?> setRequestQueue(RequestQueue requestQueue) {
+		this.requestQueue = requestQueue;
+		return super.setRequestQueue(requestQueue);
+	}
+
+	@Override
+	public void deliverError(VolleyError error) {
+		if(error!=null && error.networkResponse!=null) {
+			final int statusCode = error.networkResponse.statusCode;
+			if(statusCode==HttpStatus.SC_MOVED_PERMANENTLY || statusCode==HttpStatus.SC_MOVED_TEMPORARILY) {
+				String location = error.networkResponse.headers.get("Location");
+				if(location!=null && redirectionCount<MAX_REDIRECTION_COUNT) {
+					++redirectionCount;
+					redirectionUrl = location;
+					requestQueue.add(this);
+					return;
+				}
+			}
+		}
+		super.deliverError(error);
+	}
 	
 	@Override
 	protected void deliverResponse(final T response) {
@@ -59,7 +102,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
             }
 			return Response.success(parseNetworkResponse(responseString), HttpHeaderParser.parseCacheHeaders(response));
 		} catch (CheckerErrorParsedError checkerErrorParsedError) {
-			return Response.error(checkerErrorParsedError);	
+			return Response.error(checkerErrorParsedError);
 		} catch (Exception e) {
 			return Response.error(new ParseError(e));
 		} catch (Throwable e) {

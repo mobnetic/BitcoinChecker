@@ -6,8 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.RequestFuture;
@@ -22,7 +20,6 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 
 	private final Context context;
 	private final Market market;
-	private RequestQueue requestQueue;
 	
 	public DynamicCurrencyPairsVolleyMainRequest(Context context, Market market, Listener<CurrencyPairsMapHelper> listener, ErrorListener errorListener) {
 		super(market.getCurrencyPairsUrl(0), listener, errorListener);
@@ -32,12 +29,6 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 		this.market = market;
 	}
 
-	@Override
-	public Request<?> setRequestQueue(RequestQueue requestQueue) {
-		this.requestQueue = requestQueue;
-		return super.setRequestQueue(requestQueue);
-	}
-	
 	@Override
 	protected CurrencyPairsMapHelper parseNetworkResponse(String responseString) throws Exception {
 		List<CurrencyPairInfo> pairs = new ArrayList<CurrencyPairInfo>();
@@ -51,7 +42,7 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 					final String nextUrl = market.getCurrencyPairsUrl(requestId);
 					if(!TextUtils.isEmpty(nextUrl)) {
 						DynamicCurrencyPairsVolleyNextRequest request = new DynamicCurrencyPairsVolleyNextRequest(nextUrl, future);
-						requestQueue.add(request);
+						getRequestQueue().add(request);
 						String nextResponse = future.get(); // this will block
 						market.parseCurrencyPairsMain(requestId, nextResponse, pairs);
 					}

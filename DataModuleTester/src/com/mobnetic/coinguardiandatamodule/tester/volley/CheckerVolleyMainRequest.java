@@ -3,8 +3,6 @@ package com.mobnetic.coinguardiandatamodule.tester.volley;
 import android.text.TextUtils;
 
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.RequestFuture;
@@ -17,7 +15,6 @@ import com.mobnetic.coinguardiandatamodule.tester.volley.generic.GenericCheckerV
 public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<TickerWithRawResponse> {
 	
 	private final Market market;
-	private RequestQueue requestQueue;
 
 	public CheckerVolleyMainRequest(Market market, CheckerInfo checkerInfo, Listener<TickerWithRawResponse> listener, ErrorListener errorListener) {
 		super(market.getUrl(0, checkerInfo), checkerInfo, listener, errorListener);
@@ -25,12 +22,6 @@ public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<Ticker
 		this.market = market;
 	}
 	
-	@Override
-	public Request<?> setRequestQueue(RequestQueue requestQueue) {
-		this.requestQueue = requestQueue;
-		return super.setRequestQueue(requestQueue);
-	}
-
 	@Override
 	protected TickerWithRawResponse parseNetworkResponse(String responseString) throws Exception {
 		TickerWithRawResponse tickerWithRawResponse = new TickerWithRawResponse();
@@ -60,7 +51,7 @@ public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<Ticker
 					final String nextUrl = market.getUrl(requestId, checkerInfo);
 					if(!TextUtils.isEmpty(nextUrl)) {
 						CheckerVolleyNextRequest request = new CheckerVolleyNextRequest(nextUrl, checkerInfo, future);
-						requestQueue.add(request);
+						getRequestQueue().add(request);
 						String nextResponse = future.get(); // this will block
 						market.parseTickerMain(requestId, nextResponse, tickerWithRawResponse.ticker, checkerInfo);
 					}
