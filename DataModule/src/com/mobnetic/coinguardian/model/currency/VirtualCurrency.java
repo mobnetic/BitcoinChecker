@@ -135,6 +135,7 @@ public class VirtualCurrency {
 	public static final String GRUMP = "GRUMP";
 	public static final String HBN = "HBN";
 	public static final String HEX = "HEX";
+	public static final String HIRO = "HIRO";
 	public static final String HRO = "HRO";
 	public static final String HUC = "HUC";
 	public static final String HVC = "HVC";
@@ -159,6 +160,7 @@ public class VirtualCurrency {
 	public static final String LDC = "LDC";
 	public static final String LEAF = "LEAF";
 	public static final String LGBT = "LGBT";
+	public static final String LGC = "LGC";
 	public static final String LK7 = "LK7";
 	public static final String LKY = "LKY";
 	public static final String LMC = "LMC";

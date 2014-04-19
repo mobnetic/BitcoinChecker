@@ -78,6 +78,9 @@ public class Poloniex extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.GRC, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.HIRO, new String[]{
+				VirtualCurrency.BTC
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.HUC, new String[]{
 				VirtualCurrency.BTC
 			});
@@ -94,6 +97,9 @@ public class Poloniex extends Market {
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LEAF, new String[]{
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LGC, new String[]{
 				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
