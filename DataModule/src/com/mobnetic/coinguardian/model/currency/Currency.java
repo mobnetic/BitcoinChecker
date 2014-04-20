@@ -105,6 +105,7 @@ public class Currency {
 	public static final String NAD = "NAD";
 	public static final String NGN = "NGN";
 	public static final String NIO = "NIO";
+	public static final String NIS = "NIS";
 	public static final String NOK = "NOK";
 	public static final String NPR = "NPR";
 	public static final String NZD = "NZD";

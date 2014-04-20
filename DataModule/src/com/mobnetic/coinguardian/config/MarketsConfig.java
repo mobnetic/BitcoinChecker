@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.Anxpro;
+import com.mobnetic.coinguardian.model.market.Bit2c;
 import com.mobnetic.coinguardian.model.market.BitKonan;
 import com.mobnetic.coinguardian.model.market.BitMarketPL;
 import com.mobnetic.coinguardian.model.market.BitTrex;
@@ -103,5 +104,6 @@ public class MarketsConfig {
 		addMarket(new BitKonan());
 		addMarket(new BitTrex());
 		addMarket(new Comkort());
+		addMarket(new Bit2c());
 	}
 }
