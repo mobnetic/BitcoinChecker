@@ -91,7 +91,6 @@ public class Prelude extends Market {
 				VirtualCurrency.BTC,
 				Currency.USD
 		});
-
 	}
 
 	public Prelude() {
