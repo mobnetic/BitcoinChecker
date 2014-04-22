@@ -88,7 +88,6 @@ public abstract class Market {
 			if(currencyPairInfo==null || TextUtils.isEmpty(currencyPairInfo.getCurrencyBase()) || TextUtils.isEmpty(currencyPairInfo.getCurrencyCounter()))
 				pairs.remove(i);
 		}
-		Collections.sort(pairs);
 	}
 	
 	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {

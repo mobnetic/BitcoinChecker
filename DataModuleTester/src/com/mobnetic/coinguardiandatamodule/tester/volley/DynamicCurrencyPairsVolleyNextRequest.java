@@ -11,7 +11,7 @@ public class DynamicCurrencyPairsVolleyNextRequest extends GzipVolleyRequest<Str
 
 	@Override
 	protected String parseNetworkResponse(String responseString) throws Exception {
-		return null;
+		return responseString;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.mobnetic.coinguardiandatamodule.tester.volley;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -31,11 +32,12 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 
 	@Override
 	protected CurrencyPairsMapHelper parseNetworkResponse(String responseString) throws Exception {
-		List<CurrencyPairInfo> pairs = new ArrayList<CurrencyPairInfo>();
+		final List<CurrencyPairInfo> pairs = new ArrayList<CurrencyPairInfo>();
 		market.parseCurrencyPairsMain(0, responseString, pairs);
 			
 		final int numOfRequests = market.getCurrencyPairsNumOfRequests();
 		if(numOfRequests>1) {
+			final List<CurrencyPairInfo> nextPairs = new ArrayList<CurrencyPairInfo>();
 			for(int requestId=1; requestId<numOfRequests; ++requestId) {
 				try {
 					RequestFuture<String> future = RequestFuture.newFuture();
@@ -44,7 +46,9 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 						DynamicCurrencyPairsVolleyNextRequest request = new DynamicCurrencyPairsVolleyNextRequest(nextUrl, future);
 						getRequestQueue().add(request);
 						String nextResponse = future.get(); // this will block
-						market.parseCurrencyPairsMain(requestId, nextResponse, pairs);
+						nextPairs.clear();
+						market.parseCurrencyPairsMain(requestId, nextResponse, nextPairs);
+						pairs.addAll(nextPairs);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,6 +56,7 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 			}
 		}
 		
+		Collections.sort(pairs);
 		CurrencyPairsListWithDate currencyPairsListWithDate = new CurrencyPairsListWithDate();
 		currencyPairsListWithDate.date = System.currentTimeMillis();
 		currencyPairsListWithDate.pairs = pairs;
