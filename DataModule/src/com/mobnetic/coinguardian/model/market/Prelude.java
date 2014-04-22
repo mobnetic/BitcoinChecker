@@ -84,18 +84,18 @@ public class Prelude extends Market {
 				VirtualCurrency.BTC,
 				Currency.USD
 		});
-//		CURRENCY_PAIRS.put(VirtualCurrency.RDD, new String[]{
-//				VirtualCurrency.BTC,
-//				Currency.USD
-//		});
+		CURRENCY_PAIRS.put(VirtualCurrency.RDD, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.VTC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
 		});
-//		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{
-//				VirtualCurrency.BTC,
-//				Currency.USD
-//		});
+		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
 	}
 
 	public Prelude() {
