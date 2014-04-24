@@ -58,6 +58,7 @@ public class MintPal extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.UTC, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZED, new String[]{ VirtualCurrency.BTC });
 		CURRENCY_PAIRS.put(VirtualCurrency.ZEIT, new String[]{ VirtualCurrency.BTC });
+		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{ VirtualCurrency.BTC });
 
 	}
 	
