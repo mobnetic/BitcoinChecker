@@ -4,13 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.mobnetic.coinguardian.model.Market;
@@ -19,6 +19,8 @@ import com.mobnetic.coinguardian.util.FormatUtilsBase;
 import com.mobnetic.coinguardiandatamodule.tester.R;
 import com.mobnetic.coinguardiandatamodule.tester.util.CheckErrorsUtils;
 import com.mobnetic.coinguardiandatamodule.tester.volley.DynamicCurrencyPairsVolleyMainRequest;
+import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseErrorListener;
+import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseListener;
 
 public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements OnDismissListener {
 
@@ -28,6 +30,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 	
 	private View refreshImageView;
 	private TextView statusView;
+	private TextView errorView;
 	
 	protected DynamicCurrencyPairsDialog(Context context, Market market, CurrencyPairsMapHelper currencyPairsMapHelper) {
 		super(context);
@@ -44,12 +47,13 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		View view = LayoutInflater.from(context).inflate(R.layout.dynamic_currency_pairs_dialog, null);
 		refreshImageView = view.findViewById(R.id.refreshImageView);
 		statusView = (TextView)view.findViewById(R.id.statusView);
+		errorView = (TextView)view.findViewById(R.id.errorView);
 		refreshImageView.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startRefreshing();
 			}
 		});
-		refreshStatusView(null);
+		refreshStatusView(null, null, null, null);
 		
 		setView(view);
 	}
@@ -64,20 +68,20 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		setCancelable(false);
 		startRefreshingAnim();
 		DynamicCurrencyPairsVolleyMainRequest request = new DynamicCurrencyPairsVolleyMainRequest(getContext(), market,
-			new Listener<CurrencyPairsMapHelper>() {
+			new ResponseListener<CurrencyPairsMapHelper>() {
 				@Override
-				public void onResponse(CurrencyPairsMapHelper currencyPairsMapHelper) {
+				public void onResponse(NetworkResponse networkResponse, String responseString, CurrencyPairsMapHelper currencyPairsMapHelper) {
 					DynamicCurrencyPairsDialog.this.currencyPairsMapHelper = currencyPairsMapHelper;
-					refreshStatusView(null);
+					refreshStatusView(networkResponse, responseString, null, null);
 					stopRefreshingAnim();
 					onPairsUpdated(market, currencyPairsMapHelper);
 //					dismiss();
 				}
-			}, new ErrorListener() {
+			}, new ResponseErrorListener() {
 				@Override
-				public void onErrorResponse(VolleyError error) {
+				public void onErrorResponse(NetworkResponse networkResponse, String responseString, VolleyError error) {
 					error.printStackTrace();
-					refreshStatusView(CheckErrorsUtils.parseVolleyErrorMsg(getContext(), error));
+					refreshStatusView(networkResponse, responseString, CheckErrorsUtils.parseVolleyErrorMsg(getContext(), error), error);
 					stopRefreshingAnim();
 				}
 			});
@@ -85,7 +89,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		requestQueue.add(request);
 	}
 	
-	private void refreshStatusView(String errorMsg) {
+	private void refreshStatusView(NetworkResponse networkResponse, String responseString, String errorMsg, VolleyError error) {
 		String dateString;
 		if(currencyPairsMapHelper!=null && currencyPairsMapHelper.getDate()>0)
 			dateString = FormatUtilsBase.formatSameDayTimeOrDate(getContext(), currencyPairsMapHelper.getDate());
@@ -95,8 +99,16 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		statusView.setText(getContext().getString(R.string.checker_add_dynamic_currency_pairs_dialog_last_sync, dateString));
 		if(currencyPairsMapHelper!=null && currencyPairsMapHelper.getPairsCount()>0)
 			statusView.append("\n"+getContext().getString(R.string.checker_add_dynamic_currency_pairs_dialog_pairs, currencyPairsMapHelper.getPairsCount()));
-		if(errorMsg!=null)
-			statusView.append("\n"+CheckErrorsUtils.formatError(getContext(), errorMsg));
+		
+		SpannableStringBuilder ssb = new SpannableStringBuilder();
+		
+		if(errorMsg!=null) {
+			ssb.append("\n");
+			ssb.append(getContext().getString(R.string.check_error_generic_prefix, errorMsg));
+		}
+		
+		CheckErrorsUtils.formatResponseDebug(getContext(), ssb, networkResponse, responseString, error);
+		errorView.setText(ssb);	
 	}
 	
 	public void startRefreshingAnim() {

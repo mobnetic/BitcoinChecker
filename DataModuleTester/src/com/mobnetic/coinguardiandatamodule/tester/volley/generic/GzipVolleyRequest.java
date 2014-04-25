@@ -32,6 +32,9 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 	private String redirectionUrl = null;
 	private int redirectionCount;
 	
+	private NetworkResponse networkResponse;
+	private String responseString;
+	
 	private final static int MAX_REDIRECTION_COUNT = 3;
 	
 	public GzipVolleyRequest(String url, Listener<T> listener, ErrorListener errorListener) {
@@ -80,19 +83,26 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 				}
 			}
 		}
-		super.deliverError(error);
+		if(listener instanceof ResponseErrorListener)
+			((ResponseErrorListener)listener).onErrorResponse(networkResponse, responseString, error);
+		else
+			super.deliverError(error);
 	}
 	
 	@Override
 	protected void deliverResponse(final T response) {
-		listener.onResponse(response);
+		if(listener instanceof ResponseListener)
+			((ResponseListener<T>)listener).onResponse(networkResponse, responseString, response);
+		else
+			listener.onResponse(response);
 	}
 	
-	protected abstract T parseNetworkResponse(String responseString) throws Exception;
+	protected abstract T parseNetworkResponse(Map<String, String> headers, String responseString) throws Exception;
 	
 	@Override
 	protected Response<T> parseNetworkResponse(NetworkResponse response) {
 		try {
+			networkResponse = response;
 			String responseString = "";
 			final String encoding = response.headers.get(HTTP.CONTENT_ENCODING);
             if(encoding!=null && encoding.contains("gzip")) {
@@ -100,7 +110,8 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
             } else {
                 responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             }
-			return Response.success(parseNetworkResponse(responseString), HttpHeaderParser.parseCacheHeaders(response));
+            this.responseString = responseString;
+			return Response.success(parseNetworkResponse(response.headers, responseString), HttpHeaderParser.parseCacheHeaders(response));
 		} catch (CheckerErrorParsedError checkerErrorParsedError) {
 			return Response.error(checkerErrorParsedError);
 		} catch (Exception e) {

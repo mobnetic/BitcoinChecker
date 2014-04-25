@@ -3,6 +3,7 @@ package com.mobnetic.coinguardiandatamodule.tester.volley;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -31,7 +32,7 @@ public class DynamicCurrencyPairsVolleyMainRequest extends GzipVolleyRequest<Cur
 	}
 
 	@Override
-	protected CurrencyPairsMapHelper parseNetworkResponse(String responseString) throws Exception {
+	protected CurrencyPairsMapHelper parseNetworkResponse(Map<String, String> headers, String responseString) throws Exception {
 		final List<CurrencyPairInfo> pairs = new ArrayList<CurrencyPairInfo>();
 		market.parseCurrencyPairsMain(0, responseString, pairs);
 			

@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,10 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
@@ -36,7 +34,9 @@ import com.mobnetic.coinguardiandatamodule.tester.util.HttpsHelper;
 import com.mobnetic.coinguardiandatamodule.tester.util.MarketCurrencyPairsStore;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerErrorParsedError;
 import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest;
-import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest.TickerWithRawResponse;
+import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest.TickerWrapper;
+import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseErrorListener;
+import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseListener;
 
 public class MainActivity extends Activity {
 
@@ -210,34 +210,32 @@ public class MainActivity extends Activity {
 		final String currencyCounter = getSelectedCurrencyCounter();
 		final String pairId = currencyPairsMapHelper!=null ? currencyPairsMapHelper.getCurrencyPairId(currencyBase, currencyCounter) : null;
 		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, pairId);
-		Request<?> request = new CheckerVolleyMainRequest(market, checkerInfo, new Listener<TickerWithRawResponse>() {
+		Request<?> request = new CheckerVolleyMainRequest(market, checkerInfo, new ResponseListener<TickerWrapper>() {
 			@Override
-			public void onResponse(TickerWithRawResponse tickerWithRawResponse) {
-				handleNewResult(checkerInfo, tickerWithRawResponse.ticker, tickerWithRawResponse.rawResponse, null);
+			public void onResponse(NetworkResponse networkResponse, String responseString, TickerWrapper tickerWrapper) {
+				handleNewResult(checkerInfo, tickerWrapper.ticker, networkResponse, responseString, null, null);
 			}
-		}, new ErrorListener() {
+		}, new ResponseErrorListener() {
 			@Override
-			public void onErrorResponse(VolleyError error) {
+			public void onErrorResponse(NetworkResponse networkResponse, String responseString, VolleyError error) {
 				error.printStackTrace();
 				
-				String rawResponse = null;
 				String errorMsg = null;
 				if(error instanceof CheckerErrorParsedError) {
-					rawResponse = ((CheckerErrorParsedError)error).getRawResponse();
 					errorMsg = ((CheckerErrorParsedError)error).getErrorMsg();
 				}
 				
 				if(TextUtils.isEmpty(errorMsg))
 					errorMsg = CheckErrorsUtils.parseVolleyErrorMsg(MainActivity.this, error);
 					
-				handleNewResult(checkerInfo, null, rawResponse, errorMsg);
+				handleNewResult(checkerInfo, null, networkResponse, responseString, errorMsg, error);
 			}
 		});
 		requestQueue.add(request);
 		showResultView(false);
 	}
 	
-	private void handleNewResult(CheckerInfo checkerInfo, Ticker ticker, String rawResponse, String errorMsg) {
+	private void handleNewResult(CheckerInfo checkerInfo, Ticker ticker, NetworkResponse networkResponse, String rawResponse, String errorMsg, VolleyError error) {
 		showResultView(true);
 		SpannableStringBuilder ssb = new SpannableStringBuilder();
 		
@@ -252,10 +250,8 @@ public class MainActivity extends Activity {
 		} else {
 			ssb.append(getString(R.string.check_error_generic_prefix, errorMsg!=null ? errorMsg : "UNKNOWN"));
 		}
-		if(rawResponse!=null){
-			ssb.append("\n\n");
-			ssb.append(Html.fromHtml(getString(R.string.ticker_raw_response)+"<br\\><small>"+rawResponse+"</small>"));
-		}
+		
+		CheckErrorsUtils.formatResponseDebug(this, ssb, networkResponse, rawResponse, error);
 		
 		resultView.setText(ssb);
 	}

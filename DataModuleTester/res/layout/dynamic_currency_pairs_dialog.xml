@@ -21,5 +21,12 @@
 	        android:textAppearance="?android:attr/textAppearanceMedium"
 	        android:text="@string/checker_add_dynamic_currency_pairs_dialog_last_sync"/>
 		
+		<TextView android:id="@+id/errorView"
+		    android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="left"
+	        android:textIsSelectable="true"
+	        android:textAppearance="?android:attr/textAppearanceMedium"/>
+		
 	</LinearLayout>
 </ScrollView>

@@ -1,5 +1,7 @@
 package com.mobnetic.coinguardiandatamodule.tester.volley;
 
+import java.util.Map;
+
 import android.text.TextUtils;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -9,38 +11,37 @@ import com.android.volley.toolbox.RequestFuture;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest.TickerWithRawResponse;
+import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainRequest.TickerWrapper;
 import com.mobnetic.coinguardiandatamodule.tester.volley.generic.GenericCheckerVolleyRequest;
 
-public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<TickerWithRawResponse> {
+public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<TickerWrapper> {
 	
 	private final Market market;
 
-	public CheckerVolleyMainRequest(Market market, CheckerInfo checkerInfo, Listener<TickerWithRawResponse> listener, ErrorListener errorListener) {
+	public CheckerVolleyMainRequest(Market market, CheckerInfo checkerInfo, Listener<TickerWrapper> listener, ErrorListener errorListener) {
 		super(market.getUrl(0, checkerInfo), checkerInfo, listener, errorListener);
 		setRetryPolicy(new DefaultRetryPolicy(5000, 3, 1.5f));
 		this.market = market;
 	}
 	
 	@Override
-	protected TickerWithRawResponse parseNetworkResponse(String responseString) throws Exception {
-		TickerWithRawResponse tickerWithRawResponse = new TickerWithRawResponse();
-		tickerWithRawResponse.rawResponse = responseString;
+	protected TickerWrapper parseNetworkResponse(Map<String, String> headers, String responseString) throws Exception {
+		TickerWrapper tickerWrapper = new TickerWrapper();
 		try {
-			tickerWithRawResponse.ticker = market.parseTickerMain(0, responseString, new Ticker(), checkerInfo);
+			tickerWrapper.ticker = market.parseTickerMain(0, responseString, new Ticker(), checkerInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
-			tickerWithRawResponse.ticker = null;
+			tickerWrapper.ticker = null;
 		}
 		
-		if(tickerWithRawResponse.ticker==null || tickerWithRawResponse.ticker.last<=Ticker.NO_DATA) {
+		if(tickerWrapper.ticker==null || tickerWrapper.ticker.last<=Ticker.NO_DATA) {
 			String errorMsg;
 			try {
 				errorMsg = market.parseErrorMain(0, responseString, checkerInfo);
 			} catch (Exception e) {
 				errorMsg = null;
 			}
-			throw new CheckerErrorParsedError(responseString, errorMsg);
+			throw new CheckerErrorParsedError(errorMsg);
 		}
 		
 		final int numOfRequests = market.getNumOfRequests(checkerInfo);
@@ -53,20 +54,19 @@ public class CheckerVolleyMainRequest extends GenericCheckerVolleyRequest<Ticker
 						CheckerVolleyNextRequest request = new CheckerVolleyNextRequest(nextUrl, checkerInfo, future);
 						getRequestQueue().add(request);
 						String nextResponse = future.get(); // this will block
-						market.parseTickerMain(requestId, nextResponse, tickerWithRawResponse.ticker, checkerInfo);
+						market.parseTickerMain(requestId, nextResponse, tickerWrapper.ticker, checkerInfo);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		return tickerWithRawResponse;
+		return tickerWrapper;
 	}
 	
-	public class TickerWithRawResponse {
+	public class TickerWrapper {
 		
 		public Ticker ticker;
-		public String rawResponse;
 		
 	}
 }

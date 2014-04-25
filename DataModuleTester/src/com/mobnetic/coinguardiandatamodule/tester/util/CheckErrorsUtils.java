@@ -1,8 +1,15 @@
 package com.mobnetic.coinguardiandatamodule.tester.util;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Map;
+
 import android.content.Context;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 
 import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
@@ -26,5 +33,38 @@ public class CheckErrorsUtils {
 	
 	public final static String formatError(Context context, String errorMsg) {
 		return context.getString(R.string.check_error_generic_prefix, errorMsg!=null ? errorMsg : "UNKNOWN");
+	}
+	
+	private static String formatMapToHtmlString(Map<String, String> headers) {
+		String output = "";
+		for (Map.Entry<String, String> entry : headers.entrySet()) {
+			output += String.format("<b>%1$s</b> = %2$s<br\\>", entry.getKey(), entry.getValue());
+		}
+		return output;
+	}
+	
+	public static SpannableStringBuilder formatResponseDebug(Context context, SpannableStringBuilder ssb, NetworkResponse networkResponse, String rawResponse, Exception exception) {
+		if(networkResponse!=null){
+			ssb.append("\n\n");
+			ssb.append(context.getString(R.string.ticker_raw_response_code, String.valueOf(networkResponse.statusCode)));
+			ssb.append("\n\n");
+			ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_response_headers)+"<br\\><small>"+CheckErrorsUtils.formatMapToHtmlString(networkResponse.headers)+"</small>"));
+		}
+		if(rawResponse!=null){
+			ssb.append("\n\n");
+			ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_response)+"<br\\><small>"+rawResponse+"</small>"));
+		}
+		if(exception!=null){
+			ssb.append("\n\n");
+			ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_stacktrace)+"<br\\><small>"+printException(exception)+"</small>"));
+		}
+		
+		return ssb;
+	}
+	
+	private static String printException(Exception e) {
+		StringWriter errors = new StringWriter();
+		e.printStackTrace(new PrintWriter(errors));
+		return errors.toString();
 	}
 }
