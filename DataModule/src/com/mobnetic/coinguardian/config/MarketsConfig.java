@@ -29,6 +29,7 @@ import com.mobnetic.coinguardian.model.market.CoinMarketIO;
 import com.mobnetic.coinguardian.model.market.Coinbase;
 import com.mobnetic.coinguardian.model.market.Coinse;
 import com.mobnetic.coinguardian.model.market.Comkort;
+import com.mobnetic.coinguardian.model.market.CryptoAltex;
 import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
@@ -107,5 +108,6 @@ public class MarketsConfig {
 		addMarket(new Comkort());
 		addMarket(new Bit2c());
 		addMarket(new BitBay());
+		addMarket(new CryptoAltex());
 	}
 }
