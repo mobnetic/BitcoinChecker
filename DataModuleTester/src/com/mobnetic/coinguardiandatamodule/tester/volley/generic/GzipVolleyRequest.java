@@ -26,6 +26,7 @@ import com.mobnetic.coinguardiandatamodule.tester.volley.UnknownVolleyError;
 public abstract class GzipVolleyRequest<T> extends Request<T> {
 
 	private final Listener<T> listener;
+	private final ErrorListener errorListener;
 	private final Map<String, String> headers;
 	
 	private RequestQueue requestQueue;
@@ -41,6 +42,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 		super(Method.GET, url, errorListener);
 		
 		this.listener = listener;
+		this.errorListener = errorListener;
 		
 		this.headers = new HashMap<String, String>();
 		this.headers.put("Accept-Encoding", "gzip");
@@ -83,8 +85,8 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 				}
 			}
 		}
-		if(listener instanceof ResponseErrorListener)
-			((ResponseErrorListener)listener).onErrorResponse(networkResponse, responseString, error);
+		if(errorListener instanceof ResponseErrorListener)
+			((ResponseErrorListener)errorListener).onErrorResponse(networkResponse, responseString, error);
 		else
 			super.deliverError(error);
 	}
