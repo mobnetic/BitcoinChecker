@@ -1,6 +1,7 @@
 package com.mobnetic.coinguardiandatamodule.tester;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,8 +20,6 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.Volley;
 import com.mobnetic.coinguardian.config.MarketsConfig;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
@@ -57,7 +56,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		requestQueue = Volley.newRequestQueue(this, new HurlStack(null, HttpsHelper.getMySSLSocketFactory()));
+		requestQueue = HttpsHelper.newRequestQueue(this);
 		
 		setContentView(R.layout.main_activity);
 		
@@ -212,12 +211,12 @@ public class MainActivity extends Activity {
 		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, pairId);
 		Request<?> request = new CheckerVolleyMainRequest(market, checkerInfo, new ResponseListener<TickerWrapper>() {
 			@Override
-			public void onResponse(NetworkResponse networkResponse, String responseString, TickerWrapper tickerWrapper) {
-				handleNewResult(checkerInfo, tickerWrapper.ticker, networkResponse, responseString, null, null);
+			public void onResponse(String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String responseString, TickerWrapper tickerWrapper) {
+				handleNewResult(checkerInfo, tickerWrapper.ticker, url, requestHeaders, networkResponse, responseString, null, null);
 			}
 		}, new ResponseErrorListener() {
 			@Override
-			public void onErrorResponse(NetworkResponse networkResponse, String responseString, VolleyError error) {
+			public void onErrorResponse(String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String responseString, VolleyError error) {
 				error.printStackTrace();
 				
 				String errorMsg = null;
@@ -228,14 +227,14 @@ public class MainActivity extends Activity {
 				if(TextUtils.isEmpty(errorMsg))
 					errorMsg = CheckErrorsUtils.parseVolleyErrorMsg(MainActivity.this, error);
 					
-				handleNewResult(checkerInfo, null, networkResponse, responseString, errorMsg, error);
+				handleNewResult(checkerInfo, null, url, requestHeaders, networkResponse, responseString, errorMsg, error);
 			}
 		});
 		requestQueue.add(request);
 		showResultView(false);
 	}
 	
-	private void handleNewResult(CheckerInfo checkerInfo, Ticker ticker, NetworkResponse networkResponse, String rawResponse, String errorMsg, VolleyError error) {
+	private void handleNewResult(CheckerInfo checkerInfo, Ticker ticker, String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String rawResponse, String errorMsg, VolleyError error) {
 		showResultView(true);
 		SpannableStringBuilder ssb = new SpannableStringBuilder();
 		
@@ -251,7 +250,7 @@ public class MainActivity extends Activity {
 			ssb.append(getString(R.string.check_error_generic_prefix, errorMsg!=null ? errorMsg : "UNKNOWN"));
 		}
 		
-		CheckErrorsUtils.formatResponseDebug(this, ssb, networkResponse, rawResponse, error);
+		CheckErrorsUtils.formatResponseDebug(this, ssb, url, requestHeaders, networkResponse, rawResponse, error);
 		
 		resultView.setText(ssb);
 	}

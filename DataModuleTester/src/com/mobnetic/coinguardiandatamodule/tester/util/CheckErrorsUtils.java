@@ -43,7 +43,17 @@ public class CheckErrorsUtils {
 		return output;
 	}
 	
-	public static SpannableStringBuilder formatResponseDebug(Context context, SpannableStringBuilder ssb, NetworkResponse networkResponse, String rawResponse, Exception exception) {
+	public static SpannableStringBuilder formatResponseDebug(Context context, SpannableStringBuilder ssb, String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String rawResponse, Exception exception) {
+		if(url!=null){
+			ssb.append("\n\n");
+			ssb.append(context.getString(R.string.ticker_raw_url, url));
+		}
+		
+		if(requestHeaders!=null){
+			ssb.append("\n\n");
+			ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_request_headers)+"<br\\><small>"+CheckErrorsUtils.formatMapToHtmlString(requestHeaders)+"</small>"));
+		}
+		
 		if(networkResponse!=null){
 			ssb.append("\n\n");
 			ssb.append(context.getString(R.string.ticker_raw_response_code, String.valueOf(networkResponse.statusCode)));

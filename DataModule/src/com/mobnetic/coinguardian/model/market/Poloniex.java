@@ -18,7 +18,6 @@ public class Poloniex extends Market {
 	private final static String NAME = "Poloniex";
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://poloniex.com/public?command=returnTicker";
-	private final static String URL_CURRENCY_PAIRS = URL;
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
@@ -223,7 +222,7 @@ public class Poloniex extends Market {
 	// ====================
 	@Override
 	public String getCurrencyPairsUrl(int requestId) {
-		return URL_CURRENCY_PAIRS;
+		return URL;
 	}
 	
 	@Override

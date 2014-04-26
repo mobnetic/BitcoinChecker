@@ -5,9 +5,19 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import android.content.Context;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.Volley;
+
 
 public class HttpsHelper {
 
+	public final static RequestQueue newRequestQueue(Context context) {
+		return Volley.newRequestQueue(context, new HurlStack(null, HttpsHelper.getMySSLSocketFactory()));
+	}
+	
 	public static SSLSocketFactory getMySSLSocketFactory() {
 		try {
 			SSLContext sslContext = SSLContext.getInstance("TLS");

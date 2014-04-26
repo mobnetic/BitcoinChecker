@@ -1,5 +1,7 @@
 package com.mobnetic.coinguardiandatamodule.tester.dialog;
 
+import java.util.Map;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,12 +14,12 @@ import android.widget.TextView;
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.util.CurrencyPairsMapHelper;
 import com.mobnetic.coinguardian.util.FormatUtilsBase;
 import com.mobnetic.coinguardiandatamodule.tester.R;
 import com.mobnetic.coinguardiandatamodule.tester.util.CheckErrorsUtils;
+import com.mobnetic.coinguardiandatamodule.tester.util.HttpsHelper;
 import com.mobnetic.coinguardiandatamodule.tester.volley.DynamicCurrencyPairsVolleyMainRequest;
 import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseErrorListener;
 import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseListener;
@@ -36,7 +38,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		super(context);
 		setInverseBackgroundForced(true);
 		
-		this.requestQueue = Volley.newRequestQueue(context);
+		this.requestQueue = HttpsHelper.newRequestQueue(context);
 		this.market = market;
 		this.currencyPairsMapHelper = currencyPairsMapHelper;
 		
@@ -53,7 +55,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 				startRefreshing();
 			}
 		});
-		refreshStatusView(null, null, null, null);
+		refreshStatusView(null, null, null, null, null, null);
 		
 		setView(view);
 	}
@@ -70,18 +72,18 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		DynamicCurrencyPairsVolleyMainRequest request = new DynamicCurrencyPairsVolleyMainRequest(getContext(), market,
 			new ResponseListener<CurrencyPairsMapHelper>() {
 				@Override
-				public void onResponse(NetworkResponse networkResponse, String responseString, CurrencyPairsMapHelper currencyPairsMapHelper) {
+				public void onResponse(String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String responseString, CurrencyPairsMapHelper currencyPairsMapHelper) {
 					DynamicCurrencyPairsDialog.this.currencyPairsMapHelper = currencyPairsMapHelper;
-					refreshStatusView(networkResponse, responseString, null, null);
+					refreshStatusView(url, requestHeaders, networkResponse, responseString, null, null);
 					stopRefreshingAnim();
 					onPairsUpdated(market, currencyPairsMapHelper);
 //					dismiss();
 				}
 			}, new ResponseErrorListener() {
 				@Override
-				public void onErrorResponse(NetworkResponse networkResponse, String responseString, VolleyError error) {
+				public void onErrorResponse(String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String responseString, VolleyError error) {
 					error.printStackTrace();
-					refreshStatusView(networkResponse, responseString, CheckErrorsUtils.parseVolleyErrorMsg(getContext(), error), error);
+					refreshStatusView(url, requestHeaders, networkResponse, responseString, CheckErrorsUtils.parseVolleyErrorMsg(getContext(), error), error);
 					stopRefreshingAnim();
 				}
 			});
@@ -89,7 +91,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 		requestQueue.add(request);
 	}
 	
-	private void refreshStatusView(NetworkResponse networkResponse, String responseString, String errorMsg, VolleyError error) {
+	private void refreshStatusView(String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String responseString, String errorMsg, VolleyError error) {
 		String dateString;
 		if(currencyPairsMapHelper!=null && currencyPairsMapHelper.getDate()>0)
 			dateString = FormatUtilsBase.formatSameDayTimeOrDate(getContext(), currencyPairsMapHelper.getDate());
@@ -107,7 +109,7 @@ public abstract class DynamicCurrencyPairsDialog extends AlertDialog implements 
 			ssb.append(getContext().getString(R.string.check_error_generic_prefix, errorMsg));
 		}
 		
-		CheckErrorsUtils.formatResponseDebug(getContext(), ssb, networkResponse, responseString, error);
+		CheckErrorsUtils.formatResponseDebug(getContext(), ssb, url, requestHeaders, networkResponse, responseString, error);
 		errorView.setText(ssb);	
 	}
 	

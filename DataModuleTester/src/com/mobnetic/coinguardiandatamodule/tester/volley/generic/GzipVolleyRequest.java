@@ -33,6 +33,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 	private String redirectionUrl = null;
 	private int redirectionCount;
 	
+	private Map<String, String> requestHeaders;
 	private NetworkResponse networkResponse;
 	private String responseString;
 	
@@ -62,7 +63,8 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 	
 	@Override
     public Map<String, String> getHeaders() throws AuthFailureError {
-        return headers!=null ? headers : super.getHeaders();
+		requestHeaders = headers!=null ? headers : super.getHeaders();
+		return requestHeaders;
     }
 	
 	@Override
@@ -86,7 +88,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 			}
 		}
 		if(errorListener instanceof ResponseErrorListener)
-			((ResponseErrorListener)errorListener).onErrorResponse(networkResponse, responseString, error);
+			((ResponseErrorListener)errorListener).onErrorResponse(getUrl(), requestHeaders, networkResponse, responseString, error);
 		else
 			super.deliverError(error);
 	}
@@ -94,7 +96,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 	@Override
 	protected void deliverResponse(final T response) {
 		if(listener instanceof ResponseListener)
-			((ResponseListener<T>)listener).onResponse(networkResponse, responseString, response);
+			((ResponseListener<T>)listener).onResponse(getUrl(), requestHeaders, networkResponse, responseString, response);
 		else
 			listener.onResponse(response);
 	}
