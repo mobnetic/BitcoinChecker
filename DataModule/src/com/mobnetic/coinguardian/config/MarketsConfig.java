@@ -16,6 +16,7 @@ import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
 import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
+import com.mobnetic.coinguardian.model.market.BtcMarkets;
 import com.mobnetic.coinguardian.model.market.Btcchina;
 import com.mobnetic.coinguardian.model.market.Btce;
 import com.mobnetic.coinguardian.model.market.Btcturk;
@@ -109,5 +110,6 @@ public class MarketsConfig {
 		addMarket(new Bit2c());
 		addMarket(new BitBay());
 		addMarket(new CryptoAltex());
+		addMarket(new BtcMarkets());
 	}
 }
