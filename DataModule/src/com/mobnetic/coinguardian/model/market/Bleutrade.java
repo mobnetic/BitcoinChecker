@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import android.text.TextUtils;
+
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
@@ -38,12 +40,16 @@ public class Bleutrade extends Market {
 	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		if(requestId==1) {
 			final String[] split = responseString.split(";");
-			ticker.vol = Double.parseDouble(split[5]);
-			ticker.high = Double.parseDouble(split[2]);
-			ticker.low = Double.parseDouble(split[3]);
+			ticker.vol = parseDouble(split[5]);
+			ticker.high = parseDouble(split[2]);
+			ticker.low = parseDouble(split[3]);
 		} else {
-			ticker.last = Double.parseDouble(responseString);
+			ticker.last = parseDouble(responseString);
 		}
+	}
+	
+	private double parseDouble(String doubleString) {
+		return !TextUtils.isEmpty(doubleString) ? Double.parseDouble(doubleString) : 0;
 	}
 	
 	// ====================

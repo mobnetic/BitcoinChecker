@@ -141,7 +141,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 
             String readed;
             while ((readed = in.readLine()) != null) {
-                responseString += readed;
+                responseString += readed+"\n";
             }
         } catch (Exception e) {
             throw e;
