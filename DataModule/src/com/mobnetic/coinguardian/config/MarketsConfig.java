@@ -48,6 +48,7 @@ import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
+import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vircurex;
@@ -113,5 +114,6 @@ public class MarketsConfig {
 		addMarket(new CryptoAltex());
 		addMarket(new BtcMarkets());
 		addMarket(new Bleutrade());
+		addMarket(new SwissCex());
 	}
 }

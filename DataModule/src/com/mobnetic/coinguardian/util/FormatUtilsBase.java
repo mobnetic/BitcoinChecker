@@ -17,8 +17,11 @@ public class FormatUtilsBase {
 	private final static DecimalFormat FORMAT_TWO_DECIMAL = new DecimalFormat("0.00");
 	private final static DecimalFormat FORMAT_THREE_SIGNIFICANT_AT_MOST = new DecimalFormat("@##");
 	private final static DecimalFormat FORMAT_EIGHT_SIGNIFICANT_AT_MOST = new DecimalFormat("@#######");
-
-	public static String formatDouble(double value) {
+	
+	// ====================
+	// Format methods
+	// ====================
+	public static String formatDouble(double value, boolean isPrice) {
 		return formatDouble(value<1 ? FORMAT_THREE_SIGNIFICANT_AT_MOST : FORMAT_TWO_DECIMAL, value);
 	}
 	
@@ -59,7 +62,7 @@ public class FormatUtilsBase {
 	}
 	
 	public static String formatPriceWithCurrency(double value, String currency) {
-		return formatPriceWithCurrency(formatDouble(value), currency);
+		return formatPriceWithCurrency(formatDouble(value, true), currency);
 	}
 	
 	public static String formatPriceWithCurrency(String priceString, String currency) {
@@ -73,7 +76,7 @@ public class FormatUtilsBase {
 		else if(skipNoSignificantDecimal)
 			return formatDoubleWithEightMax(price);
 		else
-			return formatDouble(price);
+			return formatDouble(price, true);
 	}
 	
 	// ====================

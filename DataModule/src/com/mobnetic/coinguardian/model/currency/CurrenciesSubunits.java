@@ -12,6 +12,7 @@ public class CurrenciesSubunits {
 		CURRENCIES_SUBUNITS.put(VirtualCurrency.BTC, new CurrencySubunitsMap(
 				new CurrencySubunit(VirtualCurrency.BTC, 1),
 				new CurrencySubunit(VirtualCurrency.mBTC, 1000),
+				new CurrencySubunit(VirtualCurrency.uBTC, 1000000),
 				new CurrencySubunit(VirtualCurrency.Satoshi, 100000000, false)
 			)
 		);
