@@ -12,10 +12,12 @@ import com.mobnetic.coinguardian.model.market.BitTrex;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
 import com.mobnetic.coinguardian.model.market.BitcoinCentralNet;
+import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
 import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
+import com.mobnetic.coinguardian.model.market.Bleutrade;
 import com.mobnetic.coinguardian.model.market.BtcMarkets;
 import com.mobnetic.coinguardian.model.market.Btcchina;
 import com.mobnetic.coinguardian.model.market.Btce;
@@ -47,8 +49,10 @@ import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
+import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
+import com.mobnetic.coinguardian.model.market.Unisend;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
@@ -112,7 +116,10 @@ public class MarketsConfig {
 		addMarket(new BitBay());
 		addMarket(new CryptoAltex());
 		addMarket(new BtcMarkets());
-//		addMarket(new Bleutrade());
+		addMarket(new Bleutrade());
 		addMarket(new SwissCex());
+		addMarket(new ShareXcoin());
+		addMarket(new Unisend());
+		addMarket(new BitcoinVenezuela());
 	}
 }

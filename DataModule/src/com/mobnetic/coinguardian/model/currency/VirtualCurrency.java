@@ -184,6 +184,7 @@ public class VirtualCurrency {
 	public static final String MRC = "MRC";
 	public static final String MRS = "MRS";
 	public static final String MRY = "MRY";
+	public static final String MSC = "MSC";
 	public static final String MST = "MST";
 	public static final String MTC = "MTC";
 	public static final String MTS = "MTS";
