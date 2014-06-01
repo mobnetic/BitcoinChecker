@@ -50,7 +50,13 @@ public class TheRock extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return String.format(URL, fixCurrency(checkerInfo.getCurrencyBase()), fixCurrency(checkerInfo.getCurrencyCounter()));
+	}
+	
+	private String fixCurrency(String currency) {
+		if(VirtualCurrency.DOGE.equals(currency))
+			return VirtualCurrency.DOG;
+		return currency;
 	}
 	
 	@Override

@@ -86,6 +86,7 @@ public class VirtualCurrency {
 	public static final String DGC = "DGC";
 	public static final String DIME = "DIME";
 	public static final String DMD = "DMD";
+	public static final String DOG = "DOG";
 	public static final String DOGE = "DOGE";
 	public static final String DOPE = "DOPE";
 	public static final String DRK = "DRK";
