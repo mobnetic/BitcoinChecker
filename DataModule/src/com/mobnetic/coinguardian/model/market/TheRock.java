@@ -25,6 +25,7 @@ public class TheRock extends Market {
 				VirtualCurrency.XRP
 			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
+				VirtualCurrency.DOGE,
 				VirtualCurrency.XRP
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
@@ -34,6 +35,9 @@ public class TheRock extends Market {
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
 				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.PPC, new String[]{
+				Currency.EUR
 			});
 		CURRENCY_PAIRS.put(Currency.USD, new String[]{
 				VirtualCurrency.XRP
