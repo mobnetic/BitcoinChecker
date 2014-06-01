@@ -116,8 +116,8 @@ public class MarketsConfig {
 		addMarket(new BitBay());
 		addMarket(new CryptoAltex());
 		addMarket(new BtcMarkets());
-		addMarket(new Bleutrade());
 		addMarket(new SwissCex());
+		addMarket(new Bleutrade());
 		addMarket(new ShareXcoin());
 		addMarket(new Unisend());
 		addMarket(new BitcoinVenezuela());
