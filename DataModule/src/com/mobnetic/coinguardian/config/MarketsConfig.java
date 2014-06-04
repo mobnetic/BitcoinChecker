@@ -42,6 +42,7 @@ import com.mobnetic.coinguardian.model.market.FybSG;
 import com.mobnetic.coinguardian.model.market.Huobi;
 import com.mobnetic.coinguardian.model.market.Justcoin;
 import com.mobnetic.coinguardian.model.market.Koinim;
+import com.mobnetic.coinguardian.model.market.Korbit;
 import com.mobnetic.coinguardian.model.market.Kraken;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
@@ -121,5 +122,6 @@ public class MarketsConfig {
 		addMarket(new ShareXcoin());
 		addMarket(new Unisend());
 		addMarket(new BitcoinVenezuela());
+		addMarket(new Korbit());
 	}
 }
