@@ -29,6 +29,7 @@ import com.mobnetic.coinguardian.model.market.CexIO;
 import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
+import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
 import com.mobnetic.coinguardian.model.market.Coinse;
 import com.mobnetic.coinguardian.model.market.Comkort;
@@ -96,6 +97,7 @@ public class MarketsConfig {
 		addMarket(new McxNOW());
 		addMarket(new CryptoTrade());
 		addMarket(new MintPal());
+		addMarket(new CoinTree());
 		addMarket(new CoinJar());
 		addMarket(new Poloniex());
 		addMarket(new Winkdex());
