@@ -97,7 +97,6 @@ public class MarketsConfig {
 		addMarket(new McxNOW());
 		addMarket(new CryptoTrade());
 		addMarket(new MintPal());
-		addMarket(new CoinTree());
 		addMarket(new CoinJar());
 		addMarket(new Poloniex());
 		addMarket(new Winkdex());
@@ -125,5 +124,6 @@ public class MarketsConfig {
 		addMarket(new Unisend());
 		addMarket(new BitcoinVenezuela());
 		addMarket(new Korbit());
+		addMarket(new CoinTree());
 	}
 }
