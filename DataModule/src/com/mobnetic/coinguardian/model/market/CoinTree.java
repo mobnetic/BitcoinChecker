@@ -13,8 +13,8 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CoinTree extends Market {
 
-	private final static String NAME = "CoinTree.com.au";
-	private final static String TTS_NAME = "CoinTree.com.au";
+	private final static String NAME = "CoinTree";
+	private final static String TTS_NAME = "Coin Tree";
 	private final static String URL = "https://www.cointree.com.au/api/price/btc/aud";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
@@ -29,7 +29,7 @@ public class CoinTree extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return URL;
 	}
 	
 	@Override
