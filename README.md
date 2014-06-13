@@ -26,6 +26,8 @@ The whole tutorial described below refers to the [DataModule](https://github.com
 
 
 #Updating currency pairs on existing exchange:
+*__Note if particular exchange supports dynamic currency pairs syncing mechanism there is NO need to add pairs manually here.__ *  
+
 To update currency pairs on your favourite exchange, you have to find the corresponding exchange class file in the [com.mobnetic.coinguardian.model.market](https://github.com/mobnetic/BitcoinChecker/tree/master/DataModule/src/com/mobnetic/coinguardian/model/market) package.  
 In every exchange file there is a `CURRENCY_PAIRS` HashMap that contains a base currency (as a key) and a list of counter currencies. Every combination of base and counter currency represents one currency pair.
 ```java
@@ -79,10 +81,10 @@ public MarketExample() {
 }
 ```
 ##2. Providing currency pairs:
-You have to specify which currency pairs are supported by your new exchange. Description for this is done above, in the [Updating currency pairs on existing exchange](https://github.com/mobnetic/BitcoinCheckerDataModule#updating-currency-pairs-on-existing-exchange) section.  
-  
-Some exchanges provides a mechanism to fetch currency pairs dynamically, there is no need to specify them manually then.   Please see [this section](https://github.com/mobnetic/BitcoinChecker/blob/master/README.md#6-fetching-currency-pairs-directly-from-exchange).
+If given exchanges provides a mechanism to fetch currency pairs dynamically, there is no need to specify them manually then.   Please see [this section](https://github.com/mobnetic/BitcoinChecker/blob/master/README.md#6-fetching-currency-pairs-directly-from-exchange).
 
+Otherwise you have to specify which currency pairs are supported by your new exchange. Description for this is done above, in the [Updating currency pairs on existing exchange](https://github.com/mobnetic/BitcoinCheckerDataModule#updating-currency-pairs-on-existing-exchange) section.  
+  
 ##3. Providing API Url:
 The API Url is provided by the getUrl method. The simplest implementation is to just return the URL field. Sometimes, the Url requires some additional parameters (like currency names) - then you have to provide them using ```String.format()``` method.  
 See examples below:
