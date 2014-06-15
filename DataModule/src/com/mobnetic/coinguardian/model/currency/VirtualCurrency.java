@@ -272,6 +272,7 @@ public class VirtualCurrency {
 	public static final String SPA = "SPA";
 	public static final String SPT = "SPT";
 	public static final String SRC = "SRC";
+	public static final String START = "START";
 	public static final String STC = "STC";
 	public static final String STL = "STL";
 	public static final String STR = "STR";
