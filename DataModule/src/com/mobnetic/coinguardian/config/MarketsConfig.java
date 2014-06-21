@@ -36,6 +36,7 @@ import com.mobnetic.coinguardian.model.market.Comkort;
 import com.mobnetic.coinguardian.model.market.CryptoAltex;
 import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
+import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
@@ -125,5 +126,6 @@ public class MarketsConfig {
 		addMarket(new BitcoinVenezuela());
 		addMarket(new Korbit());
 		addMarket(new CoinTree());
+		addMarket(new Cryptonit());
 	}
 }
