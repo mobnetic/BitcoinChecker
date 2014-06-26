@@ -46,6 +46,7 @@ import com.mobnetic.coinguardian.model.market.Justcoin;
 import com.mobnetic.coinguardian.model.market.Koinim;
 import com.mobnetic.coinguardian.model.market.Korbit;
 import com.mobnetic.coinguardian.model.market.Kraken;
+import com.mobnetic.coinguardian.model.market.LakeBTC;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.MintPal;
@@ -127,5 +128,6 @@ public class MarketsConfig {
 		addMarket(new Korbit());
 		addMarket(new CoinTree());
 		addMarket(new Cryptonit());
+		addMarket(new LakeBTC());
 	}
 }
