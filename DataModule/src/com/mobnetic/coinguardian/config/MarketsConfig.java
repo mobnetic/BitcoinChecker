@@ -8,6 +8,7 @@ import com.mobnetic.coinguardian.model.market.Bit2c;
 import com.mobnetic.coinguardian.model.market.BitBay;
 import com.mobnetic.coinguardian.model.market.BitKonan;
 import com.mobnetic.coinguardian.model.market.BitMarketPL;
+import com.mobnetic.coinguardian.model.market.BitMaszyna;
 import com.mobnetic.coinguardian.model.market.BitTrex;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
@@ -129,5 +130,6 @@ public class MarketsConfig {
 		addMarket(new CoinTree());
 		addMarket(new Cryptonit());
 		addMarket(new LakeBTC());
+		addMarket(new BitMaszyna());
 	}
 }
