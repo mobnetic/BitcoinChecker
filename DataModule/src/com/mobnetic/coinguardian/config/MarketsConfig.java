@@ -6,6 +6,7 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.Anxpro;
 import com.mobnetic.coinguardian.model.market.Bit2c;
 import com.mobnetic.coinguardian.model.market.BitBay;
+import com.mobnetic.coinguardian.model.market.BitCore;
 import com.mobnetic.coinguardian.model.market.BitKonan;
 import com.mobnetic.coinguardian.model.market.BitMarketPL;
 import com.mobnetic.coinguardian.model.market.BitMaszyna;
@@ -131,5 +132,6 @@ public class MarketsConfig {
 		addMarket(new Cryptonit());
 		addMarket(new LakeBTC());
 		addMarket(new BitMaszyna());
+		addMarket(new BitCore());
 	}
 }
