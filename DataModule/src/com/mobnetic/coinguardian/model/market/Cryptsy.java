@@ -349,11 +349,10 @@ public class Cryptsy extends Market {
 	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONObject returnObject = jsonObject.getJSONObject("return");
-		final JSONObject marketsObject = returnObject;//returnObject.getJSONObject("markets");
-		final JSONArray marketNames = marketsObject.names();
+		final JSONArray marketNames = returnObject.names();
 		
 		for(int i=0; i<marketNames.length(); ++i) {
-			JSONObject marketObject = marketsObject.getJSONObject(marketNames.getString(i));
+			JSONObject marketObject = returnObject.getJSONObject(marketNames.getString(i));
 			pairs.add(new CurrencyPairInfo(
 					marketObject.getString("primarycode"),
 					marketObject.getString("secondarycode"),
