@@ -18,7 +18,7 @@ public class Cryptsy extends Market {
 	private final static String NAME = "Cryptsy";
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=%1$s";
-	private final static String URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=marketdatav2";
+	private final static String URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=orderdatav2";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	private final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>();
 	static {
@@ -349,7 +349,7 @@ public class Cryptsy extends Market {
 	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONObject returnObject = jsonObject.getJSONObject("return");
-		final JSONObject marketsObject = returnObject.getJSONObject("markets");
+		final JSONObject marketsObject = returnObject;//returnObject.getJSONObject("markets");
 		final JSONArray marketNames = marketsObject.names();
 		
 		for(int i=0; i<marketNames.length(); ++i) {
