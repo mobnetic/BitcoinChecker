@@ -63,6 +63,7 @@ import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
+import com.mobnetic.coinguardian.model.market.Zaydo;
 
 public class MarketsConfig {
 
@@ -133,5 +134,6 @@ public class MarketsConfig {
 		addMarket(new LakeBTC());
 		addMarket(new BitMaszyna());
 		addMarket(new BitCore());
+		addMarket(new Zaydo());
 	}
 }
