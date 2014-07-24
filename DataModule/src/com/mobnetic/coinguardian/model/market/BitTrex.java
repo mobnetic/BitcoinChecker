@@ -16,8 +16,8 @@ public class BitTrex extends Market {
 
 	private final static String NAME = "BitTrex";
 	private final static String TTS_NAME = "Bit Trex";
-	private final static String URL = "https://bittrex.com/api/v1/public/getticker?market=%1$s-%2$s";
-	private final static String URL_CURRENCY_PAIRS = "https://bittrex.com/api/v1/public/getmarkets";
+	private final static String URL = "https://bittrex.com/api/v1.1/public/getticker?market=%1$s-%2$s";
+	private final static String URL_CURRENCY_PAIRS = "https://bittrex.com/api/v1.1/public/getmarkets";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public BitTrex() {
