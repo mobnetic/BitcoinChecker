@@ -3,6 +3,7 @@ package com.mobnetic.coinguardian.config;
 import java.util.LinkedHashMap;
 
 import com.mobnetic.coinguardian.model.Market;
+import com.mobnetic.coinguardian.model.market.AllCoin;
 import com.mobnetic.coinguardian.model.market.Anxpro;
 import com.mobnetic.coinguardian.model.market.Bit2c;
 import com.mobnetic.coinguardian.model.market.BitBay;
@@ -135,5 +136,6 @@ public class MarketsConfig {
 		addMarket(new BitMaszyna());
 		addMarket(new BitCore());
 		addMarket(new Zaydo());
+		addMarket(new AllCoin());
 	}
 }
