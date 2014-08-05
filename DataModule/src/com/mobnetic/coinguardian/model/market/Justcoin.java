@@ -22,6 +22,7 @@ public class Justcoin extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.EUR,
 				VirtualCurrency.LTC,
+				VirtualCurrency.STR,
 				Currency.NOK,
 				Currency.USD,
 				VirtualCurrency.XRP
