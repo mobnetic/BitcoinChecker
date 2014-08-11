@@ -24,7 +24,8 @@ public class Justcoin extends Market {
 				VirtualCurrency.LTC,
 				Currency.NOK,
 				Currency.USD,
-				VirtualCurrency.XRP
+				VirtualCurrency.XRP,
+				VirtualCurrency.STR
 			});
 	}
 	
