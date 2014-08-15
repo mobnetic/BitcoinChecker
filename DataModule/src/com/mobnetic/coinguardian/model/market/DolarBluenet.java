@@ -14,7 +14,7 @@ public class DolarBluenet extends Market {
 
 	private final static String NAME = "Dolarblue.net";
 	private final static String TTS_NAME = "Dolar blue";
-	private final static String URL = "http://ws.geeklab.com.ar/dolar/get-dolar-json.php";
+	private final static String URL = "http://dolar.bitplanet.info/api.php";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(Currency.USD, new String[]{
@@ -33,8 +33,8 @@ public class DolarBluenet extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.ask = jsonObject.getDouble("blue");	
-		ticker.low = jsonObject.getDouble("libre");	//Dolar Oficial, no refleja el valor real de mercado
+		ticker.ask = jsonObject.getDouble("venta");	
+		ticker.bid = jsonObject.getDouble("compra");	
 		ticker.last = ticker.ask;
 	}
 }
