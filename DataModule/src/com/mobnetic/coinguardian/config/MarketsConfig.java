@@ -68,8 +68,6 @@ import com.mobnetic.coinguardian.model.market.Zaydo;
 import com.mobnetic.coinguardian.model.market.Ripio;
 import com.mobnetic.coinguardian.model.market.DolarBluenet;
 
-
-
 public class MarketsConfig {
 
 	public final static LinkedHashMap<String, Market> MARKETS = new LinkedHashMap<String, Market>();
@@ -143,6 +141,5 @@ public class MarketsConfig {
 		addMarket(new AllCoin());
 		addMarket(new Ripio());
 		addMarket(new DolarBluenet());
-
 	}
 }
