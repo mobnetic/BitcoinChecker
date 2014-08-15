@@ -65,6 +65,8 @@ import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
 import com.mobnetic.coinguardian.model.market.Zaydo;
+import com.mobnetic.coinguardian.model.market.Ripio;
+import com.mobnetic.coinguardian.model.market.DolarBluenet;
 
 public class MarketsConfig {
 
@@ -137,5 +139,7 @@ public class MarketsConfig {
 		addMarket(new BitCore());
 		addMarket(new Zaydo());
 		addMarket(new AllCoin());
+		addMarket(new Ripio());
+		addMarket(new DolarBluenet());
 	}
 }
