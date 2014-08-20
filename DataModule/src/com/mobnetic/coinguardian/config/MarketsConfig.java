@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.AllCoin;
 import com.mobnetic.coinguardian.model.market.Anxpro;
+import com.mobnetic.coinguardian.model.market.Basebit;
 import com.mobnetic.coinguardian.model.market.Bit2c;
 import com.mobnetic.coinguardian.model.market.BitBay;
 import com.mobnetic.coinguardian.model.market.BitCore;
@@ -41,6 +42,7 @@ import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
 import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
+import com.mobnetic.coinguardian.model.market.DolarBluenet;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
@@ -56,6 +58,7 @@ import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
+import com.mobnetic.coinguardian.model.market.Ripio;
 import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
@@ -65,8 +68,6 @@ import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
 import com.mobnetic.coinguardian.model.market.Zaydo;
-import com.mobnetic.coinguardian.model.market.Ripio;
-import com.mobnetic.coinguardian.model.market.DolarBluenet;
 
 public class MarketsConfig {
 
@@ -141,5 +142,6 @@ public class MarketsConfig {
 		addMarket(new AllCoin());
 		addMarket(new Ripio());
 		addMarket(new DolarBluenet());
+		addMarket(new Basebit());
 	}
 }
