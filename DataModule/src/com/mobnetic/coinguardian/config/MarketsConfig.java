@@ -36,6 +36,7 @@ import com.mobnetic.coinguardian.model.market.CoinMarketIO;
 import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
 import com.mobnetic.coinguardian.model.market.Coinse;
+import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.Comkort;
 import com.mobnetic.coinguardian.model.market.CryptoAltex;
 import com.mobnetic.coinguardian.model.market.CryptoRush;
@@ -143,5 +144,6 @@ public class MarketsConfig {
 		addMarket(new Ripio());
 		addMarket(new DolarBluenet());
 		addMarket(new Basebit());
+		addMarket(new CoinSwap());
 	}
 }
