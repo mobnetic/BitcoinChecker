@@ -211,7 +211,7 @@ protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonOb
 or
 protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs)
 ```
-While parsing currency pairs you need to create [CurrencyPairInfo](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/CurrencyPairInfo.java) and add it to `List<CurrencyPairInfo> pairs`. The last argument `pairId` is currently used only on Cryptsy, so just pass null on the exchanges.  
+While parsing currency pairs you need to create [CurrencyPairInfo](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/CurrencyPairInfo.java) and add it to `List<CurrencyPairInfo> pairs`. The last argument `pairId` is a unique pair id used on some exchanges. You can just pass `null` if there is no such thing on given exchange.  
 
 You can also use multiple requests to fetch currency pairs from exchange - it is described in section [Multiple requests while fetching currency pairs](https://github.com/mobnetic/BitcoinChecker/blob/master/README.md#multiple-requests-while-fetching-currency-pairs).
 
