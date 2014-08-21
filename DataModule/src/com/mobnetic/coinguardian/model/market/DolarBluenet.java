@@ -13,7 +13,7 @@ import com.mobnetic.coinguardian.model.currency.Currency;
 public class DolarBluenet extends Market {
 
 	private final static String NAME = "Dolarblue.net";
-	private final static String TTS_NAME = "Dolar blue";
+	private final static String TTS_NAME = "Dolar Blue";
 	private final static String URL = "http://dolar.bitplanet.info/api.php";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
@@ -28,7 +28,7 @@ public class DolarBluenet extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return URL;
 	}
 	
 	@Override
