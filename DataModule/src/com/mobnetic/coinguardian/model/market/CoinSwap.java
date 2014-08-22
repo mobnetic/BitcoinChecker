@@ -26,7 +26,7 @@ public class CoinSwap extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
+		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
 	}
 	
 	@Override
@@ -39,6 +39,9 @@ public class CoinSwap extends Market {
 		ticker.last = jsonObject.getDouble("lastprice");
 	}
 	
+	// ====================
+	// Get currency pairs
+	// ====================
 	public String getCurrencyPairsUrl(int requestId) {
 		return URL_CURRENCY_PAIRS;
 	}
@@ -51,7 +54,7 @@ public class CoinSwap extends Market {
 			pairs.add(new CurrencyPairInfo(
 				marketJsonObject.getString("symbol"),
 				marketJsonObject.getString("exchange"),
-				marketJsonObject.getString("symbol")));
+				null));
 		}
 	}
 }
