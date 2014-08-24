@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import android.text.TextUtils;
@@ -17,10 +15,9 @@ public class Bleutrade extends Market {
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://bleutrade.com/api/v1/24h_trade_pair_info?market=%1$s_%2$s";
 	private final static String URL_CURRENCY_PAIRS = "https://bleutrade.com/api/v1/trade_pairs";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public Bleutrade() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 	
 	@Override

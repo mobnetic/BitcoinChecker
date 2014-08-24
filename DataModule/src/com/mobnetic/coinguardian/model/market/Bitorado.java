@@ -1,16 +1,14 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardian.model.currency.Currency;
-import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Bitorado extends Market
 {
@@ -19,32 +17,8 @@ public class Bitorado extends Market
     private final static String URL = "https://www.bitorado.com/api/market/%1$s-%2$s/ticker";
     private final static String URL_CURRENCY_PAIRS = "https://www.bitorado.com/api/ticker";
     
-    private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-    static {
-        CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-                Currency.PLN
-            });
-        CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-                Currency.PLN,
-                VirtualCurrency.BTC
-            });
-        CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
-                Currency.PLN,
-                VirtualCurrency.BTC
-            });
-        CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{
-                VirtualCurrency.BTC
-            });
-        CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
-                VirtualCurrency.BTC
-            });
-        CURRENCY_PAIRS.put(VirtualCurrency.PLC, new String[]{
-                VirtualCurrency.BTC
-            });
-    }
-
     public Bitorado() {
-        super(NAME, TTS_NAME, CURRENCY_PAIRS);
+        super(NAME, TTS_NAME, null);
     }
 
     @Override

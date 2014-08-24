@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -11,7 +9,6 @@ import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CoinDesk extends Market {
@@ -20,17 +17,9 @@ public class CoinDesk extends Market {
 	private final static String TTS_NAME = "Coin Desk";
 	private final static String URL = "https://api.coindesk.com/v1/bpi/currentprice.json";
 	private final static String URL_CURRENCY_PAIRS = URL;
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.USD,
-				Currency.GBP,
-				Currency.EUR
-			});
-	}
 	
 	public CoinDesk() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

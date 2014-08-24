@@ -1,8 +1,6 @@
 package com.mobnetic.coinguardian.model.market;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -12,8 +10,6 @@ import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardian.model.currency.Currency;
-import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class VaultOfSatoshi extends Market {
 
@@ -21,33 +17,9 @@ public class VaultOfSatoshi extends Market {
 	private final static String TTS_NAME = "Vault Of Satoshi";
 	private final static String URL = "https://api.vaultofsatoshi.com/public/ticker?order_currency=%1$s&payment_currency=%2$s";
 	private final static String URL_CURRENCY_PAIRS = "https://api.vaultofsatoshi.com/public/currency";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.BC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.BIL, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.CGB, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.DGC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.EMC2, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.FLT, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.MINT, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.NOBL, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.NVC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.PPC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.QRK, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.VTC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.XPM, new String[]{ Currency.CAD, Currency.USD });
-		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{ Currency.CAD, Currency.USD });
-	}
 	
 	public VaultOfSatoshi() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 	
 	@Override

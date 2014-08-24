@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -18,10 +16,9 @@ public class Basebit extends Market {
 	private final static String TTS_NAME = "Base Bit";
 	private final static String URL = "http://www.basebit.com.br/quote-%1$s";
 	private final static String URL_CURRENCY_PAIRS = "http://www.basebit.com.br/listpairs";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public Basebit() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

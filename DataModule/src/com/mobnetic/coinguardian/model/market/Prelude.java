@@ -1,20 +1,17 @@
 package com.mobnetic.coinguardian.model.market;
 
+import java.text.NumberFormat;
+import java.util.List;
+import java.util.Locale;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
-import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
 
 public class Prelude extends Market {
 
@@ -26,80 +23,8 @@ public class Prelude extends Market {
 	private final static String URL_CURRENCY_PAIRS_BTC = "https://api.prelude.io/pairings/btc";
 	private final static String URL_CURRENCY_PAIRS_USD = "https://api.prelude.io/pairings/usd";
 	
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	static {
-		CURRENCY_PAIRS.put(VirtualCurrency._888, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.BC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.DGC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.EMC2, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.MAX, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.MEOW, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.MINT, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.PPC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.QRK, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.RDD, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.VTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-		CURRENCY_PAIRS.put(VirtualCurrency.ZET, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-		});
-	}
-
 	public Prelude() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

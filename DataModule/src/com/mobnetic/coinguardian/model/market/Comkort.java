@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -18,10 +16,9 @@ public class Comkort extends Market {
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://api.comkort.com/v1/public/market/summary?market_alias=%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://api.comkort.com/v1/public/market/list";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public Comkort() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,8 +10,6 @@ import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
-import com.mobnetic.coinguardian.model.currency.Currency;
-import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CCex extends Market {
 
@@ -21,199 +17,9 @@ public class CCex extends Market {
 	public final static String TTS_NAME = "C-Cex";
 	public final static String URL = "https://c-cex.com/t/%1$s-%2$s.json";
 	public final static String URL_CURRENCY_PAIRS = "https://c-cex.com/t/pairs.json";
-	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	static {
-		CURRENCY_PAIRS.put(VirtualCurrency._66, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.ALB, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.ANT, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.BLC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.BTQ, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.COIN, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.CSC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DGC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DUCK, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DVC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.FRK, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.FRY, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.FSC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.GRC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.IFC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.IQD, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.IXC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.KRN, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LDC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LEAF, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MIM, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MINT, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PCC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PLC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PMC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.PPC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.Q2C, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.QRK, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.RUBY, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.STC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.SYN, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.TES, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.TTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.UNI, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.USDE, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.UTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.VTC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.ZED, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
-	}
 	
 	public CCex() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

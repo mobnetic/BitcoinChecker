@@ -1,8 +1,6 @@
 package com.mobnetic.coinguardian.model.market;
 
 import java.io.StringReader;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -29,26 +27,9 @@ public class McxNOW extends Market {
 	private final static String TTS_NAME = "MCX now";
 	private final static String URL = "https://mcxnow.com/orders?cur=%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://mcxnow.com/current";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.CL, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.DVC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.MAX, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.MCX, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.MNC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.MXB, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.PPC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.SC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.START, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{ VirtualCurrency.BTC });
-		CURRENCY_PAIRS.put(VirtualCurrency.XPM, new String[]{ VirtualCurrency.BTC });
-	}
 	
 	public McxNOW() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

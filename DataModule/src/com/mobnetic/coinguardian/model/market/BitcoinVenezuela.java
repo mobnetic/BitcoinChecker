@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -19,10 +17,9 @@ public class BitcoinVenezuela extends Market {
 	private final static String TTS_NAME = "Bitcoin Venezuela";
 	private final static String URL = "http://api.bitcoinvenezuela.com/?html=no&currency=%1$s&amount=1&to=%2$s";
 	private final static String URL_CURRENCY_PAIRS = "http://api.bitcoinvenezuela.com/";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public BitcoinVenezuela() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

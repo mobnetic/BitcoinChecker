@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -19,10 +17,9 @@ public class LakeBTC extends Market {
 	private final static String TTS_NAME = "Lake BTC";
 	private final static String URL = "https://www.lakebtc.com/api_v1/ticker";
 	private final static String URL_CURRENCY_PAIRS = URL;
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public LakeBTC() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override

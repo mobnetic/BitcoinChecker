@@ -1,7 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -21,10 +19,9 @@ public class SwissCex extends Market {
 	private final static String URL = "http://api.swisscex.com/quote/%1$s/%2$s?apiKey=%3$s";
 	private final static String URL_CURRENCY_PAIRS = "http://api.swisscex.com/quotes?apiKey=%1$s";
 	public static String API_KEY = "61u3kk4h2una357envden8cuk6";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	public SwissCex() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 	
 	@Override
