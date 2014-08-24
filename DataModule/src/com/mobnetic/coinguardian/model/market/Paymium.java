@@ -3,6 +3,7 @@ package com.mobnetic.coinguardian.model.market;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
@@ -15,7 +16,7 @@ public class Paymium extends Market {
 
 	private final static String NAME = "Paymium";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://paymium.com/api/v1/data/eur/ticker";
+	private final static String URL = "https://paymium.com/api/v1/data/eur2/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -42,4 +43,16 @@ public class Paymium extends Market {
 		ticker.last = jsonObject.getDouble("price");
 	}
 
+	@Override
+	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo) throws Exception {
+		final StringBuilder stringBuilder = new StringBuilder();
+		final JSONArray errorsArray = jsonObject.getJSONArray("errors");
+		for(int i=0; i<errorsArray.length(); ++i) {
+			if(stringBuilder.length()!=0) {
+				stringBuilder.append("\n");
+			}
+			stringBuilder.append(errorsArray.getString(i));
+		}
+		return stringBuilder.toString();
+	}
 }
