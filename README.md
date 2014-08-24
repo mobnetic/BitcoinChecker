@@ -1,4 +1,4 @@
-__Bitcoin Checker__ is a FREE app to track the most recent prices of your favourite currency pairs (on over 60 supported exchanges) in many customizable ways (such as rich notifications, TTS voice announcements, Home and Lockscreen widget or multiple alarms).
+__Bitcoin Checker__ is a FREE app to track the most recent prices of your favourite currency pairs (on over 65 supported exchanges) in many customizable ways (such as rich notifications, TTS voice announcements, Home and Lockscreen widget or multiple alarms).
 
 ###Hello Bitcoin Checker users!  
 As you know, the number of virtual currencies is increasing very fast. Currency pairs set on existing exchanges change almost every day and there is also a need to add newer and newer exchanges over time.
@@ -196,9 +196,15 @@ protected String parseError(int requestId, String responseString, CheckerInfo ch
 ##6. Fetching currency pairs directly from exchange:
 If there is any API (or other way) to obtain currency pairs directly from exchange (without need to update them manually) you should implement currency pairs fetching functionality instead of providing a static set of currency pairs.
 See example on  [Basebit](https://github.com/mobnetic/BitcoinChecker/blob/master/DataModule/src/com/mobnetic/coinguardian/model/market/Basebit.java).  
-First thing is to provide provide url:
+Because there are no static currency pairs defined - you should pass a `null` as a last argument in the constructor and do NOT initialize `CURRENCY_PAIRS` at all. You need to provide the url to fetch currency pairs instead:
 ```java
-URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=marketdatav2";
+private final static String URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=marketdatav2";
+
+public SampleExchange() {
+	super(NAME, TTS_NAME, null);	// <- null intead of CURRENCY_PAIRS map
+}
+
+[...]
 
 @Override
 public String getCurrencyPairsUrl(int requestId) {
