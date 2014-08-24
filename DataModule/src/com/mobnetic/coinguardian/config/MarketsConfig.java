@@ -15,7 +15,6 @@ import com.mobnetic.coinguardian.model.market.BitMaszyna;
 import com.mobnetic.coinguardian.model.market.BitTrex;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
-import com.mobnetic.coinguardian.model.market.BitcoinCentralNet;
 import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
@@ -33,10 +32,10 @@ import com.mobnetic.coinguardian.model.market.CexIO;
 import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
+import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
 import com.mobnetic.coinguardian.model.market.Coinse;
-import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.Comkort;
 import com.mobnetic.coinguardian.model.market.CryptoAltex;
 import com.mobnetic.coinguardian.model.market.CryptoRush;
@@ -57,6 +56,7 @@ import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
+import com.mobnetic.coinguardian.model.market.Paymium;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
 import com.mobnetic.coinguardian.model.market.Ripio;
@@ -79,7 +79,6 @@ public class MarketsConfig {
 	
 	static {
 		addMarket(new Bitstamp());
-//		addMarket(new Mtgox());
 		addMarket(new Btcchina());
 		addMarket(new Btce());
 		addMarket(new Bitcurex());
@@ -92,7 +91,6 @@ public class MarketsConfig {
 		addMarket(new Vircurex());
 		addMarket(new Fxbtc());
 		addMarket(new Bter());
-		addMarket(new BitcoinCentralNet());
 		addMarket(new Justcoin());
 		addMarket(new Btcturk());
 		addMarket(new Coinse());
@@ -145,5 +143,6 @@ public class MarketsConfig {
 		addMarket(new DolarBluenet());
 		addMarket(new Basebit());
 		addMarket(new CoinSwap());
+		addMarket(new Paymium());
 	}
 }
