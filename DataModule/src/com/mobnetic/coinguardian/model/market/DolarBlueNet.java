@@ -10,9 +10,9 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 
-public class DolarBluenet extends Market {
+public class DolarBlueNet extends Market {
 
-	private final static String NAME = "Dolarblue.net";
+	private final static String NAME = "DolarBlue.net";
 	private final static String TTS_NAME = "Dolar Blue";
 	private final static String URL = "http://dolar.bitplanet.info/api.php";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
@@ -22,7 +22,7 @@ public class DolarBluenet extends Market {
 			});
 	}
 	
-	public DolarBluenet() {
+	public DolarBlueNet() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
 

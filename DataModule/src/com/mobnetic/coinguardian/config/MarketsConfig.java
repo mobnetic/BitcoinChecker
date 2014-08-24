@@ -42,7 +42,7 @@ import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
 import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
-import com.mobnetic.coinguardian.model.market.DolarBluenet;
+import com.mobnetic.coinguardian.model.market.DolarBlueNet;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
@@ -140,7 +140,7 @@ public class MarketsConfig {
 		addMarket(new Zaydo());
 		addMarket(new AllCoin());
 		addMarket(new Ripio());
-		addMarket(new DolarBluenet());
+		addMarket(new DolarBlueNet());
 		addMarket(new Basebit());
 		addMarket(new CoinSwap());
 		addMarket(new Paymium());
