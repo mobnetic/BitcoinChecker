@@ -19,6 +19,7 @@ import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
 import com.mobnetic.coinguardian.model.market.Bitorado;
+import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
 import com.mobnetic.coinguardian.model.market.Bleutrade;
 import com.mobnetic.coinguardian.model.market.BtcMarkets;
@@ -144,5 +145,6 @@ public class MarketsConfig {
 		addMarket(new Basebit());
 		addMarket(new CoinSwap());
 		addMarket(new Paymium());
+		addMarket(new Bitso());
 	}
 }
