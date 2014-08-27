@@ -19,6 +19,7 @@ public class Cryptsy extends Market {
 	private final static String URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=orderdatav2";
 	private final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>(151);
 	static {
+		// Kept for backward compatibility
 		CURRENCY_PAIRS_IDS.put("42_BTC", 141);
 		CURRENCY_PAIRS_IDS.put("ADT_LTC", 94);
 		CURRENCY_PAIRS_IDS.put("ADT_XPM", 113);
@@ -201,8 +202,9 @@ public class Cryptsy extends Market {
 	
 	@Override
 	protected String parseError(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
-		if(checkerInfo.getCurrencyPairId()==null)
+		if(checkerInfo.getCurrencyPairId()==null) {
 			return "Perform sync and re-add this Checker";
+		}
 		return super.parseError(requestId, responseString, checkerInfo);
 	}
 	
