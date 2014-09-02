@@ -41,6 +41,7 @@ import com.mobnetic.coinguardian.model.market.Comkort;
 import com.mobnetic.coinguardian.model.market.CryptoAltex;
 import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
+import com.mobnetic.coinguardian.model.market.Cryptoine;
 import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.DolarBlueNet;
@@ -146,5 +147,6 @@ public class MarketsConfig {
 		addMarket(new CoinSwap());
 		addMarket(new Paymium());
 		addMarket(new Bitso());
+		addMarket(new Cryptoine());
 	}
 }
