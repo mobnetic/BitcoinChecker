@@ -15,6 +15,7 @@ import com.mobnetic.coinguardian.model.market.BitMaszyna;
 import com.mobnetic.coinguardian.model.market.BitTrex;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
+import com.mobnetic.coinguardian.model.market.BitcoinToYou;
 import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
@@ -148,5 +149,6 @@ public class MarketsConfig {
 		addMarket(new Paymium());
 		addMarket(new Bitso());
 		addMarket(new Cryptoine());
+		addMarket(new BitcoinToYou());
 	}
 }
