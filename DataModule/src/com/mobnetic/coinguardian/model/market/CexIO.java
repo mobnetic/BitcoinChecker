@@ -17,43 +17,61 @@ public class CexIO extends Market {
 	private final static String URL = "https://cex.io/api/ticker/%1$s/%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.USD, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.GHS,
-				VirtualCurrency.LTC,
-				VirtualCurrency.DOGE,
-				VirtualCurrency.DRK
-			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				VirtualCurrency.GHS,
-				VirtualCurrency.LTC,
-				VirtualCurrency.DOGE,
-				VirtualCurrency.DRK,
-				VirtualCurrency.NMC,
-				VirtualCurrency.IXC,
-				VirtualCurrency.POT,
-				VirtualCurrency.ANC,
-				VirtualCurrency.MEC,
-				VirtualCurrency.WDC,
-				VirtualCurrency.FTC,
-				VirtualCurrency.DGB,
-				VirtualCurrency.USDE,
-				VirtualCurrency.MYR,
-				VirtualCurrency.AUR
+				Currency.USD,
+				Currency.EUR
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.GHS, new String[]{
+				Currency.USD,
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				VirtualCurrency.GHS,
-				VirtualCurrency.DOGE,
-				VirtualCurrency.DRK,
-				VirtualCurrency.MEC,
-				VirtualCurrency.WDC,
-				VirtualCurrency.ANC,
-				VirtualCurrency.FTC
+				Currency.USD,
+				Currency.EUR,
+				VirtualCurrency.BTC
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.EUR, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
+				Currency.USD,
 				VirtualCurrency.BTC,
 				VirtualCurrency.LTC,
-				VirtualCurrency.DOGE
+				Currency.EUR
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.DRK, new String[]{
+				Currency.USD,
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});	
+		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.IXC, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.POT, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ANC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.MEC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.USDE, new String[]{
+				VirtualCurrency.BTC
 			});
 	}
 	
