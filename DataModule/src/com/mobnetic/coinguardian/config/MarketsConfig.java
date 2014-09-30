@@ -18,6 +18,7 @@ import com.mobnetic.coinguardian.model.market.BitcoinAverage;
 import com.mobnetic.coinguardian.model.market.BitcoinToYou;
 import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
+import com.mobnetic.coinguardian.model.market.BitexLa;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
 import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitso;
@@ -150,5 +151,6 @@ public class MarketsConfig {
 		addMarket(new Bitso());
 		addMarket(new Cryptoine());
 		addMarket(new BitcoinToYou());
+		addMarket(new BitexLa());
 	}
 }
