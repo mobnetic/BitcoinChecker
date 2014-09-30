@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CexIO extends Market {
@@ -17,18 +18,18 @@ public class CexIO extends Market {
 	private final static String URL = "https://cex.io/api/ticker/%1$s/%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
+		CURRENCY_PAIRS.put(VirtualCurrency.ANC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
+				VirtualCurrency.BTC
+			});	
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD,
 				Currency.EUR
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.GHS, new String[]{
-				Currency.USD,
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				Currency.USD,
-				Currency.EUR,
+		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
@@ -41,44 +42,44 @@ public class CexIO extends Market {
 				Currency.USD,
 				VirtualCurrency.BTC,
 				VirtualCurrency.LTC
-			});	
-		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.IXC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.POT, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.ANC, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MEC, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{
-				VirtualCurrency.BTC,
-				VirtualCurrency.LTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{
 				VirtualCurrency.BTC,
 				VirtualCurrency.LTC
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DGB, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.GHS, new String[]{
+				Currency.USD,
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.IXC, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				Currency.USD,
+				Currency.EUR,
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.MEC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.MYR, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.NMC, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.POT, new String[]{
 				VirtualCurrency.BTC
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.USDE, new String[]{
 				VirtualCurrency.BTC
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.MYR, new String[]{
-				VirtualCurrency.BTC
+		CURRENCY_PAIRS.put(VirtualCurrency.WDC, new String[]{
+				VirtualCurrency.BTC,
+				VirtualCurrency.LTC
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
-				VirtualCurrency.BTC
-			});			
 	}
 	
 	public CexIO() {
@@ -92,11 +93,12 @@ public class CexIO extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		
-		if(jsonObject.has("bid"))
+		if (jsonObject.has("bid")) {
 			ticker.bid = jsonObject.getDouble("bid");
-		if(jsonObject.has("ask"))
+		}
+		if (jsonObject.has("ask")) {
 			ticker.ask = jsonObject.getDouble("ask");
+		}
 		ticker.vol = jsonObject.getDouble("volume");
 		ticker.high = jsonObject.getDouble("high");
 		ticker.low = jsonObject.getDouble("low");
