@@ -73,6 +73,12 @@ public class CexIO extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.USDE, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.MYR, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.AUR, new String[]{
+				VirtualCurrency.BTC
+			});			
 	}
 	
 	public CexIO() {
