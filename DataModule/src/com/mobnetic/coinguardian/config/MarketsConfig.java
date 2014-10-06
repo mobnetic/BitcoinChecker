@@ -51,6 +51,7 @@ import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
 import com.mobnetic.coinguardian.model.market.Huobi;
+import com.mobnetic.coinguardian.model.market.ItBit;
 import com.mobnetic.coinguardian.model.market.Justcoin;
 import com.mobnetic.coinguardian.model.market.Koinim;
 import com.mobnetic.coinguardian.model.market.Korbit;
@@ -152,5 +153,6 @@ public class MarketsConfig {
 		addMarket(new Cryptoine());
 		addMarket(new BitcoinToYou());
 		addMarket(new BitexLa());
+		addMarket(new ItBit());
 	}
 }
