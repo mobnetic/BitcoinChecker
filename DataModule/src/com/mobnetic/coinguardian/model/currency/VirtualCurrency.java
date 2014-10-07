@@ -288,6 +288,7 @@ public class VirtualCurrency {
 	public static final String TES = "TES";
 	public static final String TFC = "TFC";
 	public static final String TGC = "TGC";
+	public static final String TH1 = "TH1";
 	public static final String THOR = "THOR";
 	public static final String TIPS = "TIPS";
 	public static final String TIX = "TIX";

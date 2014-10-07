@@ -30,6 +30,9 @@ public class Bitfinex extends Market {
 				Currency.USD,
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.TH1, new String[]{
+				VirtualCurrency.BTC
+			});
 	}
 	
 	public Bitfinex() {
