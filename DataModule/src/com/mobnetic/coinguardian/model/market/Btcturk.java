@@ -35,12 +35,12 @@ public class Btcturk extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = jsonObject.getDouble("bid");
-		ticker.ask = jsonObject.getDouble("ask");
-		ticker.vol = jsonObject.getDouble("volume");
-		ticker.high = jsonObject.getDouble("high");
-		ticker.low = jsonObject.getDouble("low");
-		ticker.last = jsonObject.getDouble("last");
-		ticker.timestamp = (long) (jsonObject.getDouble("timestamp")*TimeUtils.MILLIS_IN_SECOND);
+		ticker.bid = jsonObject.getDouble("Bid");
+		ticker.ask = jsonObject.getDouble("Ask");
+		ticker.vol = jsonObject.getDouble("Volume");
+		ticker.high = jsonObject.getDouble("High");
+		ticker.low = jsonObject.getDouble("Low");
+		ticker.last = jsonObject.getDouble("Last");
+		ticker.timestamp = (long) (jsonObject.getDouble("Timestamp")*TimeUtils.MILLIS_IN_SECOND);
 	}
 }
