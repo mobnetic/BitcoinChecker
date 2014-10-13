@@ -50,5 +50,6 @@ public class CurrencySymbols {
 		CURRENCY_SYMBOLS.put(Currency.BIF, "Fr");
 		CURRENCY_SYMBOLS.put(Currency.TRY, "TL");
 		CURRENCY_SYMBOLS.put(Currency.ZAR, "R");
+		CURRENCY_SYMBOLS.put(Currency.IDR, "Rp");
 	}
 }
