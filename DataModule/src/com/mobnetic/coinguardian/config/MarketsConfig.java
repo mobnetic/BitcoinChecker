@@ -74,6 +74,7 @@ import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
 import com.mobnetic.coinguardian.model.market.Zaydo;
+import com.mobnetic.coinguardian.model.market.BitcoinVIP;
 
 public class MarketsConfig {
 
@@ -154,5 +155,6 @@ public class MarketsConfig {
 		addMarket(new BitcoinToYou());
 		addMarket(new BitexLa());
 		addMarket(new ItBit());
+		addMarket(new BitcoinVIP());
 	}
 }
