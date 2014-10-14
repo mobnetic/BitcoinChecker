@@ -15,6 +15,7 @@ import com.mobnetic.coinguardian.model.market.BitMaszyna;
 import com.mobnetic.coinguardian.model.market.BitTrex;
 import com.mobnetic.coinguardian.model.market.BitX;
 import com.mobnetic.coinguardian.model.market.BitcoinAverage;
+import com.mobnetic.coinguardian.model.market.BitcoinCoId;
 import com.mobnetic.coinguardian.model.market.BitcoinToYou;
 import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
@@ -154,5 +155,6 @@ public class MarketsConfig {
 		addMarket(new BitcoinToYou());
 		addMarket(new BitexLa());
 		addMarket(new ItBit());
+		addMarket(new BitcoinCoId());
 	}
 }
