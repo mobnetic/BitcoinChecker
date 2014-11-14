@@ -20,6 +20,12 @@ public class BitcoinCoId extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.IDR
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
+				VirtualCurrency.BTC
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				VirtualCurrency.BTC
+			});
 	}
 	
 	public BitcoinCoId() {
