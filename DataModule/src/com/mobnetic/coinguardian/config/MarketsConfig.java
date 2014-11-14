@@ -51,6 +51,7 @@ import com.mobnetic.coinguardian.model.market.DolarBlueNet;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
+import com.mobnetic.coinguardian.model.market.HitBtc;
 import com.mobnetic.coinguardian.model.market.Huobi;
 import com.mobnetic.coinguardian.model.market.ItBit;
 import com.mobnetic.coinguardian.model.market.Justcoin;
@@ -156,5 +157,6 @@ public class MarketsConfig {
 		addMarket(new BitexLa());
 		addMarket(new ItBit());
 		addMarket(new BitcoinCoId());
+		addMarket(new HitBtc());
 	}
 }
