@@ -230,6 +230,19 @@ public class Cryptsy extends Market {
 	}
 	
 	@Override
+	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
+		try {
+			// try to reduce JSON response before parsing
+			responseString = responseString
+				.replaceAll(",\"sellorders\":\\[[{a-z0-9\":.}, ]*\\]", "")
+				.replaceAll(",\"buyorders\":\\[[{a-z0-9\":.}, ]*\\]", "");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		super.parseCurrencyPairs(requestId, responseString, pairs);
+	}
+	
+	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONObject returnObject = jsonObject.getJSONObject("return");
 		final JSONArray marketNames = returnObject.names();

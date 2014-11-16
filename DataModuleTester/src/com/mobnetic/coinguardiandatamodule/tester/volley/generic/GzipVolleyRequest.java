@@ -11,6 +11,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Cache.Entry;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -115,7 +116,10 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
                 responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             }
             this.responseString = responseString;
-			return Response.success(parseNetworkResponse(response.headers, responseString), HttpHeaderParser.parseCacheHeaders(response));
+            final Map<String, String> headers = response.headers;
+            final Entry cacheHeaders = HttpHeaderParser.parseCacheHeaders(response);
+            response = null;
+			return Response.success(parseNetworkResponse(headers, responseString), cacheHeaders);
 		} catch (CheckerErrorParsedError checkerErrorParsedError) {
 			return Response.error(checkerErrorParsedError);
 		} catch (Exception e) {
