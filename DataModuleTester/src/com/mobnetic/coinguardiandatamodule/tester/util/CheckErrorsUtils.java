@@ -18,6 +18,8 @@ import com.mobnetic.coinguardiandatamodule.tester.R;
 
 public class CheckErrorsUtils {
 	
+	private final static int RAW_RESPONSE_CHARS_LIMIT = 5000;
+	
 	public final static String parseVolleyErrorMsg(Context context, VolleyError error) {
 		if(error instanceof NetworkError)
 			return context.getString(R.string.check_error_network);
@@ -62,7 +64,11 @@ public class CheckErrorsUtils {
 		}
 		if(rawResponse!=null){
 			ssb.append("\n\n");
-			ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_response)+"<br\\><small>"+rawResponse+"</small>"));
+			String limitedRawResponse = rawResponse; 
+			if(rawResponse.length() > RAW_RESPONSE_CHARS_LIMIT) {
+				limitedRawResponse = rawResponse.substring(0, RAW_RESPONSE_CHARS_LIMIT)+"...";
+			}
+			ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_response)+"<br\\><small>"+limitedRawResponse+"</small>"));
 		}
 		if(exception!=null){
 			ssb.append("\n\n");
