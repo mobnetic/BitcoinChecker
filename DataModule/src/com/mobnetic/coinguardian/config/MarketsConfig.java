@@ -33,6 +33,7 @@ import com.mobnetic.coinguardian.model.market.Bter;
 import com.mobnetic.coinguardian.model.market.CCex;
 import com.mobnetic.coinguardian.model.market.Campbx;
 import com.mobnetic.coinguardian.model.market.CexIO;
+import com.mobnetic.coinguardian.model.market.CleverCoin;
 import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
@@ -158,5 +159,6 @@ public class MarketsConfig {
 		addMarket(new ItBit());
 		addMarket(new BitcoinCoId());
 		addMarket(new HitBtc());
+		addMarket(new CleverCoin());
 	}
 }
