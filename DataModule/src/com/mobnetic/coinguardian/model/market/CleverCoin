@@ -12,7 +12,7 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class CleverCoin extends Market {
 
-	private final static String NAME = “Clevercoin”;
+	private final static String NAME = “CleverCoin”;
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://api.clevercoin.com/v1/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
