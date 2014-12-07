@@ -13,12 +13,15 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitX extends Market {
 
-	private final static String NAME = "BitX";
+	private final static String NAME = "BitX.co";
 	private final static String TTS_NAME = "Bit X";
-	private final static String URL = "https://bitx.co.za/api/1/ticker?pair=%1$s%2$s";
+	private final static String URL = "https://api.mybitx.com/api/1/ticker?pair=%1$s%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+				Currency.NAD,
+				Currency.KES,
+				Currency.MYR,
 				Currency.ZAR
 			});
 	}
@@ -44,10 +47,10 @@ public class BitX extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.last = jsonObject.getDouble("last_trade");		
 		ticker.bid = jsonObject.getDouble("bid");
 		ticker.ask = jsonObject.getDouble("ask");
 		ticker.vol = jsonObject.getDouble("rolling_24_hour_volume");		
+		ticker.last = jsonObject.getDouble("last_trade");		
 		ticker.timestamp = jsonObject.getLong("timestamp");
 	}
 }
