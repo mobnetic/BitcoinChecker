@@ -321,6 +321,7 @@ public class VirtualCurrency {
 	public static final String XJO = "XJO";
 	public static final String XNC = "XNC";
 	public static final String XPM = "XPM";
+	public static final String XPY = "XPY";
 	public static final String XRP = "XRP";
 	public static final String XVN = "XVN"; 	// VEN
 	public static final String XXL = "XXL";

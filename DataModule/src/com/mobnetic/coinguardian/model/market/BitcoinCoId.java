@@ -26,6 +26,9 @@ public class BitcoinCoId extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.XPY, new String[]{
+				VirtualCurrency.BTC
+			});
 	}
 	
 	public BitcoinCoId() {
