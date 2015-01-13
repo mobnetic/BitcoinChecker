@@ -13,9 +13,9 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitBay extends Market {
 
-	private final static String NAME = "BitBay.pl";
+	private final static String NAME = "BitBay.net";
 	private final static String TTS_NAME = "Bit Bay";
-	private final static String URL = "https://market.bitbay.pl/API/Public/%1$s%2$s/ticker.json";
+	private final static String URL = "https://bitbay.net/API/Public/%1$s%2$s/ticker.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
