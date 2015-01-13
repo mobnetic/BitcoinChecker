@@ -49,6 +49,7 @@ import com.mobnetic.coinguardian.model.market.Cryptoine;
 import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.DolarBlueNet;
+import com.mobnetic.coinguardian.model.market.FoxBit;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
@@ -131,7 +132,6 @@ public class MarketsConfig {
 		addMarket(new BitTrex());
 		addMarket(new Comkort());
 		addMarket(new Bit2c());
-		addMarket(new BitBay());
 		addMarket(new CryptoAltex());
 		addMarket(new BtcMarkets());
 		addMarket(new SwissCex());
@@ -160,5 +160,7 @@ public class MarketsConfig {
 		addMarket(new BitcoinCoId());
 		addMarket(new HitBtc());
 		addMarket(new CleverCoin());
+		addMarket(new BitBay());
+		addMarket(new FoxBit());
 	}
 }
