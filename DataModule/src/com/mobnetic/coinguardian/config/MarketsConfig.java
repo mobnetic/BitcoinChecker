@@ -68,6 +68,7 @@ import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Paymium;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
+import com.mobnetic.coinguardian.model.market.QuadrigaCX;
 import com.mobnetic.coinguardian.model.market.Ripio;
 import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
@@ -162,5 +163,6 @@ public class MarketsConfig {
 		addMarket(new CleverCoin());
 		addMarket(new BitBay());
 		addMarket(new FoxBit());
+		addMarket(new QuadrigaCX());
 	}
 }
