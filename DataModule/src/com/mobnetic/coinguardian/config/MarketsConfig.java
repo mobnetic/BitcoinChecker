@@ -21,6 +21,7 @@ import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.BitexLa;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
+import com.mobnetic.coinguardian.model.market.Bitmarket24PL;
 import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
@@ -166,5 +167,6 @@ public class MarketsConfig {
 		addMarket(new FoxBit());
 		addMarket(new QuadrigaCX());
 		addMarket(new CoinMateIO());
+		addMarket(new Bitmarket24PL());
 	}
 }
