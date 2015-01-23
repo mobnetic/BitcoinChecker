@@ -11,10 +11,10 @@ import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
-public class Bitmarket24PL extends Market {
+public class BitMarket24PL extends Market {
 
-	private final static String NAME = "Bitmarket24.pl";
-	private final static String TTS_NAME = "Bit market 24";
+	private final static String NAME = "BitMarket24.pl";
+	private final static String TTS_NAME = "Bit Market 24";
 	private final static String URL = "https://bitmarket24.pl/api/%1$s_%2$s/status.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
@@ -27,7 +27,7 @@ public class Bitmarket24PL extends Market {
 			});
 	}
 	
-	public Bitmarket24PL() {
+	public BitMarket24PL() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
 	
