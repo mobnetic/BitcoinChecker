@@ -37,6 +37,7 @@ import com.mobnetic.coinguardian.model.market.CleverCoin;
 import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
+import com.mobnetic.coinguardian.model.market.CoinMateIO;
 import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
@@ -164,5 +165,6 @@ public class MarketsConfig {
 		addMarket(new BitBay());
 		addMarket(new FoxBit());
 		addMarket(new QuadrigaCX());
+		addMarket(new CoinMateIO());
 	}
 }
