@@ -31,6 +31,7 @@ import com.mobnetic.coinguardian.model.market.Btcchina;
 import com.mobnetic.coinguardian.model.market.Btce;
 import com.mobnetic.coinguardian.model.market.Btcturk;
 import com.mobnetic.coinguardian.model.market.Bter;
+import com.mobnetic.coinguardian.model.market.Buttercoin;
 import com.mobnetic.coinguardian.model.market.CCex;
 import com.mobnetic.coinguardian.model.market.Campbx;
 import com.mobnetic.coinguardian.model.market.CexIO;
@@ -168,5 +169,6 @@ public class MarketsConfig {
 		addMarket(new QuadrigaCX());
 		addMarket(new CoinMateIO());
 		addMarket(new BitMarket24PL());
+		addMarket(new Buttercoin());
 	}
 }
