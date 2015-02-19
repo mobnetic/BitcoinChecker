@@ -41,6 +41,7 @@ import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
 import com.mobnetic.coinguardian.model.market.CoinMateIO;
 import com.mobnetic.coinguardian.model.market.CoinSwap;
+import com.mobnetic.coinguardian.model.market.CoinTraderNet;
 import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
 import com.mobnetic.coinguardian.model.market.Coinse;
@@ -170,5 +171,6 @@ public class MarketsConfig {
 		addMarket(new CoinMateIO());
 		addMarket(new BitMarket24PL());
 		addMarket(new Buttercoin());
+		addMarket(new CoinTraderNet());
 	}
 }
