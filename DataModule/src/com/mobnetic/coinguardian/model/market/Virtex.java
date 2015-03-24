@@ -41,11 +41,21 @@ public class Virtex extends Market {
 		final JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
 		final JSONObject pairJsonObject = tickerJsonObject.getJSONObject(checkerInfo.getCurrencyBase()+checkerInfo.getCurrencyCounter());
 		
-		ticker.bid = pairJsonObject.getDouble("buy");
-		ticker.ask = pairJsonObject.getDouble("sell");
-		ticker.vol = pairJsonObject.getDouble("volume");
-		ticker.high = pairJsonObject.getDouble("high");
-		ticker.low = pairJsonObject.getDouble("low");
+		if (!pairJsonObject.isNull("buy")) {
+			ticker.bid = pairJsonObject.getDouble("buy");
+		}
+		if (!pairJsonObject.isNull("sell")) {
+			ticker.ask = pairJsonObject.getDouble("sell");
+		}
+		if (!pairJsonObject.isNull("volume")) {
+			ticker.vol = pairJsonObject.getDouble("volume");
+		}
+		if (!pairJsonObject.isNull("high")) {
+			ticker.high = pairJsonObject.getDouble("high");
+		}
+		if (!pairJsonObject.isNull("low")) {
+			ticker.low = pairJsonObject.getDouble("low");
+		}
 		ticker.last = pairJsonObject.getDouble("last");
 	}
 }
