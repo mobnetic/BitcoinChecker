@@ -51,6 +51,7 @@ import com.mobnetic.coinguardian.model.market.CryptoRush;
 import com.mobnetic.coinguardian.model.market.CryptoTrade;
 import com.mobnetic.coinguardian.model.market.Cryptoine;
 import com.mobnetic.coinguardian.model.market.Cryptonit;
+import com.mobnetic.coinguardian.model.market.Cryptopia;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.DolarBlueNet;
 import com.mobnetic.coinguardian.model.market.FoxBit;
@@ -59,12 +60,14 @@ import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
 import com.mobnetic.coinguardian.model.market.HitBtc;
 import com.mobnetic.coinguardian.model.market.Huobi;
+import com.mobnetic.coinguardian.model.market.Igot;
 import com.mobnetic.coinguardian.model.market.ItBit;
 import com.mobnetic.coinguardian.model.market.Justcoin;
 import com.mobnetic.coinguardian.model.market.Koinim;
 import com.mobnetic.coinguardian.model.market.Korbit;
 import com.mobnetic.coinguardian.model.market.Kraken;
 import com.mobnetic.coinguardian.model.market.LakeBTC;
+import com.mobnetic.coinguardian.model.market.LocalBitcoins;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.MintPal;
@@ -172,5 +175,8 @@ public class MarketsConfig {
 		addMarket(new BitMarket24PL());
 		addMarket(new Buttercoin());
 		addMarket(new CoinTraderNet());
+		addMarket(new LocalBitcoins());
+		addMarket(new Cryptopia());
+		addMarket(new Igot());
 	}
 }
