@@ -2,7 +2,8 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.util.List;
 
-import android.text.TextUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
@@ -13,8 +14,8 @@ public class Bleutrade extends Market {
 	
 	private final static String NAME = "Bleutrade";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://bleutrade.com/api/v1/24h_trade_pair_info?market=%1$s_%2$s";
-	private final static String URL_CURRENCY_PAIRS = "https://bleutrade.com/api/v1/trade_pairs";
+	private final static String URL = "https://bleutrade.com/api/v2/public/getticker?market=%1$s";
+	private final static String URL_CURRENCY_PAIRS = "https://bleutrade.com/api/v2/public/getmarkets";
 	
 	public Bleutrade() {
 		super(NAME, TTS_NAME, null);
@@ -22,20 +23,26 @@ public class Bleutrade extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return String.format(URL, checkerInfo.getCurrencyPairId());
 	}
 	
 	@Override
-	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		final String[] split = responseString.split(";");
-		ticker.vol = parseDouble(split[5]);
-		ticker.high = parseDouble(split[2]);
-		ticker.low = parseDouble(split[3]);
-		ticker.last = parseDouble(split[4]);
+	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+		final Object resultObject = jsonObject.get("result");
+		JSONObject resultsJsonObject = null;
+		if (resultObject instanceof JSONArray) {
+			resultsJsonObject = ((JSONArray)resultObject).getJSONObject(0);
+		} else {
+			resultsJsonObject = (JSONObject)resultObject;
+		}
+		ticker.bid = resultsJsonObject.getDouble("Bid");
+		ticker.ask = resultsJsonObject.getDouble("Ask");
+		ticker.last = resultsJsonObject.getDouble("Last");
 	}
 	
-	private double parseDouble(String doubleString) {
-		return !TextUtils.isEmpty(doubleString) ? Double.parseDouble(doubleString) : 0;
+	@Override
+	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo) throws Exception {
+		return jsonObject.getString("message");
 	}
 	
 	// ====================
@@ -47,16 +54,20 @@ public class Bleutrade extends Market {
 	}
 	
 	@Override
-	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
-		final String[] currencyPairs = responseString.split("\n");
-		for(int i=0; i<currencyPairs.length; ++i) {
-			final String pairId = currencyPairs[i];
-			final int underlineIndex = pairId.indexOf('_');
-			pairs.add(new CurrencyPairInfo(
-					pairId.substring(0, underlineIndex),
-					pairId.substring(underlineIndex+1),
-					pairId
-				));
+	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+		final JSONArray resultsJsonArray = jsonObject.getJSONArray("result");
+		for (int i = 0; i < resultsJsonArray.length(); ++i) {
+			final JSONObject pairJsonObject = resultsJsonArray.getJSONObject(i);
+			final String pairId = pairJsonObject.getString("MarketName");
+			final String currencyBase = pairJsonObject.getString("MarketCurrency");
+			final String currencyCounter = pairJsonObject.getString("BaseCurrency");
+			if (pairId != null && currencyBase != null && currencyCounter != null) {
+				pairs.add(new CurrencyPairInfo(
+						currencyBase,
+						currencyCounter,
+						pairId
+					));
+			}
 		}
 	}
 }
