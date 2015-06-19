@@ -70,6 +70,7 @@ import com.mobnetic.coinguardian.model.market.LakeBTC;
 import com.mobnetic.coinguardian.model.market.LocalBitcoins;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
+import com.mobnetic.coinguardian.model.market.Mexbt;
 import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Paymium;
@@ -180,5 +181,6 @@ public class MarketsConfig {
 		addMarket(new Cryptopia());
 		addMarket(new Igot());
 		addMarket(new SevenNineSix());
+		addMarket(new Mexbt());
 	}
 }

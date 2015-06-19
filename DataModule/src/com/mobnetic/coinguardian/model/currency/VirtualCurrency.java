@@ -191,6 +191,7 @@ public class VirtualCurrency {
 	public static final String MTC = "MTC";
 	public static final String MTS = "MTS";
 	public static final String MXB = "MXB";
+	public static final String MXN = "MXN";
 	public static final String MYMINER = "MYMINER";
 	public static final String MYR = "MYR";
 	public static final String MZC = "MZC";
