@@ -34,10 +34,11 @@ public class SevenNineSix extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		if(VirtualCurrency.LTC.equals(checkerInfo.getCurrencyBase()))
+		if(VirtualCurrency.LTC.equals(checkerInfo.getCurrencyBase())) {
 			return URL_LTC;
-		else
+		} else {
 			return URL_BTC;
+		}
 	}
 
 	@Override
