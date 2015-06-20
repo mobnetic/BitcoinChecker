@@ -2,9 +2,14 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
+import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
@@ -14,7 +19,8 @@ public class Btce extends Market {
 
 	private final static String NAME = "Btc-e";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://btc-e.com/api/2/%1$s_%2$s/ticker";
+	private final static String URL = "https://btc-e.com/api/3/ticker/%1$s";
+	private final static String URL_CURRENCY_PAIRS = "https://btc-e.com/api/3/info";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -40,20 +46,12 @@ public class Btce extends Market {
 				Currency.RUR
 			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.TRC, new String[]{
-				VirtualCurrency.BTC
+				Currency.USD,
+				Currency.RUR
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.PPC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.FTC, new String[]{
-				VirtualCurrency.BTC
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.XPM, new String[]{
-				VirtualCurrency.BTC
 			});
 	}
 	
@@ -63,12 +61,17 @@ public class Btce extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
+		String pairId = checkerInfo.getCurrencyPairId();
+		if(checkerInfo.getCurrencyPairId() == null) {
+			pairId = String.format("%1$s_%2$s", checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
+		}
+		return String.format(URL, pairId);
 	}
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
+		final JSONArray names = jsonObject.names();
+		JSONObject tickerJsonObject = jsonObject.getJSONObject(names.getString(0));
 		
 		ticker.bid = tickerJsonObject.getDouble("sell");	// REVERSED!
 		ticker.ask = tickerJsonObject.getDouble("buy");	// REVERSED!
@@ -77,5 +80,31 @@ public class Btce extends Market {
 		ticker.low = tickerJsonObject.getDouble("low");
 		ticker.last = tickerJsonObject.getDouble("last");
 		ticker.timestamp = tickerJsonObject.getLong("updated");
+	}
+	
+	// ====================
+	// Get currency pairs
+	// ====================
+	@Override
+	public String getCurrencyPairsUrl(int requestId) {
+		return URL_CURRENCY_PAIRS;
+	}
+	
+	@Override
+	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+		final JSONObject pairsJsonObject = jsonObject.getJSONObject("pairs");
+		final JSONArray pairsNames = pairsJsonObject.names();
+		for(int i=0; i<pairsNames.length(); ++i) {
+			String pairId = pairsNames.getString(i);
+			if(pairId==null)
+				continue;
+			String[] currencies = pairId.split("_");
+			if(currencies.length!=2)
+				continue;
+			
+			String currencyBase = currencies[0].toUpperCase(Locale.ENGLISH);
+			String currencyCounter = currencies[1].toUpperCase(Locale.ENGLISH);
+			pairs.add(new CurrencyPairInfo(currencyBase, currencyCounter, pairId));
+		}
 	}
 }
