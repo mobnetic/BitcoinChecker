@@ -55,6 +55,7 @@ public class Currency {
 	public static final String GIP = "GIP";
 	public static final String GMD = "GMD";
 	public static final String GNF = "GNF";
+	public static final String GOLD = "GOLD";
 	public static final String GTQ = "GTQ";
 	public static final String GYD = "GYD";
 	public static final String HKD = "HKD";

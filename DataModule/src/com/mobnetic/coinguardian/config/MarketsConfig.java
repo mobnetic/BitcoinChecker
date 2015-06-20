@@ -83,6 +83,7 @@ import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
 import com.mobnetic.coinguardian.model.market.Unisend;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
+import com.mobnetic.coinguardian.model.market.Vaultoro;
 import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
@@ -182,5 +183,6 @@ public class MarketsConfig {
 		addMarket(new Igot());
 		addMarket(new SevenNineSix());
 		addMarket(new Mexbt());
+		addMarket(new Vaultoro());
 	}
 }
