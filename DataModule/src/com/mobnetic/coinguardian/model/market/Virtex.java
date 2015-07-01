@@ -13,7 +13,7 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Virtex extends Market {
 
-	private final static String NAME = "VirtEx";
+	private final static String NAME = "CaVirtEx";
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://cavirtex.com/api2/ticker.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
