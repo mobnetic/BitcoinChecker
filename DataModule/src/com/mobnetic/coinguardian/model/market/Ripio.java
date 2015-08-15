@@ -35,7 +35,7 @@ public class Ripio extends Market {
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject ratesJsonObject = jsonObject.getJSONObject("rates");
-		ticker.high = ratesJsonObject.getDouble("ARS_BUY")*1.045; //Valor final con comisiones de Ripio
+		ticker.bid = ratesJsonObject.getDouble("ARS_SELL");
 		ticker.ask = ratesJsonObject.getDouble("ARS_BUY");		
 		ticker.last = ticker.ask;
 	}
