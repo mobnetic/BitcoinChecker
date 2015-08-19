@@ -73,12 +73,14 @@ public class Kraken extends Market {
         
         for(int i=0; i<pairNames.length(); ++i) {
         	final String pairId = pairNames.getString(i);
-        	final JSONObject pairJsonObject = result.getJSONObject(pairId);
-        	
-            pairs.add(new CurrencyPairInfo(
-            		parseCurrency(pairJsonObject.getString("base")),
-            		parseCurrency(pairJsonObject.getString("quote")),
-            		pairId));
+        	if (pairId != null && pairId.indexOf('.') == -1) {
+	        	final JSONObject pairJsonObject = result.getJSONObject(pairId);
+	        	
+	            pairs.add(new CurrencyPairInfo(
+	            		parseCurrency(pairJsonObject.getString("base")),
+	            		parseCurrency(pairJsonObject.getString("quote")),
+	            		pairId));
+        	}
         }
     }
     
