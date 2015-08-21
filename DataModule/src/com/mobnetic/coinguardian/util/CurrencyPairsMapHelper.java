@@ -25,7 +25,6 @@ public class CurrencyPairsMapHelper {
 		List<CurrencyPairInfo> sortedPairs = currencyPairsListWithDate.pairs;
 		pairsCount = sortedPairs.size();
 				
-		// optymalizacja przy pustych ID
 		HashMap<String, Integer> currencyGroupSizes = new HashMap<String, Integer>();
 		for(CurrencyPairInfo currencyPairInfo : sortedPairs) {
 			Integer currentCurrencyGroupSize = currencyGroupSizes.get(currencyPairInfo.getCurrencyBase());

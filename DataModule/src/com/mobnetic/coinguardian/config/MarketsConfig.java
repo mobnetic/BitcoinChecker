@@ -27,7 +27,9 @@ import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
 import com.mobnetic.coinguardian.model.market.BitxCom;
 import com.mobnetic.coinguardian.model.market.Bleutrade;
+import com.mobnetic.coinguardian.model.market.BtcBox;
 import com.mobnetic.coinguardian.model.market.BtcMarkets;
+import com.mobnetic.coinguardian.model.market.BtcXIndia;
 import com.mobnetic.coinguardian.model.market.Btcchina;
 import com.mobnetic.coinguardian.model.market.Btce;
 import com.mobnetic.coinguardian.model.market.Btcturk;
@@ -186,5 +188,7 @@ public class MarketsConfig {
 		addMarket(new Mexbt());
 		addMarket(new Vaultoro());
 		addMarket(new BitxCom());
+		addMarket(new BtcBox());
+		addMarket(new BtcXIndia());
 	}
 }
