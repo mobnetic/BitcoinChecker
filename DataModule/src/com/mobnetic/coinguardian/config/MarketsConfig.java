@@ -23,6 +23,7 @@ import com.mobnetic.coinguardian.model.market.BitexLa;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
 import com.mobnetic.coinguardian.model.market.BitMarket24PL;
 import com.mobnetic.coinguardian.model.market.Bitorado;
+import com.mobnetic.coinguardian.model.market.Bitreserve;
 import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
 import com.mobnetic.coinguardian.model.market.BitxCom;
@@ -166,6 +167,7 @@ public class MarketsConfig {
 		addMarket(new Basebit());
 		addMarket(new CoinSwap());
 		addMarket(new Paymium());
+		addMarket(new Bitreserve());
 		addMarket(new Bitso());
 		addMarket(new Cryptoine());
 		addMarket(new BitcoinToYou());
