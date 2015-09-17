@@ -27,7 +27,10 @@ public class Bitreserve extends Market {
                 CURRENCY_PAIRS.put(Currency.USD, new String[]{
                                 VirtualCurrency.BTC,
                                 Currency.MXN,
+                                Currency.AED,
                                 Currency.AUD,
+                                Currency.ARS,
+                                Currency.BRL,
                                 Currency.CAD,
                                 Currency.CHF,
                                 Currency.CNY,
@@ -41,6 +44,7 @@ public class Bitreserve extends Market {
                                 Currency.KES,
                                 Currency.NOK,
                                 Currency.NZD,
+                                Currency.PHP,
                                 Currency.PLN,
                                 Currency.SEK,
                                 Currency.SGD,
@@ -52,7 +56,16 @@ public class Bitreserve extends Market {
                 CURRENCY_PAIRS.put(Currency.MXN, new String[]{
                                 Currency.USD
                         });
+                CURRENCY_PAIRS.put(Currency.AED, new String[]{
+                                Currency.USD
+                        });
+                CURRENCY_PAIRS.put(Currency.ARS, new String[]{
+                                Currency.USD
+                        });
                 CURRENCY_PAIRS.put(Currency.AUD, new String[]{
+                                Currency.USD
+                        });
+                CURRENCY_PAIRS.put(Currency.BRL, new String[]{
                                 Currency.USD
                         });
                 CURRENCY_PAIRS.put(Currency.CAD, new String[]{
@@ -92,6 +105,9 @@ public class Bitreserve extends Market {
                                 Currency.USD
                         });
                 CURRENCY_PAIRS.put(Currency.NZD, new String[]{
+                                Currency.USD
+                        });
+                CURRENCY_PAIRS.put(Currency.PHP, new String[]{
                                 Currency.USD
                         });
                 CURRENCY_PAIRS.put(Currency.PLN, new String[]{
