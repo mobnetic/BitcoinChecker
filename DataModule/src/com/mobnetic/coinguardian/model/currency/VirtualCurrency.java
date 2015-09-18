@@ -36,9 +36,6 @@ public class VirtualCurrency {
 	public static final String BQC = "BQC";
 	public static final String BTB = "BTB";
 	public static final String BTC = "BTC";
-	public static final String BTC_1WeekFutures = "BTC This Week Futures";
-	public static final String BTC_2WeeksFutures = "BTC Next Week Futures";
-	public static final String BTC_3MonthsFutures = "BTC Next Quarter Futures";
 	public static final String mBTC = "mBTC";
 	public static final String uBTC = "uBTC";
 	public static final String Satoshi = "Satoshi";
@@ -173,9 +170,6 @@ public class VirtualCurrency {
 	public static final String LOT = "LOT";
 	public static final String LTB = "LTB";
 	public static final String LTC = "LTC";
-	public static final String LTC_1WeekFutures = "LTC This Week Futures";
-	public static final String LTC_2WeeksFutures = "LTC Next Week Futures";
-	public static final String LTC_3MonthsFutures = "LTC Next Quarter Futures";
 	public static final String mLTC = "mLTC";
 	public static final String LYC = "LYC";
 	public static final String MAX = "MAX";
