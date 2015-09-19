@@ -36,6 +36,9 @@ public class VirtualCurrency {
 	public static final String BQC = "BQC";
 	public static final String BTB = "BTB";
 	public static final String BTC = "BTC";
+	public static final String BTCFUT1W = "BTCFUT1W";
+	public static final String BTCFUT2W = "BTCFUT2W";
+	public static final String BTCFUT3M = "BTCFUT3M";
 	public static final String mBTC = "mBTC";
 	public static final String uBTC = "uBTC";
 	public static final String Satoshi = "Satoshi";
@@ -170,6 +173,9 @@ public class VirtualCurrency {
 	public static final String LOT = "LOT";
 	public static final String LTB = "LTB";
 	public static final String LTC = "LTC";
+	public static final String LTCFUT1W = "LTCFUT1W";
+	public static final String LTCFUT2W = "LTCFUT2W";
+	public static final String LTCFUT3M = "LTCFUT3M";
 	public static final String mLTC = "mLTC";
 	public static final String LYC = "LYC";
 	public static final String MAX = "MAX";
@@ -315,13 +321,17 @@ public class VirtualCurrency {
 	public static final String WDC = "WDC";
 	public static final String WIKI = "WIKI";
 	public static final String WOLF = "WOLF";
+	public static final String XAG = "XAG";
+	public static final String XAU = "XAU";
 	public static final String XBT = "XBT";		// BTC
 	public static final String XCP = "XCP";
 	public static final String XDG = "XDG";		// DOGE
 	public static final String XIV = "XIV";
 	public static final String XJO = "XJO";
 	public static final String XNC = "XNC";
+	public static final String XPD = "XPD";
 	public static final String XPM = "XPM";
+	public static final String XPT = "XPT";
 	public static final String XPY = "XPY";
 	public static final String XRP = "XRP";
 	public static final String XVN = "XVN"; 	// VEN
