@@ -12,8 +12,8 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class OkcoinFuturesPrice extends Market {
 
-	private final static String NAME = "OKCoin futures price";
-	private final static String TTS_NAME = "Ok coin features price";
+	private final static String NAME = "OKCoin Futures";
+	private final static String TTS_NAME = "Ok Coin Futures";
 	private final static String URL_USD_1w = "https://www.okcoin.com/api/v1/future_ticker.do?symbol=%1$s_%2$s&contract_type=this_week";
 	private final static String URL_USD_2w = "https://www.okcoin.com/api/v1/future_ticker.do?symbol=%1$s_%2$s&contract_type=next_week";
 	private final static String URL_USD_3m = "https://www.okcoin.com/api/v1/future_ticker.do?symbol=%1$s_%2$s&contract_type=quarter";
