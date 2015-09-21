@@ -76,6 +76,7 @@ import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.Mexbt;
 import com.mobnetic.coinguardian.model.market.MintPal;
 import com.mobnetic.coinguardian.model.market.Okcoin;
+import com.mobnetic.coinguardian.model.market.OkcoinFuturesPrice;
 import com.mobnetic.coinguardian.model.market.Paymium;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
@@ -109,6 +110,7 @@ public class MarketsConfig {
 		addMarket(new Kraken());
 		addMarket(new Bitfinex());
 		addMarket(new Okcoin());
+		addMarket(new OkcoinFuturesPrice());
 		addMarket(new Cryptsy());
 		addMarket(new Coinbase());
 		addMarket(new Vircurex());
