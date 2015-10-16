@@ -75,6 +75,7 @@ import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.Mexbt;
 import com.mobnetic.coinguardian.model.market.MintPal;
+import com.mobnetic.coinguardian.model.market.OKCoinFutures;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Paymium;
 import com.mobnetic.coinguardian.model.market.Poloniex;
@@ -190,5 +191,6 @@ public class MarketsConfig {
 		addMarket(new BitxCom());
 		addMarket(new BtcBox());
 		addMarket(new BtcXIndia());
+		addMarket(new OKCoinFutures());
 	}
 }
