@@ -4,8 +4,11 @@ import java.util.Locale;
 
 public class CheckerInfo extends CurrencyPairInfo {
 
-	public CheckerInfo(String currencyBase, String currencyCounter, String currencyPairId) {
+	protected final int contractType;
+	
+	public CheckerInfo(String currencyBase, String currencyCounter, String currencyPairId, int contractType) {
 		super(currencyBase, currencyCounter, currencyPairId);
+		this.contractType = contractType;
 	}
 	
 	public String getCurrencyBaseLowerCase() {
@@ -14,5 +17,9 @@ public class CheckerInfo extends CurrencyPairInfo {
 	
 	public String getCurrencyCounterLowerCase() {
 		return getCurrencyCounter().toLowerCase(Locale.US);
+	}
+	
+	public int getContractType() {
+		return contractType;
 	}
 }

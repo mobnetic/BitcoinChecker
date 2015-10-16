@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
@@ -22,6 +23,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.mobnetic.coinguardian.config.MarketsConfig;
 import com.mobnetic.coinguardian.model.CheckerInfo;
+import com.mobnetic.coinguardian.model.Futures;
+import com.mobnetic.coinguardian.model.FuturesMarket;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.util.CurrencyPairsMapHelper;
@@ -46,6 +49,7 @@ public class MainActivity extends Activity {
 	private View dynamicCurrencyPairsInfoView;
 	private Spinner currencyBaseSpinner;
 	private Spinner currencyCounterSpinner;
+	private Spinner futuresContractTypeSpinner;
 	private View getResultButton;
 	private ProgressBar progressBar;
 	private TextView resultView;
@@ -66,13 +70,16 @@ public class MainActivity extends Activity {
 		dynamicCurrencyPairsInfoView = findViewById(R.id.dynamicCurrencyPairsInfoView);
 		currencyBaseSpinner = (Spinner)findViewById(R.id.currencyBaseSpinner);
 		currencyCounterSpinner = (Spinner)findViewById(R.id.currencyCounterSpinner);
+		futuresContractTypeSpinner = (Spinner)findViewById(R.id.futuresContractTypeSpinner);
 		getResultButton = findViewById(R.id.getResultButton);
 		progressBar = (ProgressBar)findViewById(R.id.progressBar);
 		resultView = (TextView)findViewById(R.id.resultView);
 		
 		refreshMarketSpinner();
+		Market market = getSelectedMarket();
 		currencyPairsMapHelper = new CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this, getSelectedMarket().key));
-		refreshCurrencySpinners(getSelectedMarket());
+		refreshCurrencySpinners(market);
+		refreshFuturesContractTypeSpinner(market);
 		showResultView(true);
 		
 		marketSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -80,6 +87,7 @@ public class MainActivity extends Activity {
 				final Market selectedMarket = getSelectedMarket();
 				currencyPairsMapHelper = new CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(MainActivity.this, selectedMarket.key));
 				refreshCurrencySpinners(selectedMarket);
+				refreshFuturesContractTypeSpinner(selectedMarket);
 			}
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// do nothing
@@ -131,6 +139,15 @@ public class MainActivity extends Activity {
 		if(currencyCounterSpinner.getAdapter()==null)
 			return null;
 		return String.valueOf(currencyCounterSpinner.getSelectedItem());
+	}
+	
+	private int getSelectedContractType(Market market) {
+		if (market instanceof FuturesMarket) {
+			final FuturesMarket futuresMarket = (FuturesMarket) market;
+			int selection = futuresContractTypeSpinner.getSelectedItemPosition();
+			return futuresMarket.contractTypes[selection];
+		}
+		return Futures.CONTRACT_TYPE_WEEKLY;
 	}
 
 
@@ -186,6 +203,20 @@ public class MainActivity extends Activity {
 			currencyCounterSpinner.setAdapter(null);
 		}
 	}
+	
+	private void refreshFuturesContractTypeSpinner(Market market) {
+		SpinnerAdapter spinnerAdapter = null;
+		if (market instanceof FuturesMarket) {
+			final FuturesMarket futuresMarket = (FuturesMarket)market;
+			CharSequence[] entries = new CharSequence[futuresMarket.contractTypes.length];
+			for (int i = 0; i<futuresMarket.contractTypes.length; ++i) {
+				entries[i] = Futures.CONTRACT_TYPE_SHORT_NAMES[futuresMarket.contractTypes[i]];
+			}
+			spinnerAdapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_dropdown_item, entries);
+		}
+		futuresContractTypeSpinner.setAdapter(spinnerAdapter);
+		futuresContractTypeSpinner.setVisibility(spinnerAdapter != null ? View.VISIBLE : View.GONE);
+	}
 
 	private void showResultView(boolean showResultView) {
 		getResultButton.setEnabled(showResultView);
@@ -208,7 +239,8 @@ public class MainActivity extends Activity {
 		final String currencyBase = getSelectedCurrencyBase();
 		final String currencyCounter = getSelectedCurrencyCounter();
 		final String pairId = currencyPairsMapHelper!=null ? currencyPairsMapHelper.getCurrencyPairId(currencyBase, currencyCounter) : null;
-		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, pairId);
+		final int contractType = getSelectedContractType(market);
+		final CheckerInfo checkerInfo = new CheckerInfo(currencyBase, currencyCounter, pairId, contractType);
 		Request<?> request = new CheckerVolleyMainRequest(market, checkerInfo, new ResponseListener<TickerWrapper>() {
 			@Override
 			public void onResponse(String url, Map<String, String> requestHeaders, NetworkResponse networkResponse, String responseString, TickerWrapper tickerWrapper) {
