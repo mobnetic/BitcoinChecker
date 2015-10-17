@@ -210,7 +210,8 @@ public class MainActivity extends Activity {
 			final FuturesMarket futuresMarket = (FuturesMarket)market;
 			CharSequence[] entries = new CharSequence[futuresMarket.contractTypes.length];
 			for (int i = 0; i<futuresMarket.contractTypes.length; ++i) {
-				entries[i] = Futures.CONTRACT_TYPE_SHORT_NAMES[futuresMarket.contractTypes[i]];
+				int contractType = futuresMarket.contractTypes[i];
+				entries[i] = Futures.getContractTypeShortName(contractType);
 			}
 			spinnerAdapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_dropdown_item, entries);
 		}
