@@ -85,6 +85,7 @@ import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
 import com.mobnetic.coinguardian.model.market.Unisend;
+import com.mobnetic.coinguardian.model.market.Uphold;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vaultoro;
 import com.mobnetic.coinguardian.model.market.Vircurex;
@@ -190,5 +191,6 @@ public class MarketsConfig {
 		addMarket(new BitxCom());
 		addMarket(new BtcBox());
 		addMarket(new BtcXIndia());
+		addMarket(new Uphold());
 	}
 }
