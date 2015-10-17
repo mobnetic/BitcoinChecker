@@ -23,7 +23,6 @@ import com.mobnetic.coinguardian.model.market.BitexLa;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
 import com.mobnetic.coinguardian.model.market.BitMarket24PL;
 import com.mobnetic.coinguardian.model.market.Bitorado;
-import com.mobnetic.coinguardian.model.market.Bitreserve;
 import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
 import com.mobnetic.coinguardian.model.market.BitxCom;
@@ -86,6 +85,7 @@ import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
 import com.mobnetic.coinguardian.model.market.Unisend;
+import com.mobnetic.coinguardian.model.market.Uphold;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vaultoro;
 import com.mobnetic.coinguardian.model.market.Vircurex;
@@ -109,7 +109,6 @@ public class MarketsConfig {
 		addMarket(new Mercado());
 		addMarket(new Kraken());
 		addMarket(new Bitfinex());
-		addMarket(new Bitreserve());
 		addMarket(new Okcoin());
 		addMarket(new Cryptsy());
 		addMarket(new Coinbase());
@@ -192,5 +191,6 @@ public class MarketsConfig {
 		addMarket(new BitxCom());
 		addMarket(new BtcBox());
 		addMarket(new BtcXIndia());
+		addMarket(new Uphold());
 	}
 }

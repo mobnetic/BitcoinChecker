@@ -315,17 +315,13 @@ public class VirtualCurrency {
 	public static final String WDC = "WDC";
 	public static final String WIKI = "WIKI";
 	public static final String WOLF = "WOLF";
-	public static final String XAG = "XAG";
-	public static final String XAU = "XAU";
 	public static final String XBT = "XBT";		// BTC
 	public static final String XCP = "XCP";
 	public static final String XDG = "XDG";		// DOGE
 	public static final String XIV = "XIV";
 	public static final String XJO = "XJO";
 	public static final String XNC = "XNC";
-	public static final String XPD = "XPD";
 	public static final String XPM = "XPM";
-	public static final String XPT = "XPT";
 	public static final String XPY = "XPY";
 	public static final String XRP = "XRP";
 	public static final String XVN = "XVN"; 	// VEN
