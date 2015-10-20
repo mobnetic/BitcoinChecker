@@ -57,6 +57,7 @@ import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptopia;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.DolarBlueNet;
+import com.mobnetic.coinguardian.model.market.FoscEx;
 import com.mobnetic.coinguardian.model.market.FoxBit;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
@@ -91,6 +92,7 @@ import com.mobnetic.coinguardian.model.market.Vaultoro;
 import com.mobnetic.coinguardian.model.market.Vircurex;
 import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
+import com.mobnetic.coinguardian.model.market.YoBit;
 import com.mobnetic.coinguardian.model.market.Zaydo;
 import com.mobnetic.coinguardian.model.market.SevenNineSix;
 
@@ -192,5 +194,7 @@ public class MarketsConfig {
 		addMarket(new BtcBox());
 		addMarket(new BtcXIndia());
 		addMarket(new Uphold());
+		addMarket(new YoBit());
+//		addMarket(new FoscEx());
 	}
 }

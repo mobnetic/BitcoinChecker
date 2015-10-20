@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardian.util.ParseUtils;
 
 public class Cryptonit extends Market {
 
@@ -33,17 +33,14 @@ public class Cryptonit extends Market {
 		final JSONObject rateJsonObject = jsonObject.getJSONObject("rate");
 		final JSONObject volumeJsonObject = jsonObject.getJSONObject("volume");
 		
-		ticker.bid = getDoubleFromString(rateJsonObject, "bid");
-		ticker.ask = getDoubleFromString(rateJsonObject, "ask");
-		if(volumeJsonObject.has(checkerInfo.getCurrencyBase()))
-			ticker.vol = getDoubleFromString(volumeJsonObject, checkerInfo.getCurrencyBase());
-		ticker.high = getDoubleFromString(rateJsonObject, "high");
-		ticker.low = getDoubleFromString(rateJsonObject, "low");
-		ticker.last = getDoubleFromString(rateJsonObject, "last");
-	}
-	
-	private double getDoubleFromString(JSONObject jsonObject, String name) throws NumberFormatException, JSONException {
-		return Double.parseDouble(jsonObject.getString(name));
+		ticker.bid = ParseUtils.getDoubleFromString(rateJsonObject, "bid");
+		ticker.ask = ParseUtils.getDoubleFromString(rateJsonObject, "ask");
+		if(volumeJsonObject.has(checkerInfo.getCurrencyBase())) {
+			ticker.vol = ParseUtils.getDoubleFromString(volumeJsonObject, checkerInfo.getCurrencyBase());
+		}
+		ticker.high = ParseUtils.getDoubleFromString(rateJsonObject, "high");
+		ticker.low = ParseUtils.getDoubleFromString(rateJsonObject, "low");
+		ticker.last = ParseUtils.getDoubleFromString(rateJsonObject, "last");
 	}
 	
 	// ====================

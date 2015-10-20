@@ -3,7 +3,6 @@ package com.mobnetic.coinguardian.model.market;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
@@ -11,6 +10,7 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+import com.mobnetic.coinguardian.util.ParseUtils;
 
 public class Zaydo extends Market {
 
@@ -35,15 +35,11 @@ public class Zaydo extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = getDoubleFromString(jsonObject, "bid");
-		ticker.ask = getDoubleFromString(jsonObject, "ask");
-		ticker.vol = getDoubleFromString(jsonObject, "volume");
-		ticker.high = getDoubleFromString(jsonObject, "high");
-		ticker.low = getDoubleFromString(jsonObject, "low");
-		ticker.last = getDoubleFromString(jsonObject, "last");
-	}
-	
-	private double getDoubleFromString(JSONObject jsonObject, String name) throws NumberFormatException, JSONException {
-		return Double.parseDouble(jsonObject.getString(name));
+		ticker.bid = ParseUtils.getDoubleFromString(jsonObject, "bid");
+		ticker.ask = ParseUtils.getDoubleFromString(jsonObject, "ask");
+		ticker.vol = ParseUtils.getDoubleFromString(jsonObject, "volume");
+		ticker.high = ParseUtils.getDoubleFromString(jsonObject, "high");
+		ticker.low = ParseUtils.getDoubleFromString(jsonObject, "low");
+		ticker.last = ParseUtils.getDoubleFromString(jsonObject, "last");
 	}
 }

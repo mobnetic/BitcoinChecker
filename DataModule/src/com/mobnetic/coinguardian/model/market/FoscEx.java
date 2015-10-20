@@ -13,39 +13,38 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 import com.mobnetic.coinguardian.util.ParseUtils;
 import com.mobnetic.coinguardian.util.TimeUtils;
 
-public class Bitfinex extends Market {
-
-	private final static String NAME = "Bitfinex";
-	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://api.bitfinex.com/v1/pubticker/%1$s%2$s";
+public class FoscEx extends Market {
+	
+	private final static String NAME = "Fosc-Ex";
+	private final static String TTS_NAME = "Fosc Ex";
+	private final static String URL = "http://www.fosc-ex.com/api-public-ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				Currency.USD,
-				VirtualCurrency.BTC
+		CURRENCY_PAIRS.put(VirtualCurrency.KNC, new String[]{
+				Currency.KRW
 			});
 	}
 	
-	public Bitfinex() {
+	public FoscEx() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
+		return URL;
 	}
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = ParseUtils.getDoubleFromString(jsonObject, "bid");
-		ticker.ask = ParseUtils.getDoubleFromString(jsonObject, "ask");
 		ticker.vol = ParseUtils.getDoubleFromString(jsonObject, "volume");
-		ticker.high = ParseUtils.getDoubleFromString(jsonObject, "high");
-		ticker.low = ParseUtils.getDoubleFromString(jsonObject, "low");
-		ticker.last = ParseUtils.getDoubleFromString(jsonObject, "last_price");
-		ticker.timestamp = (long) (jsonObject.getDouble("timestamp")*TimeUtils.MILLIS_IN_SECOND);
+		ticker.last = ParseUtils.getDoubleFromString(jsonObject, "last");
+		ticker.timestamp = jsonObject.getLong("timestamp") * TimeUtils.MILLIS_IN_SECOND;
+		
 	}
+	
+	@Override
+	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo) throws Exception {
+		return jsonObject.getString("error");
+	}
+
 }

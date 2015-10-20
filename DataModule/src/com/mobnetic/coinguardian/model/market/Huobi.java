@@ -3,7 +3,6 @@ package com.mobnetic.coinguardian.model.market;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
@@ -11,6 +10,7 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+import com.mobnetic.coinguardian.util.ParseUtils;
 
 public class Huobi extends Market {
 
@@ -44,15 +44,11 @@ public class Huobi extends Market {
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
 		
-		ticker.bid = getDoubleFromString(tickerJsonObject, "buy");
-		ticker.ask = getDoubleFromString(tickerJsonObject, "sell");
-		ticker.vol = getDoubleFromString(tickerJsonObject, "vol");
-		ticker.high = getDoubleFromString(tickerJsonObject, "high");
-		ticker.low = getDoubleFromString(tickerJsonObject, "low");
-		ticker.last = getDoubleFromString(tickerJsonObject, "last");
-	}
-	
-	private double getDoubleFromString(JSONObject jsonObject, String name) throws NumberFormatException, JSONException {
-		return Double.parseDouble(jsonObject.getString(name));
+		ticker.bid = ParseUtils.getDoubleFromString(tickerJsonObject, "buy");
+		ticker.ask = ParseUtils.getDoubleFromString(tickerJsonObject, "sell");
+		ticker.vol = ParseUtils.getDoubleFromString(tickerJsonObject, "vol");
+		ticker.high = ParseUtils.getDoubleFromString(tickerJsonObject, "high");
+		ticker.low = ParseUtils.getDoubleFromString(tickerJsonObject, "low");
+		ticker.last = ParseUtils.getDoubleFromString(tickerJsonObject, "last");
 	}
 }

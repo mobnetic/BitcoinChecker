@@ -3,7 +3,6 @@ package com.mobnetic.coinguardian.model.market;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
@@ -11,6 +10,7 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+import com.mobnetic.coinguardian.util.ParseUtils;
 
 public class BtcXIndia extends Market {
 
@@ -38,12 +38,8 @@ public class BtcXIndia extends Market {
 		ticker.bid = jsonObject.getDouble("bid");
 		ticker.ask = jsonObject.getDouble("ask");
 		ticker.vol = jsonObject.getDouble("total_volume_24h");
-		ticker.high = getDoubleFromString(jsonObject, "high");
-		ticker.low = getDoubleFromString(jsonObject, "low");
+		ticker.high = ParseUtils.getDoubleFromString(jsonObject, "high");
+		ticker.low = ParseUtils.getDoubleFromString(jsonObject, "low");
 		ticker.last = jsonObject.getDouble("last_traded_price");
-	}
-	
-	private double getDoubleFromString(JSONObject jsonObject, String name) throws NumberFormatException, JSONException {
-		return Double.parseDouble(jsonObject.getString(name));
 	}
 }

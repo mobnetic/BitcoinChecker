@@ -3,13 +3,13 @@ package com.mobnetic.coinguardian.model.market;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardian.util.ParseUtils;
 import com.mobnetic.coinguardiandatamodule.R;
 
 public class AllCoin extends Market {
@@ -31,16 +31,12 @@ public class AllCoin extends Market {
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject dataJsonObject = jsonObject.getJSONObject("data");
-		ticker.bid = getDoubleFromString(dataJsonObject, "top_bid");
-		ticker.ask = getDoubleFromString(dataJsonObject, "top_ask");
-		ticker.vol = getDoubleFromString(dataJsonObject, "volume_24h_"+checkerInfo.getCurrencyBase());
-		ticker.high = getDoubleFromString(dataJsonObject, "max_24h_price");
-		ticker.low = getDoubleFromString(dataJsonObject, "min_24h_price");
-		ticker.last = getDoubleFromString(dataJsonObject, "trade_price");
-	}
-	
-	private double getDoubleFromString(JSONObject jsonObject, String name) throws NumberFormatException, JSONException {
-		return Double.parseDouble(jsonObject.getString(name));
+		ticker.bid = ParseUtils.getDoubleFromString(dataJsonObject, "top_bid");
+		ticker.ask = ParseUtils.getDoubleFromString(dataJsonObject, "top_ask");
+		ticker.vol = ParseUtils.getDoubleFromString(dataJsonObject, "volume_24h_"+checkerInfo.getCurrencyBase());
+		ticker.high = ParseUtils.getDoubleFromString(dataJsonObject, "max_24h_price");
+		ticker.low = ParseUtils.getDoubleFromString(dataJsonObject, "min_24h_price");
+		ticker.last = ParseUtils.getDoubleFromString(dataJsonObject, "trade_price");
 	}
 	
 	@Override

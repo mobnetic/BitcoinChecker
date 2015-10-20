@@ -3,14 +3,14 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardian.util.ParseUtils;
 
 public class Uphold extends Market {
 
@@ -30,13 +30,9 @@ public class Uphold extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = getDoubleFromString(jsonObject, "bid");
-		ticker.ask = getDoubleFromString(jsonObject, "ask");
+		ticker.bid = ParseUtils.getDoubleFromString(jsonObject, "bid");
+		ticker.ask = ParseUtils.getDoubleFromString(jsonObject, "ask");
 		ticker.last = ((ticker.bid+ticker.ask)/2); //This is how Uphold operate on production (as I observed)
-	}
-	
-	private double getDoubleFromString(JSONObject jsonObject, String name) throws NumberFormatException, JSONException {
-		return Double.parseDouble(jsonObject.getString(name));
 	}
 
 	// ====================

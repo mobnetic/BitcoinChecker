@@ -156,6 +156,7 @@ public class VirtualCurrency {
 	public static final String KDC = "KDC";
 	public static final String KGC = "KGC";
 	public static final String KKC = "KKC";
+	public static final String KNC = "KNC";
 	public static final String KOI = "KOI";
 	public static final String KRN = "KRN";
 	public static final String KUN = "KUN";
