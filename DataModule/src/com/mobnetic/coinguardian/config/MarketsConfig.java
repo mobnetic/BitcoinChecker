@@ -95,6 +95,7 @@ import com.mobnetic.coinguardian.model.market.Winkdex;
 import com.mobnetic.coinguardian.model.market.YoBit;
 import com.mobnetic.coinguardian.model.market.Zaydo;
 import com.mobnetic.coinguardian.model.market.SevenNineSix;
+import com.mobnetic.coinguardian.model.market.BitoEX;
 
 public class MarketsConfig {
 
@@ -196,5 +197,6 @@ public class MarketsConfig {
 		addMarket(new Uphold());
 		addMarket(new YoBit());
 //		addMarket(new FoscEx());
+		addMarket(new BitoEX());
 	}
 }
