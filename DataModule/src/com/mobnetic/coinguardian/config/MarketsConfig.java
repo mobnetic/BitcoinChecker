@@ -22,6 +22,7 @@ import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.BitexLa;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
+import com.mobnetic.coinguardian.model.market.BitoEX;
 import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
@@ -197,6 +198,7 @@ public class MarketsConfig {
 		addMarket(new Uphold());
 		addMarket(new YoBit());
 		addMarket(new ShapeShift());
+		addMarket(new BitoEX());
 		addMarket(new OKCoinFutures());
 //		addMarket(new FoscEx());
 	}
