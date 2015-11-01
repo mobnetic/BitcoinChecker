@@ -10,6 +10,7 @@ import com.mobnetic.coinguardian.model.market.Bit2c;
 import com.mobnetic.coinguardian.model.market.BitBay;
 import com.mobnetic.coinguardian.model.market.BitCore;
 import com.mobnetic.coinguardian.model.market.BitKonan;
+import com.mobnetic.coinguardian.model.market.BitMarket24PL;
 import com.mobnetic.coinguardian.model.market.BitMarketPL;
 import com.mobnetic.coinguardian.model.market.BitMaszyna;
 import com.mobnetic.coinguardian.model.market.BitTrex;
@@ -21,7 +22,6 @@ import com.mobnetic.coinguardian.model.market.BitcoinVenezuela;
 import com.mobnetic.coinguardian.model.market.Bitcurex;
 import com.mobnetic.coinguardian.model.market.BitexLa;
 import com.mobnetic.coinguardian.model.market.Bitfinex;
-import com.mobnetic.coinguardian.model.market.BitMarket24PL;
 import com.mobnetic.coinguardian.model.market.Bitorado;
 import com.mobnetic.coinguardian.model.market.Bitso;
 import com.mobnetic.coinguardian.model.market.Bitstamp;
@@ -57,7 +57,6 @@ import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptopia;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
 import com.mobnetic.coinguardian.model.market.DolarBlueNet;
-import com.mobnetic.coinguardian.model.market.FoscEx;
 import com.mobnetic.coinguardian.model.market.FoxBit;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
@@ -76,12 +75,14 @@ import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
 import com.mobnetic.coinguardian.model.market.Mexbt;
 import com.mobnetic.coinguardian.model.market.MintPal;
+import com.mobnetic.coinguardian.model.market.OKCoinFutures;
 import com.mobnetic.coinguardian.model.market.Okcoin;
 import com.mobnetic.coinguardian.model.market.Paymium;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
 import com.mobnetic.coinguardian.model.market.QuadrigaCX;
 import com.mobnetic.coinguardian.model.market.Ripio;
+import com.mobnetic.coinguardian.model.market.SevenNineSix;
 import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
@@ -94,7 +95,6 @@ import com.mobnetic.coinguardian.model.market.Virtex;
 import com.mobnetic.coinguardian.model.market.Winkdex;
 import com.mobnetic.coinguardian.model.market.YoBit;
 import com.mobnetic.coinguardian.model.market.Zaydo;
-import com.mobnetic.coinguardian.model.market.SevenNineSix;
 
 public class MarketsConfig {
 
@@ -195,6 +195,7 @@ public class MarketsConfig {
 		addMarket(new BtcXIndia());
 		addMarket(new Uphold());
 		addMarket(new YoBit());
+		addMarket(new OKCoinFutures());
 //		addMarket(new FoscEx());
 	}
 }
