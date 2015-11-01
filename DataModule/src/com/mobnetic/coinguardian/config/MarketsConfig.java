@@ -83,6 +83,7 @@ import com.mobnetic.coinguardian.model.market.Prelude;
 import com.mobnetic.coinguardian.model.market.QuadrigaCX;
 import com.mobnetic.coinguardian.model.market.Ripio;
 import com.mobnetic.coinguardian.model.market.SevenNineSix;
+import com.mobnetic.coinguardian.model.market.ShapeShift;
 import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
@@ -195,6 +196,7 @@ public class MarketsConfig {
 		addMarket(new BtcXIndia());
 		addMarket(new Uphold());
 		addMarket(new YoBit());
+		addMarket(new ShapeShift());
 		addMarket(new OKCoinFutures());
 //		addMarket(new FoscEx());
 	}
