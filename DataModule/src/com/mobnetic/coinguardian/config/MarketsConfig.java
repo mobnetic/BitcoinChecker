@@ -82,7 +82,7 @@ import com.mobnetic.coinguardian.model.market.Ripio;
 import com.mobnetic.coinguardian.model.market.ShareXcoin;
 import com.mobnetic.coinguardian.model.market.SwissCex;
 import com.mobnetic.coinguardian.model.market.TheRock;
-import com.mobnetic.coinguardian.model.market.Unisend;
+import com.mobnetic.coinguardian.model.market.RipioXchg;
 import com.mobnetic.coinguardian.model.market.VaultOfSatoshi;
 import com.mobnetic.coinguardian.model.market.Vaultoro;
 import com.mobnetic.coinguardian.model.market.Vircurex;
@@ -149,7 +149,7 @@ public class MarketsConfig {
 		addMarket(new SwissCex());
 		addMarket(new Bleutrade());
 		addMarket(new ShareXcoin());
-		addMarket(new Unisend());
+		addMarket(new RipioXchg());
 		addMarket(new BitcoinVenezuela());
 		addMarket(new Korbit());
 		addMarket(new CoinTree());
