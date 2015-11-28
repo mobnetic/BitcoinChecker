@@ -40,6 +40,6 @@ public class CoinSecure extends Market {
 		ticker.high = jsonObject.getDouble("high");
 		ticker.low = jsonObject.getDouble("low");
 		ticker.last = jsonObject.getDouble("lastprice");
-		ticker.timestamp = jsonObject.getLong("timestamp");
+//		ticker.timestamp = jsonObject.getLong("timestamp");
 	}
 }
