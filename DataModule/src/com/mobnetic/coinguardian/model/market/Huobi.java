@@ -16,8 +16,8 @@ public class Huobi extends Market {
 
 	private final static String NAME = "Huobi";
 	private final static String TTS_NAME = NAME;
-	private final static String URL_BTC = "http://market.huobi.com/staticmarket/ticker_btc_json.js";
-	private final static String URL_LTC = "http://market.huobi.com/staticmarket/ticker_ltc_json.js";
+	private final static String URL_BTC = "http://api.huobi.com/staticmarket/ticker_btc_json.js";
+	private final static String URL_LTC = "http://api.huobi.com/staticmarket/ticker_ltc_json.js";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
