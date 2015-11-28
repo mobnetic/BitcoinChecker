@@ -84,6 +84,7 @@ import com.mobnetic.coinguardian.model.market.Paymium;
 import com.mobnetic.coinguardian.model.market.Poloniex;
 import com.mobnetic.coinguardian.model.market.Prelude;
 import com.mobnetic.coinguardian.model.market.QuadrigaCX;
+import com.mobnetic.coinguardian.model.market.Quoine;
 import com.mobnetic.coinguardian.model.market.Ripio;
 import com.mobnetic.coinguardian.model.market.SevenNineSix;
 import com.mobnetic.coinguardian.model.market.ShapeShift;
@@ -205,5 +206,6 @@ public class MarketsConfig {
 //		addMarket(new FoscEx());
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
+		addMarket(new Quoine());
 	}
 }
