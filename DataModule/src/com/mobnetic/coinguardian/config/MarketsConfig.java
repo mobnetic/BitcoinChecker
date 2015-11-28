@@ -44,6 +44,7 @@ import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
 import com.mobnetic.coinguardian.model.market.CoinMateIO;
+import com.mobnetic.coinguardian.model.market.CoinSecure;
 import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.CoinTraderNet;
 import com.mobnetic.coinguardian.model.market.CoinTree;
@@ -57,6 +58,7 @@ import com.mobnetic.coinguardian.model.market.Cryptoine;
 import com.mobnetic.coinguardian.model.market.Cryptonit;
 import com.mobnetic.coinguardian.model.market.Cryptopia;
 import com.mobnetic.coinguardian.model.market.Cryptsy;
+import com.mobnetic.coinguardian.model.market.Dashcurex;
 import com.mobnetic.coinguardian.model.market.DolarBlueNet;
 import com.mobnetic.coinguardian.model.market.FoxBit;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
@@ -201,5 +203,7 @@ public class MarketsConfig {
 		addMarket(new BitoEX());
 		addMarket(new OKCoinFutures());
 //		addMarket(new FoscEx());
+		addMarket(new CoinSecure());
+		addMarket(new Dashcurex());
 	}
 }
