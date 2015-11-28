@@ -50,16 +50,18 @@ public class Quoine extends Market {
 		final JSONArray pairsJsonArray = new JSONArray(responseString);
 		for(int i=0; i<pairsJsonArray.length(); ++i) {
 			final JSONObject pairJsonObject = pairsJsonArray.getJSONObject(i);
-			if ("CASH".equals(pairJsonObject.getString("code"))) {
-				final String currencyCounter = pairJsonObject.getString("currency");
-				final String pairName = pairJsonObject.getString("currency_pair_code");
-				if (pairName != null && pairName.endsWith(currencyCounter)) {
-					final String currencyBase = pairName.substring(0, pairName.length() - currencyCounter.length());
-					pairs.add(new CurrencyPairInfo(
-							currencyBase,
-							currencyCounter,
-							pairName));
-				}
+			if (!"CASH".equals(pairJsonObject.getString("code"))) {
+				continue;
+			}
+			
+			final String currencyCounter = pairJsonObject.getString("currency");
+			final String pairName = pairJsonObject.getString("currency_pair_code");
+			if (pairName != null && currencyCounter != null && pairName.endsWith(currencyCounter)) {
+				final String currencyBase = pairName.substring(0, pairName.length() - currencyCounter.length());
+				pairs.add(new CurrencyPairInfo(
+						currencyBase,
+						currencyCounter,
+						pairName));
 			}
 		}
 	}
