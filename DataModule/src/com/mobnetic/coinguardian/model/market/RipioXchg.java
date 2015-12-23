@@ -40,7 +40,6 @@ public class RipioXchg extends Market {
 
 		ticker.bid = bidJsonArray.getJSONObject(0).getDouble("price");
 		ticker.ask = askJsonArray.getJSONObject(0).getDouble("price");
-		ticker.last = ticker.ask;
 		ticker.timestamp = jsonObject.getInt("timestamp");
 		
 	}
