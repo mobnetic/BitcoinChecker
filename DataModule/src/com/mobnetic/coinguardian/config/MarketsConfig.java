@@ -49,6 +49,7 @@ import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.CoinTraderNet;
 import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
+import com.mobnetic.coinguardian.model.market.CoinbaseExchange;
 import com.mobnetic.coinguardian.model.market.Coinse;
 import com.mobnetic.coinguardian.model.market.Comkort;
 import com.mobnetic.coinguardian.model.market.CryptoAltex;
@@ -119,6 +120,7 @@ public class MarketsConfig {
 		addMarket(new Okcoin());
 		addMarket(new Cryptsy());
 		addMarket(new Coinbase());
+		addMarket(new CoinbaseExchange());
 		addMarket(new Vircurex());
 		addMarket(new Fxbtc());
 		addMarket(new Bter());
