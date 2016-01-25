@@ -73,6 +73,7 @@ import com.mobnetic.coinguardian.model.market.Koinim;
 import com.mobnetic.coinguardian.model.market.Korbit;
 import com.mobnetic.coinguardian.model.market.Kraken;
 import com.mobnetic.coinguardian.model.market.LakeBTC;
+import com.mobnetic.coinguardian.model.market.Livecoin;
 import com.mobnetic.coinguardian.model.market.LocalBitcoins;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
@@ -107,7 +108,7 @@ public class MarketsConfig {
 	private final static void addMarket(Market market) {
 		MarketsConfig.MARKETS.put(market.key, market);
 	}
-	
+
 	static {
 		addMarket(new Bitstamp());
 		addMarket(new Btcchina());
@@ -207,5 +208,6 @@ public class MarketsConfig {
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
+		addMarket(new Livecoin());
 	}
 }
