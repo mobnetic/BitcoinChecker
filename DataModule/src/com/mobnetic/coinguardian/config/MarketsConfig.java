@@ -64,6 +64,7 @@ import com.mobnetic.coinguardian.model.market.FoxBit;
 import com.mobnetic.coinguardian.model.market.Fxbtc;
 import com.mobnetic.coinguardian.model.market.FybSE;
 import com.mobnetic.coinguardian.model.market.FybSG;
+import com.mobnetic.coinguardian.model.market.Gemini;
 import com.mobnetic.coinguardian.model.market.HitBtc;
 import com.mobnetic.coinguardian.model.market.Huobi;
 import com.mobnetic.coinguardian.model.market.Igot;
@@ -107,7 +108,7 @@ public class MarketsConfig {
 	private final static void addMarket(Market market) {
 		MarketsConfig.MARKETS.put(market.key, market);
 	}
-	
+
 	static {
 		addMarket(new Bitstamp());
 		addMarket(new Btcchina());
@@ -207,5 +208,6 @@ public class MarketsConfig {
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
+	    addMarket(new Gemini());
 	}
 }
