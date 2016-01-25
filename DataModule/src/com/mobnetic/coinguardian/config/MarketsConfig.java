@@ -40,6 +40,7 @@ import com.mobnetic.coinguardian.model.market.CCex;
 import com.mobnetic.coinguardian.model.market.Campbx;
 import com.mobnetic.coinguardian.model.market.CexIO;
 import com.mobnetic.coinguardian.model.market.CleverCoin;
+import com.mobnetic.coinguardian.model.market.Coinapult;
 import com.mobnetic.coinguardian.model.market.CoinDesk;
 import com.mobnetic.coinguardian.model.market.CoinJar;
 import com.mobnetic.coinguardian.model.market.CoinMarketIO;
@@ -107,7 +108,7 @@ public class MarketsConfig {
 	private final static void addMarket(Market market) {
 		MarketsConfig.MARKETS.put(market.key, market);
 	}
-	
+
 	static {
 		addMarket(new Bitstamp());
 		addMarket(new Btcchina());
@@ -207,5 +208,6 @@ public class MarketsConfig {
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
+        addMarket(new Coinapult());
 	}
 }
