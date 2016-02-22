@@ -74,6 +74,7 @@ import com.mobnetic.coinguardian.model.market.Koinim;
 import com.mobnetic.coinguardian.model.market.Korbit;
 import com.mobnetic.coinguardian.model.market.Kraken;
 import com.mobnetic.coinguardian.model.market.LakeBTC;
+import com.mobnetic.coinguardian.model.market.Livecoin;
 import com.mobnetic.coinguardian.model.market.LocalBitcoins;
 import com.mobnetic.coinguardian.model.market.McxNOW;
 import com.mobnetic.coinguardian.model.market.Mercado;
@@ -209,5 +210,6 @@ public class MarketsConfig {
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
 		addMarket(new CoinbaseExchange());
+		addMarket(new Livecoin());
 	}
 }
