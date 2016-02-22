@@ -28,11 +28,21 @@ public class Livecoin extends Market {
 
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = jsonObject.getDouble("best_bid");
-		ticker.ask = jsonObject.getDouble("best_ask");
-		ticker.vol = jsonObject.getDouble("volume");
-		ticker.high = jsonObject.getDouble("high");
-		ticker.low = jsonObject.getDouble("low");
+		if (!jsonObject.isNull("best_bid")) {
+			ticker.bid = jsonObject.getDouble("best_bid");
+		}
+		if (!jsonObject.isNull("best_ask")) {
+			ticker.ask = jsonObject.getDouble("best_ask");
+		}
+		if (!jsonObject.isNull("volume")) {
+			ticker.vol = jsonObject.getDouble("volume");
+		}
+		if (!jsonObject.isNull("high")) {
+			ticker.high = jsonObject.getDouble("high");
+		}
+		if (!jsonObject.isNull("low")) {
+			ticker.low = jsonObject.getDouble("low");
+		}
 		ticker.last = jsonObject.getDouble("last");
 	}
 
