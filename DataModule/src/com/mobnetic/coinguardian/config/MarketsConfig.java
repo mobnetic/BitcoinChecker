@@ -49,6 +49,7 @@ import com.mobnetic.coinguardian.model.market.CoinSwap;
 import com.mobnetic.coinguardian.model.market.CoinTraderNet;
 import com.mobnetic.coinguardian.model.market.CoinTree;
 import com.mobnetic.coinguardian.model.market.Coinbase;
+import com.mobnetic.coinguardian.model.market.CoinbaseExchange;
 import com.mobnetic.coinguardian.model.market.Coinse;
 import com.mobnetic.coinguardian.model.market.Comkort;
 import com.mobnetic.coinguardian.model.market.CryptoAltex;
@@ -207,5 +208,6 @@ public class MarketsConfig {
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
+		addMarket(new CoinbaseExchange());
 	}
 }

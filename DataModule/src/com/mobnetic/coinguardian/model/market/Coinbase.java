@@ -15,16 +15,16 @@ public class Coinbase extends Market {
 
 	private final static String NAME = "Coinbase";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://coinbase.com/api/v1/prices/buy?currency=%1$s";
-	private final static String URL_SECOND = "https://coinbase.com/api/v1/prices/sell?currency=%1$s";
+	private final static String URL = "https://api.coinbase.com/v2/prices/buy?currency=%1$s";
+	private final static String URL_SECOND = "https://api.coinbase.com/v2/prices/sell?currency=%1$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.USD
-//				Currency.EUR,
+				Currency.USD,
+				Currency.EUR,
 //				Currency.CHF,
-//				Currency.GBP,
+				Currency.GBP,
 //				Currency.CAD,
 //				Currency.CNY,
 //				Currency.RUB,
@@ -202,7 +202,7 @@ public class Coinbase extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		JSONObject subtotal = jsonObject.getJSONObject("subtotal");
+		JSONObject subtotal = jsonObject.getJSONObject("data");
 		if(requestId==0) {
 			ticker.ask = subtotal.getDouble("amount");
 			ticker.last = subtotal.getDouble("amount");
