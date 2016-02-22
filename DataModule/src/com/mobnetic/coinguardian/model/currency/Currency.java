@@ -157,6 +157,8 @@ public class Currency {
 	public static final String VUV = "VUV";
 	public static final String WST = "WST";
 	public static final String XAF = "XAF";
+	public static final String XAG = "XAG";
+	public static final String XAU = "XAU";
 	public static final String XCD = "XCD";
 	public static final String XOF = "XOF";
 	public static final String XPF = "XPF";
