@@ -120,7 +120,6 @@ public class MarketsConfig {
 		addMarket(new Okcoin());
 		addMarket(new Cryptsy());
 		addMarket(new Coinbase());
-		addMarket(new CoinbaseExchange());
 		addMarket(new Vircurex());
 		addMarket(new Fxbtc());
 		addMarket(new Bter());
@@ -209,5 +208,6 @@ public class MarketsConfig {
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
+		addMarket(new CoinbaseExchange());
 	}
 }

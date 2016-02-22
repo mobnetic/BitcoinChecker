@@ -42,9 +42,9 @@ public class CoinbaseExchange extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.ask = jsonObject.getDouble("ask");
 		ticker.bid = jsonObject.getDouble("bid");
-		ticker.last = jsonObject.getDouble("price");
+		ticker.ask = jsonObject.getDouble("ask");
 		ticker.vol = jsonObject.getDouble("volume");
+		ticker.last = jsonObject.getDouble("price");
 	}
 }
