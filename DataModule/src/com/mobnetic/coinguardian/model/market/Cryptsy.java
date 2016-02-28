@@ -15,8 +15,8 @@ public class Cryptsy extends Market {
 
 	private final static String NAME = "Cryptsy";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=%1$s";
-	private final static String URL_CURRENCY_PAIRS = "http://pubapi.cryptsy.com/api.php?method=orderdatav2";
+	private final static String URL = "https://cryptsy.com/api/v2/markets/%1$s";
+	private final static String URL_CURRENCY_PAIRS = "https://cryptsy.com/api/v2/markets";
 	private final static HashMap<String, Integer> CURRENCY_PAIRS_IDS = new HashMap<String, Integer>(151);
 	static {
 		// Kept for backward compatibility
@@ -190,14 +190,13 @@ public class Cryptsy extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		final JSONObject returnObject = jsonObject.getJSONObject("return");
-		final JSONObject marketsObject = returnObject.getJSONObject("markets");
-		final JSONObject pairObject = marketsObject.getJSONObject(marketsObject.names().getString(0));
-		
-		ticker.bid = getFirstPriceFromOrdersArray(pairObject.optJSONArray("buyorders"));
-		ticker.ask = getFirstPriceFromOrdersArray(pairObject.optJSONArray("sellorders"));
-		ticker.vol = pairObject.getDouble("volume");
-		ticker.last = pairObject.getDouble("lasttradeprice");
+		final JSONObject dataJsonObject = jsonObject.getJSONObject("data");
+		final JSONObject daySummaryObject = dataJsonObject.getJSONObject("24hr");
+				
+		// ticker.vol = daySummaryObject.getDouble("volume"); TODO enable later when there will be any documentation of real data to test on
+		ticker.high = daySummaryObject.getDouble("price_high");
+		ticker.low = daySummaryObject.getDouble("price_low");
+		ticker.last = dataJsonObject.getJSONObject("last_trade").getDouble("price");
 	}
 	
 	@Override
@@ -206,19 +205,6 @@ public class Cryptsy extends Market {
 			return "Perform sync and re-add this Checker";
 		}
 		return super.parseError(requestId, responseString, checkerInfo);
-	}
-	
-	private double getFirstPriceFromOrdersArray(JSONArray ordersArray) {
-		try {
-			if(ordersArray!=null && ordersArray.length()>0) {
-				final JSONObject jsonObject = ordersArray.optJSONObject(0);
-				if(jsonObject!=null)
-					return jsonObject.getDouble("price");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Ticker.NO_DATA;
 	}
 	
 	// ====================
@@ -230,29 +216,22 @@ public class Cryptsy extends Market {
 	}
 	
 	@Override
-	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
-		try {
-			// try to reduce JSON response before parsing
-			responseString = responseString
-				.replaceAll(",\"sellorders\":\\[[{a-z0-9\":.}, ]*\\]", "")
-				.replaceAll(",\"buyorders\":\\[[{a-z0-9\":.}, ]*\\]", "");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		super.parseCurrencyPairs(requestId, responseString, pairs);
-	}
-	
-	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
-		final JSONObject returnObject = jsonObject.getJSONObject("return");
-		final JSONArray marketNames = returnObject.names();
-		
-		for(int i=0; i<marketNames.length(); ++i) {
-			JSONObject marketObject = returnObject.getJSONObject(marketNames.getString(i));
+		final JSONArray dataJsonArray = jsonObject.getJSONArray("data");
+		for(int i=0; i<dataJsonArray.length(); ++i) {
+			final JSONObject marketObject = dataJsonArray.getJSONObject(i);
+			final String currencyPair = marketObject.getString("label");
+			if(currencyPair==null) {
+				continue;
+			}
+			final String[] currencies = currencyPair.split("/");
+			if(currencies.length!=2 || currencies[0] == null || currencies[1] == null)
+				continue;
+			
 			pairs.add(new CurrencyPairInfo(
-					marketObject.getString("primarycode"),
-					marketObject.getString("secondarycode"),
-					marketObject.getString("marketid")
+					currencies[0],
+					currencies[1],
+					marketObject.getString("id")
 				));
 		}
 	}
