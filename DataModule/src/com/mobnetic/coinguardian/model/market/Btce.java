@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.mobnetic.coinguardian.config.Settings;
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
@@ -19,8 +20,10 @@ public class Btce extends Market {
 
 	private final static String NAME = "Btc-e";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://btc-e.com/api/3/ticker/%1$s";
-	private final static String URL_CURRENCY_PAIRS = "https://btc-e.com/api/3/info";
+	private final static String URL_HOST_COM = "btc-e.com";
+	private final static String URL_HOST_NZ = "btc-e.nz";
+	private final static String URL = "https://%1$s/api/3/ticker/%2$s";
+	private final static String URL_CURRENCY_PAIRS = "https://%1$s/api/3/info";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -59,13 +62,20 @@ public class Btce extends Market {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
 	
+	private String detectHost() {
+		if (Settings.userCountry != null && Settings.userCountry.endsWith("RU")) {
+			return URL_HOST_NZ;
+		}
+		return URL_HOST_COM;
+	}
+	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
 		String pairId = checkerInfo.getCurrencyPairId();
 		if(checkerInfo.getCurrencyPairId() == null) {
 			pairId = String.format("%1$s_%2$s", checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
 		}
-		return String.format(URL, pairId);
+		return String.format(URL, detectHost(), pairId);
 	}
 	
 	@Override
@@ -87,7 +97,7 @@ public class Btce extends Market {
 	// ====================
 	@Override
 	public String getCurrencyPairsUrl(int requestId) {
-		return URL_CURRENCY_PAIRS;
+		return String.format(URL_CURRENCY_PAIRS, detectHost());
 	}
 	
 	@Override

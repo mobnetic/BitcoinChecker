@@ -111,7 +111,6 @@ public class MarketsConfig {
 		addMarket(new CoinSecure());
 		addMarket(new Dashcurex());
 		addMarket(new Quoine());
-		addMarket(new CoinbaseExchange());
 		addMarket(new Livecoin());
 		addMarket(new Gemini());
 		addMarket(new Coinapult());

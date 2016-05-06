@@ -103,6 +103,7 @@ public class VirtualCurrency {
 	public static final String EMC2 = "EMC2";
 	public static final String EMD = "EMD";
 	public static final String EMO = "EMO";
+	public static final String ETH = "ETH";
 	public static final String ETOK = "ETOK";
 	public static final String eTOK = "eTOK";
 	public static final String EUC = "EUC";

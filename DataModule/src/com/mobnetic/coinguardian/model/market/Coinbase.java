@@ -18,14 +18,15 @@ public class Coinbase extends Market {
 
 	private final static String NAME = "Coinbase";
 	private final static String TTS_NAME = NAME;
-	private final static String URL_TICKER_BUY = "https://api.coinbase.com/v2/prices/buy?currency=%1$s";
-	private final static String URL_TICKER_SELL = "https://api.coinbase.com/v2/prices/sell?currency=%1$s";
-	private final static String URL_CURRENCY_PAIRS = "https://api.coinbase.com/v2/currencies";
+	private final static String URL = "https://api.exchange.coinbase.com/products/%1$s-%2$s/ticker";
+	private final static String URL_CURRENCY_PAIRS = "https://api.exchange.coinbase.com/products/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.USD
+				Currency.USD,
+				Currency.EUR,
+				Currency.GBP
 			});
 	}
 	
@@ -34,43 +35,35 @@ public class Coinbase extends Market {
 	}
 
 	@Override
-	public int getNumOfRequests(CheckerInfo checkerInfo) {
-		return 2;
-	}
-
-	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		if (requestId == 0) {
-			return String.format(URL_TICKER_BUY, checkerInfo.getCurrencyCounter());
-		} else {
-			return String.format(URL_TICKER_SELL, checkerInfo.getCurrencyCounter());
-		}
+		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
 	}
-
+	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		JSONObject data = jsonObject.getJSONObject("data");
-		if (requestId == 0) {
-			ticker.ask = data.getDouble("amount");
-			ticker.last = data.getDouble("amount");
-		} else {
-			ticker.bid = data.getDouble("amount");
-		}
+		ticker.bid = jsonObject.getDouble("bid");
+		ticker.ask = jsonObject.getDouble("ask");
+		ticker.vol = jsonObject.getDouble("volume");
+		ticker.last = jsonObject.getDouble("price");
 	}
 
+	// ====================
+	// Get currency pairs
+	// ====================
 	@Override
 	public String getCurrencyPairsUrl(int requestId) {
 		return URL_CURRENCY_PAIRS;
 	}
-
+	
 	@Override
-	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
-		final JSONArray data = jsonObject.getJSONArray("data");
-		for (int i = 0; i < data.length(); i++) {
-			final JSONObject currencyJsonObject = data.getJSONObject(i);
-			final String currency = currencyJsonObject.getString("id");
-			pairs.add(new CurrencyPairInfo(VirtualCurrency.BTC, currency, currency));
+	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
+		final JSONArray jsonArray = new JSONArray(responseString);
+		for (int i = 0; i < jsonArray.length(); ++i) {
+			final JSONObject pairJsonObject = jsonArray.getJSONObject(i);
+			pairs.add(new CurrencyPairInfo(
+					pairJsonObject.getString("base_currency"),
+					pairJsonObject.getString("quote_currency"),
+					pairJsonObject.getString("id")));
 		}
 	}
-
 }
