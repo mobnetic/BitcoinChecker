@@ -115,5 +115,6 @@ public class MarketsConfig {
 		addMarket(new Gemini());
 		addMarket(new Coinapult());
 		addMarket(new Btc38());
+		addMarket(new BitMEX());
 	}
 }
