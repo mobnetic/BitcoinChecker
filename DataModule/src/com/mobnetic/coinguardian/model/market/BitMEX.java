@@ -12,8 +12,7 @@ public class BitMEX extends Market {
 
 	private final static String NAME = "BitMEX";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://www.bitmex.com/api/v1/trade?symbol=%1$s%2$s&count=1&start=0&reverse=true";
-	private final static String URL_QUOTES = "https://www.bitmex.com/api/v1/quote?symbol=%1$s%2$s&count=1&start=0&reverse=true";
+	private final static String URL = "https://www.bitmex.com/api/v1/instrument?symbol=%1$s%2$s&columns=bidPrice,askPrice,volume24h,highPrice,lowPrice,lastPrice";
 	private final static String URL_CURRENCY_PAIRS = "https://www.bitmex.com/api/v1/instrument/activeIntervals";
 
 	public BitMEX() {
@@ -22,15 +21,7 @@ public class BitMEX extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-        if (requestId == 0)
-            return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
-        else
-            return String.format(URL_QUOTES, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
-	}
-
-	@Override
-	public int getNumOfRequests(CheckerInfo checkerInfo) {
-		return 2;
+        return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
 	}
 
 	@Override
@@ -40,12 +31,12 @@ public class BitMEX extends Market {
 
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-        if (requestId == 0) {
-            ticker.last = jsonObject.getDouble("price");
-        } else {
-            ticker.bid = jsonObject.getDouble("bidPrice");
-            ticker.ask = jsonObject.getDouble("askPrice");
-        }
+        ticker.bid = jsonObject.getDouble("bidPrice");
+        ticker.ask = jsonObject.getDouble("askPrice");
+        ticker.vol = jsonObject.getDouble("volume24h");
+        ticker.high = jsonObject.getDouble("highPrice");
+        ticker.low = jsonObject.getDouble("lowPrice");
+        ticker.last = jsonObject.getDouble("lastPrice");
 	}
 
 	// ====================
