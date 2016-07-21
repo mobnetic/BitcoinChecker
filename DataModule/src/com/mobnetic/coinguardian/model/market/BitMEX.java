@@ -1,5 +1,7 @@
 package com.mobnetic.coinguardian.model.market;
 
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,10 +35,11 @@ public class BitMEX extends Market {
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
         ticker.bid = jsonObject.getDouble("bidPrice");
         ticker.ask = jsonObject.getDouble("askPrice");
-        ticker.vol = jsonObject.getDouble("volume24h");
-        ticker.high = jsonObject.getDouble("highPrice");
-        ticker.low = jsonObject.getDouble("lowPrice");
         ticker.last = jsonObject.getDouble("lastPrice");
+        if (!jsonObject.isNull("highPrice"))
+            ticker.high = jsonObject.getDouble("highPrice");
+        if (!jsonObject.isNull("lowPrice"))
+            ticker.low = jsonObject.getDouble("lowPrice");
 	}
 
 	// ====================
@@ -49,16 +52,17 @@ public class BitMEX extends Market {
 
 	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
-		final JSONArray pairNames = jsonObject.symbols();
+		final JSONArray pairNames = jsonObject.getJSONArray("symbols");
 
 		for(int i=0; i<pairNames.length(); ++i) {
 			String pairId = pairNames.getString(i);
 			if(pairId==null)
 				continue;
 
+            String base = null, counter = null;
             try {
-			String base = pairId.substring(0, 3);
-			String counter = pairId.substring(3);
+                base = pairId.substring(0, 3);
+                counter = pairId.substring(3);
             } catch (IndexOutOfBoundsException e) {
                 continue;
             }
