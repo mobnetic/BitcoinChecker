@@ -30,6 +30,7 @@ public class VirtualCurrency {
 	public static final String BEN = "BEN";
 	public static final String BET = "BET";
 	public static final String BF1 = "BF1";
+	public static final String BFX = "BFX";
 	public static final String BIL = "BIL";
 	public static final String BLA = "BLA";
 	public static final String BLC = "BLC";
@@ -37,7 +38,7 @@ public class VirtualCurrency {
 	public static final String BTB = "BTB";
 	public static final String BTC = "BTC";
 	public static final String mBTC = "mBTC";
-	public static final String uBTC = "µBTC";
+	public static final String uBTC = "ï¿½BTC";
 	public static final String Satoshi = "Satoshi";
 	public static final String BTCS = "BTCS";
 	public static final String BTE = "BTE";
