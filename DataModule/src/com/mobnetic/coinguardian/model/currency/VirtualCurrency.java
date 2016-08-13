@@ -38,7 +38,7 @@ public class VirtualCurrency {
 	public static final String BTB = "BTB";
 	public static final String BTC = "BTC";
 	public static final String mBTC = "mBTC";
-	public static final String uBTC = "�BTC";
+	public static final String uBTC = "µBTC";
 	public static final String Satoshi = "Satoshi";
 	public static final String BTCS = "BTCS";
 	public static final String BTE = "BTE";
