@@ -20,9 +20,14 @@ public class Bitfinex extends Market {
 	private final static String URL = "https://api.bitfinex.com/v1/pubticker/%1$s%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
+		CURRENCY_PAIRS.put(VirtualCurrency.BFX, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
 			});
+
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				Currency.USD,
 				VirtualCurrency.BTC
