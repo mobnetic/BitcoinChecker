@@ -1,7 +1,0 @@
-#Sun Oct 02 12:43:34 CEST 2016
-base.0=C\:\\Users\\Maciej\\AndroidStudioProjects\\BitcoinCheckerGithub\\dataModuleTester\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_9957d10540cea93d53f2aeb108e288fc34660a91
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=C\:\\Users\\Maciej\\AndroidStudioProjects\\BitcoinCheckerGithub\\dataModuleTester\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_48f2ccd67b91491696afc494973a48dd10b167dd\\classes.dex
-base.1=C\:\\Users\\Maciej\\AndroidStudioProjects\\BitcoinCheckerGithub\\dataModuleTester\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_48f2ccd67b91491696afc494973a48dd10b167dd
-file.0=C\:\\Users\\Maciej\\AndroidStudioProjects\\BitcoinCheckerGithub\\dataModuleTester\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_9957d10540cea93d53f2aeb108e288fc34660a91\\classes.dex
