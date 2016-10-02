@@ -1,0 +1,28 @@
+[
+    {
+        "outputFile": "C:\\Users\\Maciej\\AndroidStudioProjects\\BitcoinCheckerGithub\\dataModuleTester\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 187
+                },
+                "from": {
+                    "file": "C:\\Users\\Maciej\\AndroidStudioProjects\\BitcoinCheckerGithub\\dataModuleTester\\src\\main\\res\\values-v14\\styles.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 225,
+                        "endLine": 9,
+                        "endColumn": 12,
+                        "endOffset": 359
+                    }
+                }
+            }
+        ]
+    }
+]

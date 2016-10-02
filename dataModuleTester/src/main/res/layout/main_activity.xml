@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal"
+	    android:padding="10dp">
+	    
+	    <Spinner android:id="@+id/marketSpinner"
+	   	    android:layout_width="match_parent"
+	   		android:layout_height="wrap_content"
+	   		android:spinnerMode="dialog"
+	   	    />
+	    
+	    
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:minHeight="?android:attr/listPreferredItemHeight"
+	    	android:orientation="horizontal"
+	    	android:gravity="center_vertical">
+		    <LinearLayout android:id="@+id/currencySpinnersWrapper"
+		    	android:layout_width="0dp"
+		    	android:layout_height="wrap_content"
+		    	android:layout_weight="1"
+		    	android:orientation="horizontal" >
+		    	<Spinner android:id="@+id/currencyBaseSpinner"
+		    	    android:layout_width="0dp"
+		    		android:layout_height="wrap_content"
+		    		android:layout_weight="1"
+		    		android:spinnerMode="dialog"
+		    	    />
+		    	<TextView
+		    	    android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"
+		    		android:textAppearance="?android:attr/textAppearanceLarge"
+		    		android:layout_gravity="center_vertical"
+		    		android:text="/"
+		    	    />
+		    	<Spinner android:id="@+id/currencyCounterSpinner"
+		    	    android:layout_width="0dp"
+		    		android:layout_height="wrap_content"
+		    		android:layout_weight="1"
+		    		android:spinnerMode="dialog"
+		    	    />
+		   	</LinearLayout>
+		   	<TextView android:id="@+id/dynamicCurrencyPairsWarningView"
+	            android:layout_width="0dp"
+		    	android:layout_height="wrap_content"
+		    	android:layout_weight="1"
+	            android:ellipsize="marquee"
+	            android:fadingEdge="horizontal"
+	            android:singleLine="true"
+	            android:textAppearance="?android:attr/textAppearanceMedium"
+	            android:text="@string/checker_add_check_currency_empty_warning_title"/>
+		   	<ImageButton android:id="@+id/dynamicCurrencyPairsInfoView"
+				android:layout_width="wrap_content"
+		    	android:layout_height="match_parent"
+		    	android:minWidth="48dp"
+		    	android:src="@drawable/ic_action_info"
+		    	android:scaleType="center"/>
+	   	</LinearLayout>
+	   	
+	    <Spinner android:id="@+id/futuresContractTypeSpinner"
+    		android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:spinnerMode="dialog"
+    		/>
+	   	
+	    <Button android:id="@+id/getResultButton"
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="10dp"
+	    	android:layout_marginBottom="15dp"
+	    	android:text="Get price!"
+	        />
+	    
+	    <FrameLayout
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content">
+	    	
+	        <ProgressBar android:id="@+id/progressBar"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:layout_gravity="center"
+	    		android:indeterminate="true"/>
+	        <TextView android:id="@+id/resultView"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:textAppearance="?android:attr/textAppearanceMedium"
+	    		android:textIsSelectable="true"/>
+	        
+	    </FrameLayout>
+	    
+	</LinearLayout>
+</ScrollView>

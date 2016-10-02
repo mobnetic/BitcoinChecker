@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="market_caution_unknown">Selected market was probably removed and does not exist. Please choose another one.</string>
+    <string name="market_caution_much_data">Caution: Due to this exchange\'s specification checking price on it may consume a lot of mobile data (while on mobile network). Be sure that you understand the possible consequences.</string>
+    <string name="market_caution_allcoin">This exchange has limit for 3000 requests per hour. Make sure you don\'t exceed the limit:)</string>
+    <string name="market_caution_yobit">This exchange has limit for 100 requests per minute. Make sure you don\'t exceed the limit:)</string>
+    
+</resources>

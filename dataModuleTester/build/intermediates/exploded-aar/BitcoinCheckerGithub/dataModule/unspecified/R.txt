@@ -1,0 +1,4 @@
+int string market_caution_allcoin 0x7f020000
+int string market_caution_much_data 0x7f020001
+int string market_caution_unknown 0x7f020002
+int string market_caution_yobit 0x7f020003
