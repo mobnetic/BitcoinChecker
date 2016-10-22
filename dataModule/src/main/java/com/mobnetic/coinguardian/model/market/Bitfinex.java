@@ -31,10 +31,18 @@ public class Bitfinex extends Market {
 				Currency.USD,
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETC, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.RRT, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
 	}
 	
 	public Bitfinex() {

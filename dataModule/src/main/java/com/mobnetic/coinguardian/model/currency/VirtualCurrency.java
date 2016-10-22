@@ -104,6 +104,7 @@ public class VirtualCurrency {
 	public static final String EMC2 = "EMC2";
 	public static final String EMD = "EMD";
 	public static final String EMO = "EMO";
+	public static final String ETC = "ETC";
 	public static final String ETH = "ETH";
 	public static final String ETOK = "ETOK";
 	public static final String eTOK = "eTOK";
@@ -262,6 +263,7 @@ public class VirtualCurrency {
 	public static final String RON = "RON";
 	public static final String RPC = "RPC";
 	public static final String RPD = "RPD";
+	public static final String RRT = "RRT";
 	public static final String RSC = "RSC";
 	public static final String RBY = "RBY";
 	public static final String RYC = "RYC";
