@@ -1,10 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
-import org.json.JSONObject;
-
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
@@ -13,6 +8,11 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 import com.mobnetic.coinguardian.util.ParseUtils;
 import com.mobnetic.coinguardian.util.TimeUtils;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 public class Bitfinex extends Market {
 
 	private final static String NAME = "Bitfinex";
@@ -20,6 +20,10 @@ public class Bitfinex extends Market {
 	private final static String URL = "https://api.bitfinex.com/v1/pubticker/%1$s%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
+		CURRENCY_PAIRS.put(VirtualCurrency.BFX, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
 			});
