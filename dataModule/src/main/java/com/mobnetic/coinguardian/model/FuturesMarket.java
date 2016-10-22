@@ -13,7 +13,6 @@ public abstract class FuturesMarket extends Market {
 
 	@Override
 	public final String getUrl(int requestId, CheckerInfo checkerInfo) {
-		// TODO Auto-generated method stub
 		return getUrl(requestId, checkerInfo, checkerInfo.getContractType());
 	}
 	
