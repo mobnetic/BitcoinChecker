@@ -24,7 +24,7 @@ public class Bitstamp extends Market {
 			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
 				Currency.USD
-		});
+			});
 	}
 	
 	public Bitstamp() {
