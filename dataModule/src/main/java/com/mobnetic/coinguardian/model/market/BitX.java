@@ -2,10 +2,13 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobnetic.coinguardian.model.CheckerInfo;
+import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
@@ -15,13 +18,15 @@ public class BitX extends Market {
 
 	private final static String NAME = "BitX.co";
 	private final static String TTS_NAME = "Bit X";
-	private final static String URL = "https://api.mybitx.com/api/1/ticker?pair=%1$s%2$s";
+	private final static String URL = "https://api.mybitx.com/api/1/ticker?pair=%1$s";
+	private final static String URL_CURRENCY_PAIRS = "https://api.mybitx.com/api/1/tickers";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.NAD,
-				Currency.KES,
+				Currency.IDR,
+				Currency.SGD,
 				Currency.MYR,
+				Currency.NGN,
 				Currency.ZAR
 			});
 	}
@@ -32,15 +37,21 @@ public class BitX extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		String currencyBase = fixCurrency(checkerInfo.getCurrencyBase());
-		String currencyCounter = checkerInfo.getCurrencyCounter();
-
-		return String.format(URL, currencyBase, currencyCounter);
+		final String pairString;
+		if(checkerInfo.getCurrencyPairId()==null) {
+			pairString = String.format("%1$s%2$s", fixCurrency(checkerInfo.getCurrencyBase()), fixCurrency(checkerInfo.getCurrencyCounter()));
+		} else {
+			pairString = checkerInfo.getCurrencyPairId();
+		}
+		return String.format(URL, pairString);
 	}
 	
 	private String fixCurrency(String currency) {
-		if(VirtualCurrency.BTC.equals(currency))
+		if(VirtualCurrency.BTC.equals(currency)) {
 			return VirtualCurrency.XBT;
+		} else if(VirtualCurrency.XBT.equals(currency)) {
+			return VirtualCurrency.BTC;
+		}
 
 		return currency;
 	}
@@ -52,5 +63,37 @@ public class BitX extends Market {
 		ticker.vol = jsonObject.getDouble("rolling_24_hour_volume");		
 		ticker.last = jsonObject.getDouble("last_trade");		
 		ticker.timestamp = jsonObject.getLong("timestamp");
+	}
+
+	// ====================
+	// Get currency pairs
+	// ====================
+	@Override
+	public String getCurrencyPairsUrl(int requestId) {
+		return URL_CURRENCY_PAIRS;
+	}
+
+	@Override
+	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
+		final JSONArray dataJsonArray = jsonObject.getJSONArray("tickers");
+		for(int i=0; i<dataJsonArray.length(); ++i) {
+			final String currencyPair = dataJsonArray.getJSONObject(i).getString("pair");
+			if(currencyPair==null) {
+				continue;
+			}
+			String currencyBase;
+			String currencyCounter;
+			try {
+				currencyBase = fixCurrency(currencyPair.substring(0, 3));
+				currencyCounter = fixCurrency(currencyPair.substring(3));
+			} catch (Exception e) {
+				continue;
+			}
+			pairs.add(new CurrencyPairInfo(
+					currencyBase,
+					currencyCounter,
+					currencyPair
+			));
+		}
 	}
 }
