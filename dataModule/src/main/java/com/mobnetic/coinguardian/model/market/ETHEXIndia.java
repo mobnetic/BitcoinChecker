@@ -28,7 +28,7 @@ public class ETHEXIndia extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return URL;
 	}
 	
 	@Override
