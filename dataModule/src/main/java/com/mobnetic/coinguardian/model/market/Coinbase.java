@@ -18,8 +18,8 @@ public class Coinbase extends Market {
 
 	private final static String NAME = "Coinbase";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://api.exchange.coinbase.com/products/%1$s-%2$s/ticker";
-	private final static String URL_CURRENCY_PAIRS = "https://api.exchange.coinbase.com/products/";
+	private final static String URL = "https://api.gdax.com/products/%1$s-%2$s/ticker";
+	private final static String URL_CURRENCY_PAIRS = "https://api.gdax.com/products/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	
 	static {
