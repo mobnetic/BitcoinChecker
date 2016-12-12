@@ -15,7 +15,7 @@ public class Bitstamp extends Market {
 
 	private final static String NAME = "Bitstamp";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://www.bitstamp.net/api/ticker/";
+	private final static String URL = "https://www.bitstamp.net/api/v2/ticker/%1$s%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -33,7 +33,7 @@ public class Bitstamp extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return URL;
+		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
 	}
 	
 	@Override
