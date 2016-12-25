@@ -16,7 +16,7 @@ public class BtcXIndia extends Market {
 
 	private final static String NAME = "BTCXIndia";
 	private final static String TTS_NAME = "BTC X India";
-	private final static String URL = "https://btcxindia.com/api/ticker";
+	private final static String URL = "https://api.btcxindia.com/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
