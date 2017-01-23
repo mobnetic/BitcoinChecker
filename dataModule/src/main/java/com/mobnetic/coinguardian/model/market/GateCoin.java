@@ -12,8 +12,8 @@ import java.util.List;
 
 public class GateCoin extends Market {
 
-	private final static String NAME = "Gate Coin";
-	private final static String TTS_NAME = NAME;
+	private final static String NAME = "GateCoin";
+	private final static String TTS_NAME = "Gate Coin";
 	private final static String URL = "https://api.gatecoin.com/Public/LiveTickers";
 
 	public GateCoin() {

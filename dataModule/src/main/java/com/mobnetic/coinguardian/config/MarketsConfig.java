@@ -118,5 +118,8 @@ public class MarketsConfig {
 		addMarket(new ETHEXIndia());
 		addMarket(new GateCoin());
 		addMarket(new Liqui());
+		addMarket(new ChileBit());
+		addMarket(new SurBitcoin());
+		addMarket(new VBtc());
 	}
 }

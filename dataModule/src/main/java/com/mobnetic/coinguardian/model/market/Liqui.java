@@ -19,8 +19,8 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 public class Liqui extends Market {
 
 	//Liqui's API is similar to BTC-e, so use BTCe.java for any help with updating this code
-	private final static String NAME = "Liqui";
-	private final static String TTS_NAME = NAME;
+	private final static String NAME = "Liqui.io";
+	private final static String TTS_NAME = "Liqui";
 	private final static String URL = " https://api.liqui.io/api/3/ticker/%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://api.liqui.io/api/3/info";
 
