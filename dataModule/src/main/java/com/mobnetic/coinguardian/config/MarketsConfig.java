@@ -117,5 +117,6 @@ public class MarketsConfig {
 		addMarket(new Btc38());
 		addMarket(new ETHEXIndia());
 		addMarket(new GateCoin());
+		addMarket(new Liqui());
 	}
 }
