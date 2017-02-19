@@ -121,5 +121,6 @@ public class MarketsConfig {
 		addMarket(new ChileBit());
 		addMarket(new SurBitcoin());
 		addMarket(new VBtc());
+		addMarket(new Urdubit());
 	}
 }
