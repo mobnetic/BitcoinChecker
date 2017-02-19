@@ -116,5 +116,6 @@ public class MarketsConfig {
 		addMarket(new Coinapult());
 		addMarket(new Btc38());
 		addMarket(new ETHEXIndia());
+		addMarket(new Urdubit());
 	}
 }
