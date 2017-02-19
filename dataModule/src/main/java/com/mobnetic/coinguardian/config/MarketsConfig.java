@@ -116,5 +116,10 @@ public class MarketsConfig {
 		addMarket(new Coinapult());
 		addMarket(new Btc38());
 		addMarket(new ETHEXIndia());
+		addMarket(new GateCoin());
+		addMarket(new Liqui());
+		addMarket(new ChileBit());
+		addMarket(new SurBitcoin());
+		addMarket(new VBtc());
 	}
 }
