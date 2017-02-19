@@ -122,5 +122,6 @@ public class MarketsConfig {
 		addMarket(new SurBitcoin());
 		addMarket(new VBtc());
 		addMarket(new Urdubit());
+		addMarket(new NegocieCoins());
 	}
 }
