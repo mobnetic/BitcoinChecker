@@ -19,6 +19,10 @@ public class QuadrigaCX extends Market {
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+				Currency.CAD,
+				Currency.USD
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
 				Currency.CAD
 			});
 	}
