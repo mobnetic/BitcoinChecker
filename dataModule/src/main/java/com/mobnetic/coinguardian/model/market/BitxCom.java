@@ -13,9 +13,9 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitxCom extends Market {
 
-	private final static String NAME = "bit-x.com";
+	private final static String NAME = "CoinsBank";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://bit-x.com/api/public/ticker?pair=%1$s%2$s";
+	private final static String URL = "https://coinsbank.com/api/public/ticker?pair=%1$s%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
