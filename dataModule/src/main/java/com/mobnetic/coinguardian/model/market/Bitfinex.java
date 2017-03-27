@@ -31,6 +31,10 @@ public class Bitfinex extends Market {
 				Currency.USD,
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.XMR, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
