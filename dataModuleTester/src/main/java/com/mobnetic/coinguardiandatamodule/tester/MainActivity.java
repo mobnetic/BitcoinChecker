@@ -156,9 +156,9 @@ public class MainActivity extends Activity {
 	// ====================
 	private void refreshMarketSpinner() {
 		final CharSequence[] entries = new String[MarketsConfig.MARKETS.size()];
-		int i=0;
+		int i = entries.length - 1;
 		for(Market market : MarketsConfig.MARKETS.values()) {
-			entries[i++] = market.name;
+			entries[i--] = market.name;
 		}
 		
 		marketSpinner.setAdapter(new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_dropdown_item, entries));
