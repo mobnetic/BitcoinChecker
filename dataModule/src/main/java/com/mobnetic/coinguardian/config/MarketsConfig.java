@@ -123,5 +123,6 @@ public class MarketsConfig {
 		addMarket(new VBtc());
 		addMarket(new Urdubit());
 		addMarket(new NegocieCoins());
+		addMarket(new BitMEX());
 	}
 }
