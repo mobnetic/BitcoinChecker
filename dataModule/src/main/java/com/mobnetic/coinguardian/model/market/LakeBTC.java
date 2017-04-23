@@ -1,6 +1,7 @@
 package com.mobnetic.coinguardian.model.market;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +16,7 @@ public class LakeBTC extends Market {
 
 	private final static String NAME = "LakeBTC";
 	private final static String TTS_NAME = "Lake BTC";
-	private final static String URL = "https://www.lakebtc.com/api_v1/ticker";
+	private final static String URL = "https://api.lakebtc.com/api_v2/ticker";
 	private final static String URL_CURRENCY_PAIRS = URL;
 	
 	public LakeBTC() {
@@ -29,7 +30,13 @@ public class LakeBTC extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		final JSONObject pairJsonObject = jsonObject.getJSONObject(checkerInfo.getCurrencyCounter());
+		final String pairId;
+		if (checkerInfo.getCurrencyPairId() == null) {
+			pairId = checkerInfo.getCurrencyBaseLowerCase() + checkerInfo.getCurrencyCounterLowerCase();
+		} else {
+			pairId = checkerInfo.getCurrencyPairId();
+		}
+		final JSONObject pairJsonObject = jsonObject.getJSONObject(pairId);
 		
 		ticker.bid = pairJsonObject.getDouble("bid");
 		ticker.ask = pairJsonObject.getDouble("ask");
@@ -49,9 +56,12 @@ public class LakeBTC extends Market {
 	
 	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
-		final JSONArray currencyCounterJsonArray = jsonObject.names();
-		for(int i=0; i<currencyCounterJsonArray.length(); ++i) {
-			pairs.add(new CurrencyPairInfo(VirtualCurrency.BTC, currencyCounterJsonArray.getString(i), null));
+		final JSONArray pairsJsonArray = jsonObject.names();
+		for(int i=0; i<pairsJsonArray.length(); ++i) {
+			final String pairId = pairsJsonArray.getString(i);
+			final String currencyBase = pairId.substring(0, 3).toUpperCase(Locale.ENGLISH);
+			final String currencyCounter = pairId.substring(3).toUpperCase(Locale.ENGLISH);
+			pairs.add(new CurrencyPairInfo(currencyBase, currencyCounter, pairId));
 		}
 	}
 }
