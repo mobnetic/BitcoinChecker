@@ -2,6 +2,8 @@ package com.mobnetic.coinguardian.model.market;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +23,10 @@ public class BitMEX extends Market {
     private final static String URL_CURRENCY_PAIRS = "https://www.bitmex.com/api/v1/instrument" +
             "?columns=rootSymbol,typ" +
             "&filter={\"state\":\"Open\"}";
-    private final static SimpleDateFormat ISO_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    private final static SimpleDateFormat ISO_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+    static {
+        ISO_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
 
     public BitMEX() {
         super(NAME, TTS_NAME, null);
@@ -48,7 +53,7 @@ public class BitMEX extends Market {
         if (!jsonObject.isNull("lowPrice"))
             ticker.low = jsonObject.getDouble("lowPrice");
         ticker.last = jsonObject.getDouble("lastPrice");
-        // This is an ISO timestamp
+        // This is an ISO timestamp representing UTC time
         ticker.timestamp = ISO_DATE_FORMAT.parse(jsonObject.getString("timestamp")).getTime();
     }
 
