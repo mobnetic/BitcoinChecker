@@ -126,7 +126,9 @@ public class MainActivity extends Activity {
 	// Get selected items
 	// ====================
 	private Market getSelectedMarket() {
-		return MarketsConfigUtils.getMarketById(marketSpinner.getSelectedItemPosition());
+		int size = MarketsConfig.MARKETS.size();
+		int idx = (size - 1) - marketSpinner.getSelectedItemPosition();
+		return MarketsConfigUtils.getMarketById(idx);
 	}
 	
 	private String getSelectedCurrencyBase() {
