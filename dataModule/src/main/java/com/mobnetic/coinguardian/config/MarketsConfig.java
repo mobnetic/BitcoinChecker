@@ -125,5 +125,6 @@ public class MarketsConfig {
 		addMarket(new NegocieCoins());
 		addMarket(new BitMEX());
 		addMarket(new Coinone());
+		addMarket(new Bithumb());
 	}
 }
