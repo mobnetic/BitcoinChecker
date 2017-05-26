@@ -124,5 +124,7 @@ public class MarketsConfig {
 		addMarket(new Urdubit());
 		addMarket(new NegocieCoins());
 		addMarket(new BitMEX());
+		addMarket(new BitFlyer());
+		addMarket(new BitFlyerFX());
 	}
 }
