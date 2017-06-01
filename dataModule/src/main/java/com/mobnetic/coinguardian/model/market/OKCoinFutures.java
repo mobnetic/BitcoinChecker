@@ -16,7 +16,7 @@ public class OKCoinFutures extends FuturesMarket {
 	
 	private final static String NAME = "OKCoin Futures";
 	private final static String TTS_NAME = "OK Coin Futures";
-	private final static String URL = "https://www.okcoin.com/api/v1/future_ticker.do?symbol=%1$s_%2$s&contract_type=%3$s";
+	private final static String URL = "https://www.okex.com/api/v1/future_ticker.do?symbol=%1$s_%2$s&contract_type=%3$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
