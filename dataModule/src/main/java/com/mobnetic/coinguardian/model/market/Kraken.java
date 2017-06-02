@@ -1,15 +1,15 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class Kraken extends Market {
 
@@ -86,7 +86,10 @@ public class Kraken extends Market {
     
     private String parseCurrency(String currency) {
 		if(currency!=null && currency.length()>=2) {
-			currency = currency.substring(1);
+			final char firstChar = currency.charAt(0);
+			if (firstChar == 'Z' || firstChar == 'X') {
+				currency = currency.substring(1);
+			}
 		}
 		if (VirtualCurrency.XBT.equals(currency)) return VirtualCurrency.BTC;
 		if (VirtualCurrency.XVN.equals(currency)) return VirtualCurrency.VEN;
