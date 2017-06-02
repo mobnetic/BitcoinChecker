@@ -1,9 +1,9 @@
 package com.mobnetic.coinguardian.config;
 
-import java.util.LinkedHashMap;
-
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.market.*;
+
+import java.util.LinkedHashMap;
 
 public class MarketsConfig {
 
@@ -126,5 +126,7 @@ public class MarketsConfig {
 		addMarket(new BitMEX());
 		addMarket(new BitFlyer());
 		addMarket(new BitFlyerFX());
+		addMarket(new Coinone());
+		addMarket(new Bithumb());
 	}
 }
