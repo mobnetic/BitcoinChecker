@@ -93,6 +93,7 @@ public class VirtualCurrency {
 	public static final String DOGE = "DOGE";
 	public static final String DOPE = "DOPE";
 	public static final String DRK = "DRK";
+	public static final String DSH = "DSH"; // DASH
 	public static final String DTC = "DTC";
 	public static final String DUCK = "DUCK";
 	public static final String DVC = "DVC";

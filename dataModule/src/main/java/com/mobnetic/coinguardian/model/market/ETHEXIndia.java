@@ -14,7 +14,7 @@ public class ETHEXIndia extends Market {
 
 	private final static String NAME = "ETHEX India";
 	private final static String TTS_NAME = NAME; 
-	private final static String URL = "https://api.ethexindia.com/ticker/";
+	private final static String URL = "https://ethexindia.com/api/ticker/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
