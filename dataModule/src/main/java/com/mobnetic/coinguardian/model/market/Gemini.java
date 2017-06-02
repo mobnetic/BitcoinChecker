@@ -27,6 +27,10 @@ public class Gemini extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
 		});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
 	}
 
 	public Gemini() {
