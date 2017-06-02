@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 
 public class Bitfinex extends Market {
 
@@ -20,10 +21,6 @@ public class Bitfinex extends Market {
 	private final static String URL = "https://api.bitfinex.com/v1/pubticker/%1$s%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.BFX, new String[]{
-				VirtualCurrency.BTC,
-				Currency.USD
-			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
 			});
@@ -31,7 +28,7 @@ public class Bitfinex extends Market {
 				Currency.USD,
 				VirtualCurrency.BTC
 			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DSH, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.DASH, new String[]{
 				Currency.USD,
 				VirtualCurrency.BTC
 		});
@@ -59,7 +56,16 @@ public class Bitfinex extends Market {
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
+		return String.format(URL,
+				fixCurrency(checkerInfo.getCurrencyBase()).toLowerCase(Locale.US),
+				fixCurrency(checkerInfo.getCurrencyCounter()).toLowerCase(Locale.US));
+	}
+
+	private String fixCurrency(String currency) {
+		if(VirtualCurrency.DASH.equals(currency)) {
+			return VirtualCurrency.DSH;
+		}
+		return currency;
 	}
 	
 	@Override
