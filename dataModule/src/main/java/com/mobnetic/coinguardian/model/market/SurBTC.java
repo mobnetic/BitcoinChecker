@@ -33,7 +33,7 @@ public class SurBTC extends Market {
 
     @Override
     public String getUrl(int requestId, CheckerInfo checkerInfo) {
-        return String.format(URL, checkerInfo.getCurrencyBase().toLowerCase(), checkerInfo.getCurrencyCounter().toLowerCase());
+        return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
     }
 
     @Override
