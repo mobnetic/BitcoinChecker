@@ -153,6 +153,7 @@ public class VirtualCurrency {
 	public static final String ICN = "ICN";
 	public static final String IFC = "IFC";
 	public static final String IND = "IND";
+	public static final String IOT = "IOT";
 	public static final String IQD = "IQD";
 	public static final String IXC = "IXC";
 	public static final String JKC = "JKC";
