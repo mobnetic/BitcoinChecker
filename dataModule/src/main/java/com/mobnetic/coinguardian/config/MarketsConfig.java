@@ -128,5 +128,6 @@ public class MarketsConfig {
 		addMarket(new BitFlyerFX());
 		addMarket(new Coinone());
 		addMarket(new Bithumb());
+		addMarket(new Coinsph());
 	}
 }
