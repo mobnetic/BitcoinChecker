@@ -10,30 +10,25 @@ import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
-public class MarketExample extends Market {
+public class BitGrail extends Market {
 
-	private final static String NAME = "Market Example";
-	private final static String TTS_NAME = NAME; 
-	private final static String URL = "https://www.marketexample.com/api/%1$s_%2$s/ticker/";
+	private final static String NAME = "BitGrail";
+	private final static String TTS_NAME = BitGrail; 
+	private final static String URL = "https://bitgrail.com/api/v1/BTC-XRB/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.CNY,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.DOGE, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.XRB, new String[]{
 				VirtualCurrency.BTC,
-				Currency.USD
 			});
 	}
 	
-	public MarketExample() {
+	public BitGrail() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return URL;
 	}
 	
 	@Override
@@ -46,4 +41,6 @@ public class MarketExample extends Market {
 		ticker.last = jsonObject.getDouble("last");
 		ticker.timestamp = jsonObject.getLong("timestamp");
 	}
+	
+	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo);
 }
