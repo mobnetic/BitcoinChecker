@@ -129,5 +129,6 @@ public class MarketsConfig {
 		addMarket(new Coinone());
 		addMarket(new Bithumb());
 		addMarket(new Coinsph());
+		addMarket(new BitGrail());
 	}
 }
