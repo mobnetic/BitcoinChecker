@@ -23,28 +23,36 @@ public class Bitfinex extends Market {
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
-			});
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				Currency.USD,
 				VirtualCurrency.BTC
-			});
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.DASH, new String[]{
 				Currency.USD,
 				VirtualCurrency.BTC
 		});
-		CURRENCY_PAIRS.put(VirtualCurrency.XMR, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.ETC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
 		});
-		CURRENCY_PAIRS.put(VirtualCurrency.ETC, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.IOT, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
-			});
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.RRT, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.XMR, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
 				VirtualCurrency.BTC,
 				Currency.USD
 		});
