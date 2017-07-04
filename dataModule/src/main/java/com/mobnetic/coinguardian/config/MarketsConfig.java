@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 
 public class MarketsConfig {
 
-	public final static LinkedHashMap<String, Market> MARKETS = new LinkedHashMap<String, Market>();
+	public final static LinkedHashMap<String, Market> MARKETS = new LinkedHashMap<>();
 	private final static void addMarket(Market market) {
 		MarketsConfig.MARKETS.put(market.key, market);
 	}
@@ -129,5 +129,6 @@ public class MarketsConfig {
 		addMarket(new Coinone());
 		addMarket(new Bithumb());
 		addMarket(new Coinsph());
+		addMarket(new SurBTC());
 	}
 }
