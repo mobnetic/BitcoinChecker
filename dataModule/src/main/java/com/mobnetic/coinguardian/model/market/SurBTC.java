@@ -21,7 +21,7 @@ public class SurBTC extends Market {
 
     private final static String NAME = "SurBTC";
     private final static String TTS_NAME = "sur BTC";
-    private final static String URL = "https://www.surbtc.com/api/v2/markets/%1$s-%2$s/ticker";
+    private final static String URL = "https://www.surbtc.com/api/v2/markets/%1$s-%2$s/ticker.json";
     private final static String URL_CURRENCY_PAIRS = "https://www.surbtc.com/api/v2/markets.json";
     private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 
