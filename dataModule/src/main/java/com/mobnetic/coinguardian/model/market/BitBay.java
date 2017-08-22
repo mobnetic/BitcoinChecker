@@ -29,6 +29,18 @@ public class BitBay extends Market {
 				Currency.USD,
 				Currency.EUR
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.PLN,
+				Currency.USD,
+				Currency.EUR
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LSK, new String[]{
+				VirtualCurrency.BTC,
+				Currency.PLN,
+				Currency.USD,
+				Currency.EUR
+			});
 	}
 	
 	public BitBay() {
