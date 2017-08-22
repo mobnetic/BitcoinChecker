@@ -175,6 +175,7 @@ public class VirtualCurrency {
 	public static final String LKY = "LKY";
 	public static final String LMC = "LMC";
 	public static final String LOT = "LOT";
+	public static final String LSK = "LSK";
 	public static final String LTB = "LTB";
 	public static final String LTC = "LTC";
 	public static final String mLTC = "mLTC";
