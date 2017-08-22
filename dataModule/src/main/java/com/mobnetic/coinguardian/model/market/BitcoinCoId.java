@@ -36,7 +36,7 @@ public class BitcoinCoId extends Market {
 		final JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
 		ticker.bid = tickerJsonObject.getDouble("buy");
 		ticker.ask = tickerJsonObject.getDouble("sell");
-		ticker.vol = tickerJsonObject.getDouble("vol_btc");
+		ticker.vol = tickerJsonObject.getDouble("vol_" + checkerInfo.getCurrencyBaseLowerCase());
 		ticker.high = tickerJsonObject.getDouble("high");
 		ticker.low = tickerJsonObject.getDouble("low");
 		ticker.last = tickerJsonObject.getDouble("last");
