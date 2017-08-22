@@ -22,6 +22,8 @@ public class VirtualCurrency {
 	public static final String BAT = "BAT";
 	public static final String BC = "BC";
 	public static final String BCC = "BCC";
+	public static final String BCH = "BCH";
+	public static final String BCU = "BCU";
 	public static final String BCX = "BCX";
 	public static final String BEE = "BEE";
 	public static final String BEER = "BEER";
@@ -105,6 +107,7 @@ public class VirtualCurrency {
 	public static final String EMC2 = "EMC2";
 	public static final String EMD = "EMD";
 	public static final String EMO = "EMO";
+	public static final String EOS = "EOS";
 	public static final String ETC = "ETC";
 	public static final String ETH = "ETH";
 	public static final String ETOK = "ETOK";
@@ -220,6 +223,7 @@ public class VirtualCurrency {
 	public static final String NYAN = "NYAN";
 	public static final String OIL = "OIL";
 	public static final String OLY = "OLY";
+	public static final String OMG = "OMG";
 	public static final String ORB = "ORB";
 	public static final String ORG = "ORG";
 	public static final String ORO = "ORO";
@@ -270,6 +274,7 @@ public class VirtualCurrency {
 	public static final String RSC = "RSC";
 	public static final String RBY = "RBY";
 	public static final String RYC = "RYC";
+	public static final String SAN = "SAN";
 	public static final String SAT = "SAT";
 	public static final String SAV = "SAV";
 	public static final String SBC = "SBC";
@@ -341,6 +346,7 @@ public class VirtualCurrency {
 	public static final String YBC = "YBC";
 	public static final String YIN = "YIN";
 	public static final String ZCC = "ZCC";
+	public static final String ZEC = "ZEC";
 	public static final String ZED = "ZED";
 	public static final String ZEIT = "ZEIT";
 	public static final String ZET = "ZET";
