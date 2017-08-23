@@ -13,7 +13,7 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 public class BitGrail extends Market {
 
 	private final static String NAME = "BitGrail";
-	private final static String TTS_NAME = BitGrail; 
+	private final static String TTS_NAME = Bit Grail; 
 	private final static String URL = "https://bitgrail.com/api/v1/%1$s-%2$s/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
@@ -82,6 +82,4 @@ public class BitGrail extends Market {
 		ticker.low = jsonObject.getDouble("low");
 		ticker.last = jsonObject.getDouble("last");
 	}
-	
-	protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo);
 }
