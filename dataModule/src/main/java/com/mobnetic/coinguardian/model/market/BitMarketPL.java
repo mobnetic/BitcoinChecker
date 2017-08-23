@@ -26,6 +26,9 @@ public class BitMarketPL extends Market {
 				Currency.PLN,
 				SYMBOL_SWAP
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BCC, new String[]{
+				Currency.PLN
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.PLN,
