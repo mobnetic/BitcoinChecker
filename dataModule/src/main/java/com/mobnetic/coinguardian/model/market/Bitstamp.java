@@ -1,15 +1,15 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
-import org.json.JSONObject;
-
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Bitstamp extends Market {
 
@@ -23,6 +23,16 @@ public class Bitstamp extends Market {
 				Currency.USD
 			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
+				Currency.USD
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.EUR,
+				Currency.USD
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				VirtualCurrency.BTC,
+				Currency.EUR,
 				Currency.USD
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
