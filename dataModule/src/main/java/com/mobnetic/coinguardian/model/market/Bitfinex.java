@@ -26,53 +26,71 @@ public class Bitfinex extends Market {
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BCC, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
-				Currency.USD,
-				VirtualCurrency.ETH
+				VirtualCurrency.BTC,
+				VirtualCurrency.ETH,
+				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.BCU, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.DSH, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.EOS, new String[]{
-				Currency.USD,
-				VirtualCurrency.ETH
+				VirtualCurrency.BTC,
+				VirtualCurrency.ETH,
+				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETC, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.IOT, new String[]{
-				Currency.USD,
-				VirtualCurrency.ETH
+				VirtualCurrency.BTC,
+				VirtualCurrency.ETH,
+				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.OMG, new String[]{
-				Currency.USD,
-				VirtualCurrency.ETH
+				VirtualCurrency.BTC,
+				VirtualCurrency.ETH,
+				Currency.USD
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.RRT, new String[]{
+				VirtualCurrency.BTC,
+				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.SAN, new String[]{
-				Currency.USD,
-				VirtualCurrency.ETH
+				VirtualCurrency.BTC,
+				VirtualCurrency.ETH,
+				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.XMR, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ZEC, new String[]{
+				VirtualCurrency.BTC,
 				Currency.USD
 		});
 	}
@@ -114,10 +132,9 @@ public class Bitfinex extends Market {
 	@Override
 	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONArray pairsArray = new JSONArray(responseString);
-
-		for(int i = 0; i < pairsArray.length(); ++i) {
+		for (int i = 0; i < pairsArray.length(); ++i) {
 			final String pairId = pairsArray.getString(i);
-			if(pairId != null && pairId.length() > 3) {
+			if (pairId != null && pairId.length() == 6) {
 				pairs.add(new CurrencyPairInfo(
 						pairId.substring(0, 3).toUpperCase(Locale.US),
 						pairId.substring(3).toUpperCase(Locale.US),
