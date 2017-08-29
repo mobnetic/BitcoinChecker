@@ -11,7 +11,7 @@ public class MarketsConfig {
 	private final static void addMarket(Market market) {
 		MarketsConfig.MARKETS.put(market.key, market);
 	}
-	
+
 	static {
 		addMarket(new Bitstamp());
 		addMarket(new Btcchina());
@@ -129,5 +129,7 @@ public class MarketsConfig {
 		addMarket(new BitFlyerFX());
 		addMarket(new Coinone());
 		addMarket(new Bithumb());
+		addMarket(new Coinsph());
+		addMarket(new Bl3p());
 	}
 }

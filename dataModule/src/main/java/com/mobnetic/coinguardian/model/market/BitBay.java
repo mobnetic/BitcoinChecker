@@ -18,12 +18,30 @@ public class BitBay extends Market {
 	private final static String URL = "https://bitbay.net/API/Public/%1$s%2$s/ticker.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
+		CURRENCY_PAIRS.put(VirtualCurrency.BCC, new String[]{
+				VirtualCurrency.BTC,
+				Currency.PLN,
+				Currency.USD,
+				Currency.EUR
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.PLN,
 				Currency.USD,
 				Currency.EUR
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				VirtualCurrency.BTC,
+				Currency.PLN,
+				Currency.USD,
+				Currency.EUR
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.PLN,
+				Currency.USD,
+				Currency.EUR
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LSK, new String[]{
 				VirtualCurrency.BTC,
 				Currency.PLN,
 				Currency.USD,
