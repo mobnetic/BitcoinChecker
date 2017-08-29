@@ -16,13 +16,15 @@ public class Mercado extends Market {
 
 	private final static String NAME = "Mercado Bitcoin";
 	private final static String TTS_NAME = "Mercado";
-	private final static String URL_BTC = "https://www.mercadobitcoin.com.br/api/ticker/";
-	private final static String URL_LTC = "https://www.mercadobitcoin.com.br/api/ticker_litecoin/";
+	private final static String URL = "https://www.mercadobitcoin.com.br/api/%1$s/ticker/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.BRL
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+				Currency.BRL
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				Currency.BRL
 			});
@@ -34,7 +36,7 @@ public class Mercado extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return VirtualCurrency.LTC.equals(checkerInfo.getCurrencyBase()) ? URL_LTC : URL_BTC;
+		return String.format(URL, checkerInfo.getCurrencyBase());
 	}
 	
 	@Override
