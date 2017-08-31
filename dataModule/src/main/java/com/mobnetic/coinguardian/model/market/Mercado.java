@@ -28,10 +28,10 @@ public class Mercado extends Market {
 				Currency.BRL
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String [] {
-		        Currency.BRL
+				Currency.BRL
 		});
 	}
-	
+
 	public Mercado() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
@@ -47,7 +47,7 @@ public class Mercado extends Market {
 				return URL_BTC;
 		}
 	}
-	
+
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject tickerJsonObject = jsonObject.getJSONObject("ticker");
