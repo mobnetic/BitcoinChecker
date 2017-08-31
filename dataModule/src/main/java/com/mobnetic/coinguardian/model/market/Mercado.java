@@ -28,7 +28,7 @@ public class Mercado extends Market {
 				Currency.BRL
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String [] {
-			Currency.BRL
+		        Currency.BRL
 		});
 	}
 	
