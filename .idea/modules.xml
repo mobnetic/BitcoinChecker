@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BitcoinChecker.iml" filepath="$PROJECT_DIR$/BitcoinChecker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BitcoinCheckerGithub.iml" filepath="$PROJECT_DIR$/BitcoinCheckerGithub.iml" />
       <module fileurl="file://$PROJECT_DIR$/dataModule/dataModule.iml" filepath="$PROJECT_DIR$/dataModule/dataModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/dataModuleTester/dataModuleTester.iml" filepath="$PROJECT_DIR$/dataModuleTester/dataModuleTester.iml" />
     </modules>
