@@ -258,6 +258,7 @@ public class VirtualCurrency {
 	public static final String Q2C = "Q2C";
 	public static final String QB = "QB";
 	public static final String QRK = "QRK";
+	public static final String QTUM = "QTUM";
 	public static final String RAD = "RAD";
 	public static final String RAIN = "RAIN";
 	public static final String RBBT = "RBBT";
