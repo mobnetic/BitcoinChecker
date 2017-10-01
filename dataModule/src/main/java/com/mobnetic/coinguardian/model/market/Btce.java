@@ -18,10 +18,10 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class Btce extends Market {
 
-	private final static String NAME = "Btc-e";
+	private final static String NAME = "WEX";
 	private final static String TTS_NAME = NAME;
-	private final static String URL_HOST_COM = "btc-e.com";
-	private final static String URL_HOST_NZ = "btc-e.nz";
+	private final static String URL_HOST_COM = "wex.nz";
+	private final static String URL_HOST_NZ = "wex.nz";
 	private final static String URL = "https://%1$s/api/3/ticker/%2$s";
 	private final static String URL_CURRENCY_PAIRS = "https://%1$s/api/3/info";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
