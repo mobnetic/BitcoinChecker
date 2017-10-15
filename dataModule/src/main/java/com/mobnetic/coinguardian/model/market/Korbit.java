@@ -27,6 +27,9 @@ public class Korbit extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.ETC, new String[]{
 				Currency.KRW
 		});
+		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
+				Currency.KRW
+		});
 	}
 
 	public Korbit() {

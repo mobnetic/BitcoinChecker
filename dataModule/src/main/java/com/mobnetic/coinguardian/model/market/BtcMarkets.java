@@ -37,6 +37,10 @@ public class BtcMarkets extends Market {
 				VirtualCurrency.BTC,
 				Currency.AUD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.AUD
+			});
 	}
 	
 	public BtcMarkets() {
