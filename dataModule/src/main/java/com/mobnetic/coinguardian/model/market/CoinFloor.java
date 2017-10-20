@@ -23,7 +23,7 @@ public class CoinFloor extends Market {
 				Currency.USD
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
-				VirtualCurrency.GBP
+				Currency.GBP
 			});
 	}
 
