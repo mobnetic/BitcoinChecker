@@ -132,5 +132,6 @@ public class MarketsConfig {
 		addMarket(new Bl3p());
 		addMarket(new SurBtc());
 		addMarket(new CoinFloor());
+		addMarket(new Lykke());
 	}
 }
