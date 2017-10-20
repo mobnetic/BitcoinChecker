@@ -18,25 +18,16 @@ public class Lykke extends Market {
 
 	private final static String NAME = "Lykke";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://public-api.lykke.com/api/Market/%1$s%2$s"
+	private final static String URL = "https://public-api.lykke.com/api/Market/%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://public-api.lykke.com/api/AssetPairs/dictionary";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
-	
-	static {
-		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.USD,
-				Currency.EUR,
-				Currency.GBP
-			});
-	}
 	
 	public Lykke() {
-		super(NAME, TTS_NAME, CURRENCY_PAIRS);
+		super(NAME, TTS_NAME, null);
 	}
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase(), checkerInfo.getCurrencyCounter());
+		return String.format(URL, checkerInfo.getCurrencyPairId());
 	}
 	
 	@Override
