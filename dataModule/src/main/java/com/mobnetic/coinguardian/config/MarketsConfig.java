@@ -130,6 +130,8 @@ public class MarketsConfig {
 		addMarket(new Bithumb());
 		addMarket(new Coinsph());
 		addMarket(new Bl3p());
+		addMarket(new SurBtc());
+		addMarket(new CoinFloor());
 		addMarket(new Lykke());
 	}
 }
