@@ -18,6 +18,7 @@ public class MarketsConfig {
 		addMarket(new Btce());
 		addMarket(new Bitcurex());
 		addMarket(new Mercado());
+		addMarket(new Braziliex());
 		addMarket(new Kraken());
 		addMarket(new Bitfinex());
 		addMarket(new Okcoin());
