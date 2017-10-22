@@ -210,6 +210,7 @@ public class VirtualCurrency {
 	public static final String NBL = "NBL";
 	public static final String NDL = "NDL";
 	public static final String NEC = "NEC";
+	public static final String NEO = "NEO";
 	public static final String NET = "NET";
 	public static final String NIB = "NIB";
 	public static final String NKA = "NKA";
@@ -311,6 +312,7 @@ public class VirtualCurrency {
 	public static final String TOP = "TOP";
 	public static final String TRC = "TRC";
 	public static final String TRL = "TRL";
+	public static final String TSL = "TSL";
 	public static final String TTC = "TTC";
 	public static final String UFO = "UFO";
 	public static final String UNC = "UNC";

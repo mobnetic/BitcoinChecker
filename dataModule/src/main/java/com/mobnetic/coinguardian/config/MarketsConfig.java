@@ -133,5 +133,6 @@ public class MarketsConfig {
 		addMarket(new SurBtc());
 		addMarket(new CoinFloor());
 		addMarket(new Lykke());
+		addMarket(new Coinnest());
 	}
 }
