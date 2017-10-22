@@ -36,6 +36,21 @@ public class Bithumb extends Market {
         CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
                 Currency.KRW
         });
+        CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
+                Currency.KRW
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+                Currency.KRW
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.XMR, new String[]{
+                Currency.KRW
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.ZEC, new String[]{
+                Currency.KRW
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.QTUM, new String[]{
+                Currency.KRW
+        });
     }
 
     public Bithumb() {
