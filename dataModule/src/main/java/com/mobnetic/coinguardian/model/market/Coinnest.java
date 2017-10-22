@@ -16,9 +16,7 @@ public class Coinnest extends Market {
 
     private final static String NAME = "Coinnest";
     private final static String TTS_NAME = NAME;
-    private final static String URL_BASE = "https://api.coinnest.co.kr";
-    private final static String URL_TICKER = URL_BASE + "/api/pub/ticker?coin=%1$s";
-    private final static String URL_ORDERS = URL_BASE + "/api/pub/depth?coin=%1$s";
+    private final static String URL = "https://api.coinnest.co.kr/api/pub/ticker?coin=%1$s";
     private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 
     static {
@@ -56,13 +54,8 @@ public class Coinnest extends Market {
     }
 
     @Override
-    public int getNumOfRequests(CheckerInfo checkerRecord) {
-        return 1;
-    }
-
-    @Override
     public String getUrl(int requestId, CheckerInfo checkerInfo) {
-        return String.format(URL_TICKER, checkerInfo.getCurrencyBaseLowerCase());
+        return String.format(URL, checkerInfo.getCurrencyBaseLowerCase());
     }
 
     @Override
