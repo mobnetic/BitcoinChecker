@@ -5,8 +5,8 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+import com.mobnetic.coinguardian.util.TimeUtils;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -67,7 +67,7 @@ public class Coinnest extends Market {
         ticker.ask = jsonObject.getDouble("sell");
         ticker.last = jsonObject.getDouble("last");
         ticker.vol = jsonObject.getDouble("vol");
-        ticker.timestamp = jsonObject.getLong("time");
+        ticker.timestamp = jsonObject.getLong("time") * TimeUtils.MILLIS_IN_SECOND;
     }
 
     @Override
