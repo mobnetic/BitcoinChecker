@@ -132,6 +132,7 @@ public class VirtualCurrency {
 	public static final String FTC = "FTC";
 	public static final String FUNK = "FUNK";
 	public static final String FZ = "FZ";
+	public static final String GAME = "GAME";
 	public static final String GDC = "GDC";
 	public static final String GHS = "GHS";
 	public static final String GLB = "GLB";
