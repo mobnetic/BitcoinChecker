@@ -16,8 +16,8 @@ import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 public class BitX extends Market {
 
-	private final static String NAME = "BitX.co";
-	private final static String TTS_NAME = "Bit X";
+	private final static String NAME = "Luno";
+	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://api.mybitx.com/api/1/ticker?pair=%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://api.mybitx.com/api/1/tickers";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
