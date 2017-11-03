@@ -135,5 +135,6 @@ public class MarketsConfig {
 		addMarket(new Lykke());
 		addMarket(new Coinnest());
 		addMarket(new Braziliex());
+		addMarket(new Abucoins());
 	}
 }

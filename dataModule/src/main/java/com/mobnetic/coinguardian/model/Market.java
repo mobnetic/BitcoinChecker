@@ -55,7 +55,7 @@ public abstract class Market {
 	}
 	
 	// ====================
-	// Parse Error
+	// Parse Ticker Error
 	// ====================
 	public final String parseErrorMain(int requestId, String responseString, CheckerInfo checkerInfo) throws Exception {
 		return parseError(requestId, responseString, checkerInfo);
