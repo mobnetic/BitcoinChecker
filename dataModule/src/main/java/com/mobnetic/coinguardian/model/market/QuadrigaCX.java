@@ -18,11 +18,15 @@ public class QuadrigaCX extends Market {
 	private final static String URL = "https://api.quadrigacx.com/v2/ticker?book=%1$s_%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+				Currency.CAD
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.CAD,
 				Currency.USD
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				VirtualCurrency.BTC,
 				Currency.CAD
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
