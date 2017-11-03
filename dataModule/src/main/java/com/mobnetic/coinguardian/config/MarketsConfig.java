@@ -136,5 +136,6 @@ public class MarketsConfig {
 		addMarket(new Coinnest());
 		addMarket(new Braziliex());
 		addMarket(new Abucoins());
+		addMarket(new Zebpay());
 	}
 }
