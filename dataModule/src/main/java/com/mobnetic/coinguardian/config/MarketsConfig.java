@@ -134,5 +134,6 @@ public class MarketsConfig {
 		addMarket(new CoinFloor());
 		addMarket(new Lykke());
 		addMarket(new Coinnest());
+		addMarket(new Braziliex());
 	}
 }
