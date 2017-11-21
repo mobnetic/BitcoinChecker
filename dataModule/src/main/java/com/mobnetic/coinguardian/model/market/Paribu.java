@@ -10,42 +10,38 @@ import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
 import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+import com.mobnetic.coinguardian.util.ParseUtils;
 
 public class Paribu extends Market {
 
-	public final static String NAME = "Koinim";
+	public final static String NAME = "Paribu";
 	public final static String TTS_NAME = NAME;
-	public final static String URL_BTC = "https://koinim.com/ticker/";
-	public final static String URL_LTC = "https://koinim.com/ticker/ltc/";
+	public final static String URL = "https://www.paribu.com/ticker";
 	public final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-				Currency.TRY
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				Currency.TRY
-			});
+			Currency.TRY
+		});
 	}
 	
-	public Koinim() {
+	public Paribu() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
 	
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		if(VirtualCurrency.LTC.equals(checkerInfo.getCurrencyBase())) {
-			return URL_LTC;
-		}
-		return URL_BTC;
+		return URL;
 	}
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = jsonObject.getDouble("buy");
-		ticker.ask = jsonObject.getDouble("sell");
-		ticker.vol = jsonObject.getDouble("volume");
-		ticker.high = jsonObject.getDouble("high");
-		ticker.low = jsonObject.getDouble("low");
-		ticker.last = jsonObject.getDouble("last_order");
+		final JSONObject dataJsonObject = jsonObject.getJSONObject("BTC_TL");
+		
+		ticker.bid = ParseUtils.getDoubleFromString(dataJsonObject, "highestBid");
+		ticker.ask = ParseUtils.getDoubleFromString(dataJsonObject, "lowestAsk");
+		ticker.vol = ParseUtils.getDoubleFromString(dataJsonObject, "volume");
+		ticker.high = ParseUtils.getDoubleFromString(dataJsonObject, "high24hr");
+		ticker.low = ParseUtils.getDoubleFromString(dataJsonObject, "low24hr");
+		ticker.last = ParseUtils.getDoubleFromString(dataJsonObject, "last");
 	}
 }
