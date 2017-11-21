@@ -34,12 +34,12 @@ public class CoinSecure extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = parsePrice(jsonObject.getDouble("bid"));
-		ticker.ask = parsePrice(jsonObject.getDouble("ask"));
-		ticker.vol = jsonObject.getDouble("coinvolume") / 100000000;
-		ticker.high = parsePrice(jsonObject.getDouble("high"));
-		ticker.low = parsePrice(jsonObject.getDouble("low"));
-		ticker.last = parsePrice(jsonObject.getDouble("lastprice"));
+		ticker.bid = parsePrice(jsonObject.getJSONObject("message").getDouble("bid"));
+		ticker.ask = parsePrice(jsonObject.getJSONObject("message").getDouble("ask"));
+		ticker.vol = jsonObject.getJSONObject("message").getDouble("coinvolume") / 100000000;
+		ticker.high = parsePrice(jsonObject.getJSONObject("message").getDouble("high"));
+		ticker.low = parsePrice(jsonObject.getJSONObject("message").getDouble("low"));
+		ticker.last = parsePrice(jsonObject.getJSONObject("message").getDouble("lastPrice"));
 //		ticker.timestamp = jsonObject.getLong("timestamp");
 	}
 	
