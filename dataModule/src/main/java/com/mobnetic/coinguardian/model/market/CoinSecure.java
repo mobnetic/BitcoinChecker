@@ -15,7 +15,7 @@ public class CoinSecure extends Market {
 
 	private final static String NAME = "CoinSecure";
 	private final static String TTS_NAME = "Coin Secure";
-	private final static String URL = "https://api.coinsecure.in/v0/noauth/newticker";
+	private final static String URL = "https://api.coinsecure.in/v1/exchange/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
