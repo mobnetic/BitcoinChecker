@@ -137,5 +137,6 @@ public class MarketsConfig {
 		addMarket(new Braziliex());
 		addMarket(new Abucoins());
 		addMarket(new Zebpay());
+		addMarket(new Paribu());
 	}
 }
