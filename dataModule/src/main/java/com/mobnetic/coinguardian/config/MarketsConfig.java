@@ -138,5 +138,6 @@ public class MarketsConfig {
 		addMarket(new Abucoins());
 		addMarket(new Zebpay());
 		addMarket(new Unocoin());
+		addMarket(new Koinex());
 	}
 }
