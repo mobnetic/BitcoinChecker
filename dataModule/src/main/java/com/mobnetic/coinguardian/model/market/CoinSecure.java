@@ -15,7 +15,7 @@ public class CoinSecure extends Market {
 
 	private final static String NAME = "CoinSecure";
 	private final static String TTS_NAME = "Coin Secure";
-	private final static String URL = "https://api.coinsecure.in/v0/noauth/newticker";
+	private final static String URL = "https://api.coinsecure.in/v1/exchange/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -34,13 +34,14 @@ public class CoinSecure extends Market {
 	
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = parsePrice(jsonObject.getDouble("bid"));
-		ticker.ask = parsePrice(jsonObject.getDouble("ask"));
-		ticker.vol = jsonObject.getDouble("coinvolume") / 100000000;
-		ticker.high = parsePrice(jsonObject.getDouble("high"));
-		ticker.low = parsePrice(jsonObject.getDouble("low"));
-		ticker.last = parsePrice(jsonObject.getDouble("lastprice"));
-//		ticker.timestamp = jsonObject.getLong("timestamp");
+		final JSONObject messageJsonObject = jsonObject.getJSONObject("message");
+		ticker.bid = parsePrice(messageJsonObject.getDouble("bid"));
+		ticker.ask = parsePrice(messageJsonObject.getDouble("ask"));
+		ticker.vol = messageJsonObject.getDouble("coinvolume") / 100000000;
+		ticker.high = parsePrice(messageJsonObject.getDouble("high"));
+		ticker.low = parsePrice(messageJsonObject.getDouble("low"));
+		ticker.last = parsePrice(messageJsonObject.getDouble("lastPrice"));
+//		ticker.timestamp = messageJsonObject.getLong("timestamp");
 	}
 	
 	private double parsePrice(double price) {
