@@ -16,14 +16,20 @@ public class Bit2c extends Market {
 	private final static String NAME = "Bit2c";
 	private final static String TTS_NAME = "Bit 2c";
 	private final static String URL = "https://www.bit2c.co.il/Exchanges/%1$s%2$s/Ticker.json";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.NIS
-			});
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-				VirtualCurrency.BTC
-			});
+				Currency.NIS
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+				Currency.NIS
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.BTG, new String[]{
+				Currency.NIS
+		});
 	}
 	
 	public Bit2c() {
