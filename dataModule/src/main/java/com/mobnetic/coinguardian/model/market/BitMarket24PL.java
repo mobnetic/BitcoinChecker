@@ -18,7 +18,13 @@ public class BitMarket24PL extends Market {
 	private final static String URL = "https://bitmarket24.pl/api/%1$s_%2$s/status.json";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
+		CURRENCY_PAIRS.put(VirtualCurrency.BCC, new String[]{
+				Currency.PLN
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+				Currency.PLN
+			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BTG, new String[]{
 				Currency.PLN
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{

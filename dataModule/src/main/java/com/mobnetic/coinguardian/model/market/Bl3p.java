@@ -22,6 +22,9 @@ public class Bl3p extends Market {
         CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
                 Currency.EUR
         });
+        CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+                Currency.EUR
+        });
     }
 
     public Bl3p() {
