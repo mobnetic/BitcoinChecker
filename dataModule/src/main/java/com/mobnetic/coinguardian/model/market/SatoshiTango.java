@@ -1,8 +1,5 @@
 package com.mobnetic.coinguardian.model.market;
 
-import android.os.Debug;
-import android.util.Log;
-
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
@@ -41,8 +38,7 @@ public class SatoshiTango extends Market {
 
     @Override
     protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-        String pairId = checkerInfo.getCurrencyPairId();
-        String currencyCode = checkerInfo.getCurrencyCounterLowerCase() + "btc";
+        String currencyCode = checkerInfo.getCurrencyCounterLowerCase() + checkerInfo.getCurrencyBaseLowerCase();
 
         final JSONObject tickerJsonObject = jsonObject.getJSONObject("data");
         final JSONObject buyObject = tickerJsonObject.getJSONObject("compra");
