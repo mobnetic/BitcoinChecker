@@ -21,7 +21,7 @@ public class Binance extends Market {
 
 	private final static String NAME = "Binance";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://api.binance.com/api/v1/ticker/price?symbol=%1$s%2$s";
+	private final static String URL = "https://api.binance.com/api/v1/ticker/24hr?symbol=%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://www.binance.com/api/v1/ticker/allPrices";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
@@ -50,13 +50,13 @@ public class Binance extends Market {
 
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = ParseUtils.getDoubleFromString(jsonObject, "bid");
-		ticker.ask = ParseUtils.getDoubleFromString(jsonObject, "ask");
+		ticker.bid = ParseUtils.getDoubleFromString(jsonObject, "bidPrice");
+		ticker.ask = ParseUtils.getDoubleFromString(jsonObject, "askPrice");
 		ticker.vol = ParseUtils.getDoubleFromString(jsonObject, "volume");
-		ticker.high = ParseUtils.getDoubleFromString(jsonObject, "high");
-		ticker.low = ParseUtils.getDoubleFromString(jsonObject, "low");
-		ticker.last = ParseUtils.getDoubleFromString(jsonObject, "last_price");
-		ticker.timestamp = (long) (jsonObject.getDouble("timestamp")*TimeUtils.MILLIS_IN_SECOND);
+		ticker.high = ParseUtils.getDoubleFromString(jsonObject, "highPrice");
+		ticker.low = ParseUtils.getDoubleFromString(jsonObject, "lowPrice");
+		ticker.last = ParseUtils.getDoubleFromString(jsonObject, "lastPrice");
+		ticker.timestamp = System.currentTimeMillis();
 	}
 
 	// ====================
