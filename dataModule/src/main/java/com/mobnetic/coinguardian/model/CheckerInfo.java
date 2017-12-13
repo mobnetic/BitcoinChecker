@@ -14,9 +14,17 @@ public class CheckerInfo extends CurrencyPairInfo {
 	public String getCurrencyBaseLowerCase() {
 		return getCurrencyBase().toLowerCase(Locale.US);
 	}
-	
+
+	public String getCurrencyBaseUpperCase() {
+		return getCurrencyBase().toUpperCase(Locale.US);
+	}
+
 	public String getCurrencyCounterLowerCase() {
 		return getCurrencyCounter().toLowerCase(Locale.US);
+	}
+
+	public String getCurrencyCounterUpperCase() {
+		return getCurrencyCounter().toUpperCase(Locale.US);
 	}
 	
 	public int getContractType() {

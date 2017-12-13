@@ -13,6 +13,7 @@ public class MarketsConfig {
 	}
 
 	static {
+		addMarket(new Binance());
 		addMarket(new Bitstamp());
 		addMarket(new Btcchina());
 		addMarket(new Btce());
