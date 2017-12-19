@@ -139,5 +139,6 @@ public class MarketsConfig {
 		addMarket(new Zebpay());
 		addMarket(new Paribu());
 		addMarket(new SatoshiTango());
+		addMarket(new BlinkTrade());
 	}
 }
