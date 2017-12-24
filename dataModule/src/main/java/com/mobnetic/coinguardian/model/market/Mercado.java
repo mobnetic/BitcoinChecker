@@ -22,10 +22,10 @@ public class Mercado extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.BRL
 		});
-		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
 				Currency.BRL
 		});
-		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				Currency.BRL
 		});
 	}
