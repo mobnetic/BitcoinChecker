@@ -25,6 +25,9 @@ public class QuadrigaCX extends Market {
 				Currency.CAD,
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BTG, new String[]{
+				Currency.CAD
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
 				VirtualCurrency.BTC,
 				Currency.CAD
