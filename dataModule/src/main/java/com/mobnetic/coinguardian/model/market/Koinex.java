@@ -5,15 +5,11 @@ import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
 import com.mobnetic.coinguardian.model.currency.Currency;
-import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class Koinex extends Market {
 

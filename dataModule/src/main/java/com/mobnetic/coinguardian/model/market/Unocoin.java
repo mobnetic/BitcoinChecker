@@ -16,7 +16,7 @@ public class Unocoin extends Market {
 	private final static String NAME = "Unocoin";
 	private final static String TTS_NAME = "Uno Coin";
 	private final static String URL = "https://www.unocoin.com/trade?all";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.INR
