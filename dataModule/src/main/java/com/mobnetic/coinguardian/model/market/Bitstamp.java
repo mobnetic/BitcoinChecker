@@ -22,6 +22,11 @@ public class Bitstamp extends Market {
 				Currency.EUR,
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.EUR,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
 				Currency.USD
 			});
@@ -36,11 +41,6 @@ public class Bitstamp extends Market {
 				Currency.USD
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
-				VirtualCurrency.BTC,
-				Currency.EUR,
-				Currency.USD
-			});
-		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
 				Currency.USD
