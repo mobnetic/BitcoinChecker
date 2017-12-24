@@ -22,6 +22,11 @@ public class Bitstamp extends Market {
 				Currency.EUR,
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
+				VirtualCurrency.BTC,
+				Currency.EUR,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
 				Currency.USD
 			});
@@ -41,16 +46,16 @@ public class Bitstamp extends Market {
 				Currency.USD
 			});
 	}
-	
+
 	public Bitstamp() {
 		super(NAME, TTS_NAME, CURRENCY_PAIRS);
 	}
-	
+
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
 		return String.format(URL, checkerInfo.getCurrencyBaseLowerCase(), checkerInfo.getCurrencyCounterLowerCase());
 	}
-	
+
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		ticker.bid = jsonObject.getDouble("bid");
