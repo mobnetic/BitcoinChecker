@@ -141,5 +141,6 @@ public class MarketsConfig {
 		addMarket(new SatoshiTango());
 		addMarket(new Koinex());
 //		addMarket(new Unocoin());
+		addMarket(new BlinkTrade());
 	}
 }
