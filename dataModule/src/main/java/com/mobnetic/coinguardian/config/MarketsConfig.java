@@ -142,5 +142,6 @@ public class MarketsConfig {
 		addMarket(new Koinex());
 //		addMarket(new Unocoin());
 		addMarket(new BlinkTrade());
+		addMarket(new Exmo());
 	}
 }
