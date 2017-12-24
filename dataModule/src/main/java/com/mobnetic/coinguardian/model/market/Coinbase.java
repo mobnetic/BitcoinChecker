@@ -20,14 +20,24 @@ public class Coinbase extends Market {
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://api.gdax.com/products/%1$s-%2$s/ticker";
 	private final static String URL_CURRENCY_PAIRS = "https://api.gdax.com/products/";
-	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
+	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.USD,
 				Currency.EUR,
 				Currency.GBP
-			});
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				Currency.USD,
+				Currency.EUR,
+				VirtualCurrency.BTC
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
+				Currency.USD,
+				Currency.EUR,
+				VirtualCurrency.BTC
+		});
 	}
 	
 	public Coinbase() {
