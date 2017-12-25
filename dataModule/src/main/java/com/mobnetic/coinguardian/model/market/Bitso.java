@@ -33,6 +33,10 @@ public class Bitso extends Market {
 		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
 				VirtualCurrency.BTC
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				VirtualCurrency.BTC,
+				Currency.MXN
+			});
 	}
 	
 	public Bitso() {
