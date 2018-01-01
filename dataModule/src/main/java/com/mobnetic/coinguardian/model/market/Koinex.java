@@ -52,7 +52,7 @@ public class Koinex extends Market {
 		final JSONObject currencyJSONObject = jsonObject.getJSONObject("stats");
 		final JSONArray currencyArray = currencyJSONObject.names();
 		for(int i=0; i<currencyArray.length(); ++i) {
-			pairs.add(new CurrencyPairInfo(Currency.INR, currencyArray.getString(i), null));
+			pairs.add(new CurrencyPairInfo(currencyArray.getString(i), Currency.INR, null));
 		}
 	}
 }
