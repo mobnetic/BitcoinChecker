@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Huobi extends Market {
 
@@ -29,7 +30,6 @@ public class Huobi extends Market {
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject tickerJsonObject = jsonObject.getJSONObject("tick");
-
 		ticker.bid = tickerJsonObject.getJSONArray("bid").getDouble(0);
 		ticker.ask = tickerJsonObject.getJSONArray("ask").getDouble(0);
 		ticker.vol = tickerJsonObject.getDouble("vol");
@@ -47,11 +47,10 @@ public class Huobi extends Market {
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
 		if("ok".equalsIgnoreCase(jsonObject.getString("status"))) {
 			final JSONArray data = jsonObject.getJSONArray("data");
-
 			for(int i = 0; i < data.length(); i++) {
-				String base = data.getJSONObject(i).getString("base-currency");
-				String counter = data.getJSONObject(i).getString("quote-currency");
-				pairs.add(new CurrencyPairInfo(base, counter, base + counter));
+				final String base = data.getJSONObject(i).getString("base-currency").toUpperCase(Locale.US);
+                final String counter = data.getJSONObject(i).getString("quote-currency").toUpperCase(Locale.US);
+				pairs.add(new CurrencyPairInfo(base, counter, null));
 			}
 		} else {
 			throw new Exception("Parse currency pairs error.");
