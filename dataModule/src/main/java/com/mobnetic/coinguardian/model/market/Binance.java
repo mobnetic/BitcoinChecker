@@ -1,14 +1,15 @@
 package com.mobnetic.coinguardian.model.market;
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.mobnetic.coinguardian.model.CheckerInfo;
 import com.mobnetic.coinguardian.model.CurrencyPairInfo;
 import com.mobnetic.coinguardian.model.Market;
 import com.mobnetic.coinguardian.model.Ticker;
+import com.mobnetic.coinguardian.model.currency.VirtualCurrency;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class Binance extends Market {
 
@@ -16,7 +17,13 @@ public class Binance extends Market {
 	private final static String TTS_NAME = NAME;
 	private final static String URL = "https://api.binance.com/api/v1/ticker/24hr?symbol=%1$s";
 	private final static String URL_CURRENCY_PAIRS = "https://api.binance.com/api/v1/ticker/allPrices";
-	private final static String[] COUNTER_CURRENCIES = {"BNB", "BTC", "ETH", "USDT"};
+
+	private final static String[] COUNTER_CURRENCIES = {
+			VirtualCurrency.BNB,
+			VirtualCurrency.BTC,
+			VirtualCurrency.ETH,
+			VirtualCurrency.USDT
+	};
 
 	public Binance() {
 		super(NAME, TTS_NAME, null);

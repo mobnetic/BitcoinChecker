@@ -36,6 +36,7 @@ public class VirtualCurrency {
 	public static final String BIL = "BIL";
 	public static final String BLA = "BLA";
 	public static final String BLC = "BLC";
+	public static final String BNB = "BNB";
 	public static final String BQC = "BQC";
 	public static final String BTB = "BTB";
 	public static final String BTC = "BTC";
@@ -321,6 +322,7 @@ public class VirtualCurrency {
 	public static final String UNO = "UNO";
 	public static final String USDE = "USDE";
 	public static final String USDe = "USDe";
+	public static final String USDT = "USDT";
 	public static final String UTC = "UTC";
 	public static final String VDC = "VDC";
 	public static final String VEN = "VEN";
