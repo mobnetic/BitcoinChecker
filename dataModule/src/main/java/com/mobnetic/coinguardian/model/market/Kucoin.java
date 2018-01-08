@@ -22,16 +22,7 @@ public class Kucoin extends Market {
     private final static String TTS_NAME = NAME;
     private final static String URL = "https://api.kucoin.com/v1/open/tick?symbol=%1$s";
 
-    private final static String URL_COINS_PAIRS = "https://api.kucoin.com/v1/market/open/coins";
-
-    //Update with list from: https://api.kucoin.com/v1/open/markets
-    private final static String[] BaseCurrencies = new String[]{
-            VirtualCurrency.BTC,
-            VirtualCurrency.ETH,
-            VirtualCurrency.NEO,
-            VirtualCurrency.USDT,
-            VirtualCurrency.KCS
-    };
+    private final static String URL_COINS_PAIRS = "https://api.kucoin.com/v1/market/open/symbols";
 
     public Kucoin() {
         super(NAME, TTS_NAME, null);
@@ -39,11 +30,7 @@ public class Kucoin extends Market {
 
     @Override
     public String getUrl(int requestId, CheckerInfo checkerInfo) {
-        String pairId = checkerInfo.getCurrencyPairId();
-        if(checkerInfo.getCurrencyPairId() == null) {
-            pairId = String.format("%1$s-%2$s", checkerInfo.getCurrencyCounterLowerCase(), checkerInfo.getCurrencyBaseLowerCase());
-        }
-        return String.format(URL, pairId);
+        return String.format(URL, checkerInfo.getCurrencyPairId());
     }
 
     @Override
@@ -71,11 +58,16 @@ public class Kucoin extends Market {
         final JSONArray data = jsonObject.getJSONArray("data");
 
         for(int i=0; i< data.length(); ++i) {
-            String coin = data.getJSONObject(i).getString("coin");
+            String symbol = data.getJSONObject(i).getString("symbol");
 
-            for (String base: BaseCurrencies) {
-                pairs.add(new CurrencyPairInfo(base, coin, coin + "-" + base));
-            }
+            String[] currencies = symbol.split("-");
+            if(currencies.length!=2)
+                continue;
+
+            String currencyBase = currencies[0].toUpperCase(Locale.ENGLISH);
+            String currencyCounter = currencies[1].toUpperCase(Locale.ENGLISH);
+
+            pairs.add(new CurrencyPairInfo(currencyBase, currencyCounter, symbol));
         }
     }
 
