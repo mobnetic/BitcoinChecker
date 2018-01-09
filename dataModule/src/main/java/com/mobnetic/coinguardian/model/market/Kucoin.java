@@ -59,15 +59,10 @@ public class Kucoin extends Market {
 
         for(int i=0; i< data.length(); ++i) {
             String symbol = data.getJSONObject(i).getString("symbol");
+            String coinPair = data.getJSONObject(i).getString("coinTypePair");
+            String coinType = data.getJSONObject(i).getString("coinType");
 
-            String[] currencies = symbol.split("-");
-            if(currencies.length!=2)
-                continue;
-
-            String currencyBase = currencies[0].toUpperCase(Locale.ENGLISH);
-            String currencyCounter = currencies[1].toUpperCase(Locale.ENGLISH);
-
-            pairs.add(new CurrencyPairInfo(currencyBase, currencyCounter, symbol));
+            pairs.add(new CurrencyPairInfo(coinPair, coinType, symbol));
         }
     }
 
