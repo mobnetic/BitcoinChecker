@@ -36,6 +36,7 @@ public class VirtualCurrency {
 	public static final String BIL = "BIL";
 	public static final String BLA = "BLA";
 	public static final String BLC = "BLC";
+	public static final String BNB = "BNB";
 	public static final String BQC = "BQC";
 	public static final String BTB = "BTB";
 	public static final String BTC = "BTC";

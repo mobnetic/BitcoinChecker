@@ -143,6 +143,7 @@ public class MarketsConfig {
 //		addMarket(new Unocoin());
 		addMarket(new BlinkTrade());
 		addMarket(new Exmo());
+		addMarket(new Binance());
 		addMarket(new Kucoin());
 	}
 }
