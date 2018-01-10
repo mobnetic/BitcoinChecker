@@ -164,6 +164,7 @@ public class VirtualCurrency {
 	public static final String JKC = "JKC";
 	public static final String JRY = "JRY";
 	public static final String KARM = "KARM";
+	public static final String KCS = "KCS";
 	public static final String KDC = "KDC";
 	public static final String KGC = "KGC";
 	public static final String KKC = "KKC";
