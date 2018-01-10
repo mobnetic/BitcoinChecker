@@ -15,7 +15,7 @@ public class NegocieCoins extends Market {
 
 	private final static String NAME = "NegocieCoins";
 	private final static String TTS_NAME = "Negocie Coins";
-	private final static String URL = "http://www.negociecoins.com.br/api/v3/%1$s%2$s/ticker";
+	private final static String URL = "https://broker.negociecoins.com.br/api/v3/%1$s%2$s/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
