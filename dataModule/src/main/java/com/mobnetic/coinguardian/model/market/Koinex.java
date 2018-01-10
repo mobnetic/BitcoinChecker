@@ -30,7 +30,7 @@ public class Koinex extends Market {
 	@Override
 	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
 		final JSONObject names = jsonObject.getJSONObject("stats");
-		JSONObject tickerJsonObject = names.getJSONObject(checkerInfo.getCurrencyCounter());
+		JSONObject tickerJsonObject = names.getJSONObject(checkerInfo.getCurrencyBase());
 		ticker.bid = tickerJsonObject.getDouble("highest_bid");
 		ticker.ask = tickerJsonObject.getDouble("lowest_ask");
 		ticker.vol = tickerJsonObject.getDouble("vol_24hrs");
