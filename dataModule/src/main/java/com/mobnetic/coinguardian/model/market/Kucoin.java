@@ -58,11 +58,12 @@ public class Kucoin extends Market {
         final JSONArray data = jsonObject.getJSONArray("data");
 
         for(int i=0; i< data.length(); ++i) {
-            String symbol = data.getJSONObject(i).getString("symbol");
-            String coinPair = data.getJSONObject(i).getString("coinTypePair");
-            String coinType = data.getJSONObject(i).getString("coinType");
-
-            pairs.add(new CurrencyPairInfo(coinPair, coinType, symbol));
+            final JSONObject pairJsonObject = data.getJSONObject(i);
+            pairs.add(new CurrencyPairInfo(
+                pairJsonObject.getString("coinType"),
+                pairJsonObject.getString("coinTypePair"),
+                pairJsonObject.getString("symbol")
+            ));
         }
     }
 
