@@ -15,7 +15,7 @@ public class Zebpay extends Market {
 
 	private final static String NAME = "Zebpay";
 	private final static String TTS_NAME = "Zeb Pay";
-	private final static String URL = "https://www.zebapi.com/api/v1/market/ticker/%1$s/%2$s";
+	private final static String URL = "https://www.zebapi.com/api/v1/market/ticker-new/%1$s/%2$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
