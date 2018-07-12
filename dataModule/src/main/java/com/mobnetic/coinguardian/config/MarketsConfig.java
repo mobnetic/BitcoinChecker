@@ -145,5 +145,6 @@ public class MarketsConfig {
 		addMarket(new Exmo());
 		addMarket(new Binance());
 		addMarket(new Kucoin());
+		addMarket(new OmniTrade());
 	}
 }
