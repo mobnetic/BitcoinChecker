@@ -29,10 +29,10 @@ public class Zebpay extends Market {
                 VirtualCurrency.BTC
         });
         CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-                VirtualCurrency.TUSD,
-                VirtualCurrency.BTC
+                VirtualCurrency.TUSD
         });
         CURRENCY_PAIRS.put(VirtualCurrency.BTG, new String[]{
+                VirtualCurrency.BTC,
                 VirtualCurrency.TUSD
         });
         CURRENCY_PAIRS.put(VirtualCurrency.CMT, new String[]{
