@@ -137,6 +137,7 @@ public class MarketsConfig {
 		addMarket(new Braziliex());
 		addMarket(new Abucoins());
 		addMarket(new Zebpay());
+		addMarket(new Coinome());
 		addMarket(new Paribu());
 		addMarket(new SatoshiTango());
 		addMarket(new Koinex());
