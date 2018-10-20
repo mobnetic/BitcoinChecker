@@ -8,6 +8,7 @@ public class VirtualCurrency {
 	public static final String _66 = "66";
 	public static final String _888 = "888";
 	public static final String ADT = "ADT";
+	public static final String AE = "AE";
 	public static final String ALB = "ALB";
 	public static final String ALF = "ALF";
 	public static final String ALP = "ALP";
@@ -66,6 +67,7 @@ public class VirtualCurrency {
 	public static final String CL = "CL";
 	public static final String CLR = "CLR";
 	public static final String CMC = "CMC";
+	public static final String CMT = "CMT";
 	public static final String CNC = "CNC";
 	public static final String CNOTE = "CNOTE";
 	public static final String COIN = "COIN";
@@ -141,6 +143,7 @@ public class VirtualCurrency {
 	public static final String GLD = "GLD";
 	public static final String GLX = "GLX";
 	public static final String GME = "GME";
+	public static final String GNT = "GNT";
 	public static final String GOAT = "GOAT";
 	public static final String GOX = "GOX";
 	public static final String GPUC = "GPUC";
@@ -158,6 +161,7 @@ public class VirtualCurrency {
 	public static final String ICN = "ICN";
 	public static final String IFC = "IFC";
 	public static final String IND = "IND";
+	public static final String IOST = "IOST";
 	public static final String IOT = "IOT";
 	public static final String IQD = "IQD";
 	public static final String IXC = "IXC";
@@ -211,6 +215,7 @@ public class VirtualCurrency {
 	public static final String MZC = "MZC";
 	public static final String NAN = "NAN";
 	public static final String NBL = "NBL";
+	public static final String NCASH = "NCASH";
 	public static final String NDL = "NDL";
 	public static final String NEC = "NEC";
 	public static final String NEO = "NEO";
@@ -271,6 +276,7 @@ public class VirtualCurrency {
 	public static final String REC = "REC";
 	public static final String RED = "RED";
 	public static final String REDD = "REDD";	// RDD
+	public static final String REP = "REP";	// RDD
 	public static final String RIC = "RIC";
 	public static final String RON = "RON";
 	public static final String RPC = "RPC";
@@ -315,8 +321,10 @@ public class VirtualCurrency {
 	public static final String TOP = "TOP";
 	public static final String TRC = "TRC";
 	public static final String TRL = "TRL";
+	public static final String TRX = "TRX";
 	public static final String TSL = "TSL";
 	public static final String TTC = "TTC";
+	public static final String TUSD = "TUSD";
 	public static final String UFO = "UFO";
 	public static final String UNC = "UNC";
 	public static final String UNI = "UNI";
@@ -358,6 +366,8 @@ public class VirtualCurrency {
 	public static final String ZEIT = "ZEIT";
 	public static final String ZET = "ZET";
 	public static final String ZEU = "ZEU";
+	public static final String ZIL = "ZIL";
 	public static final String ZMB = "ZMB";
+	public static final String ZRX = "ZRX";
 	public static final String ZTC = "ZTC";
 }

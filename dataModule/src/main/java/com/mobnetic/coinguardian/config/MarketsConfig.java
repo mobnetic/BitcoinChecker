@@ -147,5 +147,6 @@ public class MarketsConfig {
 		addMarket(new Kucoin());
 		addMarket(new BitcoinTrade());
 		addMarket(new OmniTrade());
+		addMarket(new Coinome());
 	}
 }
