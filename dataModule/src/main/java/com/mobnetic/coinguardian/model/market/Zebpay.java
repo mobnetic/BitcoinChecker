@@ -19,20 +19,65 @@ public class Zebpay extends Market {
     private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 
     static {
-        CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
-                Currency.INR
+        CURRENCY_PAIRS.put(VirtualCurrency.AE, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.BAT, new String[]{
+                VirtualCurrency.BTC
         });
         CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
-                Currency.INR
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
+                VirtualCurrency.TUSD,
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.BTG, new String[]{
+                VirtualCurrency.TUSD
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.CMT, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.EOS, new String[]{
+                VirtualCurrency.BTC
         });
         CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
-                Currency.INR
+                VirtualCurrency.BTC
         });
-        CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
-                Currency.INR
+        CURRENCY_PAIRS.put(VirtualCurrency.GNT, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.IOST, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.KNC, new String[]{
+                VirtualCurrency.BTC
         });
         CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
-                Currency.INR
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.NCASH, new String[]{
+                VirtualCurrency.BTC,
+                VirtualCurrency.XRP
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.OMG, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.REP, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.TRX, new String[]{
+                VirtualCurrency.BTC,
+                VirtualCurrency.XRP
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.ZIL, new String[]{
+                VirtualCurrency.BTC
+        });
+        CURRENCY_PAIRS.put(VirtualCurrency.ZRX, new String[]{
+                VirtualCurrency.BTC
         });
     }
 
