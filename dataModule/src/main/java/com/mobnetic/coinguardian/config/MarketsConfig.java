@@ -147,5 +147,6 @@ public class MarketsConfig {
 		addMarket(new BitcoinTrade());
 		addMarket(new OmniTrade());
 		addMarket(new Coinome());
+		addMarket(new Nocks());
 	}
 }
