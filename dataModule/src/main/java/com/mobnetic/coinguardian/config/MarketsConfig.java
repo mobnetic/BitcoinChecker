@@ -148,5 +148,6 @@ public class MarketsConfig {
 		addMarket(new OmniTrade());
 		addMarket(new Coinome());
 		addMarket(new Nocks());
+		addmarket(new Profitfy());
 	}
 }
