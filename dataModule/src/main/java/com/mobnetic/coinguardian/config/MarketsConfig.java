@@ -87,7 +87,6 @@ public class MarketsConfig {
 		addMarket(new HitBtc());
 		addMarket(new CleverCoin());
 		addMarket(new BitBay());
-		addMarket(new FoxBit());
 		addMarket(new QuadrigaCX());
 		addMarket(new CoinMateIO());
 		addMarket(new BitMarket24PL());
@@ -145,5 +144,9 @@ public class MarketsConfig {
 		addMarket(new Exmo());
 		addMarket(new Binance());
 		addMarket(new Kucoin());
+		addMarket(new BitcoinTrade());
+		addMarket(new OmniTrade());
+		addMarket(new Coinome());
+		addMarket(new Nocks());
 	}
 }
