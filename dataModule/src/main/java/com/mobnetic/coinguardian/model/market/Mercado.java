@@ -16,7 +16,7 @@ public class Mercado extends Market {
 
 	private final static String NAME = "Mercado Bitcoin";
 	private final static String TTS_NAME = "Mercado";
-	private final static String URL = "https://www.mercadobitcoin.com.br/api/%1$s/ticker/";
+	private final static String URL = "https://www.mercadobitcoin.net/api/%1$s/ticker/";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -26,6 +26,12 @@ public class Mercado extends Market {
 				Currency.BRL
 		});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
+				Currency.BRL
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
+				Currency.BRL
+		});
+		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
 				Currency.BRL
 		});
 	}
