@@ -20,9 +20,9 @@ public class Kucoin extends Market {
 
     private final static String NAME = "Kucoin";
     private final static String TTS_NAME = NAME;
-    private final static String URL = "https://api.kucoin.com/v1/open/tick?symbol=%1$s";
+    private final static String URL = "https://api.kucoin.com/api/v1/market/stats?symbol=%1$s";
 
-    private final static String URL_COINS_PAIRS = "https://api.kucoin.com/v1/market/open/symbols";
+    private final static String URL_COINS_PAIRS = "https://api.kucoin.com/api/v1/symbols";
 
     public Kucoin() {
         super(NAME, TTS_NAME, null);
@@ -41,8 +41,8 @@ public class Kucoin extends Market {
         ticker.vol = tickerJsonObject.getDouble("vol");
         ticker.high = tickerJsonObject.getDouble("high");
         ticker.low = tickerJsonObject.getDouble("low");
-        ticker.last = tickerJsonObject.getDouble("lastDealPrice");
-        ticker.timestamp = tickerJsonObject.getLong("datetime");
+        ticker.last = tickerJsonObject.getDouble("last");
+        ticker.timestamp = tickerJsonObject.getLong("time");
     }
 
     // ====================
@@ -60,8 +60,8 @@ public class Kucoin extends Market {
         for(int i=0; i< data.length(); ++i) {
             final JSONObject pairJsonObject = data.getJSONObject(i);
             pairs.add(new CurrencyPairInfo(
-                pairJsonObject.getString("coinType"),
-                pairJsonObject.getString("coinTypePair"),
+                pairJsonObject.getString("baseCurrency"),
+                pairJsonObject.getString("quoteCurrency"),
                 pairJsonObject.getString("symbol")
             ));
         }
