@@ -107,7 +107,7 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 		try {
 			networkResponse = response;
 			String responseString = "";
-			final String encoding = response.headers.get("Content-Encoding");
+			final String encoding = getEncoding(response.headers);
             if(encoding!=null && encoding.contains("gzip")) {
                 responseString = decodeGZip(response.data);
             } else {
@@ -126,7 +126,17 @@ public abstract class GzipVolleyRequest<T> extends Request<T> {
 			return Response.error(new UnknownVolleyError(e));
 		}
 	}
-	
+
+	private String getEncoding(Map<String, String> headers){
+		if(headers.get("Content-Encoding") != null){
+			return headers.get("Content-Encoding");
+		}
+		if(headers.get("content-encoding") != null){
+			return headers.get("content-encoding");
+		}
+		return null;
+	}
+
 	private String decodeGZip(byte[] data) throws Exception {
         String responseString = "";
 
