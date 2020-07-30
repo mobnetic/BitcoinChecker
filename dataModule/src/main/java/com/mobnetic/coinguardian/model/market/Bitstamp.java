@@ -40,6 +40,11 @@ public class Bitstamp extends Market {
 				Currency.EUR,
 				Currency.USD
 			});
+		CURRENCY_PAIRS.put(VirtualCurrency.XLM, new String[]{
+				VirtualCurrency.BTC,
+				Currency.EUR,
+				Currency.USD
+			});
 		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
