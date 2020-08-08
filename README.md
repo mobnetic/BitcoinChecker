@@ -13,14 +13,6 @@ Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin C
 ##### Bitcoin Checker on Google Play Store:
 https://play.google.com/store/apps/details?id=com.mobnetic.coinguardian
 
-### Donate to Bitcoin Checker project:
-
-♥ __BTC__: 1KyLY5sT1Ffa6ctFPFpdL2bxhSAxNqfvMA
-
-♥ __DOGE__: D81kyZ49E132enb7ct7RcPGpjgsrN7bsd7
-
-♥ __LTC__: LZ3EiK42o5nbDW3cwiaKUptFQ9eBA3x1vw
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
