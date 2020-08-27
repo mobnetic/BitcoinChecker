@@ -15,18 +15,18 @@ public class FormatUtilsBase {
 	// Double formatting
 	// ====================
 	private final static DecimalFormat FORMAT_TWO_DECIMAL = new DecimalFormat("0.00");
-	private final static DecimalFormat FORMAT_THREE_SIGNIFICANT_AT_MOST = new DecimalFormat("@##");
+	private final static DecimalFormat FORMAT_FIVE_SIGNIFICANT_AT_MOST = new DecimalFormat("@#####");
 	private final static DecimalFormat FORMAT_EIGHT_SIGNIFICANT_AT_MOST = new DecimalFormat("@#######");
 	
 	// ====================
 	// Format methods
 	// ====================
 	public static String formatDouble(double value, boolean isPrice) {
-		return formatDouble(value<1 ? FORMAT_THREE_SIGNIFICANT_AT_MOST : FORMAT_TWO_DECIMAL, value);
+		return formatDouble(value<1 ? FORMAT_FIVE_SIGNIFICANT_AT_MOST : FORMAT_TWO_DECIMAL, value);
 	}
 	
-	public static String formatDoubleWithThreeMax(double value) {
-		return formatDouble(FORMAT_THREE_SIGNIFICANT_AT_MOST, value);
+	public static String formatDoubleWithFiveMax(double value) {
+		return formatDouble(FORMAT_FIVE_SIGNIFICANT_AT_MOST, value);
 	}
 	
 	protected static String formatDoubleWithEightMax(double value) {
