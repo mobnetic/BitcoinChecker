@@ -11,7 +11,7 @@ _We proudly announce_ that [DataModule](dataModule) (containing exchanges and cu
 Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin Checker apps in the [Issues](https://github.com/mobnetic/BitcoinChecker/issues) section.
 
 ##### Bitcoin Checker on Google Play Store:
-https://play.google.com/store/apps/details?id=com.mobnetic.coinguardian
+https://play.google.com/store/apps/details?id=com.aneonex.bitcoinchecker
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
