@@ -28,7 +28,6 @@ public class MarketsConfig {
 		addMarket(new Btcturk());
 		addMarket(new Coinse());
 		addMarket(new Campbx());
-		addMarket(new BitcoinAverage());
 		addMarket(new TheRock());
 		addMarket(new CexIO());
 		addMarket(new Virtex());
@@ -41,10 +40,8 @@ public class MarketsConfig {
 		addMarket(new CoinJar());
 		addMarket(new Poloniex());
 		addMarket(new Winkdex());
-		addMarket(new Anxpro());
 		addMarket(new BitX());
 		addMarket(new CCex());
-		addMarket(new BitMarketPL());
 		addMarket(new Bitorado());
 		addMarket(new CryptoRush());
 		addMarket(new CoinDesk());
@@ -68,12 +65,10 @@ public class MarketsConfig {
 		addMarket(new Cryptonit());
 		addMarket(new LakeBTC());
 		addMarket(new BitMaszyna());
-		addMarket(new BitCore());
 		addMarket(new Zaydo());
 		addMarket(new AllCoin());
 		addMarket(new Ripio());
 		addMarket(new DolarBlueNet());
-		addMarket(new Basebit());
 		addMarket(new CoinSwap());
 		addMarket(new Paymium());
 		addMarket(new Bitso());
@@ -87,13 +82,11 @@ public class MarketsConfig {
 		addMarket(new BitBay());
 		addMarket(new QuadrigaCX());
 		addMarket(new CoinMateIO());
-		addMarket(new BitMarket24PL());
 		addMarket(new Buttercoin());
 		addMarket(new CoinTraderNet());
 		addMarket(new LocalBitcoins());
 		addMarket(new Cryptopia());
 		addMarket(new Igot());
-		addMarket(new SevenNineSix());
 		addMarket(new Mexbt());
 		addMarket(new Vaultoro());
 		addMarket(new BitxCom());
