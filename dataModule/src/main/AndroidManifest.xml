@@ -3,8 +3,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
+    <!--uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="18" /-->
 
 </manifest>
