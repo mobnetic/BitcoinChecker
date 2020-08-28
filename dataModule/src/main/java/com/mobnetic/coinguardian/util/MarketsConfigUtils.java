@@ -10,7 +10,6 @@ public class MarketsConfigUtils {
 
 	private final static Market UNKNOWN = new Unknown();
 
-/*
 	public static Market getMarketById(int id) {
 		synchronized (MarketsConfig.MARKETS) {
 			if(id>=0 && id<MarketsConfig.MARKETS.size()) {
@@ -19,7 +18,7 @@ public class MarketsConfigUtils {
 		}
 		return UNKNOWN;
 	}
-*/
+
 	public static Market getMarketByKey(String key) {
 		synchronized (MarketsConfig.MARKETS) {
 			if(MarketsConfig.MARKETS.containsKey(key))
