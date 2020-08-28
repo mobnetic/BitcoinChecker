@@ -1,8 +1,5 @@
 package com.mobnetic.coinguardiandatamodule.tester;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -40,7 +37,30 @@ import com.mobnetic.coinguardiandatamodule.tester.volley.CheckerVolleyMainReques
 import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseErrorListener;
 import com.mobnetic.coinguardiandatamodule.tester.volley.generic.ResponseListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends Activity {
+
+	private class MarketEntry implements Comparable<MarketEntry> {
+		public String key;
+		public String name;
+
+		public MarketEntry(String key, String name) {
+			this.key = key;
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
+
+		@Override
+		public int compareTo(MarketEntry o) {
+			return name.compareTo(o.name);
+		}
+	}
 
 	private RequestQueue requestQueue;
 	private Spinner marketSpinner;
@@ -126,9 +146,8 @@ public class MainActivity extends Activity {
 	// Get selected items
 	// ====================
 	private Market getSelectedMarket() {
-		int size = MarketsConfig.MARKETS.size();
-		int idx = (size - 1) - marketSpinner.getSelectedItemPosition();
-		return MarketsConfigUtils.getMarketById(idx);
+		MarketEntry marketEntry = (MarketEntry)marketSpinner.getSelectedItem();
+		return MarketsConfigUtils.getMarketByKey(marketEntry.key);
 	}
 	
 	private String getSelectedCurrencyBase() {
@@ -152,18 +171,20 @@ public class MainActivity extends Activity {
 		return Futures.CONTRACT_TYPE_WEEKLY;
 	}
 
-
 	// ====================
 	// Refreshing UI
 	// ====================
 	private void refreshMarketSpinner() {
-		final CharSequence[] entries = new String[MarketsConfig.MARKETS.size()];
+		final MarketEntry[] entries = new MarketEntry[MarketsConfig.MARKETS.size()];
 		int i = entries.length - 1;
 		for(Market market : MarketsConfig.MARKETS.values()) {
-			entries[i--] = market.name;
+			MarketEntry marketEntry = new MarketEntry(market.key, market.name);
+			entries[i--] = marketEntry;// market.name;
 		}
-		
-		marketSpinner.setAdapter(new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_dropdown_item, entries));
+
+		java.util.Arrays.sort(entries);
+
+		marketSpinner.setAdapter(new ArrayAdapter<MarketEntry>(this, android.R.layout.simple_spinner_dropdown_item, entries));
 	}
 	
 	private void refreshCurrencySpinners(Market market) {
