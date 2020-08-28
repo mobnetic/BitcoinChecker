@@ -14,7 +14,7 @@ public class BitcoinTrade extends Market {
 
 	private final static String NAME = "BitcoinTrade";
 	private final static String TTS_NAME = "Bitcoin Trade";
-	private final static String URL = "https://api.bitcointrade.com.br/v1/public/%1$s/ticker/";
+	private final static String URL = "https://api.bitcointrade.com.br/v3/public/%1$s%2$s/ticker";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<String, CharSequence[]>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
@@ -34,7 +34,7 @@ public class BitcoinTrade extends Market {
 
 	@Override
 	public String getUrl(int requestId, CheckerInfo checkerInfo) {
-		return String.format(URL, checkerInfo.getCurrencyBase());
+		return String.format(URL, checkerInfo.getCurrencyCounter(), checkerInfo.getCurrencyBase());
 	}
 
 	@Override
