@@ -349,6 +349,7 @@ public class VirtualCurrency {
 	public static final String XDG = "XDG";		// DOGE
 	public static final String XIV = "XIV";
 	public static final String XJO = "XJO";
+	public static final String XLM = "XLM";
 	public static final String XMR = "XMR";
 	public static final String XNC = "XNC";
 	public static final String XPM = "XPM";
