@@ -51,6 +51,9 @@ public class Bithumb extends Market {
         CURRENCY_PAIRS.put(VirtualCurrency.QTUM, new String[]{
                 Currency.KRW
         });
+        CURRENCY_PAIRS.put(VirtualCurrency.CON, new String[]{
+                Currency.KRW
+        });
     }
 
     public Bithumb() {
@@ -77,7 +80,7 @@ public class Bithumb extends Market {
         JSONObject dataObject = jsonObject.getJSONObject("data");
 
         if (requestId == 0) {
-            ticker.vol = dataObject.getDouble("volume_1day");
+            ticker.vol = dataObject.getDouble("units_traded_24H");
             ticker.high = dataObject.getDouble("max_price");
             ticker.low = dataObject.getDouble("min_price");
             ticker.last = dataObject.getDouble("closing_price");

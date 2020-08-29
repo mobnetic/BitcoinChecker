@@ -14,7 +14,6 @@ public class MarketsConfig {
 
 	static {
 		addMarket(new Bitstamp());
-		addMarket(new Bitcurex());
 		addMarket(new Mercado());
 		addMarket(new Kraken());
 		addMarket(new Bitfinex());

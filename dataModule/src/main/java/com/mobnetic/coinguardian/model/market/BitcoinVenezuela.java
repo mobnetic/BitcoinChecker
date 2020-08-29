@@ -15,8 +15,8 @@ public class BitcoinVenezuela extends Market {
 
 	private final static String NAME = "BitcoinVenezuela";
 	private final static String TTS_NAME = "Bitcoin Venezuela";
-	private final static String URL = "http://api.bitcoinvenezuela.com/?html=no&currency=%1$s&amount=1&to=%2$s";
-	private final static String URL_CURRENCY_PAIRS = "http://api.bitcoinvenezuela.com/";
+	private final static String URL = "https://api.bitcoinvenezuela.com/?html=no&currency=%1$s&amount=1&to=%2$s";
+	private final static String URL_CURRENCY_PAIRS = "https://api.bitcoinvenezuela.com/";
 	
 	public BitcoinVenezuela() {
 		super(NAME, TTS_NAME, null);

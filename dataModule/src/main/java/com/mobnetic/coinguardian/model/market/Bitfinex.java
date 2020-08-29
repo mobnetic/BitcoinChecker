@@ -21,8 +21,8 @@ public class Bitfinex extends Market {
 
 	private final static String NAME = "Bitfinex";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://api.bitfinex.com/v1/pubticker/%1$s";
-	private final static String URL_CURRENCY_PAIRS = "https://api.bitfinex.com/v1/symbols";
+	private final static String URL = "https://api-pub.bitfinex.com/v2/ticker/%1$s";
+	private final static String URL_CURRENCY_PAIRS = "https://api-pub.bitfinex.com/v2/tickers?symbols=ALL";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BCC, new String[]{
@@ -111,14 +111,14 @@ public class Bitfinex extends Market {
 	}
 
 	@Override
-	protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
-		ticker.bid = ParseUtils.getDoubleFromString(jsonObject, "bid");
-		ticker.ask = ParseUtils.getDoubleFromString(jsonObject, "ask");
-		ticker.vol = ParseUtils.getDoubleFromString(jsonObject, "volume");
-		ticker.high = ParseUtils.getDoubleFromString(jsonObject, "high");
-		ticker.low = ParseUtils.getDoubleFromString(jsonObject, "low");
-		ticker.last = ParseUtils.getDoubleFromString(jsonObject, "last_price");
-		ticker.timestamp = (long) (jsonObject.getDouble("timestamp")*TimeUtils.MILLIS_IN_SECOND);
+	protected void parseTicker(int requestId, String responseString, Ticker ticker, CheckerInfo checkerInfo) throws Exception {
+		JSONArray jsonArray = new JSONArray(responseString);
+		ticker.bid = jsonArray.getDouble(0);
+		ticker.ask = jsonArray.getDouble(2);
+		ticker.last = jsonArray.getDouble(6);
+		ticker.vol = jsonArray.getDouble(7);
+		ticker.high = jsonArray.getDouble(8);
+		ticker.low = jsonArray.getDouble(9);
 	}
 
 	// ====================
@@ -133,11 +133,13 @@ public class Bitfinex extends Market {
 	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
 		final JSONArray pairsArray = new JSONArray(responseString);
 		for (int i = 0; i < pairsArray.length(); ++i) {
-			final String pairId = pairsArray.getString(i);
-			if (pairId != null && pairId.length() == 6) {
+			final JSONArray pairArray = pairsArray.getJSONArray(i);
+			final String pairId = pairArray.getString(0);
+			if (pairId != null && pairId.length() == 7) {
+				// pairId example "tBTCUSD"
 				pairs.add(new CurrencyPairInfo(
-						pairId.substring(0, 3).toUpperCase(Locale.US),
-						pairId.substring(3).toUpperCase(Locale.US),
+						pairId.substring(1, 4).toUpperCase(Locale.US),
+						pairId.substring(4).toUpperCase(Locale.US),
 						pairId));
 			}
 		}
