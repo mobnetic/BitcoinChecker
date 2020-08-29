@@ -20,35 +20,46 @@ public class Bitstamp extends Market {
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
 				Currency.EUR,
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.BCH, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
 		CURRENCY_PAIRS.put(Currency.EUR, new String[]{
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
+		CURRENCY_PAIRS.put(Currency.GBP, new String[]{
+				Currency.EUR,
+				Currency.USD
+		});
 		CURRENCY_PAIRS.put(VirtualCurrency.ETH, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.LTC, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.XLM, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
 		CURRENCY_PAIRS.put(VirtualCurrency.XRP, new String[]{
 				VirtualCurrency.BTC,
 				Currency.EUR,
-				Currency.USD
+				Currency.USD,
+				Currency.GBP
 			});
 	}
 
