@@ -54,7 +54,6 @@ public class MarketsConfig {
 		addMarket(new Bit2c());
 		addMarket(new CryptoAltex());
 		addMarket(new BtcMarkets());
-		addMarket(new SwissCex());
 		addMarket(new Bleutrade());
 		addMarket(new ShareXcoin());
 		addMarket(new Unisend());
