@@ -13,7 +13,7 @@ _We proudly announce_ that [DataModule](dataModule) (containing exchanges and cu
 * Update currency pairs on their favourite exchange
 
 ### Issues
-Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin Checker apps in the [Issues](https://github.com/mobnetic/BitcoinChecker/issues) section.
+Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin Checker apps in the [Issues](../../issues/) section.
 
 ##### Bitcoin Checker on Google Play Store:
 https://play.google.com/store/apps/details?id=com.aneonex.bitcoinchecker
@@ -124,7 +124,7 @@ public MarketExample() {
 ### 2. Providing currency pairs:
 If given exchanges provides a mechanism to fetch currency pairs dynamically, there is no need to specify them manually then.   Please see [this section](# 6-fetching-currency-pairs-directly-from-exchange).
 
-Otherwise you have to specify which currency pairs are supported by your new exchange. Description for this is done above, in the [Updating currency pairs on existing exchange](https://github.com/mobnetic/BitcoinCheckerDataModule# updating-currency-pairs-on-existing-exchange) section.
+Otherwise you have to specify which currency pairs are supported by your new exchange. Description for this is done above, in the [Updating currency pairs on existing exchange](https://github.com/aneonex/BitcoinCheckerDataModule# updating-currency-pairs-on-existing-exchange) section.
 
 ### 3. Providing API Url:
 The API Url is provided by the getUrl method. The simplest implementation is to just return the URL field. Sometimes, the Url requires some additional parameters (like currency names) - then you have to provide them using ```String.format()``` method.
