@@ -18,6 +18,12 @@ Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin C
 ##### Bitcoin Checker on Google Play Store:
 https://play.google.com/store/apps/details?id=com.aneonex.bitcoinchecker
 
+## Donate to project develpment
+- BTC: 1ADwViiQWaiw5ghkcNnSRA5KDZhdhgGvR1
+- ETH: 0x06339d6415f1ef0fa8f9a9e62e55f3610c043e0e
+
+Thank you!
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
