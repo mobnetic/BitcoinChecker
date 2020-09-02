@@ -15,8 +15,8 @@ public class Binance extends Market {
 
 	private final static String NAME = "Binance";
 	private final static String TTS_NAME = NAME;
-	private final static String URL = "https://api.binance.com/api/v1/ticker/24hr?symbol=%1$s";
-	private final static String URL_CURRENCY_PAIRS = "https://api.binance.com/api/v1/ticker/allPrices";
+	private final static String URL = "https://api.binance.com/api/v3/ticker/24hr?symbol=%1$s";
+	private final static String URL_CURRENCY_PAIRS = "https://api.binance.com/api/v3/exchangeInfo";
 
 	private final static String[] COUNTER_CURRENCIES = {
 			VirtualCurrency.BNB,
@@ -54,20 +54,24 @@ public class Binance extends Market {
 
 	@Override
 	protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs) throws Exception {
-		final JSONArray resultJsonArray = new JSONArray(responseString);
+		final JSONObject jsonObject = new JSONObject(responseString);
+		final JSONArray jsonSymbols = jsonObject.getJSONArray("symbols");;
 
-		for(int i=0; i<resultJsonArray.length(); ++i) {
-			final JSONObject marketJsonObject = resultJsonArray.getJSONObject(i);
-			final String symbol = marketJsonObject.getString("symbol");
+		for(int i=0; i<jsonSymbols.length(); ++i) {
+			final JSONObject marketJsonObject = jsonSymbols.getJSONObject(i);
 
-			for (String counter : COUNTER_CURRENCIES) {
-				if (symbol.endsWith(counter)) {
-					pairs.add(new CurrencyPairInfo(
-							symbol.substring(0, symbol.lastIndexOf(counter)),
-							counter,
-							symbol));
-				}
+			final String status = marketJsonObject.getString("status");
+			if(!status.equals("TRADING")) {
+				continue;
 			}
+
+			final String symbol = marketJsonObject.getString("symbol");
+			final String baseAsset = marketJsonObject.getString("baseAsset");
+			final String quoteAsset = marketJsonObject.getString("quoteAsset");
+			pairs.add(new CurrencyPairInfo(
+					baseAsset,
+					quoteAsset,
+					symbol));
 		}
 	}
 }
