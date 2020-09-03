@@ -20,7 +20,7 @@ public class BlinkTrade extends Market {
 	
 	private final static String NAME = "BlinkTrade";
 	private final static String TTS_NAME = "Blink Trade";
-	private final static String URL = "https://bitcambio_api.blinktrade.com/api/v1/%2$s/ticker?crypto_currency=%1$s";
+	private final static String URL = "https://bitcambioapi.blinktrade.com/api/v1/%2$s/ticker?crypto_currency=%1$s";
 	private final static HashMap<String, CharSequence[]> CURRENCY_PAIRS = new LinkedHashMap<>();
 	static {
 		CURRENCY_PAIRS.put(VirtualCurrency.BTC, new String[]{
