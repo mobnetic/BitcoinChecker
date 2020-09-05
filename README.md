@@ -63,7 +63,7 @@ The whole tutorial described below refers to the [DataModule](dataModule) projec
 ## Updating currency pairs on existing exchange:
 *__Note if particular exchange supports dynamic currency pairs syncing mechanism there is NO need to add pairs manually here.__ *
 
-To update currency pairs on your favourite exchange, you have to find the corresponding exchange class file in the [com.mobnetic.coinguardian.model.market](dataModule/src/main/java/com/mobnetic/coinguardian/model/market) package.
+To update currency pairs on your favourite exchange, you have to find the corresponding exchange class file in the [com.aneonex.bitcoinchecker.datamodule.model.market](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market) package.
 In every exchange file there is a `CURRENCY_PAIRS` HashMap that contains a base currency (as a key) and a list of counter currencies. Every combination of base and counter currency represents one currency pair.
 
 ```java
@@ -76,10 +76,10 @@ CURRENCY_PAIRS.put(VirtualCurrency.LTC,  // Base currency
   }
 );
 ```
-This example from [BTC-e](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Btce.java) represents 4 pairs: `LTC/BTC`, `LTC/USD`, `LTC/RUR` and `LTC/EUR`.
+This example from [BTC-e](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Btce.kt) represents 4 pairs: `LTC/BTC`, `LTC/USD`, `LTC/RUR` and `LTC/EUR`.
 
 ### Adding new pair on Cryptsy?
-This is generally enough, but while adding a new currency pair on [Cryptsy](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Cryptsy.java) you also need to provide a special pair ID. Please include it in a map called `CURRENCY_PAIRS_IDS`, as shown here:
+This is generally enough, but while adding a new currency pair on [Cryptsy](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Cryptsy.kt) you also need to provide a special pair ID. Please include it in a map called `CURRENCY_PAIRS_IDS`, as shown here:
 
 ```java
 [...]
@@ -94,8 +94,8 @@ The simplest way to find the pair ID is to click or hover on that particular pai
 Try to keep alphabetical order of base currencies (or even with counter currencies) but sometimes it's also good to mirror the order from the exchange site.
 
 While adding new pairs, you should use currency names from these two classes:
-- [Currency](dataModule/src/main/java/com/mobnetic/coinguardian/model/currency/Currency.java) - where you can find fiat currencies
-- [VirtualCurrency](dataModule/src/main/java/com/mobnetic/coinguardian/model/currency/VirtualCurrency.java) - where all of the crypto/virtual currencies are stored
+- [Currency](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/currency/Currency.java) - where you can find fiat currencies
+- [VirtualCurrency](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/currency/VirtualCurrency.kt) - where all of the crypto/virtual currencies are stored
 
 ### Some currencies are missing?
 You want to add some currency pairs but one currency (or both) is missing in Currency or VirtualCurrency class?
@@ -104,12 +104,12 @@ Just add them to the Currency or VirtualCurrency class. Please put all fiat/norm
 
 ## Adding new exchange:
 #### Example:
-Please see the example of a class that represents a single exchange here - [MarketExample](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/example/MarketExample.java)
+Please see the example of a class that represents a single exchange here - [MarketExample](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/example/MarketExample.kt)
 
 ### 1. New exchange configuration:
 To add support for a new exchange, you have to provide some constants describing that particular exchange:
 * `NAME` - name of the exchange that will be displayed in the app.
-* `TTS_NAME` - name of the exchange that will be used in spoken announements. Sometimes it's just fine to put `NAME` here (see [Kraken](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Kraken.java)), but sometimes it's better to provide a more spoken friendly version (like on [McxNOW](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/McxNOW.java) - "MCX now").
+* `TTS_NAME` - name of the exchange that will be used in spoken announements. Sometimes it's just fine to put `NAME` here (see [Kraken](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Kraken.kt)), but sometimes it's better to provide a more spoken friendly version (like on [McxNOW](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/McxNOW.kt) - "MCX now").
 * `URL` - this field stores the Url for the Ticker API. Most often it contains two parameters, but sometimes it has one (`%1$s` and `%2$s`). These parameters are replaced with currency names or the selected currency pair. Providing a URL is described in the next section.
 * `CURRENCY_PAIRS` - map of all currencies supported by this exchange - described later.
 
@@ -167,7 +167,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 ```
 
 #### 3a. Providing other parameters in URL (advanced):
-Sometimes there is a need to include some kind of pair ID instead of just currency names. Please see [Cryptsy](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Cryptsy.java) as an example. There is a separate `CURRENCY_PAIRS_IDS` map that holds pair ids:
+Sometimes there is a need to include some kind of pair ID instead of just currency names. Please see [Cryptsy](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Cryptsy.java) as an example. There is a separate `CURRENCY_PAIRS_IDS` map that holds pair ids:
 
 ```java
 [...]
@@ -195,7 +195,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 ```
 
 ### 4. Parsing API response:
-While parsing the response from the exchange you have to fill the fieds of [Ticker](dataModule/src/main/java/com/mobnetic/coinguardian/model/Ticker.java) object.
+While parsing the response from the exchange you have to fill the fieds of [Ticker](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/Ticker.kt) object.
 If the API response is just in plain JSON object, you can parse it in the parseTickerFromJsonObject method:
 
 ```java
@@ -212,7 +212,7 @@ protected void parseTickerFromJsonObject(int requestId, JSONObject jsonObject, T
 ```
 
 __IMPORTANT:__ The ticker.last field is mandatory; the rest of the fields are optional.
-__NOTE:__ Parsing the `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker will fill it with `now` date. If you want to parse this information, please note that some exchanges provide time in different formats (like seconds or nanos) so you have to multiply or divide it to get the time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` constants from [TimeUtils](dataModule/src/main/java/com/mobnetic/coinguardian/util/TimeUtils.java) for that.
+__NOTE:__ Parsing the `timestamp` field (in millis) is not required. If omitted, Bitcoin Checker will fill it with `now` date. If you want to parse this information, please note that some exchanges provide time in different formats (like seconds or nanos) so you have to multiply or divide it to get the time in millis format. You can use `TimeUtils.NANOS_IN_MILLIS` or `TimeUtils.MILLIS_IN_SECOND` constants from [TimeUtils](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/util/TimeUtils.kt) for that.
 
 #### 4a. Parsing non JSONObject responses (advanced):
 Sometimes responses are more complicated than plain JSON, then you should use the `parseTicker` method. The default implementation try to parse received response as a `JSONObject`, but you can parse also other formats by overriding this method:
@@ -224,12 +224,12 @@ protected void parseTicker(int requestId, String responseString, Ticker ticker, 
 ```
 
 Here you can find examples of usage:
-* [Huobi](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Huobi.java): "almost" JSON object response, there is a need to trim some characters at the begining and at the end of the response
-* [MintPal](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/MintPal.java): JSON array response (instead of JSON object)
-* [McxNOW](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/McxNOW.java): XML based response
+* [Huobi](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Huobi.kt): "almost" JSON object response, there is a need to trim some characters at the begining and at the end of the response
+* [MintPal](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/MintPal.kt): JSON array response (instead of JSON object)
+* [McxNOW](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/McxNOW.kt): XML based response
 
 ### 5. Parsing error (not required):
-Sometimes an exchange is down but with some error message in their API (See [Crypto-Trade](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/CryptoTrade.java) as an example). You can also handle this situation and display an error message directly from the exchange to the user. There are two methods related with it and they are designed in a similar way to parsing a normal response:
+Sometimes an exchange is down but with some error message in their API (See [Crypto-Trade](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/CryptoTrade.kt) as an example). You can also handle this situation and display an error message directly from the exchange to the user. There are two methods related with it and they are designed in a similar way to parsing a normal response:
 
 ```java
 protected String parseErrorFromJsonObject(int requestId, JSONObject jsonObject, CheckerInfo checkerInfo);
@@ -241,7 +241,7 @@ protected String parseError(int requestId, String responseString, CheckerInfo ch
 
 ### 6. Fetching currency pairs directly from exchange:
 If there is any API (or other way) to obtain currency pairs directly from exchange (without need to update them manually) you should implement currency pairs fetching functionality instead of providing a static set of currency pairs.
-See example on  [Basebit](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Basebit.java).
+See example on  [Basebit](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Basebit.kt).
 Because there are no static currency pairs defined - you should pass a `null` as a last argument in the constructor and do NOT initialize `CURRENCY_PAIRS` at all. You need to provide the url to fetch currency pairs instead:
 
 ```java
@@ -266,7 +266,7 @@ or
 protected void parseCurrencyPairs(int requestId, String responseString, List<CurrencyPairInfo> pairs)
 ```
 
-While parsing currency pairs you need to create [CurrencyPairInfo](dataModule/src/main/java/com/mobnetic/coinguardian/model/CurrencyPairInfo.java) and add it to `List<CurrencyPairInfo> pairs`. The last argument `pairId` is a unique pair id used on some exchanges. You can just pass `null` if there is no such thing on given exchange.
+While parsing currency pairs you need to create [CurrencyPairInfo](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/CurrencyPairInfo.kt) and add it to `List<CurrencyPairInfo> pairs`. The last argument `pairId` is a unique pair id used on some exchanges. You can just pass `null` if there is no such thing on given exchange.
 
 You can also use multiple requests to fetch currency pairs from exchange - it is described in section [Multiple requests while fetching currency pairs](# multiple-requests-while-fetching-currency-pairs).
 
@@ -284,7 +284,7 @@ static {
 ### Multiple requests per exchange:
 Some exchanges do not provide a nice ticker api with the all important information (bid, ask, vol, high, low, last), so there is a need to perform a few requests (for example 2) to acquire as much information as possible.
 These requests will be performed in a sequense and a new price notification will appear when all of these requests are finished.
-See the [Poloniex](dataModule/src/main/java/com/mobnetic/coinguardian/model/market/Poloniex.java) exchange as a good example. In order to perform 2 requests you have to override `getNumOfRequests` method:
+See the [Poloniex](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Poloniex.kt) exchange as a good example. In order to perform 2 requests you have to override `getNumOfRequests` method:
 
 ```java
 @Override
