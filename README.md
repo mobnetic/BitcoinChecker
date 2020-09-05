@@ -94,12 +94,12 @@ The simplest way to find the pair ID is to click or hover on that particular pai
 Try to keep alphabetical order of base currencies (or even with counter currencies) but sometimes it's also good to mirror the order from the exchange site.
 
 While adding new pairs, you should use currency names from these two classes:
-- [Currency](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/currency/Currency.java) - where you can find fiat currencies
+- [Currency](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/currency/Currency.kt) - where you can find fiat currencies
 - [VirtualCurrency](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/currency/VirtualCurrency.kt) - where all of the crypto/virtual currencies are stored
 
 ### Some currencies are missing?
 You want to add some currency pairs but one currency (or both) is missing in Currency or VirtualCurrency class?
-Just add them to the Currency or VirtualCurrency class. Please put all fiat/normal currencies in the Currency.java file and all crypto/virtual currencies in VirtualCurrency.java.
+Just add them to the Currency or VirtualCurrency class. Please put all fiat/normal currencies in the Currency.kt file and all crypto/virtual currencies in VirtualCurrency.kt.
 
 
 ## Adding new exchange:
@@ -167,7 +167,7 @@ public String getUrl(int requestId, CheckerInfo checkerInfo) {
 ```
 
 #### 3a. Providing other parameters in URL (advanced):
-Sometimes there is a need to include some kind of pair ID instead of just currency names. Please see [Cryptsy](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Cryptsy.java) as an example. There is a separate `CURRENCY_PAIRS_IDS` map that holds pair ids:
+Sometimes there is a need to include some kind of pair ID instead of just currency names. Please see [Cryptsy](dataModule/src/main/java/com/aneonex/bitcoinchecker/datamodule/model/market/Cryptsy.kt) as an example. There is a separate `CURRENCY_PAIRS_IDS` map that holds pair ids:
 
 ```java
 [...]
