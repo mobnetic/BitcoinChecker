@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.mobnetic.coinguardiandatamodule.tester"
+        applicationId "com.aneonex.bitcoinchecker.datamodule.tester"
         minSdkVersion 26
         targetSdkVersion 28
     }
@@ -22,5 +23,9 @@ dependencies {
     implementation project(':dataModule')
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'com.android.volley:volley:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 //    compile files('libs/volley.jar')
+}
+repositories {
+    mavenCentral()
 }
