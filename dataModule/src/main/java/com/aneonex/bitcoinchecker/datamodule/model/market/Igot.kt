@@ -15,7 +15,7 @@ class Igot : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val pairJsonObject = jsonObject.getJSONObject(checkerInfo.currencyPairId)
+        val pairJsonObject = jsonObject.getJSONObject(checkerInfo.currencyPairId!!)
         ticker.high = pairJsonObject.getDouble("highest_today")
         ticker.low = pairJsonObject.getDouble("lowest_today")
         ticker.last = pairJsonObject.getDouble("current_rate")
@@ -30,7 +30,7 @@ class Igot : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val pairsJsonArray = jsonObject.names()
+        val pairsJsonArray = jsonObject.names()!!
         for (i in 0 until pairsJsonArray.length()) {
             val currencyCounter = pairsJsonArray.getString(i)
             if (currencyCounter != null) {

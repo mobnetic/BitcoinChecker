@@ -27,7 +27,7 @@ class ShapeShift : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val jsonCoinNames = jsonObject.names()
+        val jsonCoinNames = jsonObject.names()!!
         val availableCoinNames: MutableList<String> = ArrayList(jsonCoinNames.length())
         for (i in 0 until jsonCoinNames.length()) {
             val coinJsonObject = jsonObject.getJSONObject(jsonCoinNames.getString(i))

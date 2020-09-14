@@ -64,10 +64,9 @@ class McxNOW : Market(NAME, TTS_NAME, null) {
         `is`.characterStream = StringReader(responseString)
         val doc = db.parse(`is`)
         val nodes = doc.getElementsByTagName("cur")
-        var node: Element? = null
         if (nodes != null) {
             for (i in 0 until nodes.length) {
-                node = nodes.item(i) as Element
+                val node = nodes.item(i) as Element?
                 if (node != null) {
                     val currency = node.getAttribute("tla")
                     if (!TextUtils.isEmpty(currency) && VirtualCurrency.BTC != currency) pairs.add(CurrencyPairInfo(currency, VirtualCurrency.BTC, null))

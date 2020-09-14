@@ -37,7 +37,6 @@ class HitBtc : Market(NAME, TTS_NAME, null) {
             val currencyBase = pairJsonObject.getString("commodity")
             val currencyCounter = pairJsonObject.getString("currency")
             val currencyPairId = pairJsonObject.getString("symbol")
-            if (currencyBase == null || currencyCounter == null || currencyPairId == null) continue
             pairs.add(CurrencyPairInfo(currencyBase, currencyCounter, currencyPairId))
         }
     }

@@ -14,7 +14,7 @@ class Coinome : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val tickerJsonObject = jsonObject.getJSONObject(checkerInfo.currencyPairId)
+        val tickerJsonObject = jsonObject.getJSONObject(checkerInfo.currencyPairId!!)
         ticker.bid = tickerJsonObject.getDouble("highest_bid")
         ticker.ask = tickerJsonObject.getDouble("lowest_ask")
         //ticker.vol = tickerJsonObject.getDouble("24hr_volume"); Currently null
@@ -30,7 +30,7 @@ class Coinome : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val pairArray = jsonObject.names()
+        val pairArray = jsonObject.names()!!
         for (i in 0 until pairArray.length()) {
             val pairId = pairArray.getString(i)
             val currencies = pairId.split("-".toRegex()).toTypedArray()

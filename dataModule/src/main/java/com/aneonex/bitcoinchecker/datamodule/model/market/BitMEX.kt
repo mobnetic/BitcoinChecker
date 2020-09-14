@@ -45,7 +45,7 @@ class BitMEX : Market(NAME, TTS_NAME, null) {
         if (!jsonObject.isNull("lowPrice")) ticker.low = jsonObject.getDouble("lowPrice")
         ticker.last = jsonObject.getDouble("lastPrice")
         // This is an ISO timestamp representing UTC time
-        ticker.timestamp = ISO_DATE_FORMAT.parse(jsonObject.getString("timestamp")).time
+        ticker.timestamp = ISO_DATE_FORMAT.parse(jsonObject.getString("timestamp"))?.time ?: 0
     }
 
     // ====================

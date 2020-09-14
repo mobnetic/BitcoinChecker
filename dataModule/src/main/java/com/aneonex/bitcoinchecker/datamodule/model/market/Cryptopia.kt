@@ -42,12 +42,10 @@ class Cryptopia : Market(NAME, TTS_NAME, null) {
             val currencyBase = pairJsonObject.getString("Symbol")
             val currencyCounter = pairJsonObject.getString("BaseSymbol")
             val pairId = pairJsonObject.getString("Id")
-            if (currencyCounter != null && currencyCounter != null && pairId != null) {
-                pairs.add(CurrencyPairInfo(
-                        currencyBase,
-                        currencyCounter,
-                        pairId))
-            }
+            pairs.add(CurrencyPairInfo(
+                    currencyBase,
+                    currencyCounter,
+                    pairId))
         }
     }
 

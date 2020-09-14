@@ -14,7 +14,7 @@ class CoinJar : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         val ratesJsonObject = jsonObject.getJSONObject("exchange_rates")
-        val pairJsonObject = ratesJsonObject.getJSONObject(checkerInfo.currencyPairId)
+        val pairJsonObject = ratesJsonObject.getJSONObject(checkerInfo.currencyPairId!!)
         ticker.bid = pairJsonObject.getDouble("bid")
         ticker.ask = pairJsonObject.getDouble("ask")
         ticker.last = pairJsonObject.getDouble("midpoint")
@@ -30,7 +30,7 @@ class CoinJar : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val ratesJsonObject = jsonObject.getJSONObject("exchange_rates")
-        val namesJsonArray = ratesJsonObject.names()
+        val namesJsonArray = ratesJsonObject.names()!!
         for (i in 0 until namesJsonArray.length()) {
             val symbol = namesJsonArray.getString(i)
             val pairJsonObject = ratesJsonObject.getJSONObject(symbol)

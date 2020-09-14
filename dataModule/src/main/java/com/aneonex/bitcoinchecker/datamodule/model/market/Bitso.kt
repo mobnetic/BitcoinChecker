@@ -66,7 +66,7 @@ class Bitso : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val pairIds = jsonObject.names()
+        val pairIds = jsonObject.names()!!
         for (i in 0 until pairIds.length()) {
             val pairId = pairIds.getString(i) ?: continue
             val currencies = pairId.split("_".toRegex()).toTypedArray()

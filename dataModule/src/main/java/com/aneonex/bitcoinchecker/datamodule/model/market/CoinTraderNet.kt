@@ -30,7 +30,7 @@ class CoinTraderNet : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         val dataJsonObject = jsonObject.getJSONObject("data")
-        val dataNamesArray = dataJsonObject.names()
+        val dataNamesArray = dataJsonObject.names()!!
         val tickerJsonObject = dataJsonObject.getJSONObject(dataNamesArray.getString(0))
         ticker.bid = tickerJsonObject.getDouble("bid")
         ticker.ask = tickerJsonObject.getDouble("offer")

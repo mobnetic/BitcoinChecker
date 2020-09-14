@@ -42,7 +42,7 @@ class AllCoin : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val dataJsonObject = jsonObject.getJSONObject("data")
-        val pairsJsonArray = dataJsonObject.names()
+        val pairsJsonArray = dataJsonObject.names()!!
         for (i in 0 until pairsJsonArray.length()) {
             val pairName = pairsJsonArray.getString(i)
             val marketJsonObject = dataJsonObject.getJSONObject(pairName)

@@ -39,7 +39,7 @@ class Quoine : Market(NAME, TTS_NAME, null) {
             }
             val currencyCounter = pairJsonObject.getString("currency")
             val pairName = pairJsonObject.getString("currency_pair_code")
-            if (pairName != null && currencyCounter != null && pairName.endsWith(currencyCounter)) {
+            if (pairName.endsWith(currencyCounter)) {
                 val currencyBase = pairName.substring(0, pairName.length - currencyCounter.length)
                 pairs.add(CurrencyPairInfo(
                         currencyBase,

@@ -43,7 +43,7 @@ class Livecoin : Market(NAME, TTS_NAME, null) {
             val tickerRow = tickerArray.getJSONObject(i)
             val symbol = tickerRow.getString("symbol")
             val currencyNames = symbol.split("/".toRegex()).toTypedArray()
-            if (currencyNames != null && currencyNames.size >= 2) {
+            if (currencyNames.size >= 2) {
                 pairs.add(CurrencyPairInfo(
                         currencyNames[0],
                         currencyNames[1],

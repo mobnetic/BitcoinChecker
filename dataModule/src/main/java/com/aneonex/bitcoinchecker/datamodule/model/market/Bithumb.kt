@@ -53,7 +53,7 @@ class Bithumb : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         }
     }
 
-    override fun getNumOfRequests(checkerRecord: CheckerInfo?): Int {
+    override fun getNumOfRequests(checkerInfo: CheckerInfo?): Int {
         return 2
     }
 

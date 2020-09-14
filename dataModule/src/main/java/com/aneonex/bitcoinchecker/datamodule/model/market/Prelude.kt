@@ -35,15 +35,15 @@ class Prelude : Market(NAME, TTS_NAME, null) {
                 val pairing = pairings.getJSONObject(i)
                 val pair = pairing.getString("pair")
                 if (checkerInfo.currencyBase == pair) {
-                    ticker.last = numberFormat.parse(pairing.getJSONObject("last_trade").getString("rate")).toDouble()
+                    ticker.last = numberFormat.parse(pairing.getJSONObject("last_trade").getString("rate"))!!.toDouble()
                     return
                 }
             }
         } else {
             val statistics = jsonObject.getJSONObject("statistics")
-            ticker.vol = numberFormat.parse(statistics.getString("volume")).toDouble()
-            ticker.high = numberFormat.parse(statistics.getString("high")).toDouble()
-            ticker.low = numberFormat.parse(statistics.getString("low")).toDouble()
+            ticker.vol = numberFormat.parse(statistics.getString("volume"))!!.toDouble()
+            ticker.high = numberFormat.parse(statistics.getString("high"))!!.toDouble()
+            ticker.low = numberFormat.parse(statistics.getString("low"))!!.toDouble()
         }
     }
 

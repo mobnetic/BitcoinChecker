@@ -18,7 +18,7 @@ class YoBit : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val names = jsonObject.names()
+        val names = jsonObject.names()!!
         val tickerJsonObject = jsonObject.getJSONObject(names.getString(0))
         ticker.bid = tickerJsonObject.getDouble("sell")
         ticker.ask = tickerJsonObject.getDouble("buy")
@@ -39,7 +39,7 @@ class YoBit : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val pairsJsonObject = jsonObject.getJSONObject("pairs")
-        val pairsNames = pairsJsonObject.names()
+        val pairsNames = pairsJsonObject.names()!!
         for (i in 0 until pairsNames.length()) {
             val pairId = pairsNames.getString(i) ?: continue
             val currencies = pairId.split("_".toRegex()).toTypedArray()

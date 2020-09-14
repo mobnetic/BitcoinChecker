@@ -27,7 +27,7 @@ class Kraken : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         val resultObject = jsonObject.getJSONObject("result")
-        val pairObject = resultObject.getJSONObject(resultObject.names().getString(0))
+        val pairObject = resultObject.getJSONObject(resultObject.names()!!.getString(0))
         ticker.bid = getDoubleFromJsonArrayObject(pairObject, "b")
         ticker.ask = getDoubleFromJsonArrayObject(pairObject, "a")
         ticker.vol = getDoubleFromJsonArrayObject(pairObject, "v")
@@ -52,7 +52,7 @@ class Kraken : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val result = jsonObject.getJSONObject("result")
-        val pairNames = result.names()
+        val pairNames = result.names()!!
         for (i in 0 until pairNames.length()) {
             val pairId = pairNames.getString(i)
             if (pairId != null && pairId.indexOf('.') == -1) {
@@ -66,16 +66,19 @@ class Kraken : Market(NAME, TTS_NAME, null) {
     }
 
     private fun parseCurrency(currency: String): String {
-        var currency = currency
-        if (currency != null && currency.length >= 2) {
+        var resultCurrency = currency
+
+        if (currency.length >= 2) {
             val firstChar = currency[0]
             if (firstChar == 'Z' || firstChar == 'X') {
-                currency = currency.substring(1)
+                resultCurrency = currency.substring(1)
             }
         }
-        if (VirtualCurrency.XBT == currency) return VirtualCurrency.BTC
-        if (VirtualCurrency.XVN == currency) return VirtualCurrency.VEN
-        return if (VirtualCurrency.XDG == currency) VirtualCurrency.DOGE else currency
+
+        if (VirtualCurrency.XBT == resultCurrency) return VirtualCurrency.BTC
+        if (VirtualCurrency.XVN == resultCurrency) return VirtualCurrency.VEN
+        if (VirtualCurrency.XDG == resultCurrency) return VirtualCurrency.DOGE
+        return resultCurrency
     }
 
     companion object {

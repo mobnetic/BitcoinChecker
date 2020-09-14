@@ -5,17 +5,14 @@ import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONObject
 
-abstract class Market(name: String, ttsName: String, currencyPairs: CurrencyPairsMap?) {
+abstract class Market(
+        @kotlin.jvm.JvmField val name: String,
+        @kotlin.jvm.JvmField val ttsName: String,
+        @kotlin.jvm.JvmField val currencyPairs: CurrencyPairsMap?
+    ) {
+
     @kotlin.jvm.JvmField
 	val key: String = this.javaClass.simpleName
-
-    @kotlin.jvm.JvmField
-	val name: String = name
-
-    val ttsName: String = ttsName
-
-    @kotlin.jvm.JvmField
-	val currencyPairs: CurrencyPairsMap?
 
     open val cautionResId: Int
         get() = 0
@@ -90,9 +87,5 @@ abstract class Market(name: String, ttsName: String, currencyPairs: CurrencyPair
     @Throws(Exception::class)
     protected open fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         // do parsing
-    }
-
-    init {
-        this.currencyPairs = currencyPairs
     }
 }

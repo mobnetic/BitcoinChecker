@@ -35,7 +35,7 @@ class BitcoinVenezuela : Market(NAME, TTS_NAME, null) {
     private fun parseCurrencyPairsFromCurrencyBase(currencyBase: String, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         if (!jsonObject.has(currencyBase)) return
         val currencyBaseJsonObject = jsonObject.getJSONObject(currencyBase)
-        val counterCurrencyNames = currencyBaseJsonObject.names()
+        val counterCurrencyNames = currencyBaseJsonObject.names()!!
         for (i in 0 until counterCurrencyNames.length()) {
             pairs.add(CurrencyPairInfo(
                     currencyBase,

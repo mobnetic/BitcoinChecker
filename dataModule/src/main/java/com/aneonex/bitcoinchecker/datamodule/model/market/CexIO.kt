@@ -66,12 +66,10 @@ class CexIO : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
             val pairJsonObject = pairsJsonArray.getJSONObject(i)
             val currencyBase = pairJsonObject.getString("symbol1")
             val currencyCounter = pairJsonObject.getString("symbol2")
-            if (currencyBase != null && currencyCounter != null) {
-                pairs.add(CurrencyPairInfo(
-                        currencyBase,
-                        currencyCounter,
-                        null))
-            }
+            pairs.add(CurrencyPairInfo(
+                    currencyBase,
+                    currencyCounter,
+                    null))
         }
     }
 }

@@ -14,7 +14,7 @@ class LocalBitcoins : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val pairJsonObject = jsonObject.getJSONObject(checkerInfo.currencyPairId)
+        val pairJsonObject = jsonObject.getJSONObject(checkerInfo.currencyPairId!!)
         ticker.vol = pairJsonObject.getDouble("volume_btc")
         val ratesJsonObject = pairJsonObject.getJSONObject("rates")
         ticker.last = ratesJsonObject.getDouble("last")
@@ -29,7 +29,7 @@ class LocalBitcoins : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val pairsJsonArray = jsonObject.names()
+        val pairsJsonArray = jsonObject.names()!!
         for (i in 0 until pairsJsonArray.length()) {
             val currencyCounter = pairsJsonArray.getString(i)
             if (currencyCounter != null) {

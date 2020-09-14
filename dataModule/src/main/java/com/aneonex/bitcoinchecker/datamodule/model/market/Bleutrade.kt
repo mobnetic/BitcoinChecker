@@ -15,8 +15,7 @@ class Bleutrade : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         val resultObject = jsonObject["result"]
-        var resultsJsonObject: JSONObject? = null
-        resultsJsonObject = if (resultObject is JSONArray) {
+        val resultsJsonObject = if (resultObject is JSONArray) {
             resultObject.getJSONObject(0)
         } else {
             resultObject as JSONObject
@@ -46,13 +45,11 @@ class Bleutrade : Market(NAME, TTS_NAME, null) {
             val pairId = pairJsonObject.getString("MarketName")
             val currencyBase = pairJsonObject.getString("MarketCurrency")
             val currencyCounter = pairJsonObject.getString("BaseCurrency")
-            if (pairId != null && currencyBase != null && currencyCounter != null) {
-                pairs.add(CurrencyPairInfo(
-                        currencyBase,
-                        currencyCounter,
-                        pairId
-                ))
-            }
+            pairs.add(CurrencyPairInfo(
+                    currencyBase,
+                    currencyCounter,
+                    pairId
+            ))
         }
     }
 

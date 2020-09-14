@@ -14,7 +14,7 @@ class Comkort : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         val marketsJsonObject = jsonObject.getJSONObject("markets")
-        val marketNames = marketsJsonObject.names()
+        val marketNames = marketsJsonObject.names()!!
         val marketJsonObject = marketsJsonObject.getJSONObject(marketNames.getString(0))
         ticker.bid = getFirstOrderFrom(marketJsonObject, "buy_orders")
         ticker.ask = getFirstOrderFrom(marketJsonObject, "sell_orders")

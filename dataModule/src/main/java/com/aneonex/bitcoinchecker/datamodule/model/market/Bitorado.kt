@@ -33,7 +33,7 @@ class Bitorado : Market(NAME, TTS_NAME, null) {
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val result = jsonObject.getJSONObject("result")
         val markets = result.getJSONObject("markets")
-        val pairNames = markets.names()
+        val pairNames = markets.names()!!
         for (i in 0 until pairNames.length()) {
             val pairId = pairNames.getString(i) ?: continue
             val currencies = pairId.split("-".toRegex()).toTypedArray()

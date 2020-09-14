@@ -35,7 +35,7 @@ class Uphold : Market(NAME, TTS_NAME, null) {
             val pairJsonObject = pairsJsonArray.getJSONObject(i)
             val pairId = pairJsonObject.getString("pair")
             val currencyCounter = pairJsonObject.getString("currency")
-            if (currencyCounter != null && pairId != null && pairId.endsWith(currencyCounter)) {
+            if (pairId.endsWith(currencyCounter)) {
                 val currencyBase = pairId.substring(0, pairId.length - currencyCounter.length)
                 if (currencyCounter != currencyBase) {
                     // normal pair

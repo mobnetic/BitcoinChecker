@@ -13,7 +13,7 @@ class CryptoAltex : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val pairObject = jsonObject.getJSONObject(checkerInfo.currencyPairId)
+        val pairObject = jsonObject.getJSONObject(checkerInfo.currencyPairId!!)
         ticker.vol = pairObject.getDouble("24_hours_volume")
         ticker.high = pairObject.getDouble("24_hours_price_high")
         ticker.low = pairObject.getDouble("24_hours_price_low")
@@ -29,11 +29,11 @@ class CryptoAltex : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val pairsNamesArray = jsonObject.names()
+        val pairsNamesArray = jsonObject.names()!!
         for (i in 0 until pairsNamesArray.length()) {
             val pairName = pairsNamesArray.getString(i)
             val split = pairName.split("/".toRegex()).toTypedArray()
-            if (split != null && split.size >= 2) {
+            if (split.size >= 2) {
                 pairs.add(CurrencyPairInfo(split[0], split[1], pairName))
             }
         }

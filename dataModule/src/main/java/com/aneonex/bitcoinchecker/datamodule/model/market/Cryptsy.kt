@@ -213,7 +213,7 @@ class Cryptsy : Market(NAME, TTS_NAME, null) {
             val marketObject = dataJsonArray.getJSONObject(i)
             val currencyPair = marketObject.getString("label") ?: continue
             val currencies: Array<String> = currencyPair.split("/".toRegex()).toTypedArray()
-            if (currencies.size != 2 || currencies[0] == null || currencies[1] == null) continue
+            if (currencies.size != 2) continue
             pairs.add(CurrencyPairInfo(
                     currencies[0],
                     currencies[1],
