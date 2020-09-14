@@ -39,11 +39,11 @@ class Gemini : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         //We could do something like take the average of the last Y prices
         //But I will just take the average of the last bid and asking price
         val bidsArray = jsonObject.getJSONArray("bids")
-        if (bidsArray != null && bidsArray.length() > 0) {
+        if (bidsArray.length() > 0) {
             ticker.bid = bidsArray.getJSONObject(0).getDouble("price")
         }
         val asksArray = jsonObject.getJSONArray("asks")
-        if (asksArray != null && asksArray.length() > 0) {
+        if (asksArray.length() > 0) {
             ticker.ask = asksArray.getJSONObject(0).getDouble("price")
         }
         if (ticker.bid != Ticker.NO_DATA.toDouble() && ticker.ask != Ticker.NO_DATA.toDouble()) {

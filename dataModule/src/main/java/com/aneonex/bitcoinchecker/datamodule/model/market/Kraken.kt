@@ -39,7 +39,7 @@ class Kraken : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     private fun getDoubleFromJsonArrayObject(jsonObject: JSONObject, arrayKey: String): Double {
         val jsonArray = jsonObject.getJSONArray(arrayKey)
-        return if (jsonArray != null && jsonArray.length() > 0) jsonArray.getDouble(0) else 0.0
+        return if (jsonArray.length() > 0) jsonArray.getDouble(0) else 0.0
     }
 
     // ====================
