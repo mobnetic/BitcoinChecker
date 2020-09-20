@@ -19,19 +19,6 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
-            CURRENCY_PAIRS[VirtualCurrency.BCC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BCH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    VirtualCurrency.ETH,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BCU] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
             CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
                     Currency.USD
             )
