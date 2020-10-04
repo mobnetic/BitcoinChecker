@@ -69,15 +69,38 @@
     		android:layout_height="wrap_content"
     		android:spinnerMode="dialog"
     		/>
-	   	
-	    <Button android:id="@+id/getResultButton"
-	        android:layout_width="match_parent"
-	    	android:layout_height="wrap_content"
-	    	android:layout_marginTop="10dp"
-	    	android:layout_marginBottom="15dp"
-	    	android:text="Get price!"
-	        />
-	    
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal"
+			>
+
+			<Button android:id="@+id/getResultButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:layout_marginBottom="15dp"
+				android:text="Get price!"
+				android:layout_weight="8"
+				/>
+
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+
+			<Button android:id="@+id/testAllButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:layout_marginBottom="15dp"
+				android:text="Test all"
+				android:layout_weight="1"
+				/>
+
+		</LinearLayout>
+
 	    <FrameLayout
 	        android:layout_width="match_parent"
 	    	android:layout_height="wrap_content">
