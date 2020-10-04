@@ -4,17 +4,14 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
-import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
 
-class BitoEX : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class BitoPro : Market(NAME, TTS_NAME, null) {
     companion object {
         private const val NAME = "BitoPro"
         private const val TTS_NAME = NAME
-        private const val URL = "https://www.bitoex.com/sync/dashboard/%1\$s"
+        private const val URL = "https://api.bitopro.com/v3/tickers/%1\$s"
         private const val URL_CURRENCY_PAIRS = "https://api.bitopro.com/v3/provisioning/trading-pairs"
     }
 
@@ -26,12 +23,10 @@ class BitoEX : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         val dataJson = jsonObject.getJSONArray("data")
         for(i in 0 until dataJson.length()){
             val pairJson = dataJson.getJSONObject(i)
-            if(!pairJson.getBoolean("maintain"))
-                continue
-
+//            if(!pairJson.getBoolean("maintain")) continue
             pairs.add(CurrencyPairInfo(
-                    pairJson.getString("base"),
-                    pairJson.getString("quote"),
+                    pairJson.getString("base").toUpperCase(Locale.ROOT),
+                    pairJson.getString("quote").toUpperCase(Locale.ROOT),
                     pairJson.getString("pair")
                 )
             )
@@ -39,15 +34,15 @@ class BitoEX : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(URL, System.currentTimeMillis())
+        return String.format(URL, checkerInfo.currencyPairId)
     }
 
     @Throws(Exception::class)
-    override fun parseTicker(requestId: Int, responseString: String, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val jsonArray = JSONArray(responseString)
-        ticker.ask = jsonArray.getString(0).replace(",".toRegex(), "").toDouble()
-        ticker.bid = jsonArray.getString(1).replace(",".toRegex(), "").toDouble()
-        ticker.last = ticker.ask
-        ticker.timestamp = java.lang.Long.valueOf(jsonArray.getString(2))
+    override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
+        val dataJson = jsonObject.getJSONObject("data")
+        ticker.vol = dataJson.getDouble("volume24hr")
+        ticker.high = dataJson.getDouble("high24hr")
+        ticker.low = dataJson.getDouble("low24hr")
+        ticker.last = dataJson.getDouble("lastPrice")
     }
 }

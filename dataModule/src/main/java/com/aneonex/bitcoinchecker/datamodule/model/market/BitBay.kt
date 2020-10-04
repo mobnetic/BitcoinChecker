@@ -20,12 +20,14 @@ class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     VirtualCurrency.BTC,
                     Currency.PLN,
                     Currency.USD,
-                    Currency.EUR
+                    Currency.EUR,
+                    Currency.GBP
             )
             CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
                     Currency.PLN,
                     Currency.USD,
-                    Currency.EUR
+                    Currency.EUR,
+                    Currency.GBP
             )
             CURRENCY_PAIRS[VirtualCurrency.DASH] = arrayOf(
                     VirtualCurrency.BTC,
@@ -43,15 +45,54 @@ class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     VirtualCurrency.BTC,
                     Currency.PLN,
                     Currency.USD,
-                    Currency.EUR
+                    Currency.EUR,
+                    Currency.GBP
             )
             CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
                     VirtualCurrency.BTC,
                     Currency.PLN,
                     Currency.USD,
-                    Currency.EUR
+                    Currency.EUR,
+                    Currency.GBP
             )
             CURRENCY_PAIRS[VirtualCurrency.LSK] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
+                    Currency.EUR
+            )
+            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
+                    Currency.EUR,
+                    Currency.GBP
+            )
+            CURRENCY_PAIRS[VirtualCurrency.OMG] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
+                    Currency.EUR
+            )
+            CURRENCY_PAIRS[VirtualCurrency.BTG] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
+                    Currency.EUR
+            )
+            CURRENCY_PAIRS[VirtualCurrency.BAT] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
+                    Currency.EUR
+            )
+            CURRENCY_PAIRS[VirtualCurrency.XLM] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
+                    Currency.EUR
+            )
+            CURRENCY_PAIRS[VirtualCurrency.TRX] = arrayOf(
                     VirtualCurrency.BTC,
                     Currency.PLN,
                     Currency.USD,
@@ -69,8 +110,10 @@ class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         ticker.bid = jsonObject.getDouble("bid")
         ticker.ask = jsonObject.getDouble("ask")
         ticker.vol = jsonObject.getDouble("volume")
-        ticker.high = jsonObject.getDouble("max")
-        ticker.low = jsonObject.getDouble("min")
+        if(jsonObject.has("max"))
+            ticker.high = jsonObject.getDouble("max")
+        if(jsonObject.has("min"))
+            ticker.low = jsonObject.getDouble("min")
         ticker.last = jsonObject.getDouble("last")
     }
 }
