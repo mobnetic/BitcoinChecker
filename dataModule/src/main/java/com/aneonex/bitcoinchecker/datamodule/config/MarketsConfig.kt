@@ -93,7 +93,6 @@ object MarketsConfig {
         addMarket(YoBit())
         addMarket(ShapeShift())
 //        addMarket(BitoEx())
-        addMarket(OKCoinFutures())
         //		addMarket(new FoscEx());
 //        addMarket(CoinSecure())
         addMarket(Dashcurex())
@@ -137,5 +136,8 @@ object MarketsConfig {
         addMarket(Coinome())
         addMarket(Nocks())
         addMarket(BitoPro())
+        addMarket(Ftx())
+        addMarket(Okex())
+        addMarket(OkexFutures())
     }
 }
