@@ -139,5 +139,6 @@ object MarketsConfig {
         addMarket(Ftx())
         addMarket(Okex())
         addMarket(OkexFutures())
+        addMarket(ZgCom())
     }
 }
