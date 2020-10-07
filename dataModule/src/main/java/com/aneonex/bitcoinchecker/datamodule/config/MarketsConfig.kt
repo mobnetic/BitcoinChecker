@@ -48,7 +48,7 @@ object MarketsConfig {
         addMarket(FybSG())
         addMarket(Prelude())
         addMarket(BitKonan())
-        addMarket(BitTrex())
+        addMarket(Bittrex())
         addMarket(Comkort())
         addMarket(Bit2c())
         addMarket(CryptoAltex())

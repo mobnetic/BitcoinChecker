@@ -6,7 +6,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import org.json.JSONObject
 
-class BitTrex : Market(NAME, TTS_NAME, null) {
+class Bittrex : Market(NAME, TTS_NAME, null) {
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         return String.format(URL, checkerInfo.currencyCounter, checkerInfo.currencyBase) // reversed
     }
@@ -39,8 +39,8 @@ class BitTrex : Market(NAME, TTS_NAME, null) {
     }
 
     companion object {
-        private const val NAME = "BitTrex"
-        private const val TTS_NAME = "Bit Trex"
+        private const val NAME = "Bittrex"
+        private const val TTS_NAME = NAME
         private const val URL = "https://bittrex.com/api/v1.1/public/getticker?market=%1\$s-%2\$s"
         private const val URL_CURRENCY_PAIRS = "https://bittrex.com/api/v1.1/public/getmarkets"
     }
