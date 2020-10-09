@@ -21,7 +21,7 @@ object MarketsConfig {
         addMarket(Coinbase())
 //        addMarket(Vircurex())
 //        addMarket(Fxbtc())
-        addMarket(Bter())
+        addMarket(GateIo())
 //        addMarket(Justcoin())
         addMarket(Btcturk())
 //        addMarket(Coinse())
