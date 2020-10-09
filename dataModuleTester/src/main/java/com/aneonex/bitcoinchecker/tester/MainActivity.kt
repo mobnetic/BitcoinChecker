@@ -1,9 +1,9 @@
 package com.aneonex.bitcoinchecker.tester
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -26,12 +26,13 @@ import com.aneonex.bitcoinchecker.tester.util.MarketCurrencyPairsStore
 import com.aneonex.bitcoinchecker.tester.volley.CheckerErrorParsedError
 import com.aneonex.bitcoinchecker.tester.volley.CheckerVolleyMainRequest
 import com.aneonex.bitcoinchecker.tester.volley.CheckerVolleyMainRequest.TickerWrapper
+import com.aneonex.bitcoinchecker.tester.volley.DynamicCurrencyPairsVolleyMainRequest
 import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseErrorListener
 import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseListener
 import java.util.*
 
 class MainActivity : Activity() {
-    private val TAG = MainActivity::class.simpleName
+    private val tag = MainActivity::class.simpleName
 
     private inner class MarketEntry(var key: String, var name: String) : Comparable<MarketEntry> {
         override fun toString(): String {
@@ -80,7 +81,7 @@ class MainActivity : Activity() {
         refreshFuturesContractTypeSpinner(market)
         showResultView(true)
         marketSpinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(arg0: AdapterView<*>?, arg1: View, arg2: Int, arg3: Long) {
+            override fun onItemSelected(arg0: AdapterView<*>?, arg1: View?, arg2: Int, arg3: Long) {
                 val selectedMarket = selectedMarket
                 currencyPairsMapHelper = CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this@MainActivity, selectedMarket.key))
                 refreshCurrencySpinners(selectedMarket)
@@ -101,7 +102,7 @@ class MainActivity : Activity() {
             }.show()
         }
         currencyBaseSpinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(arg0: AdapterView<*>?, arg1: View, arg2: Int, arg3: Long) {
+            override fun onItemSelected(arg0: AdapterView<*>?, arg1: View?, arg2: Int, arg3: Long) {
                 refreshCurrencyCounterSpinner(selectedMarket)
             }
 
@@ -238,7 +239,7 @@ class MainActivity : Activity() {
                     if (error is CheckerErrorParsedError) {
                         errorMsg = error.errorMsg
                     }
-                    if (TextUtils.isEmpty(errorMsg)) errorMsg = CheckErrorsUtils.parseVolleyErrorMsg(this@MainActivity, error)
+                    if (errorMsg.isNullOrEmpty()) errorMsg = CheckErrorsUtils.parseVolleyErrorMsg(this@MainActivity, error)
                     handleNewResult(checkerInfo, null, url, requestHeaders, networkResponse, responseString, errorMsg, error)
                 }
             })
@@ -278,10 +279,12 @@ class MainActivity : Activity() {
         Toast.makeText(this, "Test all", Toast.LENGTH_SHORT).show()
 
         for (market in MarketsConfig.MARKETS.values) {
-            Log.d(TAG, "*** Checking: ${market.name} (${market.key}) ***")
+            Log.d(tag, "*** Checking: ${market.name} (${market.key}) ***")
 
             if(market.currencyPairs.isNullOrEmpty()){
-                Log.d(TAG, "No pairs")
+                Log.d(tag, "No pairs, queue updating...")
+                requestQueue.add(createRequestDynamicCurrencyPairs(this, market))
+
                 continue
             }
 
@@ -289,7 +292,7 @@ class MainActivity : Activity() {
             val currencyBase = map.keys.first()
             val currencyCounter = map[currencyBase]!!.first()
 
-            Log.d(TAG, "First pair: $currencyBase/$currencyCounter")
+            Log.d(tag, "First pair: $currencyBase/$currencyCounter")
 
             val currencyPairsMapHelper = CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this, market.key))
             val pairId = currencyPairsMapHelper.getCurrencyPairId(currencyBase, currencyCounter)
@@ -302,31 +305,26 @@ class MainActivity : Activity() {
             val request: Request<*> = CheckerVolleyMainRequest(market, checkerInfo,
                     object : ResponseListener<TickerWrapper?>() {
                         override fun onResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, response: TickerWrapper?) {
-                            handleTestExchange(market.name, checkerInfo, response?.ticker, url, requestHeaders, networkResponse, responseString, null, null)
+                            handleTestExchange(market.name, url, null)
                         }
                     }, object : ResponseErrorListener() {
                 override fun onErrorResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, error: VolleyError) {
-                    error.printStackTrace()
-                    var errorMsg: String? = null
-                    if (error is CheckerErrorParsedError) {
-                        errorMsg = error.errorMsg
-                    }
-                    if (TextUtils.isEmpty(errorMsg)) errorMsg = CheckErrorsUtils.parseVolleyErrorMsg(this@MainActivity, error)
-                    handleTestExchange(market.name, checkerInfo, null, url, requestHeaders, networkResponse, responseString, errorMsg, error)
+//                    error.printStackTrace()
+                    handleTestExchange(market.name, url, error)
                 }
             })
             requestQueue.add(request)
         }
     }
 
-    private fun handleTestExchange(marketName: String, checkerInfo: CheckerInfo, ticker: Ticker?, url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, rawResponse: String?, errorMsg: String?, error: VolleyError?) {
+    private fun handleTestExchange(marketName: String, url: String?, error: VolleyError?) {
 //        showResultView(true)
 
         val sb = StringBuilder()
 
         sb.append("TEST_RESULT [$marketName]: ")
 
-        if(ticker != null)
+        if(error == null)
             sb.append("Success")
         else
             sb.append("FAILED")
@@ -334,6 +332,22 @@ class MainActivity : Activity() {
         sb.append(": ")
         sb.append(url ?: "Unknown uri")
 
-        Log.d(TAG, sb.toString())
+        if(error?.cause != null)
+            sb.append("\nDetails: ${error.cause}")
+
+        Log.d(tag, sb.toString())
+    }
+
+    private fun createRequestDynamicCurrencyPairs(context: Context, market: Market): DynamicCurrencyPairsVolleyMainRequest {
+        return DynamicCurrencyPairsVolleyMainRequest(context, market,
+                object : ResponseListener<CurrencyPairsMapHelper?>() {
+                    override fun onResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, response: CurrencyPairsMapHelper?) {
+                        handleTestExchange(market.name, url, null)
+                    }
+                }, object : ResponseErrorListener() {
+            override fun onErrorResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, error: VolleyError) {
+                handleTestExchange(market.name, url, error)
+            }
+        })
     }
 }
