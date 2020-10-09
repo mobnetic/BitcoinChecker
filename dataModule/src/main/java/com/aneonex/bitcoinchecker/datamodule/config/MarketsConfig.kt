@@ -140,5 +140,6 @@ object MarketsConfig {
         addMarket(Okex())
         addMarket(OkexFutures())
         addMarket(ZgCom())
+        addMarket(Upbit())
     }
 }
