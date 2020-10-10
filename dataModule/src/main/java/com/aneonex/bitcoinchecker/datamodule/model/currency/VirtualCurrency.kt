@@ -180,6 +180,7 @@ object VirtualCurrency {
     const val LEAF = "LEAF"
     const val LGBT = "LGBT"
     const val LGC = "LGC"
+    const val LINK = "LINK"
     const val LK7 = "LK7"
     const val LKY = "LKY"
     const val LMC = "LMC"

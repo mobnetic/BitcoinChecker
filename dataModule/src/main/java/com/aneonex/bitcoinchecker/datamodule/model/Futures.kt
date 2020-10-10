@@ -6,12 +6,15 @@ object Futures {
 //    const val CONTRACT_TYPE_MONTHLY = 2
 //    const val CONTRACT_TYPE_BIMONTHLY = 3
     const val CONTRACT_TYPE_QUARTERLY = 4
+    const val CONTRACT_TYPE_BIQUARTERLY = 5
+
     private val CONTRACT_TYPE_SHORT_NAMES = arrayOf(
             "1W",
             "2W",
             "1M",
             "2M",
-            "3M"
+            "3M",
+            "6M"
     )
 
     @kotlin.jvm.JvmStatic
