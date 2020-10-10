@@ -89,6 +89,9 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
 
     @Throws(Exception::class)
     override fun parseTicker(requestId: Int, responseString: String, ticker: Ticker, checkerInfo: CheckerInfo) {
+        // Ticker array format: https://docs.bitfinex.com/reference#rest-public-ticker
+        // [ BID, BID_SIZE, ASK, ASK_SIZE, DAILY_CHANGE, DAILY_CHANGE_RELATIVE, LAST_PRICE, VOLUME, HIGH, LOW ],
+
         val jsonArray = JSONArray(responseString)
         ticker.bid = jsonArray.getDouble(0)
         ticker.ask = jsonArray.getDouble(2)
@@ -105,19 +108,35 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         return URL_CURRENCY_PAIRS
     }
 
-    @Throws(Exception::class)
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
         val pairsArray = JSONArray(responseString)
         for (i in 0 until pairsArray.length()) {
             val pairArray = pairsArray.getJSONArray(i)
             val pairId = pairArray.getString(0)
-            if (pairId != null && pairId.length == 7) {
-                // pairId example "tBTCUSD"
-                pairs.add(CurrencyPairInfo(
-                        pairId.substring(1, 4).toUpperCase(Locale.US),
-                        pairId.substring(4).toUpperCase(Locale.US),
-                        pairId))
+
+            if(pairId.isNullOrEmpty()) continue
+            if(!pairId.startsWith('t')) continue
+
+            var currencyBase: String
+            var currencyCounter: String
+
+            val splitPair = pairId.split(':')
+            if(splitPair.size == 2){
+                // pairId example "tLINK:USD"
+                currencyBase = splitPair[0].substring(1)
+                currencyCounter = splitPair[1]
             }
+            else{
+                if(pairId.length != 7) continue
+                // pairId example "tBTCUSD"
+                currencyBase = pairId.substring(1, 4)
+                currencyCounter = pairId.substring(4)
+            }
+
+            pairs.add(CurrencyPairInfo(
+                    currencyBase,
+                    currencyCounter,
+                    pairId))
         }
     }
 }
