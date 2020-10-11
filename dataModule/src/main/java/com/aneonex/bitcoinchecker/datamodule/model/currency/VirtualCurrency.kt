@@ -41,7 +41,7 @@ object VirtualCurrency {
     const val BTB = "BTB"
     const val BTC = "BTC"
     const val mBTC = "mBTC"
-    const val uBTC = "µBTC"
+//    const val uBTC = "µBTC"
     const val Satoshi = "Satoshi"
     const val BTCS = "BTCS"
     const val BTE = "BTE"
