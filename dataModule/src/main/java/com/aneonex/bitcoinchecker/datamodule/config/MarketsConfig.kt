@@ -92,7 +92,7 @@ object MarketsConfig {
         addMarket(YoBit())
         addMarket(ShapeShift())
 //        addMarket(BitoEx())
-        //		addMarket(new FoscEx());
+//        addMarket(new FoscEx());
 //        addMarket(CoinSecure())
 //        addMarket(Dashcurex())
         addMarket(Quoine())
@@ -125,7 +125,7 @@ object MarketsConfig {
         addMarket(Paribu())
         addMarket(SatoshiTango())
 //        addMarket(Koinex())
-        //		addMarket(new Unocoin());
+//        addMarket(new Unocoin());
         addMarket(BlinkTrade())
         addMarket(Exmo())
         addMarket(Binance())
@@ -140,5 +140,6 @@ object MarketsConfig {
         addMarket(OkexFutures())
         addMarket(ZgCom())
         addMarket(Upbit())
-    }
+        addMarket(CoinEx())
+   }
 }
