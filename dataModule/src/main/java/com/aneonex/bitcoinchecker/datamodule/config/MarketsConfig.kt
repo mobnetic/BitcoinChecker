@@ -144,5 +144,6 @@ object MarketsConfig {
         addMarket(BitpandaPro())
         addMarket(Indodax())
         addMarket(Liquid())
+        addMarket(WazirX())
    }
 }
