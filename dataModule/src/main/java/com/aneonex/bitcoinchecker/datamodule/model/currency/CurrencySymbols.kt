@@ -13,8 +13,8 @@ object CurrencySymbols {
         //		CURRENCY_SYMBOLS.put(CAD, "$");
         CURRENCY_SYMBOLS[Currency.GBP] = "£"
         CURRENCY_SYMBOLS[Currency.CHF] = "Fr"
-        CURRENCY_SYMBOLS[Currency.RUB] = "р."
-        CURRENCY_SYMBOLS[Currency.RUR] = "р."
+        CURRENCY_SYMBOLS[Currency.RUB] = "₽"
+        CURRENCY_SYMBOLS[Currency.RUR] = "₽"
         CURRENCY_SYMBOLS[Currency.AUD] = "$"
         CURRENCY_SYMBOLS[Currency.SEK] = "kr"
         CURRENCY_SYMBOLS[Currency.DKK] = "kr"
@@ -30,7 +30,7 @@ object CurrencySymbols {
         CURRENCY_SYMBOLS[Currency.DZD] = "د.ج"
         CURRENCY_SYMBOLS[Currency.AOA] = "Kz"
         CURRENCY_SYMBOLS[Currency.ARS] = "$"
-        CURRENCY_SYMBOLS[Currency.AMD] = "դր."
+        CURRENCY_SYMBOLS[Currency.AMD] = "֏"
         CURRENCY_SYMBOLS[Currency.AWG] = "ƒ"
         CURRENCY_SYMBOLS[Currency.AZN] = "m"
         CURRENCY_SYMBOLS[Currency.BSD] = "$"
@@ -50,5 +50,38 @@ object CurrencySymbols {
         CURRENCY_SYMBOLS[Currency.TRY] = "TL"
         CURRENCY_SYMBOLS[Currency.ZAR] = "R"
         CURRENCY_SYMBOLS[Currency.IDR] = "Rp"
+//        CURRENCY_SYMBOLS[Currency.VND] = "₫"
+        CURRENCY_SYMBOLS[Currency.GEL] = "₾"
+//        CURRENCY_SYMBOLS[Currency.IRR] = "﷼"
+        CURRENCY_SYMBOLS[Currency.HUF] = "Ft"
+//        CURRENCY_SYMBOLS[Currency.ILS] = "₪"
+        CURRENCY_SYMBOLS[Currency.INR] = "₹"
+        CURRENCY_SYMBOLS[Currency.JOD] = "JD"
+        CURRENCY_SYMBOLS[Currency.ISK] = "kr"
+        CURRENCY_SYMBOLS[Currency.KZT] = "₸"
+//        CURRENCY_SYMBOLS[Currency.KHR] = "៛"
+//        CURRENCY_SYMBOLS[Currency.QAR] = "﷼"
+        CURRENCY_SYMBOLS[Currency.KES] = "KSH"
+//        CURRENCY_SYMBOLS[Currency.KGS] = "с"
+        CURRENCY_SYMBOLS[Currency.CRC] = "₡"
+        CURRENCY_SYMBOLS[Currency.CHF] = "₣"
+        CURRENCY_SYMBOLS[Currency.MYR] = "RM"
+        CURRENCY_SYMBOLS[Currency.MAD] = "Dh"
+        CURRENCY_SYMBOLS[Currency.MNT] = "₮"
+        CURRENCY_SYMBOLS[Currency.NGN] = "₦"
+        CURRENCY_SYMBOLS[Currency.AED] = "Dh"
+        CURRENCY_SYMBOLS[Currency.PEN] = "S/"
+        CURRENCY_SYMBOLS[Currency.RON] = "L"
+        CURRENCY_SYMBOLS[Currency.SAR] = "SR"
+        CURRENCY_SYMBOLS[Currency.RSD] = "din."
+        CURRENCY_SYMBOLS[Currency.TZS] = "TSh"
+//        CURRENCY_SYMBOLS[Currency.UAH] = "₴"
+        CURRENCY_SYMBOLS[Currency.PHP] = "₱"
+        CURRENCY_SYMBOLS[Currency.CZK] = "Kč"
+
+
+
+
+
     }
 }
