@@ -143,5 +143,6 @@ object MarketsConfig {
         addMarket(CoinEx())
         addMarket(BitpandaPro())
         addMarket(Indodax())
+        addMarket(Liquid())
    }
 }
