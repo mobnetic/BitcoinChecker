@@ -142,5 +142,6 @@ object MarketsConfig {
         addMarket(Upbit())
         addMarket(CoinEx())
         addMarket(BitpandaPro())
+        addMarket(Indodax())
    }
 }
