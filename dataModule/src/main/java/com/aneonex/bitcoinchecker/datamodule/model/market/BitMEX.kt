@@ -4,10 +4,9 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
 
 class BitMEX : Market(NAME, TTS_NAME, null) {
     companion object {
@@ -19,11 +18,6 @@ class BitMEX : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://www.bitmex.com/api/v1/instrument" +
                 "?columns=rootSymbol,typ" +
                 "&filter={\"state\":\"Open\"}"
-        private val ISO_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
-
-        init {
-            ISO_DATE_FORMAT.timeZone = TimeZone.getTimeZone("GMT")
-        }
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
@@ -45,7 +39,7 @@ class BitMEX : Market(NAME, TTS_NAME, null) {
         if (!jsonObject.isNull("lowPrice")) ticker.low = jsonObject.getDouble("lowPrice")
         ticker.last = jsonObject.getDouble("lastPrice")
         // This is an ISO timestamp representing UTC time
-        ticker.timestamp = ISO_DATE_FORMAT.parse(jsonObject.getString("timestamp"))?.time ?: 0
+        ticker.timestamp = TimeUtils.convertISODateToTimestamp(jsonObject.getString("timestamp"))
     }
 
     // ====================
