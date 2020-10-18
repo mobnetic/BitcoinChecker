@@ -151,6 +151,7 @@ object Currency {
     const val UYU = "UYU"
     const val UZS = "UZS"
     const val VEF = "VEF"
+    const val VES = "VES"
     const val VND = "VND"
     const val VUV = "VUV"
     const val WST = "WST"
