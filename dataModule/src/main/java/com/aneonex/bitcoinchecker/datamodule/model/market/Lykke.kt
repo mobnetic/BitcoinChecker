@@ -32,9 +32,15 @@ class Lykke : Market(NAME, TTS_NAME, null) {
         val jsonArray = JSONArray(responseString)
         for (i in 0 until jsonArray.length()) {
             val pairJsonObject = jsonArray.getJSONObject(i)
+
+            // Parsing assets from pair in format "BTC/USD"
+            val pair = pairJsonObject.getString("name").split('/')
+            if(pair.size != 2)
+                continue
+
             pairs.add(CurrencyPairInfo(
-                    pairJsonObject.getString("baseAssetId"),
-                    pairJsonObject.getString("quotingAssetId"),
+                    pair[0], // Base
+                    pair[1], // Quoting
                     pairJsonObject.getString("id")))
         }
     }
