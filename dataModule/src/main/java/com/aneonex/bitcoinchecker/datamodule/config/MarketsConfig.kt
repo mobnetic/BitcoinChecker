@@ -141,5 +141,6 @@ object MarketsConfig {
         addMarket(ZgCom())
         addMarket(Upbit())
         addMarket(CoinEx())
+        addMarket(BitpandaPro())
    }
 }
