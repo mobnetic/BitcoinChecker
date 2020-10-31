@@ -95,7 +95,7 @@ object MarketsConfig {
 //        addMarket(new FoscEx());
 //        addMarket(CoinSecure())
 //        addMarket(Dashcurex())
-        addMarket(Quoine())
+//        addMarket(Quoine())
         addMarket(Livecoin())
         addMarket(Gemini())
 //        addMarket(Coinapult())
