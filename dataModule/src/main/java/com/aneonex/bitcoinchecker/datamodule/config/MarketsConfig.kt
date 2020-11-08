@@ -148,5 +148,6 @@ object MarketsConfig {
         addMarket(Pdax())
         addMarket(Exrates())
         addMarket(Coinsbit())
+        addMarket(Coineal())
    }
 }
