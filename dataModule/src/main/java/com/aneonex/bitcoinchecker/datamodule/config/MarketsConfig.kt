@@ -145,5 +145,6 @@ object MarketsConfig {
         addMarket(Indodax())
         addMarket(Liquid())
         addMarket(WazirX())
+        addMarket(Pdax())
    }
 }
