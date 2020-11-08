@@ -149,5 +149,6 @@ object MarketsConfig {
         addMarket(Exrates())
         addMarket(Coinsbit())
         addMarket(Coineal())
+        addMarket(Bkex())
    }
 }
