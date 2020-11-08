@@ -150,5 +150,6 @@ object MarketsConfig {
         addMarket(Coinsbit())
         addMarket(Coineal())
         addMarket(Bkex())
+        addMarket(Mxc())
    }
 }
