@@ -147,5 +147,6 @@ object MarketsConfig {
         addMarket(WazirX())
         addMarket(Pdax())
         addMarket(Exrates())
+        addMarket(Coinsbit())
    }
 }
