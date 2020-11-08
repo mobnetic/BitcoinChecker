@@ -146,5 +146,6 @@ object MarketsConfig {
         addMarket(Liquid())
         addMarket(WazirX())
         addMarket(Pdax())
+        addMarket(Exrates())
    }
 }
