@@ -23,7 +23,7 @@ dependencies {
     implementation project(':dataModule')
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.android.volley:volley:1.1.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
 //    compile files('libs/volley.jar')
 }
 repositories {
