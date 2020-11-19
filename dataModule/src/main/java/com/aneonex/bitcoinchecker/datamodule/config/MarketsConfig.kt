@@ -151,5 +151,13 @@ object MarketsConfig {
         addMarket(Coineal())
         addMarket(Bkex())
         addMarket(Mxc())
+
+        addMarket(Biki())
+        addMarket(Bybit())
+        addMarket(BitZ())
+        addMarket(Hbtc())
+        addMarket(Hydax())
+        addMarket(Mexo())
+        addMarket(XthetaGlobal())
    }
 }
