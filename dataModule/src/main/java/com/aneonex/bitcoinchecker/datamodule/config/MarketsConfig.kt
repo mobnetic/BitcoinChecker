@@ -159,5 +159,6 @@ object MarketsConfig {
         addMarket(Hydax())
         addMarket(Mexo())
         addMarket(XthetaGlobal())
+        addMarket(IndependentReserve())
    }
 }
