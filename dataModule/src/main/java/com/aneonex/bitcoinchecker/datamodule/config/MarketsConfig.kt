@@ -161,5 +161,6 @@ object MarketsConfig {
         addMarket(XthetaGlobal())
 
         addMarket(UniswapV2())
+        addMarket(IndependentReserve())
    }
 }
