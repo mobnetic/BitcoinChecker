@@ -159,5 +159,7 @@ object MarketsConfig {
         addMarket(Hydax())
         addMarket(Mexo())
         addMarket(XthetaGlobal())
+
+        addMarket(UniswapV2())
    }
 }
