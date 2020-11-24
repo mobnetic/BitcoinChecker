@@ -7,6 +7,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency.AUD
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency.NZD
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency.USD
+import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.Instant
@@ -19,6 +20,10 @@ class IndependentReserve : Market(NAME, TTS_NAME, null) {
         private const val URL = "https://api.independentreserve.com/Public/GetMarketSummary?primaryCurrencyCode=%1\$s&secondaryCurrencyCode=%2\$s"
         private const val URL_CURRENCY_PAIRS = "https://api.independentreserve.com/Public/GetValidPrimaryCurrencyCodes"
         private val SUPPORTED_SECONDARY_CURRENCY_CODES = listOf(AUD, USD, NZD)
+
+        private fun getCurrencyPublicName(currency: String): String{
+            return if(currency == "XBT")  VirtualCurrency.BTC else currency
+        }
     }
 
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
@@ -29,9 +34,9 @@ class IndependentReserve : Market(NAME, TTS_NAME, null) {
 
             SUPPORTED_SECONDARY_CURRENCY_CODES.forEach { secondaryPair ->
                 pairs.add(CurrencyPairInfo(
-                        primaryCurrencyCode.toUpperCase(Locale.ROOT),
+                        getCurrencyPublicName(primaryCurrencyCode.toUpperCase(Locale.ROOT)),
                         secondaryPair.toUpperCase(Locale.ROOT),
-                        primaryCurrencyCode.toUpperCase(Locale.ROOT),
+                        primaryCurrencyCode.toLowerCase(Locale.ROOT),
                 ))
             }
         }
@@ -40,7 +45,7 @@ class IndependentReserve : Market(NAME, TTS_NAME, null) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
