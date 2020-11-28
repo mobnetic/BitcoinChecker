@@ -23,7 +23,7 @@ class UniswapV2 : Market(NAME, TTS_NAME, null) {
     override val currencyPairsNumOfRequests: Int get() = 15
 
     override fun getCurrencyPairsUrl(requestId: Int): String {
-        return String.format(URL_CURRENCY_PAIRS, requestId)
+        return String.format(URL_CURRENCY_PAIRS, requestId+1)
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {

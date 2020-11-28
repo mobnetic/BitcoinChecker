@@ -160,7 +160,7 @@ object MarketsConfig {
         addMarket(Mexo())
         addMarket(XthetaGlobal())
 
-//        addMarket(UniswapV2())
+        addMarket(UniswapV2())
         addMarket(IndependentReserve())
    }
 }
