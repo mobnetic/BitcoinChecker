@@ -1,6 +1,7 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
+import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
@@ -13,6 +14,8 @@ class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         private const val NAME = "BitBay.net"
         private const val TTS_NAME = "Bit Bay"
         private const val URL = "https://bitbay.net/API/Public/%1\$s%2\$s/ticker.json"
+        private const val URL_CURRENCY_PAIRS = "https://api.bitbay.net/rest/trading/ticker"
+
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
@@ -54,6 +57,11 @@ class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     Currency.USD,
                     Currency.EUR,
                     Currency.GBP
+            )
+            CURRENCY_PAIRS[VirtualCurrency.LINK] = arrayOf(
+                    VirtualCurrency.BTC,
+                    Currency.PLN,
+                    Currency.USD,
             )
             CURRENCY_PAIRS[VirtualCurrency.LSK] = arrayOf(
                     VirtualCurrency.BTC,
@@ -98,6 +106,24 @@ class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     Currency.USD,
                     Currency.EUR
             )
+        }
+    }
+
+    override fun getCurrencyPairsUrl(requestId: Int): String {
+        return URL_CURRENCY_PAIRS
+    }
+
+    override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
+        val itemsJson = jsonObject.getJSONObject("items")
+        itemsJson.keys().forEach {
+            val coins = it.split('-')
+            if(coins.size == 2){
+                pairs.add( CurrencyPairInfo(
+                        coins[0], // base
+                        coins[1], // quote
+                        null
+                ))
+            }
         }
     }
 
