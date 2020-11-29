@@ -25,6 +25,13 @@ abstract class Market(
     }
 
     abstract fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String
+
+    // When the body is set, the HTTP POST request is used
+    // By default is HTTP GET
+    open fun getRequestBody(requestId: Int, checkerInfo: CheckerInfo): String? {
+        return null
+    }
+
     @Throws(Exception::class)
     fun parseTickerMain(requestId: Int, responseString: String, ticker: Ticker, checkerInfo: CheckerInfo): Ticker {
         parseTicker(requestId, responseString, ticker, checkerInfo)
@@ -67,6 +74,11 @@ abstract class Market(
         get() = 1
 
     open fun getCurrencyPairsUrl(requestId: Int): String? {
+        return null
+    }
+
+    // If body defined than used HTTP POST request
+    open fun getCurrencyPairsRequestBody(requestId: Int): String? {
         return null
     }
 

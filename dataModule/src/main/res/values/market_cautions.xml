@@ -5,7 +5,8 @@
     <string name="market_caution_much_data">Caution: Due to this exchange\'s specification, checking the price on it may consume a lot of mobile data (while on mobile network). Be sure that you understand the possible consequences.</string>
     <string name="market_caution_allcoin">This exchange has a limit of 3000 requests per hour. Make sure you don\'t exceed the limit:)</string>
     <string name="market_caution_yobit">This exchange has a limit of 100 requests per minute. Make sure you don\'t exceed the limit:)</string>
-    <string name="market_caution_dex_coingecko">This is a decentralized exchange (DEX).
-        The price is obtained via the third party resource CoinGecko.com</string>
+    <string name="market_caution_uniswap">This is a decentralized exchange (DEX).
+        The price is obtained via the third party resource TheGraph.com.
+        Only top 500 most liquid pairs are used.</string>
 
 </resources>

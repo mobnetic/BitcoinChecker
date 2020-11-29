@@ -13,7 +13,7 @@ import com.aneonex.bitcoinchecker.tester.volley.generic.GzipVolleyRequest
 import java.util.*
 
 class DynamicCurrencyPairsVolleyMainRequest(private val context: Context, private val market: Market, listener: Response.Listener<CurrencyPairsMapHelper?>, errorListener: Response.ErrorListener)
-    : GzipVolleyRequest<CurrencyPairsMapHelper?>(market.getCurrencyPairsUrl(0), listener, errorListener) {
+    : GzipVolleyRequest<CurrencyPairsMapHelper?>(market.getCurrencyPairsUrl(0), market.getCurrencyPairsRequestBody(0), listener, errorListener) {
 
     @Throws(Exception::class)
     override fun parseNetworkResponse(headers: Map<String?, String?>?, responseString: String?): CurrencyPairsMapHelper {
@@ -26,8 +26,9 @@ class DynamicCurrencyPairsVolleyMainRequest(private val context: Context, privat
                 try {
                     val future = RequestFuture.newFuture<String>()
                     val nextUrl = market.getCurrencyPairsUrl(requestId)
+                    val nextRequestBody = market.getCurrencyPairsRequestBody(requestId)
                     if (!TextUtils.isEmpty(nextUrl)) {
-                        val request = DynamicCurrencyPairsVolleyNextRequest(nextUrl, future)
+                        val request = DynamicCurrencyPairsVolleyNextRequest(nextUrl, nextRequestBody, future)
                         requestQueue!!.add(request)
                         val nextResponse = future.get() // this will block
                         nextPairs.clear()

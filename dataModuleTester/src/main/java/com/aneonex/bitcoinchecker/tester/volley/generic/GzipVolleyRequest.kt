@@ -11,11 +11,14 @@ import java.net.HttpURLConnection
 import java.util.*
 import java.util.zip.GZIPInputStream
 
-abstract class GzipVolleyRequest<T>(url: String?, private val listener: Response.Listener<T>, errorListener: Response.ErrorListener)
-    : Request<T>(Method.GET, url, errorListener) {
+abstract class GzipVolleyRequest<T>(url: String?, private val requestBody: String?, private val listener: Response.Listener<T>, errorListener: Response.ErrorListener)
+    : Request<T>(if (requestBody == null) Method.GET else Method.POST, url, errorListener) {
+
+    /** Default charset for JSON request.  */
+    protected val PROTOCOL_CHARSET = Charsets.UTF_8
 
     private val initialErrorListener = errorListener
-    private val headers: MutableMap<String, String>?
+    private val headers: MutableMap<String, String>
     var requestQueue: RequestQueue? = null
         private set
     private var redirectionUrl: String? = null
@@ -28,9 +31,17 @@ abstract class GzipVolleyRequest<T>(url: String?, private val listener: Response
         return if (redirectionUrl != null) redirectionUrl.toString() else super.getUrl()
     }
 
+    override fun getBodyContentType(): String {
+        return if(requestBody != null) "application/json; charset=$PROTOCOL_CHARSET" else super.getBodyContentType()
+    }
+
+    override fun getBody(): ByteArray {
+        return if(requestBody != null) return requestBody.toByteArray(PROTOCOL_CHARSET) else super.getBody()
+    }
+
     @Throws(AuthFailureError::class)
     override fun getHeaders(): Map<String, String> {
-        requestHeaders = headers ?: super.getHeaders()
+        requestHeaders = headers //: super.getHeaders()
         return requestHeaders!!
     }
 
@@ -126,6 +137,8 @@ abstract class GzipVolleyRequest<T>(url: String?, private val listener: Response
     }
 
     init {
+        if(url == null && requestBody != null) throw IllegalArgumentException("Invalid arguments: Url cannot be null when requestBody is not null")
+
         headers = HashMap()
         headers["Accept-Encoding"] = "gzip"
         headers["User-Agent"] = "Bitcoin Checker (gzip)"
