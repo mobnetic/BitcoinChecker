@@ -14,9 +14,9 @@ class CapeCrypto : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     companion object {
         private const val NAME = "CapeCrypto"
         private const val TTS_NAME = NAME
-        // private const val URL_TICKER = "https://trade.capecrypto.com/api/v2/peatio/public/markets/%1\$s%2\$s/tickers"
-        private const val URL_TICKER = "https://trade.capecrypto.com/api/v2/peatio/public/markets/btczar/tickers"
-        private const val URL_ORDERS = "https://trade.capecrypto.com/api/v2/peatio/public/markets/btczar/order-book?asks_limit=1&bids_limit=1"
+        // private const val URL_TICKER = "https://trade.capecrypto.com/api/v2/peatio/public/markets/btczar/tickers"
+        private const val URL_TICKER = "https://trade.capecrypto.com/api/v2/peatio/public/markets/%1\$s%2\$s/tickers"
+        private const val URL_ORDERS = "https://trade.capecrypto.com/api/v2/peatio/public/markets/%1\$s%2\$s/order-book?asks_limit=1&bids_limit=1"
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
@@ -32,9 +32,9 @@ class CapeCrypto : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         return if (requestId == 0) {
-            String.format(URL_TICKER, checkerInfo.currencyBaseLowerCase)
+            String.format(URL_TICKER, checkerInfo.currencyBaseLowerCase, checkerInfo.currencyCounterLowerCase)
         } else {
-            String.format(URL_ORDERS, checkerInfo.currencyBaseLowerCase)
+            String.format(URL_ORDERS, checkerInfo.currencyBaseLowerCase, checkerInfo.currencyCounterLowerCase)
         }
     }
 
@@ -62,15 +62,5 @@ class CapeCrypto : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     override fun parseErrorFromJsonObject(requestId: Int, jsonObject: JSONObject,
                                           checkerInfo: CheckerInfo?): String? {
         return jsonObject.getString("message")
-    }
-
-    @Throws(Exception::class)
-    private fun getFirstPriceFromOrder(jsonObject: JSONObject, key: String): Double {
-        val array = jsonObject.getJSONArray(key)
-        if (array.length() == 0) {
-            return Ticker.NO_DATA.toDouble()
-        }
-        val first = array.getJSONObject(0)
-        return first.getDouble("price")
     }
 }
