@@ -162,5 +162,6 @@ object MarketsConfig {
 
         addMarket(UniswapV2())
         addMarket(IndependentReserve())
+        addMarket(CapeCrypto())
    }
 }
