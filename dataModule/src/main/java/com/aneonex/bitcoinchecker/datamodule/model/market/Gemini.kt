@@ -1,59 +1,54 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
+import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
+import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
 
-class Gemini : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class Gemini : Market(NAME, TTS_NAME, null) {
     companion object {
         private const val NAME = "Gemini"
         private const val TTS_NAME = "Gemini"
-        private const val URL = "https://api.gemini.com/v1/book/%1\$s%2\$s?limit_asks=1&limit_bids=1"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
+        private const val URL = "https://api.gemini.com/v1/pubticker/%1\$s"
+        private const val URL_CURRENCY_PAIRS = "https://api.gemini.com/v1/symbols"
+    }
 
-        // Gemini allows dynamic symbol retrieval but returns it in format: [ "btcusd" ]
-        // This doesn't provide an easy way to programmatically split the currency
-        // So just define them
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
+    override fun getCurrencyPairsUrl(requestId: Int): String {
+        return URL_CURRENCY_PAIRS
+    }
+
+    override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
+        val markets = JSONArray(responseString)
+        val quoteCurrencyLength = 3
+
+        for(i in 0 until markets.length()){
+            val market = markets.getString(i)
+
+            pairs.add( CurrencyPairInfo(
+                    market.substring(0, market.length-quoteCurrencyLength).toUpperCase(Locale.ROOT),
+                    market.substring(market.length-quoteCurrencyLength).toUpperCase(Locale.ROOT),
+                    market
+            ))
         }
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(URL, checkerInfo.currencyBase, checkerInfo.currencyCounter)
+        // Compatibility with old pre-installed pairs
+        val pairId = checkerInfo.currencyPairId ?: (checkerInfo.currencyBase + checkerInfo.currencyCounter)
+        return String.format(URL, pairId)
     }
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        //Gemini isn't a traditional tracker, rather it seems to return the X last bids and asks
-        //We could do something like take the average of the last Y prices
-        //But I will just take the average of the last bid and asking price
-        val bidsArray = jsonObject.getJSONArray("bids")
-        if (bidsArray.length() > 0) {
-            ticker.bid = bidsArray.getJSONObject(0).getDouble("price")
-        }
-        val asksArray = jsonObject.getJSONArray("asks")
-        if (asksArray.length() > 0) {
-            ticker.ask = asksArray.getJSONObject(0).getDouble("price")
-        }
-        if (ticker.bid != Ticker.NO_DATA.toDouble() && ticker.ask != Ticker.NO_DATA.toDouble()) {
-            ticker.last = (ticker.bid + ticker.ask) / 2.0
-        } else if (ticker.bid != Ticker.NO_DATA.toDouble()) {
-            ticker.last = ticker.bid
-        } else if (ticker.ask != Ticker.NO_DATA.toDouble()) {
-            ticker.last = ticker.ask
-        } else {
-            ticker.last = 0.0
+        ticker.bid = jsonObject.getDouble("bid")
+        ticker.ask = jsonObject.getDouble("ask")
+        ticker.last = jsonObject.getDouble("last")
+        jsonObject.getJSONObject("volume").apply {
+            ticker.vol = getDouble(checkerInfo.currencyBase)
+            ticker.timestamp = getLong("timestamp")
         }
     }
 }
