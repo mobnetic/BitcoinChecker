@@ -4,55 +4,49 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.ZonedDateTime
 
-class Coinbase : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class Coinbase : Market(NAME, TTS_NAME, null) {
     companion object {
-        private const val NAME = "Coinbase"
+        private const val NAME = "Coinbase Pro"
         private const val TTS_NAME = NAME
-        private const val URL = "https://api.gdax.com/products/%1\$s-%2\$s/ticker"
-        private const val URL_CURRENCY_PAIRS = "https://api.gdax.com/products/"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
+        private const val URL_TICKER = "https://api.pro.coinbase.com/products/%1\$s/ticker"
+        private const val URL_STATS = "https://api.pro.coinbase.com/products/%1\$s/stats"
+        private const val URL_CURRENCY_PAIRS = "https://api.pro.coinbase.com/products"
+    }
 
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.USD,
-                    Currency.EUR,
-                    Currency.GBP
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    Currency.USD,
-                    Currency.EUR,
-                    VirtualCurrency.BTC
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    Currency.USD,
-                    Currency.EUR,
-                    VirtualCurrency.BTC
-            )
-        }
+    override fun getNumOfRequests(checkerInfo: CheckerInfo?): Int {
+        return 2
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(URL, checkerInfo.currencyBase, checkerInfo.currencyCounter)
+        // Compatibility with old Coinbase implementation (before v2.19)
+        val pairId = checkerInfo.currencyPairId ?: "${checkerInfo.currencyBase}-${checkerInfo.currencyCounter}"
+
+        if(requestId == 0)
+            return String.format(URL_TICKER, pairId)
+
+        return String.format(URL_STATS, pairId)
     }
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        ticker.bid = jsonObject.getDouble("bid")
-        ticker.ask = jsonObject.getDouble("ask")
-        ticker.vol = jsonObject.getDouble("volume")
-        ticker.last = jsonObject.getDouble("price")
+        if(requestId == 0) {
+            ticker.bid = jsonObject.getDouble("bid")
+            ticker.ask = jsonObject.getDouble("ask")
+            ticker.vol = jsonObject.getDouble("volume")
+            ticker.last = jsonObject.getDouble("price")
+            ticker.timestamp = ZonedDateTime.parse(jsonObject.getString("time")).toEpochSecond()
+        }
+        else {
+            ticker.high = jsonObject.getDouble("high")
+            ticker.low = jsonObject.getDouble("low")
+        }
     }
 
-    // ====================
-    // Get currency pairs
-    // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
