@@ -19,10 +19,8 @@ Please submit all requests for new exchanges/currency pairs or bugs in Bitcoin C
 https://play.google.com/store/apps/details?id=com.aneonex.bitcoinchecker
 
 ## Donate to project development
-`
 - BTC: 1ADwViiQWaiw5ghkcNnSRA5KDZhdhgGvR1
 - ETH: 0x39F4C57F0136FB7F660c93E9d22c99E451627967
-`
 
 Thank you!
 
