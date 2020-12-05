@@ -21,7 +21,7 @@ https://play.google.com/store/apps/details?id=com.aneonex.bitcoinchecker
 ## Donate to project development
 `
 - BTC: 1ADwViiQWaiw5ghkcNnSRA5KDZhdhgGvR1
-- ETH: 0x06339d6415f1ef0fa8f9a9e62e55f3610c043e0e
+- ETH: 0x39F4C57F0136FB7F660c93E9d22c99E451627967
 `
 
 Thank you!
