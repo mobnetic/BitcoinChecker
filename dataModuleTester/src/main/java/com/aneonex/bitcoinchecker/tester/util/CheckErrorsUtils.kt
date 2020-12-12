@@ -10,8 +10,16 @@ import java.io.StringWriter
 
 object CheckErrorsUtils {
     private const val RAW_RESPONSE_CHARS_LIMIT = 5000
+
     fun parseVolleyErrorMsg(context: Context, error: VolleyError?): String {
-        return if (error is NetworkError) context.getString(R.string.check_error_network) else if (error is TimeoutError) context.getString(R.string.check_error_timeout) else if (error is ServerError) context.getString(R.string.check_error_server) else if (error is ParseError) context.getString(R.string.check_error_parse) else context.getString(R.string.check_error_unknown)
+        return when (error) {
+            is NetworkError -> context.getString(R.string.check_error_network)
+            is TimeoutError -> context.getString(R.string.check_error_timeout)
+            is ClientError -> context.getString(R.string.check_error_client)
+            is ServerError -> context.getString(R.string.check_error_server)
+            is ParseError -> context.getString(R.string.check_error_parse)
+            else -> context.getString(R.string.check_error_unknown)
+        }
     }
 
     fun formatError(context: Context, errorMsg: String?): String {

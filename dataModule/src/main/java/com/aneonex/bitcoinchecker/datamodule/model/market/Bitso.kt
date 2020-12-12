@@ -4,77 +4,60 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
-import com.aneonex.bitcoinchecker.datamodule.util.ParseUtils
 import org.json.JSONObject
+import java.time.ZonedDateTime
 import java.util.*
 
-class Bitso : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class Bitso : Market(NAME, TTS_NAME, null) {
     companion object {
         private const val NAME = "Bitso"
         private const val TTS_NAME = NAME
-        private const val URL = "https://api.bitso.com/public/info"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
-
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.MXN
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.MXN
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.MXN
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BCH] = arrayOf(
-                    VirtualCurrency.BTC
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.MXN
-            )
-        }
+        private const val URL = "https://api.bitso.com/v3/ticker?book=%1\$s"
+        private const val URL_CURRENCY_PAIRS = "https://api.bitso.com/v3/available_books/"
     }
 
-    override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return URL
-    }
-
-    @Throws(Exception::class)
-    override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        var pairId = checkerInfo.currencyPairId
-        if (pairId == null) {
-            pairId = checkerInfo.currencyBaseLowerCase + "_" + checkerInfo.currencyCounterLowerCase
-        }
-        val pairJsonObject = jsonObject.getJSONObject(pairId)
-        ticker.bid = ParseUtils.getDoubleFromString(pairJsonObject, "buy")
-        ticker.ask = ParseUtils.getDoubleFromString(pairJsonObject, "sell")
-        ticker.vol = ParseUtils.getDoubleFromString(pairJsonObject, "volume")
-        ticker.last = ParseUtils.getDoubleFromString(pairJsonObject, "rate")
-    }
-
-    // ====================
-    // Get currency pairs
-    // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
-        return URL
+    override fun getCurrencyPairsUrl(requestId: Int): String {
+        return URL_CURRENCY_PAIRS
     }
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val pairIds = jsonObject.names()!!
-        for (i in 0 until pairIds.length()) {
-            val pairId = pairIds.getString(i) ?: continue
+        val books = jsonObject.getJSONArray("payload")
+        for (i in 0 until books.length()) {
+            val pairId = books.getJSONObject(i).getString("book")
             val currencies = pairId.split("_".toRegex()).toTypedArray()
             if (currencies.size != 2) continue
             pairs.add(CurrencyPairInfo(
-                    currencies[0].toUpperCase(Locale.US),
-                    currencies[1].toUpperCase(Locale.US),
+                    currencies[0].toUpperCase(Locale.ROOT),
+                    currencies[1].toUpperCase(Locale.ROOT),
                     pairId))
         }
+    }
+
+    override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
+        // Compatibility with previous version
+        val pairId: String = checkerInfo.currencyPairId ?: "${checkerInfo.currencyBaseLowerCase}_${checkerInfo.currencyCounterLowerCase}"
+        return String.format(URL, pairId)
+    }
+
+    @Throws(Exception::class)
+    override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
+            jsonObject.getJSONObject("payload").let {
+            ticker.high = it.getDouble("high")
+            ticker.low = it.getDouble("low")
+
+            ticker.bid = it.getDouble("bid")
+            ticker.ask = it.getDouble("ask")
+
+            ticker.vol = it.getDouble("volume")
+            ticker.last = it.getDouble("last")
+
+            ticker.timestamp = ZonedDateTime.parse(it.getString("created_at")).toEpochSecond()
+        }
+    }
+
+    @Throws(Exception::class)
+    override fun parseErrorFromJsonObject(requestId: Int, jsonObject: JSONObject, checkerInfo: CheckerInfo?): String? {
+        return jsonObject.getJSONObject("error").getString("message")
     }
 }
