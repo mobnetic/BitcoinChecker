@@ -7,8 +7,8 @@ import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
+import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONObject
-import java.time.ZonedDateTime
 
 class OkexFutures : FuturesMarket(NAME, TTS_NAME, CURRENCY_PAIRS, CONTRACT_TYPES) {
     companion object {
@@ -82,6 +82,6 @@ class OkexFutures : FuturesMarket(NAME, TTS_NAME, CURRENCY_PAIRS, CONTRACT_TYPES
         ticker.high = jsonObject.getDouble("high_24h")
         ticker.low = jsonObject.getDouble("low_24h")
         ticker.last = jsonObject.getDouble("last")
-        ticker.timestamp =  ZonedDateTime.parse(jsonObject.getString("timestamp")).toEpochSecond()
+        ticker.timestamp =  TimeUtils.convertISODateToTimestamp(jsonObject.getString("timestamp"))
     }
 }

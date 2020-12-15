@@ -4,8 +4,8 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONObject
-import java.time.ZonedDateTime
 import java.util.*
 
 class Bitso : Market(NAME, TTS_NAME, null) {
@@ -52,7 +52,7 @@ class Bitso : Market(NAME, TTS_NAME, null) {
             ticker.vol = it.getDouble("volume")
             ticker.last = it.getDouble("last")
 
-            ticker.timestamp = ZonedDateTime.parse(it.getString("created_at")).toEpochSecond()
+            ticker.timestamp = TimeUtils.convertISODateToTimestamp(it.getString("created_at"))
         }
     }
 

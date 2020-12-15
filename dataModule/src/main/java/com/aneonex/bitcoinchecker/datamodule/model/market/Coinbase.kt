@@ -4,9 +4,9 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONArray
 import org.json.JSONObject
-import java.time.ZonedDateTime
 
 class Coinbase : Market(NAME, TTS_NAME, null) {
     companion object {
@@ -38,7 +38,7 @@ class Coinbase : Market(NAME, TTS_NAME, null) {
             ticker.ask = jsonObject.getDouble("ask")
             ticker.vol = jsonObject.getDouble("volume")
             ticker.last = jsonObject.getDouble("price")
-            ticker.timestamp = ZonedDateTime.parse(jsonObject.getString("time")).toEpochSecond()
+            ticker.timestamp = TimeUtils.convertISODateToTimestamp(jsonObject.getString("time"))
         }
         else {
             ticker.high = jsonObject.getDouble("high")

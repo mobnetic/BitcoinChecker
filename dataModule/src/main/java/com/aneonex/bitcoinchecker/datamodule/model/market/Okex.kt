@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -15,7 +16,7 @@ class Okex : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://www.okex.com/api/spot/v3/instruments"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
@@ -41,12 +42,12 @@ class Okex : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-//        val tickerJsonObject = jsonObject.getJSONObject("ticker")
         ticker.bid = jsonObject.getDouble("bid")
         ticker.ask = jsonObject.getDouble("ask")
         ticker.vol = jsonObject.getDouble("base_volume_24h")
         ticker.high = jsonObject.getDouble("high_24h")
         ticker.low = jsonObject.getDouble("low_24h")
         ticker.last = jsonObject.getDouble("last")
+        ticker.timestamp =  TimeUtils.convertISODateToTimestamp(jsonObject.getString("timestamp"))
     }
 }
