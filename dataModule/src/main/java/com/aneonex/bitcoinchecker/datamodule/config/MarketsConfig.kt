@@ -165,5 +165,7 @@ object MarketsConfig {
         addMarket(CapeCrypto())
 
         addMarket(BinanceFutures())
+        addMarket(Bitvavo())
+        addMarket(Bitmax())
    }
 }
