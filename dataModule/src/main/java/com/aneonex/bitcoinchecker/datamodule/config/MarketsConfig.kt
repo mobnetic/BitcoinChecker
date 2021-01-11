@@ -167,5 +167,7 @@ object MarketsConfig {
         addMarket(BinanceFutures())
         addMarket(Bitvavo())
         addMarket(Bitmax())
+
+        addMarket(BitPay())
    }
 }
