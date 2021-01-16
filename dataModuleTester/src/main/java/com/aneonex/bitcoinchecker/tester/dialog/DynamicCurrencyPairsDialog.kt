@@ -37,8 +37,8 @@ abstract class DynamicCurrencyPairsDialog protected constructor(context: Context
         startRefreshingAnim()
         val request = DynamicCurrencyPairsVolleyMainRequest(context, market,
                 object : ResponseListener<CurrencyPairsMapHelper?>() {
-                    override fun onResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, currencyPairsMapHelper: CurrencyPairsMapHelper?) {
-                        this@DynamicCurrencyPairsDialog.currencyPairsMapHelper = currencyPairsMapHelper
+                    override fun onResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, response: CurrencyPairsMapHelper?) {
+                        this@DynamicCurrencyPairsDialog.currencyPairsMapHelper = response
                         refreshStatusView(url, requestHeaders, networkResponse, responseString, null, null)
                         stopRefreshingAnim()
                         onPairsUpdated(market, currencyPairsMapHelper)

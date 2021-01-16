@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
+import androidx.core.view.isVisible
 import com.android.volley.NetworkResponse
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -154,13 +155,13 @@ class MainActivity : Activity() {
         refreshCurrencyCounterSpinner(market)
         refreshDynamicCurrencyPairsView(market)
         val isCurrencyEmpty = selectedCurrencyBase == null || selectedCurrencyCounter == null
-        currencySpinnersWrapper.visibility = if (isCurrencyEmpty) View.GONE else View.VISIBLE
-        dynamicCurrencyPairsWarningView.visibility = if (isCurrencyEmpty) View.VISIBLE else View.GONE
-        getResultButton.visibility = if (isCurrencyEmpty) View.GONE else View.VISIBLE
+        currencySpinnersWrapper.isVisible = !isCurrencyEmpty
+        dynamicCurrencyPairsWarningView.isVisible = isCurrencyEmpty
+        getResultButton.isVisible = !isCurrencyEmpty
     }
 
     private fun refreshDynamicCurrencyPairsView(market: Market) {
-        dynamicCurrencyPairsInfoView.visibility = if (market.getCurrencyPairsUrl(0) != null) View.VISIBLE else View.GONE
+        dynamicCurrencyPairsInfoView.isVisible = market.getCurrencyPairsUrl(0) != null
     }
 
     private fun refreshCurrencyBaseSpinner(market: Market) {
@@ -199,13 +200,13 @@ class MainActivity : Activity() {
             spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
         }
         futuresContractTypeSpinner.adapter = spinnerAdapter
-        futuresContractTypeSpinner.visibility = if (spinnerAdapter != null) View.VISIBLE else View.GONE
+        futuresContractTypeSpinner.isVisible = spinnerAdapter != null
     }
 
     private fun showResultView(showResultView: Boolean) {
         getResultButton.isEnabled = showResultView
-        progressBar.visibility = if (showResultView) View.GONE else View.VISIBLE
-        resultView.visibility = if (showResultView) View.VISIBLE else View.GONE
+        progressBar.isVisible = !showResultView
+        resultView.isVisible = showResultView
     }
 
     private fun getProperCurrencyPairs(market: Market): HashMap<String?, Array<String>>? {

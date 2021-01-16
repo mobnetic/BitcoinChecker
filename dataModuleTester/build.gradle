@@ -27,8 +27,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    lintOptions {
+        abortOnError true
+        disable 'MissingTranslation'
     }
 }
 
@@ -36,4 +42,7 @@ dependencies {
     implementation project(':dataModule')
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.android.volley:volley:1.1.1'
+
+    // AndroidX
+    implementation "androidx.core:core-ktx:$core_ktx_version"
 }

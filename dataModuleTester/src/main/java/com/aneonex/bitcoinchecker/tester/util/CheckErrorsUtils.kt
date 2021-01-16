@@ -41,13 +41,13 @@ object CheckErrorsUtils {
         }
         if (requestHeaders != null) {
             ssb.append("\n\n")
-            ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_request_headers) + "<br\\><small>" + formatMapToHtmlString(requestHeaders) + "</small>"))
+            ssb.append(SpannableUtils.fromHtml(context.getString(R.string.ticker_raw_request_headers) + "<br\\><small>" + formatMapToHtmlString(requestHeaders) + "</small>"))
         }
         if (networkResponse != null) {
             ssb.append("\n\n")
             ssb.append(context.getString(R.string.ticker_raw_response_code, networkResponse.statusCode.toString()))
             ssb.append("\n\n")
-            ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_response_headers) + "<br\\><small>" + formatMapToHtmlString(networkResponse.headers) + "</small>"))
+            ssb.append(SpannableUtils.fromHtml(context.getString(R.string.ticker_raw_response_headers) + "<br\\><small>" + formatMapToHtmlString(networkResponse.headers) + "</small>"))
         }
         if (rawResponse != null) {
             ssb.append("\n\n")
@@ -55,11 +55,11 @@ object CheckErrorsUtils {
             if (rawResponse.length > RAW_RESPONSE_CHARS_LIMIT) {
                 limitedRawResponse = rawResponse.substring(0, RAW_RESPONSE_CHARS_LIMIT) + "..."
             }
-            ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_response) + "<br\\><small>" + limitedRawResponse + "</small>"))
+            ssb.append(SpannableUtils.fromHtml(context.getString(R.string.ticker_raw_response) + "<br\\><small>" + limitedRawResponse + "</small>"))
         }
         if (exception != null) {
             ssb.append("\n\n")
-            ssb.append(Html.fromHtml(context.getString(R.string.ticker_raw_stacktrace) + "<br\\><small>" + printException(exception) + "</small>"))
+            ssb.append(SpannableUtils.fromHtml(context.getString(R.string.ticker_raw_stacktrace) + "<br\\><small>" + printException(exception) + "</small>"))
         }
         return ssb
     }
