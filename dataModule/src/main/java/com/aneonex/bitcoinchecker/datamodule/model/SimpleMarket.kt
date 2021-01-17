@@ -12,6 +12,10 @@ abstract class SimpleMarket(
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(tickerUrl, checkerInfo.currencyPairId)
+        return String.format(tickerUrl, getPairId(checkerInfo))
+    }
+
+    open fun getPairId(checkerInfo: CheckerInfo): String? {
+        return checkerInfo.currencyPairId
     }
 }

@@ -163,6 +163,7 @@ object MarketsConfig {
         Bitmax(),
 
         BitPay(),
+        Hotbit(),
     )
 
     @kotlin.jvm.JvmField
