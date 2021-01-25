@@ -9,23 +9,47 @@ import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONObject
 
-class Mercado : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class Mercado : Market(NAME, TTS_NAME, getCurrencyPairs()) {
     companion object {
         private const val NAME = "Mercado Bitcoin"
         private const val TTS_NAME = "Mercado"
         private const val URL = "https://www.mercadobitcoin.com.br/api/%1\$s/ticker/"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.BRL
+        @Suppress("SpellCheckingInspection")
+        private fun getCurrencyPairs(): CurrencyPairsMap {
+            // API Doc: https://www.mercadobitcoin.com.br/api-doc/
+            val baseCurrencies = arrayOf(
+                    "ASRFT",
+                    "ATMFT",
+                    VirtualCurrency.BCH,
+                    VirtualCurrency.BTC,
+                    "CAIFT",
+                    "CHZ",
+                    VirtualCurrency.ETH,
+                    "GALFT",
+                    "IMOB01",
+                    "JUVFT",
+                    VirtualCurrency.LINK,
+                    VirtualCurrency.LTC,
+                    "MBCONS01",
+                    "MBCONS02",
+                    "MBFP01",
+                    "MBVASCO01",
+
+                    "MBPRK01",
+                    "MBPRK02",
+                    "MBPRK03",
+                    "MBPRK04",
+
+                    "PAXG",
+                    "PSGFT",
+                    VirtualCurrency.USDC,
+                    "WBX",
+                    VirtualCurrency.XRP,
             )
-            CURRENCY_PAIRS[VirtualCurrency.BCH] = arrayOf(
-                    Currency.BRL
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    Currency.BRL
-            )
+
+            val quoteCurrencies = arrayOf(Currency.BRL)
+            return baseCurrencies.associateTo(CurrencyPairsMap()) { it to quoteCurrencies }
         }
     }
 

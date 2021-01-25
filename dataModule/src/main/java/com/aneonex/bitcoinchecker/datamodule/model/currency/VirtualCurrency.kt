@@ -329,6 +329,7 @@ object VirtualCurrency {
     const val UNC = "UNC"
     const val UNI = "UNI"
     const val UNO = "UNO"
+    const val USDC = "USDC"
     const val USDE = "USDE"
     const val USDe = "USDe"
     const val USDT = "USDT"
