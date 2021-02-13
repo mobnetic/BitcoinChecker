@@ -172,6 +172,7 @@ object MarketsConfig {
         LiteBit(),
         OceanEx(),
         BitMart(),
+        BigONE(),
     )
 
     @kotlin.jvm.JvmField
