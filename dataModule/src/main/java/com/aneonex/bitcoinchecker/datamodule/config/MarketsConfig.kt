@@ -167,6 +167,7 @@ object MarketsConfig {
 
         BitCambio(),
         BwCom(),
+        EXX(),
     )
 
     @kotlin.jvm.JvmField
