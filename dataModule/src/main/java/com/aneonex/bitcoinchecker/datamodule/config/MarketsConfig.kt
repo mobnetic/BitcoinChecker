@@ -170,6 +170,7 @@ object MarketsConfig {
         EXX(),
         CoinTiger(),
         LiteBit(),
+        OceanEx(),
     )
 
     @kotlin.jvm.JvmField
