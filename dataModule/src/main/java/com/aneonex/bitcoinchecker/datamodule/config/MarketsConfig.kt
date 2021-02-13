@@ -168,6 +168,7 @@ object MarketsConfig {
         BitCambio(),
         BwCom(),
         EXX(),
+        CoinTiger(),
     )
 
     @kotlin.jvm.JvmField
