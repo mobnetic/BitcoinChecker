@@ -121,7 +121,6 @@ object MarketsConfig {
 //        Koinex(),
 //        Unocoin(),
         BlinkTrade(),
-        BitCambio(),
         Exmo(),
         Binance(),
         Kucoin(),
@@ -165,6 +164,16 @@ object MarketsConfig {
 
         BitPay(),
         Hotbit(),
+
+        BitCambio(),
+        BwCom(),
+        EXX(),
+        CoinTiger(),
+        LiteBit(),
+        OceanEx(),
+        BitMart(),
+        BigONE(),
+        Tokok(),
     )
 
     @kotlin.jvm.JvmField
