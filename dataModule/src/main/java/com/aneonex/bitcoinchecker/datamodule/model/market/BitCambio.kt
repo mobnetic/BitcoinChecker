@@ -3,9 +3,10 @@
  * Date: Fri Feb 12 20:33:40 -03 2021
  * Desc: BitCambio market
  */
-package com.aneonex.bitcoinchecker.datamodule.model.market
+ package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
+import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
@@ -17,18 +18,40 @@ class BitCambio : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     companion object {
         private const val NAME = "BitCambio"
         private const val TTS_NAME = "BitCambio Trade"
-        private const val URL = "https://nova.bitcambio.com.br/api/v3/public/getmarketsummary?market=%1\$s_%2\$s"
+        private const val URL = "https://nova.bitcambio.com.br/api/v3/public/getmarketsummary?market=%1\$s"
+        private const val URL_CURRENCY_PAIRS = "https://nova.bitcambio.com.br/api/v3/public/getmarkets"
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
+            // Predefined most used currencies
             CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
                 Currency.BRL
             )
         }
     }
 
+    override fun getCurrencyPairsUrl(requestId: Int): String {
+        return URL_CURRENCY_PAIRS
+    }
+
+    override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
+        val markets = jsonObject.getJSONArray("result")
+        for(i in 0 until markets.length()){
+            val market = markets.getJSONObject(i)
+
+            if(market.getBoolean("IsActive")){
+                pairs.add( CurrencyPairInfo(
+                    market.getString("MarketAsset"),
+                    market.getString("BaseAsset"),
+                    market.getString("MarketName")
+                ))
+            }
+        }
+    }
+
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(URL, checkerInfo.currencyBase, checkerInfo.currencyCounter)
+        val pairId: String = checkerInfo.currencyPairId ?: "${checkerInfo.currencyBase}_${checkerInfo.currencyCounter}"
+        return String.format(URL, pairId)
     }
 
     @Throws(Exception::class)
