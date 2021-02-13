@@ -121,6 +121,7 @@ object MarketsConfig {
 //        Koinex(),
 //        Unocoin(),
         BlinkTrade(),
+        BitCambio(),
         Exmo(),
         Binance(),
         Kucoin(),
