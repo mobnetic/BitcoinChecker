@@ -171,6 +171,7 @@ object MarketsConfig {
         CoinTiger(),
         LiteBit(),
         OceanEx(),
+        BitMart(),
     )
 
     @kotlin.jvm.JvmField

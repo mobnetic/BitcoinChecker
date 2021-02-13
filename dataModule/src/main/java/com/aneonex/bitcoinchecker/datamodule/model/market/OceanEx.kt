@@ -5,7 +5,6 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.SimpleMarket
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import org.json.JSONObject
-import java.util.*
 
 class OceanEx : SimpleMarket(
         "OceanEx",
