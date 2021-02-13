@@ -173,6 +173,7 @@ object MarketsConfig {
         OceanEx(),
         BitMart(),
         BigONE(),
+        Tokok(),
     )
 
     @kotlin.jvm.JvmField
