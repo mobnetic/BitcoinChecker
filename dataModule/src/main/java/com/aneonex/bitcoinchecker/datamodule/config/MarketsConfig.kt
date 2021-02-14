@@ -174,6 +174,8 @@ object MarketsConfig {
         BitMart(),
         BigONE(),
         Tokok(),
+
+        Orionx(),
     )
 
     @kotlin.jvm.JvmField

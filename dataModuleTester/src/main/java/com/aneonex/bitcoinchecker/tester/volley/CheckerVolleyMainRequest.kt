@@ -11,7 +11,7 @@ import com.aneonex.bitcoinchecker.tester.volley.CheckerVolleyMainRequest.TickerW
 import com.aneonex.bitcoinchecker.tester.volley.generic.GenericCheckerVolleyRequest
 
 class CheckerVolleyMainRequest(market: Market, checkerInfo: CheckerInfo, listener: Response.Listener<TickerWrapper?>, errorListener: Response.ErrorListener)
-    : GenericCheckerVolleyRequest<TickerWrapper?>(market.getUrl(0, checkerInfo), market.getRequestBody(0, checkerInfo), checkerInfo, listener, errorListener) {
+    : GenericCheckerVolleyRequest<TickerWrapper?>(market.getUrl(0, checkerInfo), market.getPostRequestInfo(0, checkerInfo), checkerInfo, listener, errorListener) {
 
     private val market: Market
     @Throws(Exception::class)
@@ -38,9 +38,9 @@ class CheckerVolleyMainRequest(market: Market, checkerInfo: CheckerInfo, listene
                 try {
                     val future = RequestFuture.newFuture<String>()
                     val nextUrl = market.getUrl(requestId, checkerInfo)
-                    val nextRequestBody = market.getRequestBody(requestId, checkerInfo)
+                    val nextPostRequestInfo = market.getPostRequestInfo(requestId, checkerInfo)
                     if (!TextUtils.isEmpty(nextUrl)) {
-                        val request = CheckerVolleyNextRequest(nextUrl, nextRequestBody, checkerInfo, future)
+                        val request = CheckerVolleyNextRequest(nextUrl, nextPostRequestInfo, checkerInfo, future)
                         requestQueue!!.add(request)
                         val nextResponse = future.get() // this will block
                         market.parseTickerMain(requestId, nextResponse, tickerWrapper.ticker!!, checkerInfo)

@@ -28,7 +28,7 @@ abstract class Market(
 
     // When the body is set, the HTTP POST request is used
     // By default is HTTP GET
-    open fun getRequestBody(requestId: Int, checkerInfo: CheckerInfo): String? {
+    open fun getPostRequestInfo(requestId: Int, checkerInfo: CheckerInfo): PostRequestInfo? {
         return null
     }
 
@@ -78,7 +78,7 @@ abstract class Market(
     }
 
     // If body defined than used HTTP POST request
-    open fun getCurrencyPairsRequestBody(requestId: Int): String? {
+    open fun getCurrencyPairsPostRequestInfo(requestId: Int): PostRequestInfo? {
         return null
     }
 

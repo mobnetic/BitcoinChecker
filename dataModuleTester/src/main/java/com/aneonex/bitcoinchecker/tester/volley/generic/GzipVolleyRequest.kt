@@ -2,23 +2,27 @@ package com.aneonex.bitcoinchecker.tester.volley.generic
 
 import com.android.volley.*
 import com.android.volley.toolbox.HttpHeaderParser
+import com.aneonex.bitcoinchecker.datamodule.model.PostRequestInfo
 import com.aneonex.bitcoinchecker.tester.volley.CheckerErrorParsedError
 import com.aneonex.bitcoinchecker.tester.volley.UnknownVolleyError
 import java.io.BufferedReader
 import java.io.ByteArrayInputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
-import java.util.*
 import java.util.zip.GZIPInputStream
 
-abstract class GzipVolleyRequest<T>(url: String?, private val requestBody: String?, private val listener: Response.Listener<T>, errorListener: Response.ErrorListener)
-    : Request<T>(if (requestBody == null) Method.GET else Method.POST, url, errorListener) {
+abstract class GzipVolleyRequest<T>(url: String?, private val postRequestInfo: PostRequestInfo?, private val listener: Response.Listener<T>, errorListener: Response.ErrorListener)
+    : Request<T>(if (postRequestInfo == null) Method.GET else Method.POST, url, errorListener) {
 
-    /** Default charset for JSON request.  */
-    protected val PROTOCOL_CHARSET = Charsets.UTF_8
+    companion object {
+        private const val MAX_REDIRECTION_COUNT = 3
+
+        /** Default charset for JSON request.  */
+        private val PROTOCOL_CHARSET = Charsets.UTF_8
+    }
 
     private val initialErrorListener = errorListener
-    private val headers: MutableMap<String, String>
+    private val headers: Map<String, String>
     var requestQueue: RequestQueue? = null
         private set
     private var redirectionUrl: String? = null
@@ -27,16 +31,31 @@ abstract class GzipVolleyRequest<T>(url: String?, private val requestBody: Strin
     private var networkResponse: NetworkResponse? = null
     private var responseString: String? = null
 
+    init {
+        if(url == null && postRequestInfo != null) throw IllegalArgumentException("Invalid arguments: Url cannot be null when requestBody is not null")
+
+        headers = mutableMapOf (
+                "Accept-Encoding" to "gzip",
+                "User-Agent" to "Bitcoin Checker (gzip)"
+        )
+
+        postRequestInfo?.headers?.let {
+            for (item in it){
+                headers[item.key] = item.value
+            }
+        }
+    }
+
     override fun getUrl(): String {
         return if (redirectionUrl != null) redirectionUrl.toString() else super.getUrl()
     }
 
     override fun getBodyContentType(): String {
-        return if(requestBody != null) "application/json; charset=$PROTOCOL_CHARSET" else super.getBodyContentType()
+        return if(postRequestInfo != null) "application/json; charset=$PROTOCOL_CHARSET" else super.getBodyContentType()
     }
 
     override fun getBody(): ByteArray {
-        return if(requestBody != null) return requestBody.toByteArray(PROTOCOL_CHARSET) else super.getBody()
+        return if(postRequestInfo != null) return postRequestInfo.body.toByteArray(PROTOCOL_CHARSET) else super.getBody()
     }
 
     @Throws(AuthFailureError::class)
@@ -130,17 +149,5 @@ abstract class GzipVolleyRequest<T>(url: String?, private val requestBody: Strin
             }
         }
         return responseString
-    }
-
-    companion object {
-        private const val MAX_REDIRECTION_COUNT = 3
-    }
-
-    init {
-        if(url == null && requestBody != null) throw IllegalArgumentException("Invalid arguments: Url cannot be null when requestBody is not null")
-
-        headers = HashMap()
-        headers["Accept-Encoding"] = "gzip"
-        headers["User-Agent"] = "Bitcoin Checker (gzip)"
     }
 }

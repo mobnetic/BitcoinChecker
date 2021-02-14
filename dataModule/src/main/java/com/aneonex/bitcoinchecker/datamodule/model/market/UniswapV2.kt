@@ -1,10 +1,7 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.R
-import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
-import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
-import com.aneonex.bitcoinchecker.datamodule.model.Market
-import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.model.*
 import org.json.JSONObject
 
 class UniswapV2 : Market(NAME, TTS_NAME, null) {
@@ -30,8 +27,9 @@ class UniswapV2 : Market(NAME, TTS_NAME, null) {
     }
 
     // Get top liquid pairs GraphQl query
-    override fun getCurrencyPairsRequestBody(requestId: Int): String {
-        return "{\"query\":\"{pairs(first: 500, orderBy:reserveUSD, orderDirection:desc) {id token0{symbol} token1{symbol}}}\"}"
+    override fun getCurrencyPairsPostRequestInfo(requestId: Int): PostRequestInfo {
+        val body = "{\"query\":\"{pairs(first: 500, orderBy:reserveUSD, orderDirection:desc) {id token0{symbol} token1{symbol}}}\"}"
+        return PostRequestInfo( body )
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
@@ -76,13 +74,15 @@ class UniswapV2 : Market(NAME, TTS_NAME, null) {
     }
 
     // Get pair ticker GraphQl query
-    override fun getRequestBody(requestId: Int, checkerInfo: CheckerInfo): String {
-        return "{\"query\":\"{"+
+    override fun getPostRequestInfo(requestId: Int, checkerInfo: CheckerInfo): PostRequestInfo {
+        val body = "{\"query\":\"{"+
                 // Get pair price
                 "pair(id: \\\"${checkerInfo.currencyPairId}\\\"){token0{symbol} token1Price token0Price} " +
                 // Get pair timestamp
                 "swaps(first: 1, where: { pair: \\\"${checkerInfo.currencyPairId}\\\" } orderBy: timestamp, orderDirection: desc) {timestamp}"+
                 "}\"}"
+
+        return PostRequestInfo(body)
     }
 
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
