@@ -176,6 +176,7 @@ object MarketsConfig {
         Tokok(),
 
         Orionx(),
+        BudaCom(),
     )
 
     @kotlin.jvm.JvmField

@@ -29,7 +29,7 @@ object CurrencySymbols {
         CURRENCY_SYMBOLS[Currency.ALL] = "L"
         CURRENCY_SYMBOLS[Currency.DZD] = "د.ج"
         CURRENCY_SYMBOLS[Currency.AOA] = "Kz"
-        CURRENCY_SYMBOLS[Currency.ARS] = "$"
+//        CURRENCY_SYMBOLS[Currency.ARS] = "$"
         CURRENCY_SYMBOLS[Currency.AMD] = "֏"
         CURRENCY_SYMBOLS[Currency.AWG] = "ƒ"
         CURRENCY_SYMBOLS[Currency.AZN] = "m"
