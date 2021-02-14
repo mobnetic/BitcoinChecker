@@ -1,11 +1,11 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import org.json.JSONArray
-import org.json.JSONObject
 
 class GateIo : Market(NAME, TTS_NAME, null) {
 
@@ -22,7 +22,7 @@ class GateIo : Market(NAME, TTS_NAME, null) {
 
     override fun parseTicker(requestId: Int, responseString: String, ticker: Ticker, checkerInfo: CheckerInfo) {
         val jsonArray = JSONArray(responseString)
-        if(jsonArray.length() < 1) throw ArrayIndexOutOfBoundsException("No data")
+        if(jsonArray.length() < 1) throw MarketParseException("No data")
 
         val jsonObject = jsonArray.getJSONObject(0)
 
@@ -37,7 +37,7 @@ class GateIo : Market(NAME, TTS_NAME, null) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

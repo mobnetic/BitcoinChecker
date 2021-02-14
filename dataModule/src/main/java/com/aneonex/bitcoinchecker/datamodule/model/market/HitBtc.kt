@@ -1,5 +1,6 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.SimpleMarket
@@ -27,7 +28,7 @@ class HitBtc : SimpleMarket(
     @Throws(Exception::class)
     override fun parseTicker(requestId: Int, responseString: String, ticker: Ticker, checkerInfo: CheckerInfo) {
         val tickers = JSONArray(responseString)
-        if(tickers.length() == 0) throw Exception("No data")
+        if(tickers.length() == 0) throw MarketParseException("No data")
         tickers.getJSONObject(0).apply {
             ticker.bid = getDouble("bid")
             ticker.ask = getDouble("ask")

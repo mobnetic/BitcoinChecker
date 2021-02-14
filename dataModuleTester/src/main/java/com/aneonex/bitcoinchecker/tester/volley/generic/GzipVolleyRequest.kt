@@ -32,7 +32,7 @@ abstract class GzipVolleyRequest<T>(url: String?, private val postRequestInfo: P
     private var responseString: String? = null
 
     init {
-        if(url == null && postRequestInfo != null) throw IllegalArgumentException("Invalid arguments: Url cannot be null when requestBody is not null")
+        if(method == Method.POST && postRequestInfo == null) throw IllegalArgumentException("Invalid arguments: postRequestInfo cannot be null for POST method")
 
         headers = mutableMapOf (
                 "Accept-Encoding" to "gzip",

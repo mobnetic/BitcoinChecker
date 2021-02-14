@@ -1,5 +1,6 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
@@ -7,7 +8,6 @@ import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import org.json.JSONObject
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class Vaultoro : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
@@ -38,7 +38,7 @@ class Vaultoro : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         val dataJson = jsonObject.getJSONArray("data")
-        if(dataJson.length() == 0) throw java.lang.Exception("No data")
+        if(dataJson.length() == 0) throw MarketParseException("No data")
 
         val tickerJson = dataJson.getJSONObject(0)
         ticker.last = tickerJson.getDouble("close")

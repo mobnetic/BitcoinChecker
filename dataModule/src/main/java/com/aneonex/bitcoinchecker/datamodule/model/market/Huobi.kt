@@ -23,7 +23,7 @@ class Huobi : Market(NAME, TTS_NAME, null) {
         ticker.last = tickerJsonObject.getDouble("close")
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

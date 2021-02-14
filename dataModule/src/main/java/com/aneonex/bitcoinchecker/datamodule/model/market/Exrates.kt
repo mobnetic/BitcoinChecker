@@ -1,11 +1,11 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import org.json.JSONObject
-import java.lang.Exception
 
 class Exrates : Market(NAME, TTS_NAME, null) {
     companion object {
@@ -43,6 +43,6 @@ class Exrates : Market(NAME, TTS_NAME, null) {
             ticker.vol = getDouble("volume_24H")
         }
 
-        if(ticker.last <= 0) throw Exception("No data")
+        if(ticker.last <= 0) throw MarketParseException("No data")
     }
 }

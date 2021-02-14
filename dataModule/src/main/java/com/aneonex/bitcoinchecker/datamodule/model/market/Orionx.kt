@@ -1,8 +1,8 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.*
 import org.json.JSONObject
-import java.lang.Exception
 import kotlin.math.pow
 
 class Orionx : Market(NAME, TTS_NAME, null) {
@@ -81,7 +81,7 @@ class Orionx : Market(NAME, TTS_NAME, null) {
             .getJSONObject("marketCurrentStats")
             .apply {
                 ticker.vol = getLong("volume").also {
-                    if(it <= 0) throw Exception("No trading volume")
+                    if(it <= 0) throw MarketParseException("No trading volume")
                 } / baseCurrencyDecimals
                 ticker.last = getLong("close") / quoteCurrencyDecimals
                 ticker.high = getLong("high") / quoteCurrencyDecimals

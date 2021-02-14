@@ -1,5 +1,6 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Futures
 import com.aneonex.bitcoinchecker.datamodule.model.FuturesMarket
@@ -69,7 +70,7 @@ class OkexFutures : FuturesMarket(NAME, TTS_NAME, CURRENCY_PAIRS, CONTRACT_TYPES
             Futures.CONTRACT_TYPE_BIWEEKLY -> "201016"
             Futures.CONTRACT_TYPE_QUARTERLY -> "201225"
             Futures.CONTRACT_TYPE_BIQUARTERLY -> "210326"
-            else -> throw ArrayIndexOutOfBoundsException("Unknown contract type: $contractType")
+            else -> throw MarketParseException("Unknown contract type: $contractType")
         }
 
         return "$currencyBase-$currencyCounter-$suffix"
