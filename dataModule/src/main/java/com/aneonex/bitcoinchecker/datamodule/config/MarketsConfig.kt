@@ -177,6 +177,7 @@ object MarketsConfig {
 
         Orionx(),
         BudaCom(),
+        CryptoMarket(),
     )
 
     @kotlin.jvm.JvmField
