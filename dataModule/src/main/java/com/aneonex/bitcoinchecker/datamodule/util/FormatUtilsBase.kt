@@ -30,8 +30,14 @@ object FormatUtilsBase {
         return formatDouble(decimalFormat, value)
     }
 
-    private fun formatDoubleWithEightMax(value: Double): String {
+    @Suppress("unused")
+    fun formatDoubleWithEightMax(value: Double): String {
         return formatDouble(FORMAT_EIGHT_SIGNIFICANT_AT_MOST, value)
+    }
+
+    @Suppress("unused")
+    fun formatDoubleWithFiveMax(value: Double): String {
+        return formatDouble(FORMAT_FIVE_SIGNIFICANT_AT_MOST, value)
     }
 
     private fun formatDouble(decimalFormat: DecimalFormat, value: Double): String {
