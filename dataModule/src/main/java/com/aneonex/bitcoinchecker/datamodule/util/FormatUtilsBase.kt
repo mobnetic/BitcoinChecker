@@ -11,19 +11,23 @@ object FormatUtilsBase {
     // ====================
     // Double formatting
     // ====================
+    private val FORMAT_NO_DECIMAL = DecimalFormat("#,###")
     private val FORMAT_TWO_DECIMAL = DecimalFormat("#,###.00")
-    private val FORMAT_FIVE_SIGNIFICANT_AT_MOST = DecimalFormat("@#####")
-    private val FORMAT_EIGHT_SIGNIFICANT_AT_MOST = DecimalFormat("@#######")
+    private val FORMAT_FIVE_SIGNIFICANT_AT_MOST = DecimalFormat("0.#####")
+    private val FORMAT_EIGHT_SIGNIFICANT_AT_MOST = DecimalFormat("0.########")
 
     // ====================
     // Format methods
     // ====================
     fun formatDouble(value: Double/*, isPrice: Boolean*/): String {
-        return formatDouble(if (value < 1) FORMAT_FIVE_SIGNIFICANT_AT_MOST else FORMAT_TWO_DECIMAL, value)
-    }
+        val decimalFormat: DecimalFormat = when {
+            value < 0.001 -> FORMAT_EIGHT_SIGNIFICANT_AT_MOST
+            value < 1 -> FORMAT_FIVE_SIGNIFICANT_AT_MOST
+            value < 10000 -> FORMAT_TWO_DECIMAL
+            else -> FORMAT_NO_DECIMAL
+        }
 
-    fun formatDoubleWithFiveMax(value: Double): String {
-        return formatDouble(FORMAT_FIVE_SIGNIFICANT_AT_MOST, value)
+        return formatDouble(decimalFormat, value)
     }
 
     private fun formatDoubleWithEightMax(value: Double): String {
@@ -56,7 +60,6 @@ object FormatUtilsBase {
         return priceString
     }
 
-    @kotlin.jvm.JvmStatic
     fun formatPriceWithCurrency(value: Double, currency: String): String {
         return formatPriceWithCurrency(formatDouble(value), currency)
     }

@@ -17,8 +17,7 @@ import com.aneonex.bitcoinchecker.datamodule.config.MarketsConfig
 import com.aneonex.bitcoinchecker.datamodule.model.*
 import com.aneonex.bitcoinchecker.datamodule.model.Futures.getContractTypeShortName
 import com.aneonex.bitcoinchecker.datamodule.util.CurrencyPairsMapHelper
-import com.aneonex.bitcoinchecker.datamodule.util.FormatUtilsBase.formatPriceWithCurrency
-import com.aneonex.bitcoinchecker.datamodule.util.FormatUtilsBase.formatSameDayTimeOrDate
+import com.aneonex.bitcoinchecker.datamodule.util.FormatUtilsBase
 import com.aneonex.bitcoinchecker.datamodule.util.MarketsConfigUtils.getMarketByKey
 import com.aneonex.bitcoinchecker.tester.dialog.DynamicCurrencyPairsDialog
 import com.aneonex.bitcoinchecker.tester.util.CheckErrorsUtils
@@ -252,7 +251,7 @@ class MainActivity : Activity() {
         showResultView(true)
         val ssb = SpannableStringBuilder()
         if (ticker != null) {
-            ssb.append(getString(R.string.ticker_last, formatPriceWithCurrency(ticker.last, checkerInfo.currencyCounter)))
+            ssb.append(getString(R.string.ticker_last, FormatUtilsBase.formatPriceWithCurrency(ticker.last, checkerInfo.currencyCounter)))
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_high, ticker.high, checkerInfo.currencyCounter))
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_low, ticker.low, checkerInfo.currencyCounter))
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_bid, ticker.bid, checkerInfo.currencyCounter))
@@ -260,7 +259,7 @@ class MainActivity : Activity() {
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol, ticker.vol, checkerInfo.currencyBase))
             ssb.append("""
 
-    ${getString(R.string.ticker_timestamp, formatSameDayTimeOrDate(this, ticker.timestamp))}
+    ${getString(R.string.ticker_timestamp, FormatUtilsBase.formatSameDayTimeOrDate(this, ticker.timestamp))}
     """.trimIndent())
         } else {
             ssb.append(getString(R.string.check_error_generic_prefix, errorMsg ?: "UNKNOWN"))
@@ -272,7 +271,7 @@ class MainActivity : Activity() {
     private fun createNewPriceLineIfNeeded(textResId: Int, price: Double, currency: String): String {
         return if (price <= Ticker.NO_DATA) "" else """
 
-         ${getString(textResId, formatPriceWithCurrency(price, currency))}
+         ${getString(textResId, FormatUtilsBase.formatPriceWithCurrency(price, currency))}
          """.trimIndent()
     }
 
