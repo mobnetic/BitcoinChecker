@@ -1,7 +1,6 @@
 package com.aneonex.bitcoinchecker.tester.util
 
 import android.content.Context
-import android.text.Html
 import android.text.SpannableStringBuilder
 import com.android.volley.*
 import com.aneonex.bitcoinchecker.tester.R
@@ -22,14 +21,18 @@ object CheckErrorsUtils {
         }
     }
 
+/*
     fun formatError(context: Context, errorMsg: String?): String {
         return context.getString(R.string.check_error_generic_prefix, errorMsg ?: "UNKNOWN")
     }
+*/
 
-    private fun formatMapToHtmlString(headers: Map<String, String>): String {
+    private fun formatMapToHtmlString(headers: Map<String, String>?): String {
         var output = ""
-        for ((key, value) in headers) {
-            output += String.format("<b>%1\$s</b> = %2\$s<br\\>", key, value)
+        if(headers != null) {
+            for ((key, value) in headers) {
+                output += String.format("<b>%1\$s</b> = %2\$s<br\\>", key, value)
+            }
         }
         return output
     }

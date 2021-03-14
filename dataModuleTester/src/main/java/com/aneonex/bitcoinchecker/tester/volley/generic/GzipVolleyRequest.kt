@@ -73,7 +73,7 @@ abstract class GzipVolleyRequest<T>(url: String?, private val postRequestInfo: P
         if (error.networkResponse != null) {
             val statusCode = error.networkResponse.statusCode
             if (statusCode == HttpURLConnection.HTTP_MOVED_PERM || statusCode == HttpURLConnection.HTTP_MOVED_TEMP) {
-                val location = error.networkResponse.headers["Location"]
+                val location = error.networkResponse.headers?.get("Location")
                 if (location != null && redirectionCount < MAX_REDIRECTION_COUNT) {
                     ++redirectionCount
                     redirectionUrl = location
@@ -98,7 +98,7 @@ abstract class GzipVolleyRequest<T>(url: String?, private val postRequestInfo: P
 //        var response: NetworkResponse? = response
         return try {
             networkResponse = response
-            val encoding = response.headers["Content-Encoding"]
+            val encoding = response.headers?.get("Content-Encoding")
             val responseString = if (encoding != null && encoding.contains("gzip")) {
                 decodeGZip(response.data)
             } else {
