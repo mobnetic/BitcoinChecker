@@ -1,6 +1,6 @@
 package com.aneonex.bitcoinchecker.tester
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -31,7 +31,7 @@ import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseErrorListener
 import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseListener
 import java.util.*
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     private val tag = MainActivity::class.simpleName
 
     private inner class MarketEntry(var key: String, var name: String) : Comparable<MarketEntry> {

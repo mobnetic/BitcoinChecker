@@ -1,6 +1,6 @@
 package com.aneonex.bitcoinchecker.tester.dialog
 
-import android.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.text.SpannableStringBuilder
@@ -84,7 +84,7 @@ abstract class DynamicCurrencyPairsDialog protected constructor(context: Context
     abstract fun onPairsUpdated(market: Market, currencyPairsMapHelper: CurrencyPairsMapHelper?)
 
     init {
-        setInverseBackgroundForced(true)
+        // setInverseBackgroundForced(true)
         requestQueue = HttpsHelper.newRequestQueue(context)
         this.market = market
         this.currencyPairsMapHelper = currencyPairsMapHelper
