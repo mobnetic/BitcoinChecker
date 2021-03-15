@@ -5,7 +5,6 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import org.json.JSONObject
-import java.util.*
 
 class Bybit : Market(NAME, TTS_NAME, null) {
     companion object {
@@ -15,7 +14,7 @@ class Bybit : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://api.bybit.com/v2/public/symbols"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
@@ -24,10 +23,19 @@ class Bybit : Market(NAME, TTS_NAME, null) {
         for(i in 0 until markets.length()){
             val market = markets.getJSONObject(i)
 
+            val instrumentName = market.getString("name")
+            val quoteCurrency = market.getString("quote_currency")
+            var baseCurrency = market.getString("base_currency")
+
+            // Detect futures
+            if(!instrumentName.endsWith(quoteCurrency)) {
+                baseCurrency = market.getString("alias").replace(quoteCurrency, "-")
+            }
+
             pairs.add( CurrencyPairInfo(
-                    market.getString("base_currency"),
-                    market.getString("quote_currency"),
-                    market.getString("name")
+                    baseCurrency,
+                    quoteCurrency,
+                    instrumentName
             ))
         }
     }
