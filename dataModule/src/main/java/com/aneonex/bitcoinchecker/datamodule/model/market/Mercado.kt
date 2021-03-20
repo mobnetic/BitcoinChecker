@@ -13,7 +13,7 @@ class Mercado : Market(NAME, TTS_NAME, getCurrencyPairs()) {
     companion object {
         private const val NAME = "Mercado Bitcoin"
         private const val TTS_NAME = "Mercado"
-        private const val URL = "https://www.mercadobitcoin.com.br/api/%1\$s/ticker/"
+        private const val URL = "https://www.mercadobitcoin.net/api/%1\$s/ticker/"
 
         @Suppress("SpellCheckingInspection")
         private fun getCurrencyPairs(): CurrencyPairsMap {
