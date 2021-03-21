@@ -75,6 +75,11 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     Currency.USD
             )
         }
+
+        private fun getCurrencyDisplayName(currencyCode: String): String {
+            if(currencyCode == "UST") return VirtualCurrency.USDT
+            return currencyCode
+        }
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
@@ -104,7 +109,7 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
@@ -123,14 +128,14 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
             val splitPair = pairId.split(':')
             if(splitPair.size == 2){
                 // pairId example "tLINK:USD"
-                currencyBase = splitPair[0].substring(1)
-                currencyCounter = splitPair[1]
+                currencyBase = getCurrencyDisplayName(splitPair[0].substring(1))
+                currencyCounter = getCurrencyDisplayName(splitPair[1])
             }
             else{
                 if(pairId.length != 7) continue
                 // pairId example "tBTCUSD"
-                currencyBase = pairId.substring(1, 4)
-                currencyCounter = pairId.substring(4)
+                currencyBase = getCurrencyDisplayName(pairId.substring(1, 4))
+                currencyCounter = getCurrencyDisplayName(pairId.substring(4))
             }
 
             pairs.add(CurrencyPairInfo(
