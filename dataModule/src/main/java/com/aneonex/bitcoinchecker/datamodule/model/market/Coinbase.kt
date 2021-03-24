@@ -1,5 +1,6 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
+import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
@@ -34,9 +35,13 @@ class Coinbase : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         if(requestId == 0) {
+            ticker.vol = jsonObject.getDouble("volume").also {
+                if(it <= 0)
+                    throw MarketParseException("No trading volume")
+            }
+
             ticker.bid = jsonObject.getDouble("bid")
             ticker.ask = jsonObject.getDouble("ask")
-            ticker.vol = jsonObject.getDouble("volume")
             ticker.last = jsonObject.getDouble("price")
             ticker.timestamp = TimeUtils.convertISODateToTimestamp(jsonObject.getString("time"))
         }
