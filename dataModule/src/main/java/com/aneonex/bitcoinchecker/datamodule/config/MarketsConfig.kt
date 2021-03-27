@@ -178,6 +178,8 @@ object MarketsConfig {
         Orionx(),
         BudaCom(),
         CryptoMarket(),
+
+        ProBit(),
     )
 
     @kotlin.jvm.JvmField
