@@ -180,6 +180,7 @@ object MarketsConfig {
         CryptoMarket(),
 
         ProBit(),
+        CryptoCom(),
     )
 
     @kotlin.jvm.JvmField
