@@ -1,9 +1,12 @@
-package com.aneonex.bitcoinchecker.datamodule.model
+package com.aneonex.bitcoinchecker.datamodule.model.market.generic
+
+import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
+import com.aneonex.bitcoinchecker.datamodule.model.Market
 
 abstract class SimpleMarket(
         name: String,
-        val pairsUrl: String,
-        val tickerUrl: String,
+        private val pairsUrl: String,
+        private val tickerUrl: String,
         ttsName: String = name
     ): Market(name, ttsName, null) {
 
