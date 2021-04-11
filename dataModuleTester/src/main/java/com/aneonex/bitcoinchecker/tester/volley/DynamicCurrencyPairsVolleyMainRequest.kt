@@ -12,13 +12,25 @@ import com.aneonex.bitcoinchecker.tester.util.MarketCurrencyPairsStore
 import com.aneonex.bitcoinchecker.tester.volley.generic.GzipVolleyRequest
 import java.util.*
 
-class DynamicCurrencyPairsVolleyMainRequest(private val context: Context, private val market: Market, listener: Response.Listener<CurrencyPairsMapHelper?>, errorListener: Response.ErrorListener)
-    : GzipVolleyRequest<CurrencyPairsMapHelper?>(market.getCurrencyPairsUrl(0), market.getCurrencyPairsPostRequestInfo(0), listener, errorListener) {
+class DynamicCurrencyPairsVolleyMainRequest(
+        private val context: Context,
+        private val market: Market,
+        listener: Response.Listener<CurrencyPairsMapHelper?>,
+        errorListener: Response.ErrorListener)
+    : GzipVolleyRequest<CurrencyPairsMapHelper?>(
+        market.getCurrencyPairsUrl(0),
+        market.getCurrencyPairsPostRequestInfo(0),
+        listener,
+        errorListener) {
 
     @Throws(Exception::class)
     override fun parseNetworkResponse(headers: Map<String?, String?>?, responseString: String?): CurrencyPairsMapHelper {
+        if (isCanceled)
+            return CurrencyPairsMapHelper(CurrencyPairsListWithDate())
+
         val pairs: MutableList<CurrencyPairInfo> = ArrayList()
         market.parseCurrencyPairsMain(0, responseString!!, pairs)
+
         val numOfRequests = market.currencyPairsNumOfRequests
         if (numOfRequests > 1) {
             val nextPairs: MutableList<CurrencyPairInfo> = ArrayList()
@@ -27,6 +39,7 @@ class DynamicCurrencyPairsVolleyMainRequest(private val context: Context, privat
                     val future = RequestFuture.newFuture<String>()
                     val nextUrl = market.getCurrencyPairsUrl(requestId)
                     val nextRequestInfo = market.getCurrencyPairsPostRequestInfo(requestId)
+
                     if (!TextUtils.isEmpty(nextUrl)) {
                         val request = DynamicCurrencyPairsVolleyNextRequest(nextUrl, nextRequestInfo, future)
                         requestQueue!!.add(request)
@@ -40,11 +53,16 @@ class DynamicCurrencyPairsVolleyMainRequest(private val context: Context, privat
                 }
             }
         }
+
         pairs.sort()
-        val currencyPairsListWithDate = CurrencyPairsListWithDate()
-        currencyPairsListWithDate.date = System.currentTimeMillis()
-        currencyPairsListWithDate.pairs = pairs
-        if (pairs.size > 0) MarketCurrencyPairsStore.savePairsForMarket(context, market.key, currencyPairsListWithDate)
+        val currencyPairsListWithDate = CurrencyPairsListWithDate().also {
+            it.date = System.currentTimeMillis()
+            it.pairs = pairs
+        }
+
+        if (pairs.size > 0)
+            MarketCurrencyPairsStore.savePairsForMarket(context, market.key, currencyPairsListWithDate)
+
         return CurrencyPairsMapHelper(currencyPairsListWithDate)
     }
 }

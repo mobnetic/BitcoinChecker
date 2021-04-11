@@ -20,15 +20,15 @@ import com.aneonex.bitcoinchecker.tester.volley.DynamicCurrencyPairsVolleyMainRe
 import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseErrorListener
 import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseListener
 
-abstract class DynamicCurrencyPairsDialog protected constructor(context: Context, market: Market, currencyPairsMapHelper: CurrencyPairsMapHelper?) : AlertDialog(context), DialogInterface.OnDismissListener {
-    private val requestQueue: RequestQueue?
-    private val market: Market
+abstract class DynamicCurrencyPairsDialog protected constructor(context: Context, val market: Market, currencyPairsMapHelper: CurrencyPairsMapHelper?) : AlertDialog(context), DialogInterface.OnDismissListener {
+
+    private val requestQueue: RequestQueue = HttpsHelper.newRequestQueue(context)
     private var currencyPairsMapHelper: CurrencyPairsMapHelper?
     private val refreshImageView: View
     private val statusView: TextView
     private val errorView: TextView
     override fun onDismiss(dialog: DialogInterface) {
-        requestQueue!!.cancelAll(this)
+        requestQueue.cancelAll(this)
         currencyPairsMapHelper = null
     }
 
@@ -52,7 +52,8 @@ abstract class DynamicCurrencyPairsDialog protected constructor(context: Context
             }
         })
         request.tag = this
-        requestQueue!!.add(request)
+
+        requestQueue.add(request)
     }
 
     private fun refreshStatusView(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, errorMsg: String?, error: VolleyError?) {
@@ -85,8 +86,6 @@ abstract class DynamicCurrencyPairsDialog protected constructor(context: Context
 
     init {
         // setInverseBackgroundForced(true)
-        requestQueue = HttpsHelper.newRequestQueue(context)
-        this.market = market
         this.currencyPairsMapHelper = currencyPairsMapHelper
         setTitle(R.string.checker_add_dynamic_currency_pairs_dialog_title)
         setOnDismissListener(this)
