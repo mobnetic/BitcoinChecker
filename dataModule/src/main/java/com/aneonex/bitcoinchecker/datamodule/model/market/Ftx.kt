@@ -45,7 +45,10 @@ class Ftx : Market(NAME, TTS_NAME, null) {
         ticker.ask = market.getDouble("ask")
         ticker.last = market.getDouble("last")
 
-        if(ticker.last > 0)
-            ticker.vol = market.getDouble("quoteVolume24h") / ticker.last
+        if(ticker.last > 0) {
+            ticker.volQuote = market.getDouble("quoteVolume24h")
+            ticker.vol = ticker.volQuote / ticker.last // Calculated base volume
+
+        }
     }
 }

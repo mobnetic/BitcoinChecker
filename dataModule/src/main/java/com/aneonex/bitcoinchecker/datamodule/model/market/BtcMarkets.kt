@@ -37,6 +37,7 @@ class BtcMarkets : SimpleMarket(
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         ticker.apply {
             last = jsonObject.getDouble("lastPrice")
+
             bid = jsonObject.getDouble("bestBid")
             ask = jsonObject.getDouble("bestAsk")
 
@@ -44,7 +45,7 @@ class BtcMarkets : SimpleMarket(
             high = jsonObject.getDouble("high24h")
 
             vol = jsonObject.getDouble("volume24h")
-            // volQuote = jsonObject.getDouble("volumeQte24h")
+            volQuote = jsonObject.getDouble("volumeQte24h")
 
             timestamp = TimeUtils.convertISODateToTimestamp(jsonObject.getString("timestamp"))
         }

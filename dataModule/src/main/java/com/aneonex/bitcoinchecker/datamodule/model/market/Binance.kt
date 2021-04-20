@@ -23,9 +23,13 @@ class Binance : Market(NAME, TTS_NAME, null) {
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
         ticker.bid = jsonObject.getDouble("bidPrice")
         ticker.ask = jsonObject.getDouble("askPrice")
+
         ticker.vol = jsonObject.getDouble("volume")
+        ticker.volQuote = jsonObject.getDouble("quoteVolume")
+
         ticker.high = jsonObject.getDouble("highPrice")
         ticker.low = jsonObject.getDouble("lowPrice")
+
         ticker.last = jsonObject.getDouble("lastPrice")
         ticker.timestamp = jsonObject.getLong("closeTime")
     }

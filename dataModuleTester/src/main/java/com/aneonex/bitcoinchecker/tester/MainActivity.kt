@@ -256,7 +256,8 @@ class MainActivity : AppCompatActivity() {
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_low, ticker.low, checkerInfo.currencyCounter))
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_bid, ticker.bid, checkerInfo.currencyCounter))
             ssb.append(createNewPriceLineIfNeeded(R.string.ticker_ask, ticker.ask, checkerInfo.currencyCounter))
-            ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol, ticker.vol, checkerInfo.currencyBase))
+            ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol_base, ticker.vol, checkerInfo.currencyBase))
+            ssb.append(createNewPriceLineIfNeeded(R.string.ticker_vol_quote, ticker.volQuote, checkerInfo.currencyCounter))
             ssb.append("""
 
     ${getString(R.string.ticker_timestamp, FormatUtilsBase.formatSameDayTimeOrDate(this, ticker.timestamp))}

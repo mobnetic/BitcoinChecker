@@ -15,7 +15,8 @@
     <string name="ticker_low">Low: %1$s</string>
     <string name="ticker_bid">Bid: %1$s</string>
     <string name="ticker_ask">Ask: %1$s</string>
-    <string name="ticker_vol">Volume: %1$s</string>
+    <string name="ticker_vol_base">Volume (base): %1$s</string>
+    <string name="ticker_vol_quote">Volume (quote): %1$s</string>
     <string name="ticker_timestamp">Time: %1$s</string>
     
     <string name="ticker_raw_url">Url: %1$s</string>
