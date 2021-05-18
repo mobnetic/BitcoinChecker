@@ -15,7 +15,8 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         private const val NAME = "Bitfinex"
         private const val TTS_NAME = NAME
         private const val URL = "https://api-pub.bitfinex.com/v2/ticker/%1\$s"
-        private const val URL_CURRENCY_PAIRS = "https://api-pub.bitfinex.com/v2/tickers?symbols=ALL"
+        private const val URL_CURRENCY_SYMBOLS = "https://api-pub.bitfinex.com/v2/conf/pub:map:currency:sym"
+        private const val URL_CURRENCY_PAIRS = "https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange"
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
@@ -75,12 +76,12 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     Currency.USD
             )
         }
-
-        private fun getCurrencyDisplayName(currencyCode: String): String {
-            if(currencyCode == "UST") return VirtualCurrency.USDT
-            return currencyCode
-        }
     }
+
+    private val symbolsMap = mutableMapOf<String, String>()
+
+    override val currencyPairsNumOfRequests: Int
+        get() = 2 // 1) symbol map, 2) pairs
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         var pairId = checkerInfo.currencyPairId
@@ -109,39 +110,59 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String {
-        return URL_CURRENCY_PAIRS
-    }
+    override fun getCurrencyPairsUrl(requestId: Int): String =
+        if (requestId == 0) URL_CURRENCY_SYMBOLS else URL_CURRENCY_PAIRS
 
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val pairsArray = JSONArray(responseString)
-        for (i in 0 until pairsArray.length()) {
-            val pairArray = pairsArray.getJSONArray(i)
-            val pairId = pairArray.getString(0)
+        val dataArray = JSONArray(responseString)
 
-            if(pairId.isNullOrEmpty()) continue
-            if(!pairId.startsWith('t')) continue
+        // Get symbols map
+        if(requestId == 0) {
+            symbolsMap.clear()
 
-            var currencyBase: String
-            var currencyCounter: String
+            if(dataArray.length() > 0){
+                val currencyArray = dataArray.getJSONArray(0)
 
-            val splitPair = pairId.split(':')
-            if(splitPair.size == 2){
-                // pairId example "tLINK:USD"
-                currencyBase = getCurrencyDisplayName(splitPair[0].substring(1))
-                currencyCounter = getCurrencyDisplayName(splitPair[1])
+                for (i in 0 until currencyArray.length()) {
+                    val codeToSymbol = currencyArray.getJSONArray(i)
+                    symbolsMap[codeToSymbol.getString(0)] = codeToSymbol.getString(1)
+                }
             }
-            else{
-                if(pairId.length != 7) continue
-                // pairId example "tBTCUSD"
-                currencyBase = getCurrencyDisplayName(pairId.substring(1, 4))
-                currencyCounter = getCurrencyDisplayName(pairId.substring(4))
+        }
+        // Get pairs
+        else {
+            fun getCurrencyDisplayName(currencyCode: String) = symbolsMap[currencyCode] ?: currencyCode
+
+            val pairsArray = dataArray.getJSONArray(0)
+            for (i in 0 until pairsArray.length()) {
+                val pairId = pairsArray.getString(i)
+
+                var currencyBase: String
+                var currencyCounter: String
+
+                val splitPair = pairId.split(':')
+                if (splitPair.size == 2) {
+                    // pairId example "LINK:USD"
+                    currencyBase = getCurrencyDisplayName(splitPair[0])
+                    currencyCounter = getCurrencyDisplayName(splitPair[1])
+                } else {
+                    if (pairId.length != 6) continue
+                    // pairId example "BTCUSD"
+                    currencyBase = getCurrencyDisplayName(pairId.substring(0, 3))
+                    currencyCounter = getCurrencyDisplayName(pairId.substring(3))
+                }
+
+                pairs.add(
+                    CurrencyPairInfo(
+                        currencyBase,
+                        currencyCounter,
+                        "t$pairId"
+                    )
+                )
             }
 
-            pairs.add(CurrencyPairInfo(
-                    currencyBase,
-                    currencyCounter,
-                    pairId))
+            // Clear cache
+            symbolsMap.clear()
         }
     }
 }
