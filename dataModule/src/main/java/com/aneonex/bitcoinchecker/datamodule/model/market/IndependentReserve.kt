@@ -49,11 +49,12 @@ class IndependentReserve : Market(NAME, TTS_NAME, null) {
                 val secondaryCurrencyCode = currencyCodes.getString(i)
 
                 latestPrimaryCurrencies.forEach { primaryCurrency ->
-                    pairs.add(CurrencyPairInfo(
-                            getCurrencyPublicName(primaryCurrency.toUpperCase(Locale.ROOT)),
-                            secondaryCurrencyCode.toUpperCase(Locale.ROOT),
+                    pairs.add(
+                        CurrencyPairInfo(
+                            getCurrencyPublicName(primaryCurrency.uppercase(Locale.ROOT)),
+                            secondaryCurrencyCode.uppercase(Locale.ROOT),
                             null
-                    ))
+                        ))
                 }
             }
 

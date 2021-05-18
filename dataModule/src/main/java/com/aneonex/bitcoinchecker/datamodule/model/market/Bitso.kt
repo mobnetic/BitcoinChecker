@@ -27,10 +27,12 @@ class Bitso : Market(NAME, TTS_NAME, null) {
             val pairId = books.getJSONObject(i).getString("book")
             val currencies = pairId.split("_".toRegex()).toTypedArray()
             if (currencies.size != 2) continue
-            pairs.add(CurrencyPairInfo(
-                    currencies[0].toUpperCase(Locale.ROOT),
-                    currencies[1].toUpperCase(Locale.ROOT),
-                    pairId))
+            pairs.add(
+                CurrencyPairInfo(
+                    currencies[0].uppercase(Locale.ROOT),
+                    currencies[1].uppercase(Locale.ROOT),
+                    pairId
+                ))
         }
     }
 

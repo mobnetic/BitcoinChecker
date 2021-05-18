@@ -25,9 +25,9 @@ class BitZ : Market(NAME, TTS_NAME, null) {
         marketsJson.keys().forEach {
             val market = marketsJson.getJSONObject(it)
             pairs.add( CurrencyPairInfo(
-                    market.getString("coinFrom").toUpperCase(Locale.ROOT),
-                    market.getString("coinTo").toUpperCase(Locale.ROOT),
-                    market.getString("name"),
+                market.getString("coinFrom").uppercase(Locale.ROOT),
+                market.getString("coinTo").uppercase(Locale.ROOT),
+                market.getString("name"),
             ))
         }
     }

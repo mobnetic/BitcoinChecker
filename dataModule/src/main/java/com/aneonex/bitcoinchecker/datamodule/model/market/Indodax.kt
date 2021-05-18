@@ -27,9 +27,10 @@ class Indodax : Market(NAME, TTS_NAME, null) {
 
             pairs.add(
                 CurrencyPairInfo(
-                        market.getString("traded_currency").toUpperCase(Locale.ROOT), // Base currency
-                        market.getString("base_currency").toUpperCase(Locale.ROOT), // base_currency is real quoting
-                        market.getString("id")
+                    market.getString("traded_currency").uppercase(Locale.ROOT), // Base currency
+                    market.getString("base_currency")
+                        .uppercase(Locale.ROOT), // base_currency is real quoting
+                    market.getString("id")
                 )
             )
         }

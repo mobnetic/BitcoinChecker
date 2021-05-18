@@ -27,11 +27,12 @@ class Gemini : Market(NAME, TTS_NAME, null) {
         for(i in 0 until markets.length()){
             val market = markets.getString(i)
 
-            pairs.add( CurrencyPairInfo(
-                    market.substring(0, market.length-quoteCurrencyLength).toUpperCase(Locale.ROOT),
-                    market.substring(market.length-quoteCurrencyLength).toUpperCase(Locale.ROOT),
+            pairs.add(
+                CurrencyPairInfo(
+                    market.substring(0, market.length - quoteCurrencyLength).uppercase(Locale.ROOT),
+                    market.substring(market.length - quoteCurrencyLength).uppercase(Locale.ROOT),
                     market
-            ))
+                ))
         }
     }
 

@@ -20,11 +20,12 @@ class LiteBit : SimpleMarket(
         for (key in data.keys()) {
             val market = data.getJSONObject(key)
 
-            pairs.add(CurrencyPairInfo(
-                market.getString("abbr").toUpperCase(Locale.ROOT),
-                Currency.EUR,
-                key
-            ))
+            pairs.add(
+                CurrencyPairInfo(
+                    market.getString("abbr").uppercase(Locale.ROOT),
+                    Currency.EUR,
+                    key
+                ))
         }
     }
 

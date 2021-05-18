@@ -27,7 +27,7 @@ class Tokok : SimpleMarket(
             pairs.add(CurrencyPairInfo(
                 assets[0], // Base currency
                 assets[1], // Quote currency
-                symbol.toLowerCase(Locale.ROOT)
+                symbol.lowercase(Locale.ROOT)
             ))
         }
     }

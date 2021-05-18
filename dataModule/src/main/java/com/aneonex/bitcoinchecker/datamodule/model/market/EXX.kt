@@ -15,14 +15,16 @@ class EXX : SimpleMarket(
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         for (marketKey in jsonObject.keys()) {
-            val assets = marketKey.toUpperCase(Locale.ROOT).split('_')
-            if(assets.size != 2) continue
+            val assets = marketKey.uppercase(Locale.ROOT).split('_')
+            if (assets.size != 2) continue
 
-            pairs.add(CurrencyPairInfo(
-                assets[0], // Base currency
-                assets[1], // Quote currency
-                marketKey
-            ))
+            pairs.add(
+                CurrencyPairInfo(
+                    assets[0], // Base currency
+                    assets[1], // Quote currency
+                    marketKey
+                )
+            )
         }
     }
 

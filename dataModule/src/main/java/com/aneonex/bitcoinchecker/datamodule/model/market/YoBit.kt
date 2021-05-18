@@ -44,8 +44,8 @@ class YoBit : Market(NAME, TTS_NAME, null) {
             val pairId = pairsNames.getString(i) ?: continue
             val currencies = pairId.split("_".toRegex()).toTypedArray()
             if (currencies.size != 2) continue
-            val currencyBase = currencies[0].toUpperCase(Locale.ENGLISH)
-            val currencyCounter = currencies[1].toUpperCase(Locale.ENGLISH)
+            val currencyBase = currencies[0].uppercase(Locale.ENGLISH)
+            val currencyCounter = currencies[1].uppercase(Locale.ENGLISH)
             pairs.add(CurrencyPairInfo(currencyBase, currencyCounter, pairId))
         }
     }

@@ -38,8 +38,8 @@ class LakeBTC : Market(NAME, TTS_NAME, null) {
         val pairsJsonArray = jsonObject.names()!!
         for (i in 0 until pairsJsonArray.length()) {
             val pairId = pairsJsonArray.getString(i)
-            val currencyBase = pairId.substring(0, 3).toUpperCase(Locale.ENGLISH)
-            val currencyCounter = pairId.substring(3).toUpperCase(Locale.ENGLISH)
+            val currencyBase = pairId.substring(0, 3).uppercase(Locale.ENGLISH)
+            val currencyCounter = pairId.substring(3).uppercase(Locale.ENGLISH)
             pairs.add(CurrencyPairInfo(currencyBase, currencyCounter, pairId))
         }
     }

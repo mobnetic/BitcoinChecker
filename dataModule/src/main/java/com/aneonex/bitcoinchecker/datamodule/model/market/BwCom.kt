@@ -18,14 +18,16 @@ class BwCom : SimpleMarket(
         for (i in 0 until markets.length()) {
             val market = markets.getJSONObject(i)
 
-            val assets = market.getString("name").toUpperCase(Locale.ROOT).split('_')
-            if(assets.size != 2) continue
+            val assets = market.getString("name").uppercase(Locale.ROOT).split('_')
+            if (assets.size != 2) continue
 
-            pairs.add(CurrencyPairInfo(
-                assets[0], // Base currency
-                assets[1], // Quote currency
-                market.getString("marketId")
-            ))
+            pairs.add(
+                CurrencyPairInfo(
+                    assets[0], // Base currency
+                    assets[1], // Quote currency
+                    market.getString("marketId")
+                )
+            )
         }
     }
 

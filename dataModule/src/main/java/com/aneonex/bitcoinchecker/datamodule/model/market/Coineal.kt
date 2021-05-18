@@ -23,11 +23,12 @@ class Coineal : Market(NAME, TTS_NAME, null) {
         val markets = jsonObject.getJSONArray("data")
         for(i in 0 until markets.length()){
             val market = markets.getJSONObject(i)
-            pairs.add( CurrencyPairInfo(
-                    market.getString("base_coin").toUpperCase(Locale.ROOT),
-                    market.getString("count_coin").toUpperCase(Locale.ROOT),
+            pairs.add(
+                CurrencyPairInfo(
+                    market.getString("base_coin").uppercase(Locale.ROOT),
+                    market.getString("count_coin").uppercase(Locale.ROOT),
                     market.getString("symbol"),
-            ))
+                ))
         }
     }
 

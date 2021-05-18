@@ -86,9 +86,11 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         var pairId = checkerInfo.currencyPairId
         if (pairId == null) {
-            pairId = String.format("t%1\$s%2\$s",
-                    checkerInfo.currencyBase.toUpperCase(Locale.ROOT),
-                    checkerInfo.currencyCounter.toUpperCase(Locale.ROOT))
+            pairId = String.format(
+                "t%1\$s%2\$s",
+                checkerInfo.currencyBase.uppercase(Locale.ROOT),
+                checkerInfo.currencyCounter.uppercase(Locale.ROOT)
+            )
         }
         return String.format(URL, pairId)
     }

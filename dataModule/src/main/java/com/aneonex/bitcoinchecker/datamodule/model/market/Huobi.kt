@@ -32,8 +32,9 @@ class Huobi : Market(NAME, TTS_NAME, null) {
         if ("ok".equals(jsonObject.getString("status"), ignoreCase = true)) {
             val data = jsonObject.getJSONArray("data")
             for (i in 0 until data.length()) {
-                val base = data.getJSONObject(i).getString("base-currency").toUpperCase(Locale.US)
-                val counter = data.getJSONObject(i).getString("quote-currency").toUpperCase(Locale.US)
+                val base = data.getJSONObject(i).getString("base-currency").uppercase(Locale.US)
+                val counter =
+                    data.getJSONObject(i).getString("quote-currency").uppercase(Locale.US)
                 pairs.add(CurrencyPairInfo(base, counter, null))
             }
         } else {

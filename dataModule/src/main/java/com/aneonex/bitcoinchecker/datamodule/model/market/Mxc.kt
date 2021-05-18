@@ -30,11 +30,12 @@ class Mxc : Market(NAME, TTS_NAME, null) {
             if(assets.size != 2)
                 continue
 
-            pairs.add( CurrencyPairInfo(
-                    assets[0].toUpperCase(Locale.ROOT),
-                    assets[1].toUpperCase(Locale.ROOT),
+            pairs.add(
+                CurrencyPairInfo(
+                    assets[0].uppercase(Locale.ROOT),
+                    assets[1].uppercase(Locale.ROOT),
                     pairId,
-            ))
+                ))
         }
     }
 

@@ -24,9 +24,10 @@ class BitoPro : Market(NAME, TTS_NAME, null) {
         for(i in 0 until dataJson.length()){
             val pairJson = dataJson.getJSONObject(i)
 //            if(!pairJson.getBoolean("maintain")) continue
-            pairs.add(CurrencyPairInfo(
-                    pairJson.getString("base").toUpperCase(Locale.ROOT),
-                    pairJson.getString("quote").toUpperCase(Locale.ROOT),
+            pairs.add(
+                CurrencyPairInfo(
+                    pairJson.getString("base").uppercase(Locale.ROOT),
+                    pairJson.getString("quote").uppercase(Locale.ROOT),
                     pairJson.getString("pair")
                 )
             )

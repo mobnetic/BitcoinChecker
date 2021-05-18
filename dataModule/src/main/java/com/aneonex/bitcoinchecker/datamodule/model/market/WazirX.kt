@@ -30,9 +30,9 @@ class WazirX : Market(NAME, TTS_NAME, null) {
 
             pairs.add(
                 CurrencyPairInfo(
-                        baseCurrency.toUpperCase(Locale.ROOT),
-                        qouteCurrency.toUpperCase(Locale.ROOT),
-                        pairId
+                    baseCurrency.uppercase(Locale.ROOT),
+                    qouteCurrency.uppercase(Locale.ROOT),
+                    pairId
                 )
             )
         }

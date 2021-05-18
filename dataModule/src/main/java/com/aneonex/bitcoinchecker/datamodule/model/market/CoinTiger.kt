@@ -20,17 +20,18 @@ class CoinTiger : SimpleMarket(
             for (i in 0 until marketSection.length()) {
                 val market = marketSection.getJSONObject(i)
 
-                pairs.add(CurrencyPairInfo(
-                    market.getString("baseCurrency").toUpperCase(Locale.ROOT),
-                    market.getString("quoteCurrency").toUpperCase(Locale.ROOT),
-                    null
-                ))
+                pairs.add(
+                    CurrencyPairInfo(
+                        market.getString("baseCurrency").uppercase(Locale.ROOT),
+                        market.getString("quoteCurrency").uppercase(Locale.ROOT),
+                        null
+                    ))
             }
         }
     }
 
     override fun getPairId(checkerInfo: CheckerInfo): String {
-        return (checkerInfo.currencyBase + checkerInfo.currencyCounter).toLowerCase(Locale.ROOT)
+        return (checkerInfo.currencyBase + checkerInfo.currencyCounter).lowercase(Locale.ROOT)
     }
 
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
