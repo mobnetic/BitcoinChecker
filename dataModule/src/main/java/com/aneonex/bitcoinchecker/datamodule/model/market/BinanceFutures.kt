@@ -37,6 +37,10 @@ class BinanceFutures : Market(NAME, TTS_NAME, null) {
         for (i in 0 until jsonSymbols.length()) {
             val marketJsonObject = jsonSymbols.getJSONObject(i)
 
+            // Tha app UI supports only perpetual futures
+            if(marketJsonObject.getString("contractType") != "PERPETUAL")
+                continue
+
             val symbol = marketJsonObject.getString("symbol")
             val baseAsset = marketJsonObject.getString("baseAsset")
             val quoteAsset = marketJsonObject.getString("quoteAsset")
