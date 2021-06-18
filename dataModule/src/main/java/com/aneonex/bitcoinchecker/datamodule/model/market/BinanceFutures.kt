@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
 class BinanceFutures : Market(NAME, TTS_NAME, null) {
@@ -33,13 +34,10 @@ class BinanceFutures : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val jsonSymbols = jsonObject.getJSONArray("symbols")
-        for (i in 0 until jsonSymbols.length()) {
-            val marketJsonObject = jsonSymbols.getJSONObject(i)
-
+        jsonObject.getJSONArray("symbols").forEachJSONObject { marketJsonObject ->
             // Tha app UI supports only perpetual futures
             if(marketJsonObject.getString("contractType") != "PERPETUAL")
-                continue
+                return@forEachJSONObject
 
             val symbol = marketJsonObject.getString("symbol")
             val baseAsset = marketJsonObject.getString("baseAsset")

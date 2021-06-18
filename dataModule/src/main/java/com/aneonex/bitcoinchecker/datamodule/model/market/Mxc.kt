@@ -15,7 +15,7 @@ class Mxc : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://www.mxc.com/open/api/v1/data/markets"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

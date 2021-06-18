@@ -34,13 +34,9 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val tag = MainActivity::class.simpleName
 
-    private inner class MarketEntry(var key: String, var name: String) : Comparable<MarketEntry> {
+    private inner class MarketEntry(var key: String, var name: String)  {
         override fun toString(): String {
             return name
-        }
-
-        override fun compareTo(other: MarketEntry): Int {
-            return name.compareTo(other.name)
         }
     }
 
@@ -139,13 +135,18 @@ class MainActivity : AppCompatActivity() {
     // Refreshing UI
     // ====================
     private fun refreshMarketSpinner() {
+/*
         val entries = arrayOfNulls<MarketEntry>(MarketsConfig.MARKETS.size)
         var i = entries.size - 1
         for (market in MarketsConfig.MARKETS.values) {
             val marketEntry = MarketEntry(market.key, market.name)
             entries[i--] = marketEntry // market.name;
         }
-        Arrays.sort(entries)
+*/
+        val entries = MarketsConfig.MARKETS.values
+            .sortedBy { market -> market.name.uppercase() }
+            .map { market ->  MarketEntry(market.key, market.name) }
+
         marketSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
     }
 

@@ -14,7 +14,7 @@ class Hydax : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://api.hydax.com/openapi/v1/brokerInfo"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

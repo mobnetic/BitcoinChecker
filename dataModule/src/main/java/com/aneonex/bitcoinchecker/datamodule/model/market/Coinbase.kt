@@ -6,6 +6,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -57,9 +58,7 @@ class Coinbase : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val jsonArray = JSONArray(responseString)
-        for (i in 0 until jsonArray.length()) {
-            val pairJsonObject = jsonArray.getJSONObject(i)
+        JSONArray(responseString).forEachJSONObject { pairJsonObject ->
             pairs.add(CurrencyPairInfo(
                     pairJsonObject.getString("base_currency"),
                     pairJsonObject.getString("quote_currency"),

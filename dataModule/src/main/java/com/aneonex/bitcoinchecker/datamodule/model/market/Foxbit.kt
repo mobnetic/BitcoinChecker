@@ -6,6 +6,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.market.generic.SimpleMarket
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -20,18 +21,14 @@ class Foxbit : SimpleMarket(
         responseString: String,
         pairs: MutableList<CurrencyPairInfo>
     ) {
-        val markets = JSONArray(responseString)
-
-        for (i in 0 until markets.length()) {
-            val market = markets.getJSONObject(i)
-
+        JSONArray(responseString).forEachJSONObject { market ->
             if(market.getString("exchange") != "Foxbit")
-                continue
+                return@forEachJSONObject
 
             val pairId = market.getString("currency")
             val separatorIndex = pairId.indexOf('X')
             if(separatorIndex <= 0)
-                continue
+                return@forEachJSONObject
 
             val asset1 = pairId.substring(0, separatorIndex)
             val asset2 = pairId.substring(separatorIndex+1, pairId.length)
@@ -42,7 +39,7 @@ class Foxbit : SimpleMarket(
                     asset2 == "BRL" -> false
                     asset2 == "USDT" -> false
                     asset2 == "BTC" -> false
-                    else -> continue // Unknown pair format
+                    else -> return@forEachJSONObject // Unknown pair format
                 }
 
             val baseCurrency = if(firstAssetIsQuoteCurrency) asset2 else asset1

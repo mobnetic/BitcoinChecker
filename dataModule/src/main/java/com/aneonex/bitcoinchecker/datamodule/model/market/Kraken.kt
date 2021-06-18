@@ -5,9 +5,17 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
+import com.aneonex.bitcoinchecker.datamodule.util.forEachString
 import org.json.JSONObject
 
 class Kraken : Market(NAME, TTS_NAME, null) {
+    companion object {
+        private const val NAME = "Kraken"
+        private const val TTS_NAME = NAME
+        private const val URL = "https://api.kraken.com/0/public/Ticker?pair=%1\$s"
+        private const val URL_CURRENCY_PAIRS = "https://api.kraken.com/0/public/AssetPairs"
+    }
+
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         return if (checkerInfo.currencyPairId != null) {
             String.format(URL, checkerInfo.currencyPairId)
@@ -45,17 +53,15 @@ class Kraken : Market(NAME, TTS_NAME, null) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val result = jsonObject.getJSONObject("result")
-        val pairNames = result.names()!!
-        for (i in 0 until pairNames.length()) {
-            val pairId = pairNames.getString(i)
-            if (pairId != null && pairId.indexOf('.') == -1) {
+        result.names()!!.forEachString { pairId ->
+            if (pairId.indexOf('.') == -1) {
                 val pairJsonObject = result.getJSONObject(pairId)
                 pairs.add(CurrencyPairInfo(
                         parseCurrency(pairJsonObject.getString("base")),
@@ -78,13 +84,7 @@ class Kraken : Market(NAME, TTS_NAME, null) {
         if (VirtualCurrency.XBT == resultCurrency) return VirtualCurrency.BTC
         if (VirtualCurrency.XVN == resultCurrency) return VirtualCurrency.VEN
         if (VirtualCurrency.XDG == resultCurrency) return VirtualCurrency.DOGE
-        return resultCurrency
-    }
 
-    companion object {
-        private const val NAME = "Kraken"
-        private const val TTS_NAME = NAME
-        private const val URL = "https://api.kraken.com/0/public/Ticker?pair=%1\$s"
-        private const val URL_CURRENCY_PAIRS = "https://api.kraken.com/0/public/AssetPairs"
+        return resultCurrency
     }
 }

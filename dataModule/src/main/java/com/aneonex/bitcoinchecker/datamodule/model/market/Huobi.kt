@@ -4,10 +4,18 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 import java.util.*
 
 class Huobi : Market(NAME, TTS_NAME, null) {
+    companion object {
+        private const val NAME = "Huobi"
+        private const val TTS_NAME = NAME
+        private const val URL = "https://api.huobi.pro/market/detail/merged?symbol=%s%s"
+        private const val URL_CURRENCY_PAIRS = "https://api.huobi.pro/v1/common/symbols"
+    }
+
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         return String.format(URL, checkerInfo.currencyBaseLowerCase, checkerInfo.currencyCounterLowerCase)
     }
@@ -30,22 +38,13 @@ class Huobi : Market(NAME, TTS_NAME, null) {
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         if ("ok".equals(jsonObject.getString("status"), ignoreCase = true)) {
-            val data = jsonObject.getJSONArray("data")
-            for (i in 0 until data.length()) {
-                val base = data.getJSONObject(i).getString("base-currency").uppercase(Locale.US)
-                val counter =
-                    data.getJSONObject(i).getString("quote-currency").uppercase(Locale.US)
+            jsonObject.getJSONArray("data").forEachJSONObject { market ->
+                val base = market.getString("base-currency").uppercase(Locale.US)
+                val counter = market.getString("quote-currency").uppercase(Locale.US)
                 pairs.add(CurrencyPairInfo(base, counter, null))
             }
         } else {
             throw Exception("Parse currency pairs error.")
         }
-    }
-
-    companion object {
-        private const val NAME = "Huobi"
-        private const val TTS_NAME = NAME
-        private const val URL = "https://api.huobi.pro/market/detail/merged?symbol=%s%s"
-        private const val URL_CURRENCY_PAIRS = "https://api.huobi.pro/v1/common/symbols"
     }
 }

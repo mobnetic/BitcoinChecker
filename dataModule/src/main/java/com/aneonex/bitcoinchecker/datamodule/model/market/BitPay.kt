@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -27,9 +28,7 @@ class BitPay : Market(NAME, TTS_NAME, null) {
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
         val baseCurrency = supportedBaseCurrencies[requestId]
 
-        val ratesJson = JSONArray(responseString)
-        for(i in 0 until ratesJson.length()){
-            val quoteCurrencyJson = ratesJson.getJSONObject(i)
+        JSONArray(responseString).forEachJSONObject { quoteCurrencyJson ->
             val quoteCurrency = quoteCurrencyJson.getString("code")
             if(quoteCurrency != baseCurrency){
                 pairs.add( CurrencyPairInfo(

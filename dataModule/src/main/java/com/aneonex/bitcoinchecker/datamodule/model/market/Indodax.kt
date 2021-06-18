@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
@@ -16,15 +17,12 @@ class Indodax : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://indodax.com/api/pairs"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val marketsJson = JSONArray(responseString)
-        for (i in 0 until marketsJson.length()) {
-            val market = marketsJson.getJSONObject(i)
-
+        JSONArray(responseString).forEachJSONObject { market ->
             pairs.add(
                 CurrencyPairInfo(
                     market.getString("traded_currency").uppercase(Locale.ROOT), // Base currency

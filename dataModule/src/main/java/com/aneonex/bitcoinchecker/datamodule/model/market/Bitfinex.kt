@@ -7,6 +7,8 @@ import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONArray
+import com.aneonex.bitcoinchecker.datamodule.util.forEachString
 import org.json.JSONArray
 import java.util.*
 
@@ -123,11 +125,10 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
             symbolsMap.clear()
 
             if(dataArray.length() > 0){
-                val currencyArray = dataArray.getJSONArray(0)
-
-                for (i in 0 until currencyArray.length()) {
-                    val codeToSymbol = currencyArray.getJSONArray(i)
-                    symbolsMap[codeToSymbol.getString(0)] = codeToSymbol.getString(1)
+                dataArray.getJSONArray(0).also { currencyArray ->
+                    currencyArray.forEachJSONArray{ codeToSymbol ->
+                        symbolsMap[codeToSymbol.getString(0)] = codeToSymbol.getString(1)
+                    }
                 }
             }
         }
@@ -136,11 +137,9 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
             fun getCurrencyDisplayName(currencyCode: String) = symbolsMap[currencyCode] ?: currencyCode
 
             val pairsArray = dataArray.getJSONArray(0)
-            for (i in 0 until pairsArray.length()) {
-                val pairId = pairsArray.getString(i)
-
-                var currencyBase: String
-                var currencyCounter: String
+            pairsArray.forEachString { pairId ->
+                val currencyBase: String
+                val currencyCounter: String
 
                 val splitPair = pairId.split(':')
                 if (splitPair.size == 2) {
@@ -148,7 +147,7 @@ class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
                     currencyBase = getCurrencyDisplayName(splitPair[0])
                     currencyCounter = getCurrencyDisplayName(splitPair[1])
                 } else {
-                    if (pairId.length != 6) continue
+                    if (pairId.length != 6) return@forEachString
                     // pairId example "BTCUSD"
                     currencyBase = getCurrencyDisplayName(pairId.substring(0, 3))
                     currencyCounter = getCurrencyDisplayName(pairId.substring(3))

@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
 class ZgCom : Market(NAME, TTS_NAME, null) {
@@ -14,16 +15,13 @@ class ZgCom : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://api.zg.com/openapi/v1/brokerInfo"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val markets = jsonObject.getJSONArray("symbols")
-        for(i in 0 until markets.length()){
-            val market = markets.getJSONObject(i)
-
-            if(market.getString("status") != "TRADING") continue
+        jsonObject.getJSONArray("symbols").forEachJSONObject { market ->
+            if(market.getString("status") != "TRADING") return@forEachJSONObject
 
             pairs.add( CurrencyPairInfo(
                     market.getString("baseAsset"),

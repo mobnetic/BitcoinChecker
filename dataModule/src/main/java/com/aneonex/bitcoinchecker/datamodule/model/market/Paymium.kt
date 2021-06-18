@@ -37,7 +37,7 @@ class Paymium : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     }
 
     @Throws(Exception::class)
-    override fun parseErrorFromJsonObject(requestId: Int, jsonObject: JSONObject, checkerInfo: CheckerInfo?): String? {
+    override fun parseErrorFromJsonObject(requestId: Int, jsonObject: JSONObject, checkerInfo: CheckerInfo?): String {
         val stringBuilder = StringBuilder()
         val errorsArray = jsonObject.getJSONArray("errors")
         for (i in 0 until errorsArray.length()) {

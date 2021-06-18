@@ -16,10 +16,11 @@ class BitFlyer : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.JPY)
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    VirtualCurrency.BTC)
+            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(Currency.JPY)
+            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(Currency.JPY, VirtualCurrency.BTC)
+            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(Currency.JPY)
+            CURRENCY_PAIRS["MONA"] = arrayOf(Currency.JPY)
+            CURRENCY_PAIRS[VirtualCurrency.BCH] = arrayOf(VirtualCurrency.BTC)
         }
     }
 

@@ -71,7 +71,7 @@ class TheRock : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

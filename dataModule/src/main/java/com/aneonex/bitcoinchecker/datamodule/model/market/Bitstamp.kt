@@ -7,6 +7,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -71,20 +72,18 @@ class Bitstamp : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     }
 
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val markets = JSONArray(responseString)
-
-        for(i in 0 until markets.length()){
-            val market = markets.getJSONObject(i)
-
+        JSONArray(responseString).forEachJSONObject { market ->
             if(market.getString("trading") == "Enabled") {
                 val assetsInPair = market.getString("name").split('/')
-                if (assetsInPair.size != 2) continue
-
-                pairs.add(CurrencyPairInfo(
-                        assetsInPair[0], // base
-                        assetsInPair[1], // quote
-                        market.getString("url_symbol")
-                ))
+                if (assetsInPair.size == 2) {
+                    pairs.add(
+                        CurrencyPairInfo(
+                            assetsInPair[0], // base
+                            assetsInPair[1], // quote
+                            market.getString("url_symbol")
+                        )
+                    )
+                }
             }
         }
     }

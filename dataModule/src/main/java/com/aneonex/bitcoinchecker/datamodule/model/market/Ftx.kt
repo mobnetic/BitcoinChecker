@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
 class Ftx : Market(NAME, TTS_NAME, null) {
@@ -14,16 +15,13 @@ class Ftx : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://ftx.com/api/markets"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val markets = jsonObject.getJSONArray("result")
-        for(i in 0 until markets.length()){
-            val market = markets.getJSONObject(i)
-
-            if(market.getString("type") != "spot") continue
+        jsonObject.getJSONArray("result").forEachJSONObject {  market ->
+            if(market.getString("type") != "spot") return@forEachJSONObject
 
             pairs.add( CurrencyPairInfo(
                     market.getString("baseCurrency"),
