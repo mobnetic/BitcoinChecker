@@ -14,7 +14,7 @@ class Upbit : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://api.upbit.com/v1/market/all?isDetails=false"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

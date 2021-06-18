@@ -4,6 +4,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
 class Biki : Market(NAME, TTS_NAME, null) {
@@ -19,10 +20,7 @@ class Biki : Market(NAME, TTS_NAME, null) {
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val markets = jsonObject.getJSONArray("data")
-        for(i in 0 until markets.length()){
-            val market = markets.getJSONObject(i)
-
+        jsonObject.getJSONArray("data").forEachJSONObject { market->
             pairs.add( CurrencyPairInfo(
                     market.getString("base_coin"),
                     market.getString("count_coin"),

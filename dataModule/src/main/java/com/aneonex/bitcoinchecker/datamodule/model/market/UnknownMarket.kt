@@ -6,7 +6,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 
-class Unknown : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class UnknownMarket : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     companion object {
         private const val NAME = "UNKNOWN"
         private const val TTS_NAME = NAME

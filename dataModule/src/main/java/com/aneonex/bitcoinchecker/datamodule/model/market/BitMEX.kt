@@ -5,6 +5,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -18,6 +19,13 @@ class BitMEX : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://www.bitmex.com/api/v1/instrument" +
                 "?columns=rootSymbol,typ" +
                 "&filter={\"state\":\"Open\"}"
+
+        private fun getDisplaySymbol(internalSymbol: String): String {
+            return when(internalSymbol) {
+                "XBT" -> "BTC"
+                else -> internalSymbol
+            }
+        }
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
@@ -45,15 +53,14 @@ class BitMEX : Market(NAME, TTS_NAME, null) {
     // ====================
     // Get currency pairs
     // ====================
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
     @Throws(Exception::class)
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val instruments = JSONArray(responseString)
-        for (i in 0 until instruments.length()) {
-            parseCurrencyPairsFromJsonObject(requestId, instruments.getJSONObject(i), pairs)
+        JSONArray(responseString).forEachJSONObject { instrument ->
+            parseCurrencyPairsFromJsonObject(requestId, instrument, pairs)
         }
     }
 
@@ -68,6 +75,6 @@ class BitMEX : Market(NAME, TTS_NAME, null) {
             quote = base
             base = "BINARY"
         }
-        pairs.add(CurrencyPairInfo(base, quote, id))
+        pairs.add(CurrencyPairInfo(getDisplaySymbol(base), getDisplaySymbol(quote), id))
     }
 }

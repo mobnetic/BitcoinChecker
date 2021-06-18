@@ -2,6 +2,7 @@ package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.R
 import com.aneonex.bitcoinchecker.datamodule.model.*
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
 class UniswapV2 : Market(NAME, TTS_NAME, null) {
@@ -33,11 +34,12 @@ class UniswapV2 : Market(NAME, TTS_NAME, null) {
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val markets = jsonObject.getJSONObject("data").getJSONArray("pairs")
         val addedPairs = HashSet<String>()
 
-        for(i in 0 until markets.length()){
-            val market = markets.getJSONObject(i)
+        jsonObject
+            .getJSONObject("data")
+            .getJSONArray("pairs")
+            .forEachJSONObject { market ->
 
             val token0 = market.getJSONObject("token0").getString("symbol")
             val token1 = market.getJSONObject("token1").getString("symbol")
@@ -51,10 +53,7 @@ class UniswapV2 : Market(NAME, TTS_NAME, null) {
             val quoteSymbol = if(token1BaseWeight < token0BaseWeight) token0 else token1
 
             if(!addedPairs.add("$baseSymbol:$quoteSymbol"))
-                continue // already added most liquid version
-
-//            if(addedPairs.contains("$quoteSymbol:$baseSymbol"))
-//                continue
+                return@forEachJSONObject // already added most liquid version
 
             pairs.add( CurrencyPairInfo(baseSymbol, quoteSymbol, pairId))
 
@@ -62,7 +61,7 @@ class UniswapV2 : Market(NAME, TTS_NAME, null) {
                 // Adding reverse pair
 
                 if(!addedPairs.add("$quoteSymbol:$baseSymbol"))
-                    continue // already added most liquid version
+                    return@forEachJSONObject // already added most liquid version
 
                 pairs.add(CurrencyPairInfo(quoteSymbol, baseSymbol, pairId))
             }

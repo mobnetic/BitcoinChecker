@@ -104,7 +104,6 @@ object MarketsConfig {
         NegocieCoins(),
         BitMEX(),
         BitFlyer(),
-        BitFlyerFX(),
         Coinone(),
         Bithumb(),
         Coinsph(),

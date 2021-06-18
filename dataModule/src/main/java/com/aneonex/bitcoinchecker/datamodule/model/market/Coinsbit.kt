@@ -14,7 +14,7 @@ class Coinsbit : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://coinsbit.io/api/v1/public/markets"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

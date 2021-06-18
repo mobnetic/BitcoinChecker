@@ -8,6 +8,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
 class Btcturk : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
@@ -29,16 +30,13 @@ class Btcturk : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         }
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
     @Throws(Exception::class)
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val pairsArray = JSONObject(responseString).getJSONArray("data")
-
-        for (i in 0 until pairsArray.length()) {
-            val pairJson = pairsArray.getJSONObject(i)
+        JSONObject(responseString).getJSONArray("data").forEachJSONObject { pairJson ->
             pairs.add(CurrencyPairInfo(
                     pairJson.getString("numeratorSymbol"),
                     pairJson.getString("denominatorSymbol"),
@@ -51,7 +49,7 @@ class Btcturk : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
         var pairId = checkerInfo.currencyPairId
         if (pairId == null) {
-            pairId = "${checkerInfo.currencyBase}_${checkerInfo.currencyCounter}";
+            pairId = "${checkerInfo.currencyBase}_${checkerInfo.currencyCounter}"
         }
 
         return String.format(URL, pairId)

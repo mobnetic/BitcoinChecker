@@ -15,7 +15,7 @@ class Coineal : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://exchange-open-api.coineal.com/open/api/common/symbols"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

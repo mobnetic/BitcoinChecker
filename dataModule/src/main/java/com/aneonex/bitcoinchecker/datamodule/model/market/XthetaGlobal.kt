@@ -37,7 +37,7 @@ class XthetaGlobal : Market(NAME, TTS_NAME, null) {
         }
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

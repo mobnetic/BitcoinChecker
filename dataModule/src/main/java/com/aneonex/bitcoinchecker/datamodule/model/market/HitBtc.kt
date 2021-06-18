@@ -6,6 +6,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.model.market.generic.SimpleMarket
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 
 class HitBtc : SimpleMarket(
@@ -15,9 +16,7 @@ class HitBtc : SimpleMarket(
         "Hit BTC") {
 
     override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
-        val symbols = JSONArray(responseString)
-        for (i in 0 until symbols.length()) {
-            val market = symbols.getJSONObject(i)
+        JSONArray(responseString).forEachJSONObject { market ->
             pairs.add(CurrencyPairInfo(
                     market.getString("baseCurrency"),
                     market.getString("quoteCurrency"),

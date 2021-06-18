@@ -32,7 +32,7 @@ class Livecoin : Market(NAME, TTS_NAME, null) {
         ticker.last = jsonObject.getDouble("last")
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 

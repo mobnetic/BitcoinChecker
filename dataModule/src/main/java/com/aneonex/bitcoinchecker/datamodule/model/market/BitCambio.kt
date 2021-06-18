@@ -9,25 +9,15 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
-class BitCambio : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class BitCambio : Market(NAME, TTS_NAME, null) {
     companion object {
         private const val NAME = "BitCambio"
         private const val TTS_NAME = "BitCambio Trade"
         private const val URL = "https://nova.bitcambio.com.br/api/v3/public/getmarketsummary?market=%1\$s"
         private const val URL_CURRENCY_PAIRS = "https://nova.bitcambio.com.br/api/v3/public/getmarkets"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
-
-        init {
-            // Predefined most used currencies
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                Currency.BRL
-            )
-        }
     }
 
     override fun getCurrencyPairsUrl(requestId: Int): String {
@@ -35,10 +25,7 @@ class BitCambio : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     }
 
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
-        val markets = jsonObject.getJSONArray("result")
-        for(i in 0 until markets.length()){
-            val market = markets.getJSONObject(i)
-
+        jsonObject.getJSONArray("result").forEachJSONObject { market ->
             if(market.getBoolean("IsActive")){
                 pairs.add( CurrencyPairInfo(
                     market.getString("MarketAsset"),

@@ -4,109 +4,14 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import org.json.JSONObject
 
-class BitBay : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class BitBay : Market(NAME, TTS_NAME, null) {
     companion object {
         private const val NAME = "BitBay.net"
         private const val TTS_NAME = "Bit Bay"
         private const val URL = "https://bitbay.net/API/Public/%1\$s%2\$s/ticker.json"
         private const val URL_CURRENCY_PAIRS = "https://api.bitbay.net/rest/trading/ticker"
-
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
-
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BCC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR,
-                    Currency.GBP
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR,
-                    Currency.GBP
-            )
-            CURRENCY_PAIRS[VirtualCurrency.DASH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.GAME] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR,
-                    Currency.GBP
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR,
-                    Currency.GBP
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LINK] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LSK] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR,
-                    Currency.GBP
-            )
-            CURRENCY_PAIRS[VirtualCurrency.OMG] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BTG] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BAT] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XLM] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-            CURRENCY_PAIRS[VirtualCurrency.TRX] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.PLN,
-                    Currency.USD,
-                    Currency.EUR
-            )
-        }
     }
 
     override fun getCurrencyPairsUrl(requestId: Int): String {

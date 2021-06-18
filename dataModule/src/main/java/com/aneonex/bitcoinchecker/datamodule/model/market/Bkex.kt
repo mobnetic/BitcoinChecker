@@ -5,7 +5,6 @@ import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import org.json.JSONObject
-import java.util.*
 
 class Bkex : Market(NAME, TTS_NAME, null) {
     companion object {
@@ -15,7 +14,7 @@ class Bkex : Market(NAME, TTS_NAME, null) {
         private const val URL_CURRENCY_PAIRS = "https://api.bkex.io/v2/common/symbols"
     }
 
-    override fun getCurrencyPairsUrl(requestId: Int): String? {
+    override fun getCurrencyPairsUrl(requestId: Int): String {
         return URL_CURRENCY_PAIRS
     }
 
