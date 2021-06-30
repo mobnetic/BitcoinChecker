@@ -7,12 +7,12 @@ import com.aneonex.bitcoinchecker.datamodule.model.Ticker
 import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
-class Bitmax : Market(NAME, TTS_NAME, null) {
+class AscendEX : Market(NAME, TTS_NAME, null) {
     companion object {
-        private const val NAME = "Bitmax"
-        private const val TTS_NAME = NAME
-        private const val URL = "https://bitmax.io/api/pro/v1/ticker?symbol=%1\$s"
-        private const val URL_CURRENCY_PAIRS = "https://bitmax.io/api/pro/v1/products"
+        private const val NAME = "AscendEX (Bitmax)"
+        private const val TTS_NAME = "AscendEx"
+        private const val URL = "https://ascendex.com/api/pro/v1/ticker?symbol=%1\$s"
+        private const val URL_CURRENCY_PAIRS = "https://ascendex.com/api/pro/v1/products"
     }
 
     override fun getCurrencyPairsUrl(requestId: Int): String {
@@ -22,10 +22,14 @@ class Bitmax : Market(NAME, TTS_NAME, null) {
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         jsonObject.getJSONArray("data").forEachJSONObject { market ->
             if(market.getString("status") == "Normal") {
+
+                val symbol = market.getString("symbol")
+                val baseAsset = if(symbol.endsWith("-PERP")) symbol else market.getString("baseAsset")
+
                 pairs.add(CurrencyPairInfo(
-                        market.getString("baseAsset"),
-                        market.getString("quoteAsset"),
-                        market.getString("symbol")
+                    baseAsset,
+                    market.getString("quoteAsset"),
+                    symbol
                 ))
             }
         }

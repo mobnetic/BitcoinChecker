@@ -159,7 +159,7 @@ object MarketsConfig {
 
         BinanceFutures(),
         Bitvavo(),
-        Bitmax(),
+        AscendEX(),
 
         BitPay(),
         Hotbit(),
