@@ -5,6 +5,8 @@ import com.aneonex.bitcoinchecker.datamodule.model.market.*
 
 object MarketsConfig {
     private val registeredMarkets = arrayOf(
+        Coinbase(), // Default market
+
         Bitstamp(),
         Mercado(),
 
@@ -12,7 +14,6 @@ object MarketsConfig {
         Bitfinex(),
         Okcoin(),
 //        Cryptsy(),
-        Coinbase(),
 //        Vircurex(),
 //        Fxbtc(),
         GateIo(),
