@@ -4,80 +4,18 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONArray
 import com.aneonex.bitcoinchecker.datamodule.util.forEachString
 import org.json.JSONArray
 import java.util.*
 
-class Bitfinex : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
+class Bitfinex : Market(NAME, TTS_NAME, null) {
     companion object {
         private const val NAME = "Bitfinex"
         private const val TTS_NAME = NAME
         private const val URL = "https://api-pub.bitfinex.com/v2/ticker/%1\$s"
         private const val URL_CURRENCY_SYMBOLS = "https://api-pub.bitfinex.com/v2/conf/pub:map:currency:sym"
         private const val URL_CURRENCY_PAIRS = "https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
-
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.DSH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.EOS] = arrayOf(
-                    VirtualCurrency.BTC,
-                    VirtualCurrency.ETH,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.IOT] = arrayOf(
-                    VirtualCurrency.BTC,
-                    VirtualCurrency.ETH,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.OMG] = arrayOf(
-                    VirtualCurrency.BTC,
-                    VirtualCurrency.ETH,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.RRT] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.SAN] = arrayOf(
-                    VirtualCurrency.BTC,
-                    VirtualCurrency.ETH,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XMR] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ZEC] = arrayOf(
-                    VirtualCurrency.BTC,
-                    Currency.USD
-            )
-        }
     }
 
     private val symbolsMap = mutableMapOf<String, String>()
