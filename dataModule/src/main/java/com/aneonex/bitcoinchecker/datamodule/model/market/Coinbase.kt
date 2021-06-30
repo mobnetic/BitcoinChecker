@@ -5,18 +5,47 @@ import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
 
-class Coinbase : Market(NAME, TTS_NAME, null) {
+class Coinbase : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     companion object {
-        private const val NAME = "Coinbase Pro"
+        private const val NAME = "Coinbase"
         private const val TTS_NAME = NAME
         private const val URL_TICKER = "https://api.pro.coinbase.com/products/%1\$s/ticker"
         private const val URL_STATS = "https://api.pro.coinbase.com/products/%1\$s/stats"
         private const val URL_CURRENCY_PAIRS = "https://api.pro.coinbase.com/products"
+
+        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
+    }
+
+    init {
+        CURRENCY_PAIRS["1INCH"] = arrayOf("BTC", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["AAVE"] = arrayOf("BTC", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["ADA"] = arrayOf("BTC", "ETH", "EUR", "GBP", "USD", "USDC")
+        CURRENCY_PAIRS["ATOM"] = arrayOf("BTC", "USD")
+        CURRENCY_PAIRS["BAT"] = arrayOf("BTC", "ETH", "EUR", "USD", "USDC")
+        CURRENCY_PAIRS["BTC"] = arrayOf("EUR", "GBP", "USDC", "USD", "USDT")
+        CURRENCY_PAIRS["DAI"] = arrayOf("USD", "USDC")
+        CURRENCY_PAIRS["DASH"] = arrayOf("BTC", "USD")
+        CURRENCY_PAIRS["DOGE"] = arrayOf("BTC", "EUR", "GBP", "USD", "USDT")
+        CURRENCY_PAIRS["DOT"] = arrayOf("BTC", "EUR", "GBP", "USD", "USDT")
+        CURRENCY_PAIRS["EOS"] = arrayOf("BTC", "EUR", "USD")
+        CURRENCY_PAIRS["ETC"] = arrayOf("BTC", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["ETH"] = arrayOf("BTC", "DAI", "EUR", "GBP", "USD", "USDT", "USDC")
+        CURRENCY_PAIRS["FIL"] = arrayOf("BTC", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["LINK"] = arrayOf("BTC", "ETH", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["LTC"] = arrayOf("BTC", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["OMG"] = arrayOf("BTC", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["STORJ"] = arrayOf("BTC", "USD")
+        CURRENCY_PAIRS["SUSHI"] = arrayOf("BTC", "ETH", "EUR", "GBP", "USD")
+        CURRENCY_PAIRS["USDC"] = arrayOf("EUR", "GBP")
+        CURRENCY_PAIRS["USDT"] = arrayOf("EUR", "GBP", "USD", "USDC")
+        CURRENCY_PAIRS["XLM"] = arrayOf("BTC", "EUR", "USD")
+        CURRENCY_PAIRS["ZEC"] = arrayOf("BTC", "USD", "USDC")
     }
 
     override fun getNumOfRequests(checkerInfo: CheckerInfo?): Int {
@@ -24,7 +53,6 @@ class Coinbase : Market(NAME, TTS_NAME, null) {
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        // Compatibility with old Coinbase implementation (before v2.19)
         val pairId = checkerInfo.currencyPairId ?: "${checkerInfo.currencyBase}-${checkerInfo.currencyCounter}"
 
         if(requestId == 0)
