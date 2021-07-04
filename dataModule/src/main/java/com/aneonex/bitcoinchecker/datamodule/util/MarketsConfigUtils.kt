@@ -7,11 +7,8 @@ import com.aneonex.bitcoinchecker.datamodule.model.market.UnknownMarket
 object MarketsConfigUtils {
     private val UNKNOWN_MARKET: Market = UnknownMarket()
 
-    fun getFirstMarket(): Market {
-        synchronized(MarketsConfig.MARKETS) {
-            return MarketsConfig.MARKETS.values.firstOrNull() ?: UNKNOWN_MARKET
-        }
-    }
+    @Suppress("unused")
+    val defaultMarket: Market = MarketsConfig.MARKETS.values.first()
 
     fun getMarketByKey(key: String?): Market {
         synchronized(MarketsConfig.MARKETS) {
