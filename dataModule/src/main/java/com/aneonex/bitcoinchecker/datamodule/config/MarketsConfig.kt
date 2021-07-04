@@ -80,7 +80,7 @@ object MarketsConfig {
 //        Igot(),
 //        Mexbt(),
         Vaultoro(),
-        BitxCom(),
+//        BitxCom(),
         BtcBox(),
 //        BtcXIndia(),
         Uphold(),
