@@ -44,6 +44,9 @@ abstract class GzipVolleyRequest<T>(url: String?, private val postRequestInfo: P
                 headers[item.key] = item.value
             }
         }
+
+        // Disable cache for volley requests
+        setShouldCache(false)
     }
 
     override fun getUrl(): String {
