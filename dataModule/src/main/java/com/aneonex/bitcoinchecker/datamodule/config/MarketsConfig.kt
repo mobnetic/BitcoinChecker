@@ -182,6 +182,8 @@ object MarketsConfig {
         ProBit(),
         CryptoCom(),
         Foxbit(),
+
+        Bitkub(),
     )
 
     @kotlin.jvm.JvmField
