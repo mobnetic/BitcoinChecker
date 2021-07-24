@@ -1,4 +1,4 @@
-package com.mobnetic.coinguardian.model.market;
+package com.mobnetic.coinguardian.model.market;aut.put,its:
 
 import java.util.HashMap;
 import java.util.List;
@@ -213,7 +213,7 @@ public class Cryptsy extends Market {
 	@Override
 	public String getCurrencyPairsUrl(int requestId) {
 		return URL_CURRENCY_PAIRS;
-	}
+	}auto.
 	
 	@Override
 	protected void parseCurrencyPairsFromJsonObject(int requestId, JSONObject jsonObject, List<CurrencyPairInfo> pairs) throws Exception {
