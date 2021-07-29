@@ -7,7 +7,7 @@ import com.google.gson.Gson
 
 object MarketCurrencyPairsStore {
     private fun getSharedPreferences(context: Context): SharedPreferences {
-        return context.applicationContext.getSharedPreferences("MARKET_CURRENCIY_PAIRS", Context.MODE_PRIVATE)
+        return context.applicationContext.getSharedPreferences("MARKET_CURRENCY_PAIRS", Context.MODE_PRIVATE)
     }
 
     fun savePairsForMarket(context: Context, marketKey: String, currencyPairsListWithDate: CurrencyPairsListWithDate?) {
@@ -19,7 +19,7 @@ object MarketCurrencyPairsStore {
     }
 
     private fun savePairsStringForMarket(context: Context, marketKey: String, jsonString: String) {
-        getSharedPreferences(context).edit().putString(marketKey, jsonString).commit()
+        getSharedPreferences(context).edit().putString(marketKey, jsonString).apply()
     }
 
     fun getPairsForMarket(context: Context, marketKey: String): CurrencyPairsListWithDate? {
