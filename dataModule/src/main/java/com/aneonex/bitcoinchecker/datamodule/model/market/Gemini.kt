@@ -47,7 +47,10 @@ class Gemini : Market(NAME, TTS_NAME, null) {
         ticker.last = jsonObject.getDouble("last")
         jsonObject.getJSONObject("volume").apply {
             ticker.vol = getDouble(checkerInfo.currencyBase)
-            ticker.timestamp = getLong("timestamp")
+
+            // The end of the 24-hour period over which volume was measured
+            // This is not the last price time
+            // ticker.timestamp = getLong("timestamp")
         }
     }
 }
