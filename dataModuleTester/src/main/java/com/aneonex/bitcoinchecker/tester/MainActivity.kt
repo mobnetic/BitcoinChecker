@@ -1,6 +1,5 @@
 package com.aneonex.bitcoinchecker.tester
 
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -8,9 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.android.volley.NetworkResponse
-import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.aneonex.bitcoinchecker.datamodule.config.MarketsConfig
@@ -19,6 +18,7 @@ import com.aneonex.bitcoinchecker.datamodule.model.Futures.getContractTypeShortN
 import com.aneonex.bitcoinchecker.datamodule.util.CurrencyPairsMapHelper
 import com.aneonex.bitcoinchecker.datamodule.util.FormatUtilsBase
 import com.aneonex.bitcoinchecker.datamodule.util.MarketsConfigUtils.getMarketByKey
+import com.aneonex.bitcoinchecker.tester.databinding.MainActivityBinding
 import com.aneonex.bitcoinchecker.tester.dialog.DynamicCurrencyPairsDialog
 import com.aneonex.bitcoinchecker.tester.util.CheckErrorsUtils
 import com.aneonex.bitcoinchecker.tester.util.HttpsHelper
@@ -32,6 +32,7 @@ import com.aneonex.bitcoinchecker.tester.volley.generic.ResponseListener
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding:  MainActivityBinding
     private val tag = MainActivity::class.simpleName
 
     private inner class MarketEntry(var key: String, var name: String)  {
@@ -41,42 +42,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var requestQueue: RequestQueue
-    private lateinit var marketSpinner: Spinner
-    private lateinit var currencySpinnersWrapper: View
-    private lateinit var dynamicCurrencyPairsWarningView: View
-    private lateinit var dynamicCurrencyPairsInfoView: View
-    private lateinit var currencyBaseSpinner: Spinner
-    private lateinit var currencyCounterSpinner: Spinner
-    private lateinit var futuresContractTypeSpinner: Spinner
-    private lateinit var getResultButton: View
-    private lateinit var testAllButton: View
-    private lateinit var progressBar: ProgressBar
-    private lateinit var resultView: TextView
-
     private var currencyPairsMapHelper: CurrencyPairsMapHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         requestQueue = HttpsHelper.newRequestQueue(this)
-        setContentView(R.layout.main_activity)
-        marketSpinner = findViewById<View>(R.id.marketSpinner) as Spinner
-        currencySpinnersWrapper = findViewById(R.id.currencySpinnersWrapper)
-        dynamicCurrencyPairsWarningView = findViewById(R.id.dynamicCurrencyPairsWarningView)
-        dynamicCurrencyPairsInfoView = findViewById(R.id.dynamicCurrencyPairsInfoView)
-        currencyBaseSpinner = findViewById<View>(R.id.currencyBaseSpinner) as Spinner
-        currencyCounterSpinner = findViewById<View>(R.id.currencyCounterSpinner) as Spinner
-        futuresContractTypeSpinner = findViewById<View>(R.id.futuresContractTypeSpinner) as Spinner
-        getResultButton = findViewById(R.id.getResultButton)
-        testAllButton = findViewById(R.id.testAllButton)
-        progressBar = findViewById<View>(R.id.progressBar) as ProgressBar
-        resultView = findViewById<View>(R.id.resultView) as TextView
+
         refreshMarketSpinner()
         val market = selectedMarket
         currencyPairsMapHelper = CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this, selectedMarket.key))
         refreshCurrencySpinners(market)
         refreshFuturesContractTypeSpinner(market)
         showResultView(true)
-        marketSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+        binding.marketSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(arg0: AdapterView<*>?, arg1: View?, arg2: Int, arg3: Long) {
                 val selectedMarket = selectedMarket
                 currencyPairsMapHelper = CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this@MainActivity, selectedMarket.key))
@@ -88,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 // do nothing
             }
         }
-        dynamicCurrencyPairsInfoView.setOnClickListener {
+        binding.dynamicCurrencyPairsInfoView.setOnClickListener {
             object : DynamicCurrencyPairsDialog(this@MainActivity, selectedMarket, currencyPairsMapHelper) {
                 override fun onPairsUpdated(market: Market, currencyPairsMapHelper: CurrencyPairsMapHelper?) {
 
@@ -97,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }.show()
         }
-        currencyBaseSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+        binding.currencyBaseSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(arg0: AdapterView<*>?, arg1: View?, arg2: Int, arg3: Long) {
                 refreshCurrencyCounterSpinner(selectedMarket)
             }
@@ -106,8 +88,8 @@ class MainActivity : AppCompatActivity() {
                 // do nothing
             }
         }
-        getResultButton.setOnClickListener { newResult }
-        testAllButton.setOnClickListener { testAllExchanges() }
+        binding.getResultButton.setOnClickListener { newResult }
+        binding.testAllButton.setOnClickListener { testAllExchanges() }
     }
 
     // ====================
@@ -115,17 +97,17 @@ class MainActivity : AppCompatActivity() {
     // ====================
     private val selectedMarket: Market
         get() {
-            val marketEntry = marketSpinner.selectedItem as MarketEntry
+            val marketEntry = binding.marketSpinner.selectedItem as MarketEntry
             return getMarketByKey(marketEntry.key)
         }
     private val selectedCurrencyBase: String?
-        get() = if (currencyBaseSpinner.adapter == null) null else currencyBaseSpinner.selectedItem.toString()
+        get() = if (binding.currencyBaseSpinner.adapter == null) null else binding.currencyBaseSpinner.selectedItem.toString()
     private val selectedCurrencyCounter: String?
-        get() = if (currencyCounterSpinner.adapter == null) null else currencyCounterSpinner.selectedItem.toString()
+        get() = if (binding.currencyCounterSpinner.adapter == null) null else binding.currencyCounterSpinner.selectedItem.toString()
 
     private fun getSelectedContractType(market: Market): Int {
         if (market is FuturesMarket) {
-            val selection = futuresContractTypeSpinner.selectedItemPosition
+            val selection = binding.futuresContractTypeSpinner.selectedItemPosition
             return market.contractTypes[selection]
         }
         return Futures.CONTRACT_TYPE_WEEKLY
@@ -147,7 +129,7 @@ class MainActivity : AppCompatActivity() {
             .sortedBy { market -> market.name.uppercase() }
             .map { market ->  MarketEntry(market.key, market.name) }
 
-        marketSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
+        binding.marketSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
     }
 
     private fun refreshCurrencySpinners(market: Market) {
@@ -155,13 +137,13 @@ class MainActivity : AppCompatActivity() {
         refreshCurrencyCounterSpinner(market)
         refreshDynamicCurrencyPairsView(market)
         val isCurrencyEmpty = selectedCurrencyBase == null || selectedCurrencyCounter == null
-        currencySpinnersWrapper.isVisible = !isCurrencyEmpty
-        dynamicCurrencyPairsWarningView.isVisible = isCurrencyEmpty
-        getResultButton.isVisible = !isCurrencyEmpty
+        binding.currencySpinnersWrapper.isVisible = !isCurrencyEmpty
+        binding.dynamicCurrencyPairsWarningView.isVisible = isCurrencyEmpty
+        binding.getResultButton.isVisible = !isCurrencyEmpty
     }
 
     private fun refreshDynamicCurrencyPairsView(market: Market) {
-        dynamicCurrencyPairsInfoView.isVisible = market.getCurrencyPairsUrl(0) != null
+        binding.dynamicCurrencyPairsInfoView.isVisible = market.getCurrencyPairsUrl(0) != null
     }
 
     private fun refreshCurrencyBaseSpinner(market: Market) {
@@ -172,9 +154,9 @@ class MainActivity : AppCompatActivity() {
             for (currency in currencyPairs.keys) {
                 entries[i++] = currency
             }
-            currencyBaseSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
+            binding.currencyBaseSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
         } else {
-            currencyBaseSpinner.adapter = null
+            binding.currencyBaseSpinner.adapter = null
         }
     }
 
@@ -183,9 +165,9 @@ class MainActivity : AppCompatActivity() {
         if (currencyPairs != null && currencyPairs.size > 0) {
             val selectedCurrencyBase = selectedCurrencyBase
             val entries = currencyPairs[selectedCurrencyBase]!!.clone()
-            currencyCounterSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
+            binding.currencyCounterSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
         } else {
-            currencyCounterSpinner.adapter = null
+            binding.currencyCounterSpinner.adapter = null
         }
     }
 
@@ -199,14 +181,14 @@ class MainActivity : AppCompatActivity() {
             }
             spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, entries)
         }
-        futuresContractTypeSpinner.adapter = spinnerAdapter
-        futuresContractTypeSpinner.isVisible = spinnerAdapter != null
+        binding.futuresContractTypeSpinner.adapter = spinnerAdapter
+        binding.futuresContractTypeSpinner.isVisible = spinnerAdapter != null
     }
 
     private fun showResultView(showResultView: Boolean) {
-        getResultButton.isEnabled = showResultView
-        progressBar.isVisible = !showResultView
-        resultView.isVisible = showResultView
+        binding.getResultButton.isEnabled = showResultView
+        binding.progressBar.isVisible = !showResultView
+        binding.resultView.isVisible = showResultView
     }
 
     private fun getProperCurrencyPairs(market: Market): HashMap<String?, Array<String>>? {
@@ -228,7 +210,7 @@ class MainActivity : AppCompatActivity() {
             val pairId = if (currencyPairsMapHelper != null) currencyPairsMapHelper!!.getCurrencyPairId(currencyBase, currencyCounter) else null
             val contractType = getSelectedContractType(market)
             val checkerInfo = CheckerInfo(currencyBase!!, currencyCounter!!, pairId, contractType)
-            val request: Request<*> = CheckerVolleyMainRequest(market, checkerInfo,
+            val request = CheckerVolleyMainRequest(market, checkerInfo,
                     object : ResponseListener<TickerWrapper?>() {
                 override fun onResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, response: TickerWrapper?) {
                     handleNewResult(checkerInfo, response?.ticker, url, requestHeaders, networkResponse, responseString, null, null)
@@ -267,7 +249,7 @@ class MainActivity : AppCompatActivity() {
             ssb.append(getString(R.string.check_error_generic_prefix, errorMsg ?: "UNKNOWN"))
         }
         CheckErrorsUtils.formatResponseDebug(this, ssb, url, requestHeaders, networkResponse, rawResponse, error)
-        resultView.text = ssb
+        binding.resultView.text = ssb
     }
 
     private fun createNewPriceLineIfNeeded(textResId: Int, price: Double, currency: String): String {
@@ -304,7 +286,7 @@ class MainActivity : AppCompatActivity() {
                 else Futures.CONTRACT_TYPE_WEEKLY
 
             val checkerInfo = CheckerInfo(currencyBase, currencyCounter, pairId, contractType)
-            val request: Request<*> = CheckerVolleyMainRequest(market, checkerInfo,
+            val request = CheckerVolleyMainRequest(market, checkerInfo,
                     object : ResponseListener<TickerWrapper?>() {
                         override fun onResponse(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, response: TickerWrapper?) {
                             handleTestExchange(market.name, url, null)
