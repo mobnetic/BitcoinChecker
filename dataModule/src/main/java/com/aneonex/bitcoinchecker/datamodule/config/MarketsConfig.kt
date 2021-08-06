@@ -184,6 +184,8 @@ object MarketsConfig {
         Foxbit(),
 
         Bitkub(),
+
+        CoinJarExchange(),
     )
 
     @kotlin.jvm.JvmField

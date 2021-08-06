@@ -43,8 +43,8 @@ class CoinJar : Market(NAME, TTS_NAME, null) {
     }
 
     companion object {
-        private const val NAME = "CoinJar"
-        private const val TTS_NAME = "Coin Jar"
+        private const val NAME = "CoinJar Prices"
+        private const val TTS_NAME = "Coin Jar prices"
         private const val URL = "https://api.coinjar.com/v3/exchange_rates"
         private const val URL_CURRENCY_PAIRS = URL
     }
