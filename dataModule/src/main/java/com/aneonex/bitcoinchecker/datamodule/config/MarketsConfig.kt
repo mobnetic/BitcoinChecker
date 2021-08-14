@@ -113,7 +113,7 @@ object MarketsConfig {
         CoinFloor(),
         Lykke(),
 //        Coinnest(),
-        Braziliex(),
+//        Braziliex(),
         Abucoins(),
 //        Zebpay(),
         Paribu(),
@@ -186,6 +186,7 @@ object MarketsConfig {
         Bitkub(),
 
         CoinJarExchange(),
+        CoinEgg(),
     )
 
     @kotlin.jvm.JvmField
