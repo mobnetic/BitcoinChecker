@@ -187,6 +187,7 @@ object MarketsConfig {
 
         CoinJarExchange(),
         CoinEgg(),
+        Phemex(),
     )
 
     @kotlin.jvm.JvmField
