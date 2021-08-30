@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '30.0.3'
 
     buildFeatures {
         viewBinding true
@@ -44,8 +44,8 @@ android {
 
 dependencies {
     implementation project(':dataModule')
-    implementation 'com.google.code.gson:gson:2.8.7'
-    implementation 'com.android.volley:volley:1.2.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.android.volley:volley:1.2.1'
 
     // AndroidX
     implementation "androidx.core:core-ktx:$core_ktx_version"
