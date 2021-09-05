@@ -1,8 +1,6 @@
 package com.aneonex.bitcoinchecker.datamodule.model
 
-class CurrencyPairsListWithDate {
-    @kotlin.jvm.JvmField
-    var date: Long = 0
-    @kotlin.jvm.JvmField
+class CurrencyPairsListWithDate(
+    var date: Long = 0,
     var pairs: List<CurrencyPairInfo>? = null
-}
+)

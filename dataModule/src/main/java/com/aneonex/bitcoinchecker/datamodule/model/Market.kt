@@ -6,12 +6,11 @@ import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
 import org.json.JSONObject
 
 abstract class Market(
-        @kotlin.jvm.JvmField val name: String,
-        @kotlin.jvm.JvmField val ttsName: String,
-        @kotlin.jvm.JvmField val currencyPairs: CurrencyPairsMap?
-    ) {
+    val name: String,
+    val ttsName: String,
+    val currencyPairs: CurrencyPairsMap?
+) {
 
-    @kotlin.jvm.JvmField
 	val key: String = this.javaClass.simpleName
 
     open val cautionResId: Int

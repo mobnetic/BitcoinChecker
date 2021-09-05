@@ -190,6 +190,5 @@ object MarketsConfig {
         Phemex(),
     )
 
-    @kotlin.jvm.JvmField
     val MARKETS: Map<String, Market> = registeredMarkets.map{it.key to it}.toMap()
 }

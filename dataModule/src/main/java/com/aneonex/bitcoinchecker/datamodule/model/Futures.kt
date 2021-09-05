@@ -17,7 +17,6 @@ object Futures {
             "6M"
     )
 
-    @kotlin.jvm.JvmStatic
     fun getContractTypeShortName(contractType: Int): String? {
         return if (contractType >= 0 && contractType < CONTRACT_TYPE_SHORT_NAMES.size) {
             CONTRACT_TYPE_SHORT_NAMES[contractType]
