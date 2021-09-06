@@ -19,7 +19,7 @@ class CheckerVolleyMainRequest(market: Market, checkerInfo: CheckerInfo, listene
         val tickerWrapper = TickerWrapper()
         var tickerParseException: Exception? = null
         try {
-            tickerWrapper.ticker = market.parseTickerMain(0, responseString!!, Ticker(), checkerInfo)
+            tickerWrapper.ticker = market.parseTickerMain(0, responseString!!, TickerImpl(), checkerInfo)
         } catch (e: Exception) {
             e.printStackTrace()
             tickerParseException = e
