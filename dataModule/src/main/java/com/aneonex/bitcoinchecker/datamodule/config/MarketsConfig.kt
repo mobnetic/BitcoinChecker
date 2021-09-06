@@ -114,7 +114,7 @@ object MarketsConfig {
         Lykke(),
 //        Coinnest(),
 //        Braziliex(),
-        Abucoins(),
+//        Abucoins(),
 //        Zebpay(),
         Paribu(),
         SatoshiTango(),
