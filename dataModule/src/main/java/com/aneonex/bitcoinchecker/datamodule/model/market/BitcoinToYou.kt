@@ -66,4 +66,12 @@ class BitcoinToYou : SimpleMarket(
             ticker.last = data.getDouble("last")
         }
     }
+
+    override fun parseErrorFromJsonObject(
+        requestId: Int,
+        jsonObject: JSONObject,
+        checkerInfo: CheckerInfo?
+    ): String? {
+        return jsonObject.getJSONObject("data").getString("message")
+    }
 }
