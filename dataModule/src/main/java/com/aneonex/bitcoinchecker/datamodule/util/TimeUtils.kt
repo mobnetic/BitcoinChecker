@@ -12,13 +12,18 @@ object TimeUtils {
     const val MILLIS_IN_YEAR = 365 * MILLIS_IN_DAY
 
     fun parseTimeToMillis(time: Long): Long {
-        if (time < MILLIS_IN_YEAR) return time * MILLIS_IN_SECOND else if (time > 5000 * MILLIS_IN_YEAR) return time / 1000
+        if (time < MILLIS_IN_YEAR)
+            return time * MILLIS_IN_SECOND
+        else
+            if (time > 5000 * MILLIS_IN_YEAR)
+                return time / 1000
+
         return time
     }
 
-    // Parsing string and converting to timestamp.
+    // Parsing string and converting to timestamp (in milliseconds).
     //  Returns 0 if parsing failed
     fun convertISODateToTimestamp(isoDateString: String): Long {
-        return ZonedDateTime.parse(isoDateString, DateTimeFormatter.ISO_DATE_TIME).toEpochSecond()
+        return ZonedDateTime.parse(isoDateString, DateTimeFormatter.ISO_DATE_TIME).toEpochSecond() * MILLIS_IN_SECOND
     }
 }

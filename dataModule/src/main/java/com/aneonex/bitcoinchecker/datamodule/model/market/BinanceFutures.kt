@@ -1,12 +1,11 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
-import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
-import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
-import com.aneonex.bitcoinchecker.datamodule.model.Market
-import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.model.*
 import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class BinanceFutures : Market(NAME, TTS_NAME, null) {
     companion object {
@@ -23,6 +22,8 @@ class BinanceFutures : Market(NAME, TTS_NAME, null) {
 
         private fun isCoinMPair(pairId: String) = pairId.startsWith(COIN_M_PREFIX)
 
+        private val FUTURES_DATE_FORMAT = DateTimeFormatter.ofPattern("yyMMdd", Locale.ROOT)
+
         private fun parseTicker(jsonObject: JSONObject, ticker: Ticker) {
             jsonObject.apply {
                 ticker.vol = getDouble("volume")
@@ -38,13 +39,25 @@ class BinanceFutures : Market(NAME, TTS_NAME, null) {
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return if(isCoinMPair(checkerInfo.currencyPairId!!)) {
-            val pairId = checkerInfo.currencyPairId.substring(COIN_M_PREFIX.length)
-            String.format(URL_COIN_M, pairId)
+        val utlTemplate: String
+        val pairId: String
+
+        if(isCoinMPair(checkerInfo.currencyPairId!!)) {
+            pairId = checkerInfo.currencyPairId.substring(COIN_M_PREFIX.length)
+            // String.format(URL_COIN_M, pairId)
+            utlTemplate = URL_COIN_M
         }
         else {
-            String.format(URL_USD_M, checkerInfo.currencyPairId)
+//            String.format(URL_USD_M, checkerInfo.currencyPairId)
+            pairId = checkerInfo.currencyPairId
+            utlTemplate = URL_USD_M
         }
+
+        val deliveryDate = FuturesContractType.getDeliveryDate(checkerInfo.contractType) ?:
+            return String.format(utlTemplate, pairId)
+
+        val pairIdWithDeliveryDate = "${checkerInfo.currencyBase}${checkerInfo.currencyCounter}_${FUTURES_DATE_FORMAT.format(deliveryDate)}"
+        return String.format(utlTemplate, pairIdWithDeliveryDate)
     }
 
     override fun parseTicker(
@@ -67,10 +80,20 @@ class BinanceFutures : Market(NAME, TTS_NAME, null) {
 
     @Throws(Exception::class)
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
+        fun parseContractType(value: String): FuturesContractType? =
+            when(value) {
+                "PERPETUAL" -> FuturesContractType.PERPETUAL
+                "CURRENT_QUARTER" -> FuturesContractType.QUARTERLY
+                "NEXT_QUARTER" -> FuturesContractType.BIQUARTERLY
+                else -> null
+            }
+
         jsonObject.getJSONArray("symbols").forEachJSONObject { marketJsonObject ->
             // Tha app UI supports only perpetual futures
-            if(marketJsonObject.getString("contractType") != "PERPETUAL")
-                return@forEachJSONObject
+            val contractType = parseContractType(marketJsonObject.getString("contractType"))
+                ?: return@forEachJSONObject
+            //if(marketJsonObject.getString("contractType") != "PERPETUAL")
+            //    return@forEachJSONObject
 
             val symbol = marketJsonObject.getString("symbol").let {
                 if(requestId > 0) COIN_M_PREFIX + it else it
@@ -79,9 +102,10 @@ class BinanceFutures : Market(NAME, TTS_NAME, null) {
             val quoteAsset = marketJsonObject.getString("quoteAsset")
 
             pairs.add(CurrencyPairInfo(
-                    baseAsset,
-                    quoteAsset,
-                    symbol))
+                baseAsset,
+                quoteAsset,
+                symbol,
+                contractType))
         }
     }
 }

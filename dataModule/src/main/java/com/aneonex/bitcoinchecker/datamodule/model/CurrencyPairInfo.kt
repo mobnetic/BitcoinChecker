@@ -3,7 +3,8 @@ package com.aneonex.bitcoinchecker.datamodule.model
 open class CurrencyPairInfo(
     val currencyBase: String,
     val currencyCounter: String,
-    val currencyPairId: String?
+    val currencyPairId: String?,
+    val contractType: FuturesContractType = FuturesContractType.NONE
 ) : Comparable<CurrencyPairInfo> {
 
     @Suppress("unused") // Used by Gson
@@ -11,10 +12,25 @@ open class CurrencyPairInfo(
 
     @Throws(NullPointerException::class)
     override fun compareTo(other: CurrencyPairInfo): Int {
-        val compBase = currencyBase.compareTo(other.currencyBase, ignoreCase = true)
-        return if (compBase != 0) compBase else currencyCounter.compareTo(
+        var compBase = currencyBase.compareTo(other.currencyBase, ignoreCase = true)
+        if (compBase != 0) return compBase
+
+        compBase = currencyCounter.compareTo(
             other.currencyCounter,
             ignoreCase = true
         )
+        if (compBase != 0) return compBase
+
+        return contractType.compareTo(other.contractType)
+    }
+
+    override fun toString(): String {
+        fun tryGetContactName(): String {
+            val resultName = FuturesContractType.getShortName(contractType)
+            return if(resultName == null) "" else ":$resultName"
+        }
+
+        return currencyPairId ?:
+        "$currencyBase:$currencyCounter" + tryGetContactName()
     }
 }

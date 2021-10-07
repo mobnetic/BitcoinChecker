@@ -56,9 +56,9 @@ abstract class DynamicCurrencyPairsDialog protected constructor(context: Context
     private fun refreshStatusView(url: String?, requestHeaders: Map<String, String>?, networkResponse: NetworkResponse?, responseString: String?, errorMsg: String?, error: VolleyError?) {
         val dateString = if (currencyPairsMapHelper != null && currencyPairsMapHelper!!.date > 0) formatSameDayTimeOrDate(context, currencyPairsMapHelper!!.date) else context.getString(R.string.checker_add_dynamic_currency_pairs_dialog_last_sync_never)
         binding.statusView.text = context.getString(R.string.checker_add_dynamic_currency_pairs_dialog_last_sync, dateString)
-        if (currencyPairsMapHelper != null && currencyPairsMapHelper!!.pairsCount > 0) binding.statusView.append("""
+        if (currencyPairsMapHelper != null && currencyPairsMapHelper!!.size > 0) binding.statusView.append("""
 
-    ${context.getString(R.string.checker_add_dynamic_currency_pairs_dialog_pairs, currencyPairsMapHelper!!.pairsCount)}
+    ${context.getString(R.string.checker_add_dynamic_currency_pairs_dialog_pairs, currencyPairsMapHelper!!.size)}
     """.trimIndent())
         val ssb = SpannableStringBuilder()
         if (errorMsg != null) {

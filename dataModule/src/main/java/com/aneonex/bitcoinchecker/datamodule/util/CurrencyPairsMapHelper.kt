@@ -1,64 +1,58 @@
 package com.aneonex.bitcoinchecker.datamodule.util
 
+import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairsListWithDate
+import com.aneonex.bitcoinchecker.datamodule.model.FuturesContractType
 import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
 
 class CurrencyPairsMapHelper(currencyPairsListWithDate: CurrencyPairsListWithDate?) {
-    val date: Long
-    val currencyPairs: CurrencyPairsMap = CurrencyPairsMap()
-    private val currencyPairsIds: HashMap<String, String?> = HashMap()
-    var pairsCount = 0
-    fun getCurrencyPairId(currencyBase: String?, currencyCounter: String?): String? {
-        return currencyPairsIds[createCurrencyPairKey(currencyBase, currencyCounter)]
+    constructor(currencyMap: CurrencyPairsMap?): this(convertPairsMapToPairList(currencyMap))
+
+    val date: Long = currencyPairsListWithDate?.date ?: 0
+    private val pairs: List<CurrencyPairInfo> = currencyPairsListWithDate?.pairs?.sorted() ?: listOf()
+
+    fun isEmpty() = pairs.isEmpty()
+    val size: Int get() = pairs.size
+
+    val baseAssets: Iterable<String> get() =
+        pairs
+            .map { it.currencyBase }
+            .distinct()
+
+    fun getQuoteAssets(baseAsset: String): Iterable<String> =
+        pairs
+            .filter { it.currencyBase == baseAsset }
+            .map { it.currencyCounter }
+            .distinct()
+
+    fun getCurrencyPairId(baseAsset: String?, quoteAsset: String?, contractType: FuturesContractType): String? {
+        if(baseAsset == null || quoteAsset == null) return null
+        return pairs
+            .firstOrNull { it.currencyBase == baseAsset
+                    && it.currencyCounter == quoteAsset
+                    && it.contractType == contractType}
+            ?.currencyPairId
     }
 
-    private fun createCurrencyPairKey(currencyBase: String?, currencyCounter: String?): String {
-        return String.format("%1\$s_%2\$s", currencyBase, currencyCounter)
+    fun getAvailableFuturesContractsTypes(baseAsset: String?, quoteAsset: String?): List<FuturesContractType> {
+        if(baseAsset == null || quoteAsset == null) return listOf()
+
+        return pairs
+            .filter { it.currencyBase == baseAsset && it.currencyCounter == quoteAsset }
+            .map { it.contractType }
     }
 
-    init {
+    companion object {
+        private fun convertPairsMapToPairList(currencyMap: CurrencyPairsMap?): CurrencyPairsListWithDate? {
+            if(currencyMap == null) return null
 
-        if (currencyPairsListWithDate == null) {
-            date = 0
-        }
-        else {
-            date = currencyPairsListWithDate.date
-
-            if(currencyPairsListWithDate.pairs != null) {
-                val sortedPairs = currencyPairsListWithDate.pairs!!
-
-                pairsCount = sortedPairs.size
-
-                // Calculate size for every currency group
-                val currencyGroupSizes = HashMap<String, Int>()
-                for (currencyPairInfo in sortedPairs) {
-                    var currentCurrencyGroupSize = currencyGroupSizes[currencyPairInfo.currencyBase]
-                    if (currentCurrencyGroupSize == null) {
-                        currentCurrencyGroupSize = 1
-                    } else {
-                        ++currentCurrencyGroupSize
-                    }
-                    currencyGroupSizes[currencyPairInfo.currencyBase] = currentCurrencyGroupSize
-                }
-
-                var currentGroupPositionToInsert = 0
-                for (currencyPairInfo in sortedPairs) {
-                    var currencyGroup = currencyPairs[currencyPairInfo.currencyBase]
-                    if (currencyGroup == null) {
-                        // Initialize array with pre-calculated size
-                        currencyGroup = Array(currencyGroupSizes[currencyPairInfo.currencyBase] ?: 0) { String() }
-                        currencyPairs[currencyPairInfo.currencyBase] = currencyGroup
-                        currentGroupPositionToInsert = 0
-                    } else {
-                        ++currentGroupPositionToInsert
-                    }
-                    currencyGroup[currentGroupPositionToInsert] = currencyPairInfo.currencyCounter
-                    if (currencyPairInfo.currencyPairId != null) {
-                        val pairKey = createCurrencyPairKey(currencyPairInfo.currencyBase, currencyPairInfo.currencyCounter)
-                        currencyPairsIds[pairKey] = currencyPairInfo.currencyPairId
+            return CurrencyPairsListWithDate(0,
+                currencyMap.flatMap { item ->
+                    item.value.map { quoteAsset ->
+                        CurrencyPairInfo(item.key, quoteAsset, null)
                     }
                 }
-            }
+            )
         }
     }
 }
