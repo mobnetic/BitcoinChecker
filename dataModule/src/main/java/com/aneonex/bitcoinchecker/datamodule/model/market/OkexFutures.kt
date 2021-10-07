@@ -1,79 +1,61 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
-import com.aneonex.bitcoinchecker.datamodule.exceptions.MarketParseException
-import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
-import com.aneonex.bitcoinchecker.datamodule.model.Futures
-import com.aneonex.bitcoinchecker.datamodule.model.FuturesMarket
-import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
+import com.aneonex.bitcoinchecker.datamodule.model.*
 import com.aneonex.bitcoinchecker.datamodule.util.TimeUtils
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
+import org.json.JSONArray
 import org.json.JSONObject
+import java.time.format.DateTimeFormatter
+import java.util.*
 
-class OkexFutures : FuturesMarket(NAME, TTS_NAME, CURRENCY_PAIRS, CONTRACT_TYPES) {
-    companion object {
-        private const val NAME = "OKEx Futures"
-        private const val TTS_NAME = "Okex Futures"
-        private const val URL = "https://www.okex.com/api/futures/v3/instruments/%1\$s/ticker"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
-        private val CONTRACT_TYPES = intArrayOf(
-                Futures.CONTRACT_TYPE_WEEKLY,
-                Futures.CONTRACT_TYPE_BIWEEKLY,
-                Futures.CONTRACT_TYPE_QUARTERLY,
-                Futures.CONTRACT_TYPE_BIQUARTERLY
-        )
+class OkexFutures : Market(
+    "OKEx Futures",
+    "Okex Futures",
+    null
+) {
 
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.EOS] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BCH] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.TRX] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LINK] = arrayOf(
-                    Currency.USD,
-                    VirtualCurrency.USDT
-            )
-        }
+    override val currencyPairsNumOfRequests: Int
+        get() = 2
+
+    override fun getCurrencyPairsUrl(requestId: Int): String =
+        if(requestId == 0) URL_PAIRS_PERPETUAL else URL_PAIRS_FUTURES
+
+    override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
+        val urlTemplate = if(checkerInfo.contractType <= FuturesContractType.PERPETUAL)
+            URL_TICKER_PERPETUAL
+        else
+            URL_TICKER_FUTURES
+
+        return String.format(urlTemplate, calculateFuturesPairId(checkerInfo))
     }
 
-    public override fun getUrl(requestId: Int, checkerInfo: CheckerInfo, contractType: Int): String {
-        return String.format(URL, getInstrumentId(checkerInfo.currencyBase, checkerInfo.currencyCounter, contractType))
-    }
+    override fun parseCurrencyPairs(requestId: Int, responseString: String, pairs: MutableList<CurrencyPairInfo>) {
+        fun parseContractType(value: String): FuturesContractType? =
+            when(value) {
+                "this_week" -> FuturesContractType.WEEKLY
+                "next_week" -> FuturesContractType.BIWEEKLY
+                "quarter" -> FuturesContractType.QUARTERLY
+                "bi_quarter" -> FuturesContractType.BIQUARTERLY
+                else -> null
+            }
 
-    private fun getInstrumentId(currencyBase: String, currencyCounter: String, contractType: Int): String {
-        val suffix = when (contractType) {
-            Futures.CONTRACT_TYPE_WEEKLY -> "201009"
-            Futures.CONTRACT_TYPE_BIWEEKLY -> "201016"
-            Futures.CONTRACT_TYPE_QUARTERLY -> "201225"
-            Futures.CONTRACT_TYPE_BIQUARTERLY -> "210326"
-            else -> throw MarketParseException("Unknown contract type: $contractType")
-        }
+        JSONArray(responseString)
+            .forEachJSONObject {
+//                val deliveryType = parseFuturesType(it.getString("alias")) ?: return@forEachJSONObject
 
-        return "$currencyBase-$currencyCounter-$suffix"
+                val contractType: FuturesContractType =
+                    if(requestId == 0) FuturesContractType.PERPETUAL
+                    else parseContractType(it.getString("alias")) ?: return@forEachJSONObject
+
+                pairs.add(
+                    CurrencyPairInfo(
+                        it.getString("base_currency"),
+                        it.getString("quote_currency"),
+                        it.getString("instrument_id"),
+                        contractType
+                        )
+                )
+            }
     }
 
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
@@ -84,5 +66,23 @@ class OkexFutures : FuturesMarket(NAME, TTS_NAME, CURRENCY_PAIRS, CONTRACT_TYPES
         ticker.low = jsonObject.getDouble("low_24h")
         ticker.last = jsonObject.getDouble("last")
         ticker.timestamp =  TimeUtils.convertISODateToTimestamp(jsonObject.getString("timestamp"))
+    }
+
+    companion object {
+        private const val URL_PAIRS_PERPETUAL = "https://www.okex.com/api/swap/v3/instruments"
+        private const val URL_PAIRS_FUTURES = "https://www.okex.com/api/futures/v3/instruments"
+
+        private const val URL_TICKER_PERPETUAL = "https://www.okex.com/api/swap/v3/instruments/%1\$s/ticker"
+        private const val URL_TICKER_FUTURES = "https://www.okex.com/api/futures/v3/instruments/%1\$s/ticker"
+
+        //private val FUTURES_DATE_FORMAT = SimpleDateFormat("yyMMdd", Locale.ROOT)
+        private val FUTURES_DATE_FORMAT = DateTimeFormatter.ofPattern("yyMMdd", Locale.ROOT)
+
+        private fun calculateFuturesPairId(checkerInfo: CheckerInfo): String? {
+            val targetDate = FuturesContractType.getDeliveryDate(checkerInfo.contractType)
+                ?: return checkerInfo.currencyPairId
+
+            return with(checkerInfo){ "$currencyBase-$currencyCounter-${FUTURES_DATE_FORMAT.format(targetDate)}" }
+        }
     }
 }

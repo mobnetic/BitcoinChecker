@@ -188,6 +188,9 @@ object MarketsConfig {
         CoinJarExchange(),
         CoinEgg(),
         Phemex(),
+
+        FtxFutures(),
+        HuobiFutures()
     )
 
     val MARKETS: Map<String, Market> = registeredMarkets.map{it.key to it}.toMap()

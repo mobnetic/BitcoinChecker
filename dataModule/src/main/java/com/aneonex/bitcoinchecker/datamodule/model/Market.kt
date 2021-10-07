@@ -34,7 +34,12 @@ abstract class Market(
     @Throws(Exception::class)
     fun parseTickerMain(requestId: Int, responseString: String, ticker: Ticker, checkerInfo: CheckerInfo): Ticker {
         parseTicker(requestId, responseString, ticker, checkerInfo)
-        if (ticker.timestamp <= 0) ticker.timestamp = System.currentTimeMillis() else ticker.timestamp = TimeUtils.parseTimeToMillis(ticker.timestamp)
+
+        if (ticker.timestamp <= 0)
+            ticker.timestamp = System.currentTimeMillis()
+        else
+            ticker.timestamp = TimeUtils.parseTimeToMillis(ticker.timestamp)
+
         return ticker
     }
 
