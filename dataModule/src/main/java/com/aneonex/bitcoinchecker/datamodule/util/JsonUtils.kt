@@ -21,3 +21,12 @@ fun JSONArray.forEachJSONArray(function: (item: JSONArray) -> Unit) {
         function(this.getJSONArray(i))
     }
 }
+
+fun JSONObject.forEachName(function: (name: String, item: JSONObject) -> Unit) {
+    val namesJsonArray = this.names()!!
+    for (i in 0 until namesJsonArray.length()) {
+        val name = namesJsonArray.getString(i)
+        val item = this.getJSONObject(name)
+        function(name, item)
+    }
+}
