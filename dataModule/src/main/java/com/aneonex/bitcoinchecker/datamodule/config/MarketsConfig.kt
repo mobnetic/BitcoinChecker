@@ -195,6 +195,7 @@ object MarketsConfig {
         Latoken(),
         Bitrue(),
         FtxUs(),
+        BinanceUs(),
     )
 
     val MARKETS: Map<String, Market> = registeredMarkets.map{it.key to it}.toMap()
