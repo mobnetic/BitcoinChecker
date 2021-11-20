@@ -23,8 +23,10 @@ object MarketCurrencyPairsStore {
     }
 
     fun getPairsForMarket(context: Context, marketKey: String): CurrencyPairsListWithDate? {
+        val pairsJson = getPairsStringForMarket(context, marketKey) ?: return null
+
         return try {
-            Gson().fromJson(getPairsStringForMarket(context, marketKey), CurrencyPairsListWithDate::class.java)
+            Gson().fromJson(pairsJson, CurrencyPairsListWithDate::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             null

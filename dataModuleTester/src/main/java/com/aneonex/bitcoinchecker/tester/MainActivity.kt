@@ -1,5 +1,6 @@
 package com.aneonex.bitcoinchecker.tester
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.View
@@ -48,12 +49,12 @@ class MainActivity : AppCompatActivity() {
         requestQueue = HttpsHelper.newRequestQueue(this)
 
         refreshMarketSpinner()
-        currencyPairsMapHelper = CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this, selectedMarket.key))
+        currencyPairsMapHelper = createCurrencyPairsMapHelper(this@MainActivity, selectedMarket)
         refreshCurrencySpinners()
         showResultView(true)
         binding.marketSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(arg0: AdapterView<*>?, arg1: View?, arg2: Int, arg3: Long) {
-                currencyPairsMapHelper = CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this@MainActivity, selectedMarket.key))
+                currencyPairsMapHelper = createCurrencyPairsMapHelper(this@MainActivity, selectedMarket)
                 binding.resultView.text = ""
                 refreshCurrencySpinners()
             }
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         binding.dynamicCurrencyPairsInfoView.setOnClickListener {
             object : DynamicCurrencyPairsDialog(this@MainActivity, selectedMarket, currencyPairsMapHelper) {
                 override fun onPairsUpdated(market: Market, currencyPairsMapHelper: CurrencyPairsMapHelper?) {
-                    this@MainActivity.currencyPairsMapHelper = currencyPairsMapHelper ?: CurrencyPairsMapHelper(MarketCurrencyPairsStore.getPairsForMarket(this@MainActivity, selectedMarket.key))
+                    this@MainActivity.currencyPairsMapHelper = currencyPairsMapHelper ?: createCurrencyPairsMapHelper(this@MainActivity, selectedMarket)
                     refreshCurrencySpinners()
                 }
             }.show()
@@ -140,7 +141,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshDynamicCurrencyPairsView() {
-        binding.dynamicCurrencyPairsInfoView.isVisible = selectedMarket.getCurrencyPairsUrl(0) != null
+        binding.dynamicCurrencyPairsInfoView.isEnabled = selectedMarket.getCurrencyPairsUrl(0) != null
     }
 
     private fun refreshCurrencyBaseSpinner() {
@@ -262,6 +263,7 @@ class MainActivity : AppCompatActivity() {
          ${getString(textResId, FormatUtilsBase.formatPriceWithCurrency(price, currency))}
          """.trimIndent()
     }
+
 /*
     private fun testAllExchanges(){
         Toast.makeText(this, "Test all", Toast.LENGTH_SHORT).show()
@@ -339,4 +341,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
  */
+
+    companion object {
+        private fun createCurrencyPairsMapHelper(context: Context, market: Market): CurrencyPairsMapHelper {
+            val pairsFromStore = MarketCurrencyPairsStore.getPairsForMarket(context, market.key)
+            return if(pairsFromStore != null)
+                CurrencyPairsMapHelper(pairsFromStore)
+            else
+                CurrencyPairsMapHelper(market.currencyPairs)
+        }
+    }
 }
