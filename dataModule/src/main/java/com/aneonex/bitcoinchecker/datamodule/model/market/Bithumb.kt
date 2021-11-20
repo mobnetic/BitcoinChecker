@@ -17,39 +17,40 @@ class Bithumb : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
         private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
 
         init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETH] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ETC] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.DASH] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.LTC] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XRP] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.BCH] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.XMR] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.ZEC] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.QTUM] = arrayOf(
-                    Currency.KRW
-            )
-            CURRENCY_PAIRS[VirtualCurrency.CON] = arrayOf(
-                    Currency.KRW
-            )
+            val marketAll = arrayOf(Currency.KRW, VirtualCurrency.BTC)
+            val marketKrw = arrayOf(Currency.KRW)
+            val marketBtc = arrayOf(VirtualCurrency.BTC)
+
+            CURRENCY_PAIRS[VirtualCurrency.BTC] = marketKrw
+            CURRENCY_PAIRS[VirtualCurrency.ETH] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.ETC] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.LTC] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.XRP] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.BCH] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.DOGE] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.SOL] = marketAll
+
+            CURRENCY_PAIRS[VirtualCurrency.QTUM] = marketKrw
+            CURRENCY_PAIRS[VirtualCurrency.CON] = marketKrw
+            CURRENCY_PAIRS[VirtualCurrency.TRX] = marketKrw
+
+            CURRENCY_PAIRS["LN"] = marketBtc
+            CURRENCY_PAIRS["IBP"] = marketBtc
+            CURRENCY_PAIRS["BFC"] = marketAll
+
+            CURRENCY_PAIRS[VirtualCurrency.EOS] = marketAll
+            CURRENCY_PAIRS[VirtualCurrency.LINK] = marketKrw
+
+            CURRENCY_PAIRS["WEMIX"] = marketKrw
+            CURRENCY_PAIRS["BORA"] = marketKrw
+            CURRENCY_PAIRS["ASM"] = marketKrw
+            CURRENCY_PAIRS["SAND"] = marketKrw
+            CURRENCY_PAIRS["MANA"] = marketKrw
+            CURRENCY_PAIRS["YFI"] = marketKrw
+            CURRENCY_PAIRS["DVI"] = marketKrw
+            CURRENCY_PAIRS["ETC"] = marketKrw
+            CURRENCY_PAIRS["DOT"] = marketKrw
+            CURRENCY_PAIRS["LUNA"] = marketKrw
         }
     }
 
@@ -58,10 +59,12 @@ class Bithumb : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
     }
 
     override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
+        val pairId = "${checkerInfo.currencyBaseLowerCase}_${checkerInfo.currencyCounterLowerCase}"
+
         return if (requestId == 0) {
-            String.format(URL_TICKER, checkerInfo.currencyBaseLowerCase)
+            String.format(URL_TICKER, pairId)
         } else {
-            String.format(URL_ORDERS, checkerInfo.currencyBaseLowerCase)
+            String.format(URL_ORDERS, pairId)
         }
     }
 

@@ -295,6 +295,7 @@ object VirtualCurrency {
     const val SMC = "SMC"
     const val SOC = "SOC"
     const val SOCHI = "SOCHI"
+    const val SOL = "SOL"
     const val SPA = "SPA"
     const val SPT = "SPT"
     const val SRC = "SRC"
