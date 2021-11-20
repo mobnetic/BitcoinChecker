@@ -192,7 +192,8 @@ object MarketsConfig {
         FtxFutures(),
         HuobiFutures(),
 
-        Latoken()
+        Latoken(),
+        Bitrue()
     )
 
     val MARKETS: Map<String, Market> = registeredMarkets.map{it.key to it}.toMap()
