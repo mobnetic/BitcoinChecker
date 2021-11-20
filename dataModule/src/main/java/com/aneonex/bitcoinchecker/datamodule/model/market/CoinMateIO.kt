@@ -1,41 +1,49 @@
 package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
-import com.aneonex.bitcoinchecker.datamodule.model.Market
+import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
-import com.aneonex.bitcoinchecker.datamodule.model.currency.Currency
-import com.aneonex.bitcoinchecker.datamodule.model.currency.CurrencyPairsMap
-import com.aneonex.bitcoinchecker.datamodule.model.currency.VirtualCurrency
+import com.aneonex.bitcoinchecker.datamodule.model.market.generic.SimpleMarket
+import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
-class CoinMateIO : Market(NAME, TTS_NAME, CURRENCY_PAIRS) {
-    companion object {
-        private const val NAME = "CoinMate.io"
-        private const val TTS_NAME = "Coin Mate"
-        private const val URL = "https://coinmate.io/api/ticker?currencyPair=%1\$s_%2\$s"
-        private val CURRENCY_PAIRS: CurrencyPairsMap = CurrencyPairsMap()
+class CoinMateIO : SimpleMarket(
+    "CoinMate.io",
+    "https://coinmate.io/api/tradingPairs",
+    "https://coinmate.io/api/ticker?currencyPair=%1\$s",
+    "Coin Mate"
+) {
+    override fun getPairId(checkerInfo: CheckerInfo): String =
+        checkerInfo.currencyPairId ?: "${checkerInfo.currencyBase}_${checkerInfo.currencyCounter}"
 
-        init {
-            CURRENCY_PAIRS[VirtualCurrency.BTC] = arrayOf(
-                    Currency.EUR,
-                    Currency.CZK
-            )
+    override fun parseCurrencyPairsFromJsonObject(
+        requestId: Int,
+        jsonObject: JSONObject,
+        pairs: MutableList<CurrencyPairInfo>
+    ) {
+        jsonObject.getJSONArray("data").forEachJSONObject { market ->
+            pairs.add(CurrencyPairInfo(
+                market.getString("firstCurrency"),
+                market.getString("secondCurrency"),
+                market.getString("name")
+            ))
         }
-    }
-
-    override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(URL, checkerInfo.currencyBase, checkerInfo.currencyCounter)
     }
 
     @Throws(Exception::class)
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        val dataJsonObject = jsonObject.getJSONObject("data")
-        ticker.bid = dataJsonObject.getDouble("bid")
-        ticker.ask = dataJsonObject.getDouble("ask")
-        ticker.vol = dataJsonObject.getDouble("amount")
-        ticker.high = dataJsonObject.getDouble("high")
-        ticker.low = dataJsonObject.getDouble("low")
-        ticker.last = dataJsonObject.getDouble("last")
+        jsonObject.getJSONObject("data").also {
+            ticker.bid = it.getDouble("bid")
+            ticker.ask = it.getDouble("ask")
+
+            ticker.high = it.getDouble("high")
+            ticker.low = it.getDouble("low")
+
+            ticker.vol = it.getDouble("amount")
+            ticker.last = it.getDouble("last")
+
+            ticker.timestamp = it.getLong("timestamp")
+        }
     }
 
     @Throws(Exception::class)
