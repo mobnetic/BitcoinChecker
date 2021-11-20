@@ -7,10 +7,20 @@ import com.aneonex.bitcoinchecker.datamodule.model.market.generic.SimpleMarket
 import com.aneonex.bitcoinchecker.datamodule.util.forEachJSONObject
 import org.json.JSONObject
 
-class Ftx : SimpleMarket(
+class Ftx : FtxBase(
     "FTX",
-    "https://ftx.com/api/markets",
-    "https://ftx.com/api/markets/%1\$s"
+    "com"
+)
+
+class FtxUs : FtxBase(
+    "FTX US",
+    "us"
+)
+
+open class FtxBase(name: String, domain: String) : SimpleMarket(
+    name,
+    "https://ftx.$domain/api/markets",
+    "https://ftx.$domain/api/markets/%1\$s"
 ) {
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         jsonObject.getJSONArray("result").forEachJSONObject {  market ->
