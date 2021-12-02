@@ -2,22 +2,15 @@ package com.aneonex.bitcoinchecker.datamodule.model.market
 
 import com.aneonex.bitcoinchecker.datamodule.model.CheckerInfo
 import com.aneonex.bitcoinchecker.datamodule.model.CurrencyPairInfo
-import com.aneonex.bitcoinchecker.datamodule.model.Market
 import com.aneonex.bitcoinchecker.datamodule.model.Ticker
+import com.aneonex.bitcoinchecker.datamodule.model.market.generic.SimpleMarket
 import org.json.JSONObject
 
-class Bkex : Market(NAME, TTS_NAME, null) {
-    companion object {
-        private const val NAME = "BKEX"
-        private const val TTS_NAME = NAME
-        private const val URL = "https://api.bkex.io/v2/q/tickers?symbol=%1\$s"
-        private const val URL_CURRENCY_PAIRS = "https://api.bkex.io/v2/common/symbols"
-    }
-
-    override fun getCurrencyPairsUrl(requestId: Int): String {
-        return URL_CURRENCY_PAIRS
-    }
-
+class Bkex : SimpleMarket(
+    "BKEX",
+    "https://api.bkex.com/v2/common/symbols",
+    "https://api.bkex.com/v2/q/tickers?symbol=%1\$s"
+) {
     override fun parseCurrencyPairsFromJsonObject(requestId: Int, jsonObject: JSONObject, pairs: MutableList<CurrencyPairInfo>) {
         val markets = jsonObject.getJSONArray("data")
         for(i in 0 until markets.length()){
@@ -42,17 +35,16 @@ class Bkex : Market(NAME, TTS_NAME, null) {
         }
     }
 
-    override fun getUrl(requestId: Int, checkerInfo: CheckerInfo): String {
-        return String.format(URL, checkerInfo.currencyPairId)
-    }
-
     override fun parseTickerFromJsonObject(requestId: Int, jsonObject: JSONObject, ticker: Ticker, checkerInfo: CheckerInfo) {
-        jsonObject.getJSONArray("data").getJSONObject(0).apply {
-            ticker.high = getDouble("high")
-            ticker.low = getDouble("low")
-            ticker.last = getDouble("close")
-            ticker.vol = getDouble("volume")
-            ticker.timestamp = getLong("ts")
-        }
+        jsonObject
+            .getJSONArray("data")
+            .getJSONObject(0)
+            .also {
+                ticker.high = it.getDouble("high")
+                ticker.low = it.getDouble("low")
+                ticker.last = it.getDouble("close")
+                ticker.vol = it.getDouble("volume")
+                ticker.timestamp = it.getLong("ts")
+            }
     }
 }
