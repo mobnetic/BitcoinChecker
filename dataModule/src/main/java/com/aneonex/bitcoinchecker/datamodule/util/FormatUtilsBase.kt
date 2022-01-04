@@ -21,7 +21,7 @@ object FormatUtilsBase {
     // ====================
     fun formatDouble(value: Double/*, isPrice: Boolean*/): String {
         val decimalFormat: DecimalFormat = when {
-            value < 1 -> FORMAT_FOUR_SIGNIFICANT_AT_MOST
+            value < 10 -> FORMAT_FOUR_SIGNIFICANT_AT_MOST
             value < 10000 -> FORMAT_TWO_DECIMAL
             else -> FORMAT_NO_DECIMAL
         }
