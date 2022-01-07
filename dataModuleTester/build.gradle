@@ -1,25 +1,55 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "24.0.3"
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
-        applicationId "com.mobnetic.coinguardiandatamodule.tester"
-        minSdkVersion 9
-        targetSdkVersion 18
+        applicationId "com.aneonex.bitcoinchecker.tester"
+        minSdkVersion min_sdk_version
+        targetSdkVersion compile_sdk_version
+
+        versionCode 1
+        versionName "1.0"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    lintOptions {
+        abortOnError true
+        disable 'MissingTranslation'
     }
 }
 
 dependencies {
-    compile project(':dataModule')
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile files('libs/volley.jar')
+    implementation project(':dataModule')
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.android.volley:volley:1.2.1'
+
+    // AndroidX
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+
+    implementation "androidx.appcompat:appcompat:1.4.0"
+    implementation 'com.google.android.material:material:1.4.0'
 }

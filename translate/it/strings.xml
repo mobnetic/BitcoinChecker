@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancel">Annulla</string>
+    <string name="ok">OK</string>
+
+    <string name="check_error_generic">Errore</string>
+    <string name="check_error_generic_prefix">Errore: %1$s</string>
+    <string name="check_error_network">Errore di rete</string>
+    <string name="check_error_parse">Errore di analisi</string>
+    <string name="check_error_server">Impossibile connettersi al server</string>
+    <string name="check_error_timeout">Tempo scaduto</string>
+    <string name="check_error_no_internet">Nessuna connessione internet</string>
+    <string name="check_error_auth">Autenticazione richiesta</string>
+    <string name="check_error_unknown">Errore sconosciuto</string>
+    <string name="checker_add_alarm_category_title">Allarme</string>
+    <string name="checker_add_alarm_checkpoint_empty_text">Nessun checkpoint impostato</string>
+    <string name="checker_add_alarm_checkpoint_reset_button">Copia valore dall\'ultimo controllo</string>
+    <string name="checker_add_alarm_copy_last_price_button">Copia valore dall\'ultimo prezzo</string>
+    <string name="checker_add_alarm_checkpoint_title">Ultimo checkpoint</string>
+    <string name="checker_add_alarm_enabled_title">Attiva allarme</string>
+    <string name="checker_add_alarm_list_add_alarm">Nuovo allarme</string>
+    <string name="checker_add_alarm_list_add_alarm_more">Più allarmi</string>
+    <string name="checker_add_alarm_sound_title">Suoni</string>
+    <string name="checker_add_alarm_title">Dettagli allarme</string>
+    <string name="checker_add_alarm_tts_summary">Avviso prezzo di allerta</string>
+    <string name="checker_add_alarm_tts_title">Allarme tramite messaggio vocale</string>
+    <string name="checker_add_alarm_type_greater_than">Maggiore di</string>
+    <string name="checker_add_alarm_type_hint_auto_disable">* Una volta verificato l\'allarme, puoi disattivarlo così evitarei di riattivare le notifiche in futuro ogni volta!</string>
+    <string name="checker_add_alarm_type_lower_than">Minore di</string>
+    <string name="checker_add_alarm_type_percent_change">Variazione percentuale</string>
+    <string name="checker_add_alarm_type_percent_change_down">Percentuale in ribasso</string>
+    <string name="checker_add_alarm_type_percent_change_up">Percentuale in rialzo</string>
+    <string name="checker_add_alarm_type_title">Condizione allarme</string>
+    <string name="checker_add_alarm_type_value_change">Variazione valore</string>
+    <string name="checker_add_alarm_type_value_change_down">Valore in ribasso</string>
+    <string name="checker_add_alarm_type_value_change_up">Valore in rialzo</string>
+    <string name="checker_add_alarm_value_title">Condizione valore</string>
+    <string name="checker_add_alarm_vibrate_title">Vibrazione</string>
+    <string name="checker_add_check_currency_dst_dialog_sync">Aggiorna</string>
+    <string name="checker_add_check_currency_dst_dialog_title">Quotazione valuta</string>
+    <string name="checker_add_check_currency_dst_subunit_subtitle">Seleziona valuta</string>
+    <string name="checker_add_check_currency_dst_subunit_title">Mostra formato prezzo</string>
+
+    <string name="checker_add_check_currency_empty_warning_summary">Clicca qui per scaricare le ultime valute dall\'exchange selezionato.</string>
+    <string name="checker_add_check_currency_empty_warning_title">Nessuna valuta</string>
+    <string name="checker_add_check_currency_no_sync_yet_hint">Questo exchange scarica le valute direttamente dal server. Non hai mai fatto una sincronizzazione, quindi le valute potrebbero non essere aggiornate.</string>
+    <string name="checker_add_check_currency_src_dialog_title">Base valute</string>
+    <string name="checker_add_check_currency_src_subunit_title">Controlla prezzo per</string>
+
+    <string name="checker_add_check_frequency_title">Aggiorna ogni</string>
+    <string name="checker_add_check_frequency_battery_warning">Attenzione! Intervalli inferiori ad 1 minuto possono ridurre drasticamente la durata della batteria.</string>
+    <string name="checker_add_check_frequency_use_global_checkbox">Usa intervallo di aggiornamento</string>
+    <string name="checker_add_check_frequency_use_global_summary">%1$s (usa impostazioni generali)</string>
+    <string name="checker_add_check_futures_contract_type_title">Tipo contratti futuri</string>
+    <string name="checker_add_check_market_suggest_more">Vuoi saperne di più?</string>
+    <string name="checker_add_check_market_title">Scegli exchange</string>
+    <string name="checker_add_check_notification_summary">Mostra sempre notifiche col prezzo più recente.</string>
+    <string name="checker_add_check_notification_title">Mostra notifiche</string>
+    <string name="checker_add_check_tts_summary">Annuncia nuovo prezzo dopo il controllo</string>
+    <string name="checker_add_check_tts_title">Avvisa tramite messaggio vocale</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_hint">Sincronizza quando vuoi per scaricare le ultime valute dall\'exchange.</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_last_sync">Ultimo aggiornamento: %1$s</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_last_sync_never">mai</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_pairs">Valute: %1$s</string>
+    <string name="checker_add_dynamic_currency_pairs_dialog_title">Aggiorna valute</string>
+    <string name="checker_add_dynamic_currency_pairs_sync_button">Sincronizza ora</string>
+    <string name="checker_add_enable">Attiva</string>
+    <string name="checker_add_exchange_tutorial2_text">Tutte le informazioni sono scaricate <b>direttamente</b> dal server dell\'exchanger. Se qualcosa ha smesso di funzionare - probabilmente <b>non è colpa dell\'app</b>.\n\nMolto probabilmente il server dell\'exchange server presenta dei problemi o ha modificato le sue API quindi l\'app non riesce a leggere i prezzi. Per favore non scriverlo nei commenti del Play Store o via email, ma avvisaci <b>su GitHub</b>, dove tutti possono rispondere e contribuire a sistemare l\'errore.\n\nGrazie!</string>
+    <string name="checker_add_exchange_tutorial2_title">Informazioni</string>
+    <string name="checker_add_exchange_tutorial_text"><b>Coinbase</b> è solo un exchange di
+        default.\n\nPuoi cambiarlo con un altro exchange per controllare differenti valute - non solo BTC. Ogni exchange fornisce divere valute e informazioni da mostrare.</string>
+    <string name="checker_add_exchange_tutorial_title">Seleziona Exchange</string>
+    <string name="checker_add_exchange_unknown_text">Sembra che l\'exchange precedentemente selezionato sia stato rimosso dall\'app per qualche motivo. Sarà ripristinato l\'exchange di default.</string>
+    <string name="checker_add_exchange_unknown_title">L\'exchange non esiste!</string>
+    <string name="checker_add_save_error_no_currency_pair">Impossibile salvare senza aver selezionato la valuta.</string>
+    <string name="checker_add_save_error_no_value_format">Impossibile salvare senza aver selezionato la \"%1$s\".</string>
+    <string name="checker_add_title_edit">Modifica allarme</string>
+    <string name="checker_add_title_new">Nuovo allarme</string>
+    <string name="checker_add_unsaved_changes_dialog_message">Salvare le modifiche prima di chiudere?</string>
+    <string name="checker_add_unsaved_changes_dialog_title">Modifiche non salvate!</string>
+    <string name="checker_add_see_above">Vedi sopra</string>
+
+
+    <string name="checkers_list_add_drag_and_drop_handler">Drag and Drop handler</string>
+    <string name="checkers_list_add_title">Imposta allarme</string>
+    <string name="checkers_list_empty_text">Nessun allarme</string>
+    <string name="checkers_list_checker_deleted">Allarme eliminato</string>
+    <string name="checkers_list_first_time_dialog_message">Bitcoin Checker è un\'app GRATUITA per restare aggiornato sui prezzi delle tue cryptomonete preferite (su oltre 100 exchange supportati) che puoi personalizzare in molti modi.
+
+Questa app "<b>NON serve per</b>" for: grafici, trading, o tenere traccia del bilancio del tuo portafoglio.
+
+Se comprendi gli scopi di quest\'app allora \"Imposta allarme\" per continuare."</string>
+    <string name="checkers_list_first_time_dialog_title">Benvenuto!</string>
+    <string name="checkers_list_item_alarm">Allarmi: %1$s</string>
+    <string name="checkers_list_item_alarm_none">nessuno</string>
+    <string name="checkers_list_item_last_check">"Prezzo: "</string>
+    <string name="checkers_list_news_dialog_github_button">Vai su GitHub</string>
+
+    <string name="checkers_list_sort_currency">Valute</string>
+    <string name="checkers_list_sort_exchange">Exchange</string>
+    <string name="checkers_list_sort_manually">Manualmente</string>
+
+    <string name="checkers_list_paused_title">In pausa</string>
+    <string name="checkers_list_paused_summary">Gli aggiornamenti automatici degli allarmi si sono interrotti.
+        \nPuoi comunque aggiornare manualmente.</string>
+    <string name="checkers_list_continue">Continua</string>
+
+    <string name="futures_contract_type_perpetual">Perpetuo</string>
+    <string name="futures_contract_type_weekly">Ogni settimana</string>
+    <string name="futures_contract_type_biweekly">Ogni 2 settimane</string>
+    <string name="futures_contract_type_monthly">Ogni mese</string>
+    <string name="futures_contract_type_bimonthly">Ogni 2 mesi</string>
+    <string name="futures_contract_type_quarterly">Ogni trimestre</string>
+    <string name="futures_contract_type_biquarterly">Ogni 2 trimestri</string>
+
+    <string name="generic_on">Acceso</string>
+    <string name="generic_off">Spento</string>
+    <string name="generic_delete">Elimina</string>
+    <string name="generic_edit">Modifica</string>
+    <string name="generic_none">Nessuno</string>
+    <string name="generic_value">Valore</string>
+    <string name="generic_do_not_save">Non salvare</string>
+    <string name="generic_refresh">Aggiorna</string>
+    <string name="generic_refresh_all">Aggiorna tutto</string>
+    <string name="generic_remove">Rimuovi</string>
+    <string name="generic_save">Salva</string>
+    <string name="generic_search">Cerca</string>
+    <string name="generic_search_no_results">Nessun risultato</string>
+    <string name="generic_send_email">Invia email…</string>
+    <string name="generic_sort_by">Ordina per…</string>
+    <string name="generic_favorite_item">Preferiti</string>
+
+    <string name="market_picker_list_search_exchange_name">Nome exchange</string>
+    <string name="market_picker_list_default_hint">"Default (tieni premuto per cambiare)"</string>
+    <string name="market_picker_list_sort_alphabetically">Nome</string>
+    <string name="market_picker_list_sort_newest">Più nuovi</string>
+    <string name="notification_alert_text_greater_than">Maggiore del %1$s</string>
+    <string name="notification_alert_text_lower_than">Minore del %1$s</string>
+    <string name="notification_alert_text_percent_change">%1$s, dal %2$s al (%3$s)</string>
+    <string name="notification_alert_tts_text_down">GIÙ</string>
+    <string name="notification_alert_tts_text_greater_lower">Avviso prezzo %1$s</string>
+    <string name="notification_alert_tts_text_percent_value_change">%1$s dal %2$s al %3$s</string>
+    <string name="notification_alert_tts_text_up">SU</string>
+    <string name="notification_ongoing_text">Minimo: %1$s | Massimo: %2$s</string>
+    <string name="notification_ongoing_text_ask">Chiedi: %1$s</string>
+    <string name="notification_ongoing_text_bid">Offri: %1$s</string>
+    <string name="notification_ongoing_text_no_info">Nessuna informazione</string>
+    <string name="notification_ongoing_text_volume">Vol: %1$s</string>
+
+    <string name="rate_app_negative">No grazie</string>
+    <string name="rate_app_neutral">Ricordalo dopo</string>
+    <string name="rate_app_positive">Vota!</string>
+    <string name="rate_app_text">Ho creato questa app <b>GRATIS</b> e fornisco supporto allo
+        stesso modo.\n\nSe pensi che abbia fatto un bel lavoro, per favore <b>mostra il tuo
+            gradimento</b> votandoci su Play Store.\n\nGrazie!</string>
+    <string name="rate_app_title">Vota %1$s</string>
+
+    <string name="settings_dark_mode_title">Tema scuro</string>
+    <string name="settings_dark_mode_default">Automatico (predefiniti di sistema)</string>
+
+    <string name="settings_about_category_title">Info su</string>
+
+    <string name="settings_about_github_title">Visita Bitcoin Checker su GitHub</string>
+    <string name="settings_about_rate_summary">o condividi la tua recensione</string>
+    <string name="settings_about_rate_title">Votaci su Google Play</string>
+    <string name="settings_about_report_issue_summary">"Se pensi che qualcosa non funzioni correttamente, vorresti vedere nuovi exchange o vuoi solo segnalare qualcos\'altro."</string>
+    <string name="settings_about_report_issue_title">Segnala problemi o idee su GitHub</string>
+    
+    <string name="settings_about_version_contact_dialog_button_email">Invia Email</string>
+    <string name="settings_about_version_contact_dialog_button_github">Vai su GitHub</string>
+    <string name="settings_about_version_contact_dialog_text">Se vuoi segnalare qualche problema o inviare suggerimenti vai su GitHub.\n\nSe preferisci contattarci in altri modi invia una mail.</string>
+    <string name="settings_about_version_summary">by Aneonex Software</string>
+    <string name="settings_about_version_title">%1$s - versione %2$s</string>
+
+    <string name="settings_activity_title">Impostazioni</string>
+    <string name="settings_check_global_frequency_title">Intervallo aggiornamento</string>
+    <string name="settings_check_notification_category_title">Notifiche prezzo</string>
+
+    <string name="settings_activity_pause">Pausa</string>
+
+    <string name="settings_check_notification_custom_layout_summary">Usa layout personalizzato col pulsante di aggiornamento
+        sulla destra quando chiudi la notifica</string>
+    <string name="settings_check_notification_custom_layout_title">Personalizza layout notifiche</string>
+
+    <string name="settings_check_notification_expandable_summary">Permetti notifiche espandibili
+        con l\'ultimo prezzo</string>
+    <string name="settings_check_notification_expandable_title">Notifiche espandibili</string>
+
+    <string name="settings_check_notification_display_grouped_summary">Tutte le notifiche con
+        l\'ultimo prezzo saranno mostrate in un gruppo separato. Utile quando si visualizzano tanti prezzi nella barra delle notifiche.</string>
+    <string name="settings_check_notification_display_grouped_title">Gruppo di notifiche</string>
+
+    <string name="settings_notifications_category_title">Personalizza notifiche</string>
+
+    <string name="settings_sounds_advanced_alarm_stream_title">Imposta suoni per notifiche</string>
+    <string name="settings_sounds_advanced_category_title">Avanzate</string>
+
+    <string name="settings_sounds_alarm_notification_category_title">Suoni notifiche</string>
+    <string name="settings_sounds_alarm_notification_down_title">Quando il prezzo SCENDE</string>
+    <string name="settings_sounds_alarm_notification_up_title">Quando il prezzo SALE</string>
+    <string name="settings_sounds_category_title">Imposta suoni</string>
+    <string name="settings_sounds_no_ringtone_provider_found">Nessuna suoneria trovata</string>
+
+    <string name="settings_tts_advanced_category_title">Avanzate</string>
+    <string name="settings_tts_advanced_stream_alarm">Allarme</string>
+    <string name="settings_tts_advanced_stream_music">Suoneria</string>
+    <string name="settings_tts_advanced_stream_notification">Suonerie e notifiche</string>
+    <string name="settings_tts_advanced_stream_title">Scegli flusso audio per TTS</string>
+    <string name="settings_tts_category_title">Impostazioni Text-To-Speech</string>
+    <string name="settings_tts_configure_summary">Bitcoin Checker può parlarti solo in Inglese, quindi assicurati che la lingua sia supportata dal TTS.</string>
+    <string name="settings_tts_configure_summary_specific_language">Bitcoin Checker parla la lingua dell\'interfaccia utente \"%1$s\", quindi assicurati che la lingua sia supportata dal TTS.</string>
+    <string name="settings_tts_configure_title">Configura TTS</string>
+    <string name="settings_tts_format_category_title">Formato</string>
+    <string name="settings_tts_format_example_title">Esempio per %1$s - %2$s:</string>
+    <string name="settings_tts_format_integer_only_summary">"La parte decimale del prezzo non sarà notificata se il valore è maggiore di 1"</string>
+    <string name="settings_tts_format_integer_only_title">Solo numeri interi</string>
+    <string name="settings_tts_format_speak_base_currency_summary">La valuta sarà notificata prima del prezzo</string>
+    <string name="settings_tts_format_speak_base_currency_title">Pronunciare la valuta di
+        base</string>
+    <string name="settings_tts_format_speak_counter_currency_summary">Il valore del prezzo sarà notificato subito dopo il prezzo</string>
+    <string name="settings_tts_format_speak_counter_currency_title">Valore di prezzo</string>
+    <string name="settings_tts_format_speak_exchange_title">Pronuncia nome di exchange</string>
+    <string name="settings_tts_headphones_only_title">Solo con cuffie</string>
+    <string name="settings_tts_screen_off_only_title">Solo col display spento</string>
+    <string name="settings_tts_speak_conditions_category_title">Pronuncia il condizioni</string>
+
+    <string name="settings_battery_optimization_category_title">Sleep mode</string>
+
+    <string name="settings_battery_optimization_status_off_title">Ottimizzazione batteria spenta</string>
+    <string name="settings_battery_optimization_status_on_title">Ottimizzazione batteria accesa</string>
+    <string name="settings_battery_optimization_status_off_summary">Attivando l\'ottimizzazione batteria per questa app puoi disabilitare le attività in background for recuperare le ultime variazioni sui mercati.</string>
+    <string name="settings_battery_optimization_status_on_summary">Puoi disattivare l\'ottimizzazione batteria per questa app per migliorare gli avvisi di prezzo.</string>
+
+    <string name="settings_battery_optimization_turn_off_title">Spegni</string>
+    <string name="settings_battery_optimization_turn_on_title">Vai alle Impostazioni Generali per attivare</string>
+
+    <string name="suggest_new_exchange_activity_send_suggestion">Vai su GitHub</string>
+    <string name="suggest_new_exchange_activity_text">If you\'d like to see any new exchange in Bitcoin Checker app please <b>don\'t suggest them on Play Store or via email</b>. Bitcoin Checker\'s open source repository <b>on GitHub this is the official place</b> for reporting any issues and posting suggestions.\n\nIt\'s very important because: \n\n- Anyone can see if there is already a related topic created by someone else. \n\n- Anyone can respond to other people\'s problems. \n\n- Anyone can contribute with a fix or add support for new exchanges by creating a Pull Request. \n\n\nRemember that I making Bitcoin Checker in free time and provide it completely for free only to make other people happy - so the things that motivates me the most are great reviews from users. \nIf you thing I am doing a great job please do not forget to give a great rating on Google Play Store.</string>
+    <string name="suggest_new_exchange_activity_title">Suggest new exchange</string>
+
+    <string name="time_ago">%1$s fa</string>
+    <string name="time_d">g</string>
+    <string name="time_days">giorni</string>
+    <string name="time_h">h</string>
+    <string name="time_hours">ore</string>
+    <string name="time_in">in %1$s</string>
+    <string name="time_m">m</string>
+    <string name="time_minutes">minuti</string>
+    <string name="time_mth">mth</string>
+    <string name="time_s">s</string>
+    <string name="time_seconds">secondi</string>
+    <string name="time_y">a</string>
+    <string name="tts_format_base_currency">%1$s %2$s</string>
+    <string name="tts_format_counter_currency">%1$s %2$s</string>
+    <string name="tts_format_exchange">%1$s su %2$s</string>
+
+    <string name="widget_init_hint">Attendi….</string>
+    <string name="widget_list_empty_text">Nessun allarme impostato.\nClicca qui per attivarne qualcuno!</string>
+    <string name="widget_settings_alpha_percent_0">Completamente trasparente</string>
+    <string name="widget_settings_alpha_percent_100">Completamente visibile</string>
+    <string name="widget_settings_alpha_percent_title">Opacità background</string>
+    <string name="widget_settings_compact_mode_summary">Mostra allarmi in modalità compatta, con meno dettagli.</string>
+    <string name="widget_settings_compact_mode_title">Modalità compatta</string>
+    <string name="widget_settings_dark_theme_title">Usa tema scuro</string>
+    <string name="widget_settings_refresh_hint_summary">Puoi cliccare su allarmi particolari per aggiornare i prezzi.</string>
+    <string name="widget_settings_refresh_hint_title">Suggerimento:</string>
+    <string name="widget_settings_show_actionbar_summary">L\'icona \"Aggiorna tutto\" sarà presente.</string>
+    <string name="widget_settings_show_actionbar_title">Mostra Actionbar</string>
+    <string name="widget_settings_title">Impostazioni Widget</string>
+    <string name="checkers_list_internet_not_available">Internet non è disponibile</string>
+</resources>
