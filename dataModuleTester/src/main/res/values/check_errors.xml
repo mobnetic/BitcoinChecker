@@ -4,6 +4,7 @@
     <string name="check_error_generic_prefix">Error: %1$s</string>
     <string name="check_error_network">Network error</string>
     <string name="check_error_timeout">Timeout error</string>
+    <string name="check_error_client">Client request error</string>
     <string name="check_error_server">Cannot connect to server</string>
     <string name="check_error_parse">Parsing error</string>
     <string name="check_error_unknown">Unknown error</string>

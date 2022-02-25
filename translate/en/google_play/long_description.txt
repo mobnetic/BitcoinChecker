@@ -1,0 +1,3 @@
+Bitcoin Checker is a FREE app to track the most recent prices of your favourite currency pairs (on over 100 supported exchanges) in many customizable ways  (such as rich notifications, Text-To-Speech voice announcements, Home and Lockscreen widget or multiple alarms).
+
+Data module (containing exchanges and currency pairs) is Open Source and availabale on GitHub: https://github.com/aneonex/BitcoinChecker/
